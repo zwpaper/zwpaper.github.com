@@ -5,6 +5,7 @@ tags: tech
 
 > 最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~
 
+<!--more-->
 #Unique Binary Search Trees
 
 [https://leetcode.com/problems/unique-binary-search-trees/]()
@@ -35,7 +36,7 @@ tags: tech
 Talk is cheap, show you the code!
 
 
-'''
+```
 class Solution {
 public:
 int numTrees(int n) {
@@ -60,4 +61,4 @@ int numTrees(int n) {
     return numbers[n];
 }
 };
-'''
+```
