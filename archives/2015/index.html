@@ -220,39 +220,6 @@
         <blockquote>
 <p>最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~</p>
 </blockquote>
-<h1 id="Unique_Binary_Search_Trees">Unique Binary Search Trees</h1><p><a href="">https://leetcode.com/problems/unique-binary-search-trees/</a></p>
-<p>给一个数字，找出来能种多少棵搜索二叉树。</p>
-<h2 id="思路">思路</h2><ul>
-<li>第一眼看到，卧槽，这什么奇皅题，上网找二叉搜索树是怎么建立的，别吐槽，都忘光了。。。</li>
-<li>看了一下，没啥帮助啊，突然看到，为啥要给个3做例子呢？于是开始找规律，这货不就是节点都放左边，然后一个个挪到右边去么？</li>
-<li>有规律了，再看看，没错了，就是这么挪，然后每挪一次，算出两边子树的个数，相乘，得到一种情况，再挪过去一个，再算，一直到一边的子树挪完了。</li>
-<li>应该可以做了，来一个数字，开始递归算各个子树的值，再相乘相加</li>
-<li>虽然之前做题的时候也用递归了，但是这个递归得有点狠啊，时间复杂度上不太好吧？想想有没有别的方法</li>
-</ul>
-<h2 id="a">a</h2><p>递归太狠，要改成递推！</p>
-<p>啊！这不就是斐波那契数列么！</p>
-<p>斐波那契数列有个递推的方法来着。。。</p>
-<h2 id="aha_Algrithm">aha Algrithm</h2><p>19 个测试，1ms 的时间，C++ 比很多用 C 还快了~</p>
-<p>Talk is cheap, show you the code!</p>
-<p>‘’’<br>class Solution {<br>public:<br>int numTrees(int n) {<br>    if( n &lt;= 2 )<br>        return n;</p>
-<pre><code>int numbers<span class="matrix">[n+<span class="number">1</span>]</span>;
-numbers<span class="matrix">[<span class="number">0</span>]</span> = <span class="number">1</span>;
-numbers<span class="matrix">[<span class="number">1</span>]</span> = <span class="number">1</span>;
-
-int <span class="built_in">i</span>,<span class="built_in">j</span>;
-<span class="keyword">for</span>( <span class="built_in">i</span> = <span class="number">2</span>; <span class="built_in">i</span> &lt;= n; <span class="built_in">i</span>++)
-    numbers<span class="matrix">[i]</span> = <span class="number">0</span>;
-<span class="keyword">for</span>( <span class="built_in">i</span> = <span class="number">2</span>; <span class="built_in">i</span> &lt;= n; <span class="built_in">i</span>++ )
-<span class="cell">{
-
-    for( j = i - <span class="number">1</span> ; j &gt;=<span class="number">0</span>; j-- )
-    {
-        numbers[i] += numbers[j] * numbers[i - j - <span class="number">1</span>];
-    }</span>
-}
-<span class="keyword">return</span> numbers<span class="matrix">[n]</span>;
-</code></pre><p>}<br>};<br>‘’’</p>
-
       
     </div>
     
@@ -264,6 +231,10 @@ int <span class="built_in">i</span>,<span class="built_in">j</span>;
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/03/Unique-binary-search-tree/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

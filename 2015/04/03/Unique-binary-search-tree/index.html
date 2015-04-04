@@ -5,30 +5,15 @@
   
   <title>Unique binary search tree in LeetCode | PapEr Write</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~
-
-Unique Binary Search Treeshttps://leetcode.com/problems/unique-binary-search-trees/
-给一个数字，找出来能种多少棵搜索二叉树。
-思路
-第一眼看到，卧槽，这什">
+  <meta name="description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unique binary search tree in LeetCode">
 <meta property="og:url" content="http://zwpaper.github.com/2015/04/03/Unique-binary-search-tree/index.html">
 <meta property="og:site_name" content="PapEr Write">
-<meta property="og:description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~
-
-Unique Binary Search Treeshttps://leetcode.com/problems/unique-binary-search-trees/
-给一个数字，找出来能种多少棵搜索二叉树。
-思路
-第一眼看到，卧槽，这什">
+<meta property="og:description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unique binary search tree in LeetCode">
-<meta name="twitter:description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~
-
-Unique Binary Search Treeshttps://leetcode.com/problems/unique-binary-search-trees/
-给一个数字，找出来能种多少棵搜索二叉树。
-思路
-第一眼看到，卧槽，这什">
+<meta name="twitter:description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~">
   
     <link rel="alternative" href="/atom.xml" title="PapEr Write" type="application/atom+xml">
   
@@ -244,6 +229,7 @@ Unique Binary Search Treeshttps://leetcode.com/problems/unique-binary-search-tre
         <blockquote>
 <p>最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="Unique_Binary_Search_Trees">Unique Binary Search Trees</h1><p><a href="">https://leetcode.com/problems/unique-binary-search-trees/</a></p>
 <p>给一个数字，找出来能种多少棵搜索二叉树。</p>
 <h2 id="思路">思路</h2><ul>
@@ -258,25 +244,7 @@ Unique Binary Search Treeshttps://leetcode.com/problems/unique-binary-search-tre
 <p>斐波那契数列有个递推的方法来着。。。</p>
 <h2 id="aha_Algrithm">aha Algrithm</h2><p>19 个测试，1ms 的时间，C++ 比很多用 C 还快了~</p>
 <p>Talk is cheap, show you the code!</p>
-<p>‘’’<br>class Solution {<br>public:<br>int numTrees(int n) {<br>    if( n &lt;= 2 )<br>        return n;</p>
-<pre><code>int numbers<span class="matrix">[n+<span class="number">1</span>]</span>;
-numbers<span class="matrix">[<span class="number">0</span>]</span> = <span class="number">1</span>;
-numbers<span class="matrix">[<span class="number">1</span>]</span> = <span class="number">1</span>;
-
-int <span class="built_in">i</span>,<span class="built_in">j</span>;
-<span class="keyword">for</span>( <span class="built_in">i</span> = <span class="number">2</span>; <span class="built_in">i</span> &lt;= n; <span class="built_in">i</span>++)
-    numbers<span class="matrix">[i]</span> = <span class="number">0</span>;
-<span class="keyword">for</span>( <span class="built_in">i</span> = <span class="number">2</span>; <span class="built_in">i</span> &lt;= n; <span class="built_in">i</span>++ )
-<span class="cell">{
-
-    for( j = i - <span class="number">1</span> ; j &gt;=<span class="number">0</span>; j-- )
-    {
-        numbers[i] += numbers[j] * numbers[i - j - <span class="number">1</span>];
-    }</span>
-}
-<span class="keyword">return</span> numbers<span class="matrix">[n]</span>;
-</code></pre><p>}<br>};<br>‘’’</p>
-
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( n &lt;= <span class="number">2</span> )</span><br><span class="line">		<span class="keyword">return</span> n;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> numbers[n+<span class="number">1</span>];</span><br><span class="line">	numbers[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	numbers[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">		numbers[i] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">2</span>; i &lt;= n; i++ )</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>( j = i - <span class="number">1</span> ; j &gt;=<span class="number">0</span>; j-- )</span><br><span class="line">		&#123;</span><br><span class="line">			numbers[i] += numbers[j] * numbers[i - j - <span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> numbers[n];</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
     
