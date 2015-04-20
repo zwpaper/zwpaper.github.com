@@ -5,24 +5,15 @@
   
   <title>自增运算与 printf 参数顺序 | PapEr Write</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。
-
-原题目What will be the output of the following C code?（ 以下代码的输出结果是什么？）［中国著名通信企业 H 公司 2007 年 7 月面试题］ 
-12345678#include&amp;lt;stdio.h&amp;">
+  <meta name="description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自增运算与 printf 参数顺序">
 <meta property="og:url" content="http://zwpaper.github.com/2015/04/19/increment-and-args-order/index.html">
 <meta property="og:site_name" content="PapEr Write">
-<meta property="og:description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。
-
-原题目What will be the output of the following C code?（ 以下代码的输出结果是什么？）［中国著名通信企业 H 公司 2007 年 7 月面试题］ 
-12345678#include&amp;lt;stdio.h&amp;">
+<meta property="og:description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自增运算与 printf 参数顺序">
-<meta name="twitter:description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。
-
-原题目What will be the output of the following C code?（ 以下代码的输出结果是什么？）［中国著名通信企业 H 公司 2007 年 7 月面试题］ 
-12345678#include&amp;lt;stdio.h&amp;">
+<meta name="twitter:description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。">
   
     <link rel="alternative" href="/atom.xml" title="PapEr Write" type="application/atom+xml">
   
@@ -238,6 +229,7 @@
         <blockquote>
 <p>最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="原题目">原题目</h1><p>What will be the output of the following C code?（ 以下代码的输出结果是什么？）<br>［中国著名通信企业 H 公司 2007 年 7 月面试题］ </p>
 <figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> arr[] = &#123;<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">	<span class="type">int</span> *<span class="keyword">ptr</span> = arr;</span><br><span class="line">	*(<span class="keyword">ptr</span>++) += <span class="number">123</span>;</span><br><span class="line">	printf(<span class="string">"%d, %d\n"</span>, *<span class="keyword">ptr</span>, *(<span class="keyword">ptr</span>++));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="原题解析">原题解析</h2><p>++ 运算相信大家都是知道的，直接到</p>
