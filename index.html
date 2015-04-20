@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/fun/" style="font-size: 10px;">fun</a><a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a><a href="/tags/tech/" style="font-size: 20px;">tech</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a><a href="/tags/fun/" style="font-size: 10px;">fun</a><a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a><a href="/tags/tech/" style="font-size: 20px;">tech</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,109 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-increment-and-args-order" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/19/increment-and-args-order/" class="article-date">
+  	<time datetime="2015-04-19T13:14:48.000Z" itemprop="datePublished">4月 19 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/19/increment-and-args-order/">自增运算与 printf 参数顺序</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。</p>
+</blockquote>
+<h1 id="原题目">原题目</h1><p>What will be the output of the following C code?（ 以下代码的输出结果是什么？）<br>［中国著名通信企业 H 公司 2007 年 7 月面试题］ </p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> arr[] = &#123;<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">	<span class="type">int</span> *<span class="keyword">ptr</span> = arr;</span><br><span class="line">	*(<span class="keyword">ptr</span>++) += <span class="number">123</span>;</span><br><span class="line">	printf(<span class="string">"%d, %d\n"</span>, *<span class="keyword">ptr</span>, *(<span class="keyword">ptr</span>++));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="原题解析">原题解析</h2><p>++ 运算相信大家都是知道的，直接到</p>
+<pre><code>printf(<span class="string">"%d, %d\n"</span>, *<span class="keyword">ptr</span>, *(<span class="keyword">ptr</span>++));
+</code></pre><p>文章中这题的考点之一就在这里，好玩的地方也就是这里。</p>
+<blockquote>
+<p>printf(“%d, %d\n”, <em>ptr, </em>(++ptr))；<br>从右到左运算，第一个是(++ptr)，也就是 ptr++，*ptr = 8, 此时 ptr 指向第三个元素 8， 所以全部为 8。</p>
+</blockquote>
+<p>也就是说输出两个8.</p>
+<p>===</p>
+<p>===</p>
+<h1 id="分析">分析</h1><h2 id="OS_X">OS X</h2><p>OS X 中使用了 clang 作 C 编译器</p>
+<blockquote>
+<p>Apple LLVM version 6.0 (clang-600.0.57) (based on LLVM 3.5svn)</p>
+</blockquote>
+<p>输出结果</p>
+<blockquote>
+<p>7, 8</p>
+</blockquote>
+<p>bingo~ 找到一个书上的错误</p>
+<p>五毛 get~</p>
+<p>但是真理之路往往不是这么一帆风顺的</p>
+<h2 id="CentOS">CentOS</h2><p>刚好手头有个 CentOS 的机器，GCC 还是有的~于是乎</p>
+<p>GCC 版本</p>
+<blockquote>
+<p>gcc version 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC)</p>
+</blockquote>
+<p>输出结果</p>
+<blockquote>
+<p>8, 8</p>
+</blockquote>
+<p>果然又是写书的，又是笔试题，还是不会全错的嘛~</p>
+<p>但是你让考试的时候，又是用 OS X 的人情何以堪！！！</p>
+<p><del>说不定这就是那59分里，被无辜扣的一分！</del></p>
+<h2 id="Windows">Windows</h2><p>手头没有 Windows 机器，查了一下</p>
+<p><a href="http://blog.csdn.net/bingxuewujian/article/details/6728396" target="_blank" rel="external">这里</a><br>说是 VC6.0 中是从右到左的，但是他说的是在整个 printf 之后才会对 i 进行自增</p>
+<p>那么，这道题又会出现一个答案</p>
+<blockquote>
+<p>7， 7</p>
+</blockquote>
+<p>兄弟，您确定吗？<em>对此持怀疑态度，有机会要试一下</em></p>
+<p>得放一放了，明天要面试，面试后更新。</p>
+<hr>
+<h1 id="ToDo：">ToDo：</h1><ul>
+<li>VC / VS 中到底结果是怎么样的</li>
+<li>printf 在各系统中头文件实现</li>
+<li>这个程序在各系统中输出的汇编是什么样子的</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-validateBST" class="article article-type-post" itemscope itemprop="blogPost">
   

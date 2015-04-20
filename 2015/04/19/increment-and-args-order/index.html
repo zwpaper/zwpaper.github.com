@@ -3,17 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>PapEr Write</title>
+  <title>自增运算与 printf 参数顺序 | PapEr Write</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PapEr Write">
-<meta property="og:url" content="http://zwpaper.github.com/archives/2015/04/index.html">
+  <meta name="description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。
+
+原题目What will be the output of the following C code?（ 以下代码的输出结果是什么？）［中国著名通信企业 H 公司 2007 年 7 月面试题］ 
+12345678#include&amp;lt;stdio.h&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自增运算与 printf 参数顺序">
+<meta property="og:url" content="http://zwpaper.github.com/2015/04/19/increment-and-args-order/index.html">
 <meta property="og:site_name" content="PapEr Write">
-<meta property="og:description">
+<meta property="og:description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。
+
+原题目What will be the output of the following C code?（ 以下代码的输出结果是什么？）［中国著名通信企业 H 公司 2007 年 7 月面试题］ 
+12345678#include&amp;lt;stdio.h&amp;">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PapEr Write">
-<meta name="twitter:description">
+<meta name="twitter:title" content="自增运算与 printf 参数顺序">
+<meta name="twitter:description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。
+
+原题目What will be the output of the following C code?（ 以下代码的输出结果是什么？）［中国著名通信企业 H 公司 2007 年 7 月面试题］ 
+12345678#include&amp;lt;stdio.h&amp;">
   
     <link rel="alternative" href="/atom.xml" title="PapEr Write" type="application/atom+xml">
   
@@ -189,9 +198,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-increment-and-args-order" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-increment-and-args-order" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/04/19/increment-and-args-order/" class="article-date">
@@ -207,12 +214,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/19/increment-and-args-order/">自增运算与 printf 参数顺序</a>
+    <h1 class="article-title" itemprop="name">
+      自增运算与 printf 参数顺序
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -272,145 +290,61 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/04/04/validateBST/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Validate Binary Search Tree</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-  
-    <article id="post-validateBST" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/04/validateBST/" class="article-date">
-  	<time datetime="2015-04-04T06:44:58.000Z" itemprop="datePublished">4月 4 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/04/validateBST/">Validate Binary Search Tree</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>给定一棵二叉树，要判断是否二叉搜索树，一开始还觉得不麻烦，但是做起来突然发起也不顺手。。。</p>
-</blockquote>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/04/validateBST/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="increment-and-args-order" data-title="自增运算与 printf 参数顺序" data-url="http://zwpaper.github.com/2015/04/19/increment-and-args-order/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-  
-    <article id="post-Unique-binary-search-tree" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/03/Unique-binary-search-tree/" class="article-date">
-  	<time datetime="2015-04-02T16:45:44.000Z" itemprop="datePublished">4月 3 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/03/Unique-binary-search-tree/">Unique binary search tree in LeetCode</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~</p>
-</blockquote>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/03/Unique-binary-search-tree/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
