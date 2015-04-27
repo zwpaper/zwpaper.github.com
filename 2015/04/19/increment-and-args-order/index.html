@@ -231,12 +231,12 @@
 </blockquote>
 <a id="more"></a>
 <h1 id="原题目">原题目</h1><p>What will be the output of the following C code?（ 以下代码的输出结果是什么？）<br>［中国著名通信企业 H 公司 2007 年 7 月面试题］ </p>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> arr[] = &#123;<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">	<span class="type">int</span> *<span class="keyword">ptr</span> = arr;</span><br><span class="line">	*(<span class="keyword">ptr</span>++) += <span class="number">123</span>;</span><br><span class="line">	printf(<span class="string">"%d, %d\n"</span>, *<span class="keyword">ptr</span>, *(<span class="keyword">ptr</span>++));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> arr[] = &#123;<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">	<span class="type">int</span> *<span class="keyword">ptr</span> = arr;</span><br><span class="line">	*(<span class="keyword">ptr</span>++) += <span class="number">123</span>;</span><br><span class="line">	printf(<span class="string">"%d, %d\n"</span>, *<span class="keyword">ptr</span>, *(++<span class="keyword">ptr</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="原题解析">原题解析</h2><p>++ 运算相信大家都是知道的，直接到</p>
-<pre><code>printf(<span class="string">"%d, %d\n"</span>, *<span class="keyword">ptr</span>, *(<span class="keyword">ptr</span>++));
+<pre><code>printf(<span class="string">"%d, %d\n"</span>, *<span class="keyword">ptr</span>, *(++<span class="keyword">ptr</span>));
 </code></pre><p>文章中这题的考点之一就在这里，好玩的地方也就是这里。</p>
 <blockquote>
-<p>printf(“%d, %d\n”, <em>ptr, </em>(++ptr))；<br>从右到左运算，第一个是(++ptr)，也就是 ptr++，*ptr = 8, 此时 ptr 指向第三个元素 8， 所以全部为 8。</p>
+<p>printf(“%d, %d\n”, <em>ptr, </em>(++ptr))；<br>从右到左运算，第一个进行运算的是(++ptr)，也就是 ptr 先自增，则 *ptr = 8, 此时 ptr 指向第三个元素 8， 所以全部为 8。</p>
 </blockquote>
 <p>也就是说输出两个8.</p>
 <p>===</p>
@@ -266,18 +266,24 @@
 <p><del>说不定这就是那59分里，被无辜扣的一分！</del></p>
 <h2 id="Windows">Windows</h2><p>手头没有 Windows 机器，查了一下</p>
 <p><a href="http://blog.csdn.net/bingxuewujian/article/details/6728396" target="_blank" rel="external">这里</a><br>说是 VC6.0 中是从右到左的，但是他说的是在整个 printf 之后才会对 i 进行自增</p>
-<p>那么，这道题又会出现一个答案</p>
+<p>那么，这道题答案</p>
 <blockquote>
-<p>7， 7</p>
+<p>8, 8</p>
 </blockquote>
-<p>兄弟，您确定吗？<em>对此持怀疑态度，有机会要试一下</em></p>
-<p>得放一放了，明天要面试，面试后更新。</p>
-<hr>
-<h1 id="ToDo：">ToDo：</h1><ul>
-<li>VC / VS 中到底结果是怎么样的</li>
-<li>printf 在各系统中头文件实现</li>
-<li>这个程序在各系统中输出的汇编是什么样子的</li>
-</ul>
+<p>在 VS 中跑了一下，8, 8</p>
+<h1 id="Level_up">Level up</h1><p>突然觉得这种时候应该丧心病狂一下，于是应该试试下面这个代码</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main() &#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">printf</span>(<span class="string">"<span class="variable">%d</span>, <span class="variable">%d</span>, <span class="variable">%d</span>, <span class="variable">%d</span>, <span class="variable">%d</span>\n"</span>, i++, i++, i, ++i, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="OS_X-1">OS X</h2><p>OS X 还是最接近正常思维地输出了</p>
+<blockquote>
+<p>2, 3, 4, 5, 5</p>
+</blockquote>
+<h2 id="Linux_/_Win">Linux / Win</h2><p>Linux 和 win 下居然出现了同样的，很神奇的输出</p>
+<blockquote>
+<p>4, 3, 5, 5, 5</p>
+</blockquote>
+<h1 id="Dig_into_Source_Code">Dig into Source Code</h1><p>这种神奇的情况，自然从 printf 的源码里面看一下原因</p>
+<p>看了一下，发现 printf 源码居然这么复杂。。。</p>
+<p>看来得找个时间仔细看一下了。</p>
 
       
     </div>
