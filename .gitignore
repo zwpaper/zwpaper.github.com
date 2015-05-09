@@ -1,2 +1,6 @@
 public/
 .deploy/
+.DS_Store/
+.deploy_git/
+source/.DS_Store/
+source/_post/.DS_Store
