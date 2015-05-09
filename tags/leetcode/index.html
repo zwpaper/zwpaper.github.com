@@ -191,6 +191,86 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-subsets" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/09/subsets/" class="article-date">
+  	<time datetime="2015-05-09T12:58:51.000Z" itemprop="datePublished">5月 9 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/09/subsets/">subsets in leetcode</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="原题">原题</h1><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Given</span> a <span class="type">set</span> <span class="keyword">of</span> <span class="keyword">distinct</span> integers, nums, <span class="keyword">return</span> all possible subsets.</span><br><span class="line"></span><br><span class="line"><span class="type">Note</span>:</span><br><span class="line"><span class="type">Elements</span> <span class="keyword">in</span> a subset must be <span class="keyword">in</span> non-descending order.</span><br><span class="line"><span class="type">The</span> solution <span class="type">set</span> must <span class="keyword">not</span> contain duplicate subsets.</span><br><span class="line"><span class="type">For</span> example,</span><br><span class="line"><span class="type">If</span> nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], a solution <span class="keyword">is</span>:</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h1 id="解题思路">解题思路</h1><h2 id="解决问题的基本思路">解决问题的基本思路</h2><ol>
+<li>明显例子的输出是刻意打乱了</li>
+<li>用一个小例子</li>
+<li>整理输出</li>
+<li>尝试推广</li>
+</ol>
+<h2 id="具体做法">具体做法</h2><ul>
+<li>1，2，3 作为小例子开始  </li>
+<li><p>整理输出，可能的输出顺序应是：</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">2 3</span><br><span class="line">1 2 3</span><br></pre></td></tr></table></figure>
+<p>  用程序好像不容易实现<br>  既然是回朔法，那再试试</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">1 2</span><br><span class="line">1 2 3</span><br><span class="line">1 3</span><br><span class="line">2</span><br><span class="line">2 3</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p>  从这个输出能看出来，如果用递归，就可以从后面向前一点点组合</p>
+</li>
+<li><p>Code</p>
+  <figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class <span class="type">Solution</span> &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; subsets(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="literal">result</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; sets;</span><br><span class="line">        <span class="literal">result</span>.push_back(sets);</span><br><span class="line">        sort(nums.begin(), nums.<span class="keyword">end</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)</span><br><span class="line">            generater(<span class="literal">result</span>, nums, sets, i);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">result</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">void</span> generater(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; &amp;output, vector&lt;<span class="type">int</span>&gt; &amp;resource, vector&lt;<span class="type">int</span>&gt; sub, <span class="type">int</span> index)&#123;</span><br><span class="line">        <span class="keyword">if</span>(index &gt;= resource.size())</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        sub.push_back(resource[index]);</span><br><span class="line">        output.push_back(sub);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = index + <span class="number">1</span>; i &lt; resource.size(); i++)&#123;</span><br><span class="line">            generater(output, resource, sub, i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>代码虽然不够漂亮，但这是自己一点点推出来的。</p>
+<h2 id="漂亮代码">漂亮代码</h2><p>要找漂亮代码当然是 discuss 区！-&gt; <a href="https://leetcode.com/discuss/questions/oj/subsets" target="_blank" rel="external">这里</a></p>
+<h1 id="得失">得失</h1><h2 id="得">得</h2><ul>
+<li>培养自己一点点找思路，推出答案</li>
+<li>开始理解 Backtracking 回朔法的概念</li>
+</ul>
+<h2 id="失">失</h2><ul>
+<li>自己对算法还是很不熟悉，复杂一点的算法就容易没有思路</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-validateBST" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
