@@ -5,15 +5,15 @@
   
   <title>subsets in leetcode | PapEr Write</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原题123456789101112131415161718Given a set of distinct integers, nums, return all possible subsets.Note:Elements in a subset must be in non-descending order.The solution set must not contain duplicate s">
+  <meta name="description" content="回朔法实践">
 <meta property="og:type" content="article">
 <meta property="og:title" content="subsets in leetcode">
 <meta property="og:url" content="http://zwpaper.github.com/2015/05/09/subsets/index.html">
 <meta property="og:site_name" content="PapEr Write">
-<meta property="og:description" content="原题123456789101112131415161718Given a set of distinct integers, nums, return all possible subsets.Note:Elements in a subset must be in non-descending order.The solution set must not contain duplicate s">
+<meta property="og:description" content="回朔法实践">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="subsets in leetcode">
-<meta name="twitter:description" content="原题123456789101112131415161718Given a set of distinct integers, nums, return all possible subsets.Note:Elements in a subset must be in non-descending order.The solution set must not contain duplicate s">
+<meta name="twitter:description" content="回朔法实践">
   
     <link rel="alternative" href="/atom.xml" title="PapEr Write" type="application/atom+xml">
   
@@ -226,7 +226,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <blockquote>
+<p>回朔法实践</p>
+</blockquote>
+<a id="more"></a>
 <h1 id="原题">原题</h1><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Given</span> a <span class="type">set</span> <span class="keyword">of</span> <span class="keyword">distinct</span> integers, nums, <span class="keyword">return</span> all possible subsets.</span><br><span class="line"></span><br><span class="line"><span class="type">Note</span>:</span><br><span class="line"><span class="type">Elements</span> <span class="keyword">in</span> a subset must be <span class="keyword">in</span> non-descending order.</span><br><span class="line"><span class="type">The</span> solution <span class="type">set</span> must <span class="keyword">not</span> contain duplicate subsets.</span><br><span class="line"><span class="type">For</span> example,</span><br><span class="line"><span class="type">If</span> nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], a solution <span class="keyword">is</span>:</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <h1 id="解题思路">解题思路</h1><h2 id="解决问题的基本思路">解决问题的基本思路</h2><ol>
 <li>明显例子的输出是刻意打乱了</li>
