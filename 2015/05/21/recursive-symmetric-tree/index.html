@@ -203,19 +203,17 @@
 <ul>
 <li>两个 NULL，真</li>
 <li>一个 NULL，一个非 NULL，假</li>
-<li><p>比较 value</p>
+<li><p>比较 value    </p>
 <ul>
 <li>value 不等，假</li>
-<li><p>value 相等，递归进行两次比较</p>
+<li>value 相等，递归进行两次比较</li>
+</ul>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">first</span>-&gt;left, <span class="keyword">second</span>-&gt;<span class="constant">right</span></span><br><span class="line"><span class="keyword">first</span>-&gt;<span class="constant">right</span>, <span class="keyword">second</span>-&gt;left</span><br></pre></td></tr></table></figure>
 <p>返回两个递归比较和与。</p>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p>边界条件</p>
-<ul>
+<li>边界条件<ul>
 <li>root == NULL 真</li>
 </ul>
 </li>
@@ -227,8 +225,7 @@
 <li>每层在比对的时候需要空间保存节点，如果用支持随机访问的容器可以省空间</li>
 <li>后面要加进来下一层的节点，前面要删除本层节点</li>
 <li>结果出来了，<strong>deque 双向队列</strong></li>
-<li><p>各层比较</p>
-<ul>
+<li>各层比较<ul>
 <li>记录当前层节点数</li>
 <li>每层头尾比较，包含 NULL</li>
 <li>两个都为 NULL，真</li>
@@ -238,8 +235,7 @@
 <li>出现假直接返回就 OK</li>
 </ul>
 </li>
-<li><p>队列处理</p>
-<ul>
+<li>队列处理<ul>
 <li>比较完一层，没有为假，把上层的节点出队</li>
 <li>出队的节点如果为 NULL，直接删除</li>
 <li>节点非 NULL，子节点入队（无论子节点是否为 NULL）</li>
@@ -249,12 +245,15 @@
 </li>
 <li><p>边界条件</p>
 <ul>
-<li>root 为 NULL，先对 root 进行判断</li>
+<li><p>root 为 NULL，先对 root 进行判断</p>
+<ul>
 <li><p>树中有 NULL 节点位置不同使得不对称树的某层非 NULL 节点对称，如：</p>
 <ul>
 <li>1 2 NULL 3 3 2 NULL 1</li>
 <li>如果只存非 NULL 节点，则是对称的</li>
 <li>所以 NULL 节点也要入队</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
