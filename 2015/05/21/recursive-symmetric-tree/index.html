@@ -243,17 +243,12 @@
 <li>循环跑完，则为真！</li>
 </ul>
 </li>
-<li><p>边界条件</p>
-<ul>
-<li><p>root 为 NULL，先对 root 进行判断</p>
-<ul>
-<li><p>树中有 NULL 节点位置不同使得不对称树的某层非 NULL 节点对称，如：</p>
-<ul>
+<li>边界条件<ul>
+<li>root 为 NULL，先对 root 进行判断</li>
+<li>树中有 NULL 节点位置不同使得不对称树的某层非 NULL 节点对称，如：<ul>
 <li>1 2 NULL 3 3 2 NULL 1</li>
 <li>如果只存非 NULL 节点，则是对称的</li>
 <li>所以 NULL 节点也要入队</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
