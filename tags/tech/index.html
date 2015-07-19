@@ -95,7 +95,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 10px;">C</a><a href="/tags/fun/" style="font-size: 10px;">fun</a><a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a><a href="/tags/tech/" style="font-size: 20px;">tech</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a><a href="/tags/Software/" style="font-size: 13.33px;">Software</a><a href="/tags/fun/" style="font-size: 10px;">fun</a><a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a><a href="/tags/tech/" style="font-size: 20px;">tech</a>
 					</div>
 				</section>
 				
@@ -148,6 +148,106 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-sessions-control-hammerspoon-doc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/11/sessions-control-hammerspoon-doc/" class="article-date">
+  	<time datetime="2015-07-11T15:48:27.000Z" itemprop="datePublished">7月 11 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/11/sessions-control-hammerspoon-doc/">Sessions control for hammerspoon</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。</p>
+</blockquote>
+<pre><code><span class="keyword">*</span><span class="keyword">*</span>注意：<span class="keyword">*</span><span class="keyword">*</span>本程序还处于开发状态，不会关闭或丢失窗口，但并<span class="keyword">*</span><span class="keyword">*</span>不对<span class="keyword">*</span><span class="keyword">*</span>稳定性提供保证，<span class="keyword">*</span><span class="keyword">*</span>请勿<span class="keyword">*</span><span class="keyword">*</span>用于正式工作中！
+</code></pre><h1 id="Hammerspoon">Hammerspoon</h1><h1 id="sessions_control">sessions control</h1><h2 id="简介">简介</h2><p>Sessions control 主要有以下三个功能：</p>
+<ul>
+<li>显示当前情景(sessions)</li>
+<li>在不同情景中切换</li>
+<li>为当前情景增删窗口(windows)</li>
+</ul>
+<p>当前实现主要通过把窗口最小化完成情景切换，后期版本会考虑把窗口隐藏，不占用任务栏空间。</p>
+<p>目前主要优势在于同时可以处理<strong>全屏窗口</strong>，当切换情景时，全屏的窗口也会同时最小化，前台情景也会恢复应有的全屏状态。</p>
+<p>各个情景都会定时保存到磁盘中，以保证各个情景不会因为 hammerspoon 或电脑的开关而丢失。</p>
+<p>对各个功能的快捷键提供定制，在脚本中可以很简单地修改快捷键。</p>
+<h2 id="功能说明">功能说明</h2><p>在本说明中使用默认的快捷键进行说明，操作主要是先按住功能键，然后点击相应快捷键，默认键位如下：</p>
+<ul>
+<li><p>功能键：<br>  ctrl + alt + cmd</p>
+</li>
+<li><p>显示当前情景：P</p>
+</li>
+<li>前一情景：[</li>
+<li>下一情景：]</li>
+<li>加入当前情景：L</li>
+<li>从当前情景删除：；</li>
+<li><p>数字键快速切换：1 ~ 情景数</p>
+<p>  其中，<code>数字键快速切换</code> 会按照情景数自动生成，通过按住功能键，加上相应的数字可以快速在情景间切换。</p>
+<p>  默认键位都位于键盘右侧，通过功能分区。</p>
+</li>
+</ul>
+<h3 id="显示当前情景">显示当前情景</h3><blockquote>
+<p>按住 <code>ctrl + alt + cmd</code> 后，点击 <code>P</code></p>
+</blockquote>
+<p>通过系统通知展示当前各个情景，并自动编号，便于后面的快速切换。</p>
+<p>当然，同时进行太多任务会很乱，所以不应该同时有太多情景，同时，系统通知中不可以放入过长的内容，所以刚刚好 (;¬_¬)</p>
+<h3 id="前后情景">前后情景</h3><blockquote>
+<ul>
+<li>前一情景：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>[</code></li>
+<li>下一情景：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>]</code></li>
+</ul>
+</blockquote>
+<p>这两个功能主要用于切换上一个或下一个情景，</p>
+<h1 id="程序实现">程序实现</h1><p>Sessions control 是基于 Hammerspoon 的脚本程序，使用 lua 编写，主要是</p>
+<ul>
+<li>sessions_control.lua</li>
+<li>sessions_head.lua</li>
+</ul>
+<p>两个文件实现。</p>
+<p>TO BE UPDATED.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Software/">Software</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-google-cpp-style" class="article article-type-post" itemscope itemprop="blogPost">
   

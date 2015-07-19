@@ -95,7 +95,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 10px;">C</a><a href="/tags/fun/" style="font-size: 10px;">fun</a><a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a><a href="/tags/tech/" style="font-size: 20px;">tech</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a><a href="/tags/Software/" style="font-size: 13.33px;">Software</a><a href="/tags/fun/" style="font-size: 10px;">fun</a><a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a><a href="/tags/tech/" style="font-size: 20px;">tech</a>
 					</div>
 				</section>
 				
@@ -148,6 +148,238 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-baiduyun-fastdown" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/19/baiduyun-fastdown/" class="article-date">
+  	<time datetime="2015-07-19T04:20:28.000Z" itemprop="datePublished">7月 19 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/19/baiduyun-fastdown/">百度云加速下载</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>自从百度云成为视频下载神器，百度云下载就广为人知，又从百度云无耻限速，百度云又被骂得广为人知，如果你还在因限速而惆怅，刚好你又在用 Chrome/Firefox，来这里，就对了。</p>
+</blockquote>
+<h1 id="说明">说明</h1><p>文章没有干货，只是自己碰巧找到两个好用的软件，效果惊人，所以总结一下自己的使用情况。</p>
+<p>因为要用到命令行，所以 Windows 没试过，Mac 和 Linux 用户应该是无压力的。</p>
+<h1 id="效果">效果</h1><p>扯别的都没用，先说一下我自己的速度情况。</p>
+<p>以下都是同一个网络环境：</p>
+<ul>
+<li>Chrome 默认下载：200 - 300 KBps</li>
+<li>Axel：下不鸟………</li>
+<li>Android ES 浏览器：500 - 1000 KBps</li>
+<li>本文所用，Aria2：1 - 3 MBps</li>
+</ul>
+<p>其中 Android 的 <code>ES 浏览器</code> 也很让我意外，基本可以稳定在 700 KBps。</p>
+<h1 id="软件">软件</h1><p>其实总共要用的软件就一个，<code>Aria2</code>，其它都是插件。</p>
+<h2 id="Aria2">Aria2</h2><p>上面说到了要用命令行，就是因为 <code>Aria2</code> 是一个命令行软件，但是在用上相应插件后，完全不用担心自己不用全命令行。</p>
+<p><a href="http://sourceforge.net/projects/aria2/" target="_blank" rel="external">Aria2主页</a></p>
+<p><a href="https://github.com/tatsuhiro-t/aria2" target="_blank" rel="external">Aria2 Github 主页</a></p>
+<p>然你要是和我一样喜欢命令行那就更无压力啦！</p>
+<h3 id="安装">安装</h3><p>以下内容要用到命令行，所以</p>
+<ul>
+<li>Mac 用户请打开 <code>Terminal</code>，也就是<code>终端</code>，打开程序菜单打 terminal 可以直接找到。</li>
+<li>Linux 用户我觉得不用我说了吧？也是 terminal，看发行版，自己解决。</li>
+</ul>
+<h4 id="Mac">Mac</h4><p>Mac 推荐用 <code>Homebrew</code> 安装，只要一句</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew <span class="keyword">install</span> aria2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>Homebrew</code> 的安装要 <code>Xcode</code> 环境，所以如果没有安装 <code>Homebrew</code> 还得先安装 <code>Xcode</code>。</p>
+<p>想安装 <code>Homebrew</code> 的用户请看这里 -&gt; <a href="http://brew.sh/index.html" target="_blank" rel="external">我是Homebrew</a></p>
+<p>其实就是下面的命令就可以安装（也是 <code>Terminal</code> 中输入）：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
+<h4 id="Linux">Linux</h4><p>发行版的差异真让我不知道应该怎么说明 Linux 安装。</p>
+<p>举一个粟子吧，Ubuntu</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install aria2</span><br></pre></td></tr></table></figure>
+<p>这个是基本，但不是关键，所以安装完就好了。</p>
+<h4 id="从源码安装">从源码安装</h4><p>如果以上方式你都觉得不合适，也可以从源码安装，但我已经忘记 Mac 默认会缺哪几个软件了，所以如果你真要这么干双不会的话，欢迎点左边的微博图标骚扰我。</p>
+<p>也可以点这里 -&gt; <a href="http://weibo.com/zwpaper" target="_blank" rel="external">我是微博</a></p>
+<h3 id="Aria2_配置">Aria2 配置</h3><p>Aria2 是一个命令行软件，所以配置是写在文件里的，你要把下面的内容放到一个能找到的地方，例如 <code>~/Documents/aria2.conf</code><br>如果你不知道这是哪里，那你就打开 Mac 的 Finder，然后在侧边栏点 <code>文档（Documents）</code>，新建一个文件叫 <code>aria2.conf</code> 然后打开写下以下内容，注意修改两个地方：</p>
+<ul>
+<li><code>用户名</code> 改为自己的用户名，不知道是什么的，请在命令行中输入 <code>pwd</code> 然后回车。</li>
+<li>最后一行，如果是 <code>SSD</code> 即 <code>固态硬盘</code> 就不用改，如果是传统硬盘，就改成 <code>file-allocation=prealloc</code></li>
+</ul>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#允许rpc</span></span><br><span class="line">enable-rpc=<span class="literal">true</span></span><br><span class="line"><span class="preprocessor">#允许非外部访问</span></span><br><span class="line">rpc-listen-all=<span class="literal">true</span></span><br><span class="line"><span class="preprocessor">#RPC端口, 仅当默认端口被占用时修改</span></span><br><span class="line">rpc-listen-port=<span class="number">6800</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#最大同时下载数(任务数), 路由建议值: 3</span></span><br><span class="line">max-concurrent-downloads=<span class="number">10</span></span><br><span class="line"><span class="preprocessor">#断点续传</span></span><br><span class="line">continue=<span class="literal">true</span></span><br><span class="line"><span class="preprocessor">#同服务器连接数</span></span><br><span class="line">max-connection-per-server=<span class="number">10</span></span><br><span class="line"><span class="preprocessor">#最小文件分片大小, 下载线程数上限取决于能分出多少片, 对于小文件重要</span></span><br><span class="line">min-split-size=<span class="number">10</span>M</span><br><span class="line"><span class="preprocessor">#单文件最大线程数, 路由建议值: 5</span></span><br><span class="line">split=<span class="number">10</span></span><br><span class="line"><span class="preprocessor">#下载速度限制</span></span><br><span class="line">max-overall-download-limit=<span class="number">0</span></span><br><span class="line"><span class="preprocessor">#单文件速度限制</span></span><br><span class="line">max-download-limit=<span class="number">0</span></span><br><span class="line"><span class="preprocessor">#上传速度限制</span></span><br><span class="line">max-overall-upload-limit=<span class="number">0</span></span><br><span class="line"><span class="preprocessor">#单文件速度限制</span></span><br><span class="line">max-upload-limit=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#文件保存路径, 默认为当前启动位置</span></span><br><span class="line">dir=/Users/用户名/Downloads</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#允许所有来源, web界面跨域权限需要</span></span><br><span class="line">rpc-allow-origin-all=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长</span></span><br><span class="line"><span class="preprocessor">#所需时间 none &lt; falloc ? trunc &lt;&lt; prealloc, falloc和trunc需要文件系统和内核支持</span></span><br><span class="line"><span class="preprocessor"># !!仅针对传统磁盘，SSD 降低文件碎片并不是什么好事。</span></span><br><span class="line">file-allocation=none</span><br></pre></td></tr></table></figure>
+<h3 id="Aria2_命令快捷设置">Aria2 命令快捷设置</h3><p>在命令行中输入以后命令，<code>用户名</code> 还是一样改成上文那个。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"alias aria2rpc='aria2c --conf-path=/Users/用户名/Documents/aria2.conf -D'"</span> &gt;&gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>相信我，你已经接近完成了。</p>
+<hr>
+<h2 id="插件">插件</h2><p>以下安装一个即可</p>
+<ul>
+<li>Chrome 插件，<a href="https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno" target="_blank" rel="external">百度网盘助手</a></li>
+<li>Firefox 插件，<a href="https://raw.githubusercontent.com/acgotaku/BaiduExporter/master/firefox/baidu-exporter.xpi" target="_blank" rel="external">百度网盘助手</a></li>
+</ul>
+<p>这个其实都可以不安装，就是一个网页，下面是它的主页</p>
+<ul>
+<li><a href="http://binux.github.io/yaaw/" target="_blank" rel="external">YAAW</a></li>
+</ul>
+<h1 id="使用">使用</h1><p>好了，现在装备齐全了，要怎么样才可以用的最舒服呢！</p>
+<p>从现在开始，以后只用按以下步骤就可以高速下载</p>
+<h2 id="运行_Aria2">运行 Aria2</h2><p>打开一个 <code>Terminal</code> 界面，输入以下并回车。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2rpc</span><br></pre></td></tr></table></figure>
+<p>好了，可以关闭 <code>Terminal</code>。<br>每次开机后运行一次即可。</p>
+<h2 id="打开_YAAW">打开 YAAW</h2><p>还记得我说的 YAAW 其实就是一个页面吗？打开它：</p>
+<p><a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a></p>
+<p>这真是个应该有一个错误</p>
+<pre><code><span class="keyword">Error</span>: Internal <span class="built_in">server</span> <span class="keyword">error</span>
+</code></pre><p>点右上角的扳手按钮，修改 <code>JSON-RPC Path</code> 内容，<br>把 <code>http://binux.github.io:6800/jsonrpc</code> 改为 <code>http://127.0.0.1:6800/jsonrpc</code></p>
+<p>保存，Save。</p>
+<h2 id="百度云">百度云</h2><p>终于到激动人心的时候了，-&gt; <a href="http://pan.baidu.com/disk/home" target="_blank" rel="external">点我打开百度云</a></p>
+<p>看到上面的图标了吗？</p>
+<p><img src="http://7xivq7.com1.z0.glb.clouddn.com/blogdownload.png" alt=""></p>
+<p>如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。</p>
+<p>选中要下载的文件，鼠标放到图标上，点击 <code>Aria2 RPC</code></p>
+<p>看看 YAAW 的页面？有没有惊喜？</p>
+<h1 id="后记">后记</h1><p>这个真的是一劳多逸，如果有命令行经验的话，连劳都不算。</p>
+<p>后面没说 Linux 的东西了，不是我忘了，而是觉得大家应该都会。</p>
+<p>如果能帮上忙就点个赞吧！XD</p>
+<p>再打个广告 -&gt; <a href="http://weibo.com/zwpaper" target="_blank" rel="external">我是微博</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Software/">Software</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-sessions-control-hammerspoon-doc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/11/sessions-control-hammerspoon-doc/" class="article-date">
+  	<time datetime="2015-07-11T15:48:27.000Z" itemprop="datePublished">7月 11 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/11/sessions-control-hammerspoon-doc/">Sessions control for hammerspoon</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。</p>
+</blockquote>
+<pre><code><span class="keyword">*</span><span class="keyword">*</span>注意：<span class="keyword">*</span><span class="keyword">*</span>本程序还处于开发状态，不会关闭或丢失窗口，但并<span class="keyword">*</span><span class="keyword">*</span>不对<span class="keyword">*</span><span class="keyword">*</span>稳定性提供保证，<span class="keyword">*</span><span class="keyword">*</span>请勿<span class="keyword">*</span><span class="keyword">*</span>用于正式工作中！
+</code></pre><h1 id="Hammerspoon">Hammerspoon</h1><h1 id="sessions_control">sessions control</h1><h2 id="简介">简介</h2><p>Sessions control 主要有以下三个功能：</p>
+<ul>
+<li>显示当前情景(sessions)</li>
+<li>在不同情景中切换</li>
+<li>为当前情景增删窗口(windows)</li>
+</ul>
+<p>当前实现主要通过把窗口最小化完成情景切换，后期版本会考虑把窗口隐藏，不占用任务栏空间。</p>
+<p>目前主要优势在于同时可以处理<strong>全屏窗口</strong>，当切换情景时，全屏的窗口也会同时最小化，前台情景也会恢复应有的全屏状态。</p>
+<p>各个情景都会定时保存到磁盘中，以保证各个情景不会因为 hammerspoon 或电脑的开关而丢失。</p>
+<p>对各个功能的快捷键提供定制，在脚本中可以很简单地修改快捷键。</p>
+<h2 id="功能说明">功能说明</h2><p>在本说明中使用默认的快捷键进行说明，操作主要是先按住功能键，然后点击相应快捷键，默认键位如下：</p>
+<ul>
+<li><p>功能键：<br>  ctrl + alt + cmd</p>
+</li>
+<li><p>显示当前情景：P</p>
+</li>
+<li>前一情景：[</li>
+<li>下一情景：]</li>
+<li>加入当前情景：L</li>
+<li>从当前情景删除：；</li>
+<li><p>数字键快速切换：1 ~ 情景数</p>
+<p>  其中，<code>数字键快速切换</code> 会按照情景数自动生成，通过按住功能键，加上相应的数字可以快速在情景间切换。</p>
+<p>  默认键位都位于键盘右侧，通过功能分区。</p>
+</li>
+</ul>
+<h3 id="显示当前情景">显示当前情景</h3><blockquote>
+<p>按住 <code>ctrl + alt + cmd</code> 后，点击 <code>P</code></p>
+</blockquote>
+<p>通过系统通知展示当前各个情景，并自动编号，便于后面的快速切换。</p>
+<p>当然，同时进行太多任务会很乱，所以不应该同时有太多情景，同时，系统通知中不可以放入过长的内容，所以刚刚好 (;¬_¬)</p>
+<h3 id="前后情景">前后情景</h3><blockquote>
+<ul>
+<li>前一情景：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>[</code></li>
+<li>下一情景：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>]</code></li>
+</ul>
+</blockquote>
+<p>这两个功能主要用于切换上一个或下一个情景，</p>
+<h1 id="程序实现">程序实现</h1><p>Sessions control 是基于 Hammerspoon 的脚本程序，使用 lua 编写，主要是</p>
+<ul>
+<li>sessions_control.lua</li>
+<li>sessions_head.lua</li>
+</ul>
+<p>两个文件实现。</p>
+<p>TO BE UPDATED.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Software/">Software</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/">tech</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-google-cpp-style" class="article article-type-post" itemscope itemprop="blogPost">
   
