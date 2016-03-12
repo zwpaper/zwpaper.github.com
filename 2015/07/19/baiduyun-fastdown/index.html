@@ -190,41 +190,45 @@
 <p>自从百度云成为视频下载神器，百度云下载就广为人知，又从百度云无耻限速，百度云又被骂得广为人知，如果你还在因限速而惆怅，刚好你又在用 Chrome/Firefox，来这里，就对了。<br>写了这个文章，结果还不少人问我怎么不能用，所以我又修改了一下，把教程做简单一点。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="准备工作：">准备工作：</h2><h1 id="下载文件">下载文件</h1><p>要用到的文件我都放在百度云了，直接下了就够了，强迫性也可以从下面主页下载</p>
-<p><a href="http://pan.baidu.com/s/1kTZPgEF" target="_blank" rel="external"></a>  密码: 4966</p>
+<h1 id="准备工作：">准备工作：</h1><h2 id="下载文件">下载文件</h2><p>要用到的文件我都放在百度云了，直接下了就够了，强迫性也可以从下面主页下载</p>
+<p><a href="">http://pan.baidu.com/s/1kTZPgEF</a> 密码: 4966</p>
 <ol>
 <li>脚本文件 aria2baiduyun，见百度云</li>
-<li>aria2 dmg文件，<a href="https://github.com/tatsuhiro-t/aria2/releases" target="_blank" rel="external"></a></li>
-<li>浏览器插件（二选一）：主页：<a href="https://github.com/acgotaku/BaiduExporter/releases" target="_blank" rel="external"></a><ul>
-<li>Chrome 插件 crx，<a href="https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno" target="_blank" rel="external">百度网盘助手</a></li>
+<li>aria2 dmg文件，<a href="">https://github.com/tatsuhiro-t/aria2/releases</a></li>
+<li>浏览器插件（二选一）：主页：<a href="">https://github.com/acgotaku/BaiduExporter/releases</a><ul>
+<li>Chrome 插件 crx，—&gt; <a href="https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno" target="_blank" rel="external">百度网盘助手</a></li>
 <li>Safari 插件 BaiduExporter.safariextz，没有链接。</li>
 </ul>
 </li>
 </ol>
-<h1 id="流程">流程</h1><hr>
-<h2 id="安装_aria2">安装 aria2</h2><p>dmg 文件，直接打开，双击安装即可。</p>
+<h1 id="流程">流程</h1><h2 id="安装_aria2">安装 aria2</h2><p>dmg 文件，直接打开，双击安装即可。</p>
 <h2 id="配置_aria2">配置 aria2</h2><p>找到之前下载的脚本文件，是一个压缩包 <strong>aria2baiduyun.tar.gz</strong> 使用常见解压文件就可以解压，有可能要解压两次。</p>
 <p>解压后文件夹内有两个文件 <strong>aria2.conf</strong> 和 <strong>aria2baiduyun.sh</strong></p>
 <p>Mac 用户请打开 <strong>Terminal</strong>，也就是<strong>终端</strong>，打开程序菜单打 terminal 可以直接找到。</p>
-<p>把 <strong>aria2baiduyun.sh</strong> 文件拖到终端的窗口里面，再按一下回车</p>
-<p>输入下面命令后按回车。</p>
+<p>把 <strong>aria2baiduyun.sh</strong> 文件拖到终端的窗口里面，再按一下<strong>回车</strong></p>
+<p>输入下面命令后按<strong>回车</strong>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<h2 id="安装浏览器插件">安装浏览器插件</h2><h3 id="Chrome">Chrome</h3><pre><code><span class="bullet">* </span>Chrome 市场直接安装，给能上的朋友：[<span class="link_label">百度网盘助手</span>](<span class="link_url">https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno</span>)
-<span class="bullet">* </span>不能打开 Chrome 市场的：
-<span class="code">    * 从上面提供的百度云里下载 BaiduExporter.crx</span>
-<span class="code">    * 打开 Chrome 菜单中的扩展程序</span>
-<span class="code">    * 勾选右上角 **开发者模式** </span>
-<span class="code">    * 把 BaiduExporter.crx 拖到扩展程序页面</span>
-</code></pre><h3 id="Safari">Safari</h3><p>从上面提供的百度云里下载 BaiduExporter.safariextz</p>
-<p>安装方式来自苹果官网：<a href="https://support.apple.com/kb/PH21488?locale=zh_CN&amp;viewlocale=zh_CN" target="_blank" rel="external"></a></p>
+<h2 id="安装浏览器插件">安装浏览器插件</h2><h3 id="Chrome">Chrome</h3><ul>
+<li>Chrome 市场直接安装，给能上的朋友：<a href="https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno" target="_blank" rel="external">百度网盘助手</a></li>
+<li>不能打开 Chrome 市场的：<blockquote>
+<ul>
+<li>从上面提供的百度云里下载 BaiduExporter.crx</li>
+<li>打开 Chrome 菜单中的扩展程序</li>
+<li>勾选右上角 <strong>开发者模式</strong> </li>
+<li>把 BaiduExporter.crx 拖到扩展程序页面</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="Safari">Safari</h3><p>从上面提供的百度云里下载 BaiduExporter.safariextz</p>
+<p>安装方式来自苹果官网：<a href="">https://support.apple.com/kb/PH21488?locale=zh_CN&amp;viewlocale=zh_CN</a></p>
 <blockquote>
 <p>安装来自开发者网站的扩展：下载，然后打开 .safariextz 文件。“Safari 扩展”偏好设置面板打开，并要求您确认扩展是否来自可信的来源。点按“信任”以安装扩展。</p>
 </blockquote>
-<h1 id="使用">使用</h1><hr>
-<p>准备工作完成，现在正式进入使用环节</p>
+<h1 id="使用">使用</h1><p>准备工作完成，现在正式进入使用环节</p>
 <h2 id="运行_Aria2">运行 Aria2</h2><p>这个操作<strong>每次开机</strong>时要执行一次：<br>打开一个 Terminal 界面，输入以下命令并回车。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2rpc</span><br></pre></td></tr></table></figure>
-<h2 id="打开_YAAW">打开 YAAW</h2><p>这是一个网站，你应该好好保存网址：<br><a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external"></a></p>
+<h2 id="打开_YAAW">打开 YAAW</h2><p>这是一个网站，你应该好好保存网址：<br><a href="">http://binux.github.io/yaaw/demo/</a></p>
 <p>第一次打开时会报一个错误：</p>
 <figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error</span>: Internal <span class="built_in">server</span> <span class="keyword">error</span></span><br></pre></td></tr></table></figure>
 <p>点右上角的扳手按钮，修改 <code>JSON-RPC Path</code> 内容，<br>把 <code>http://binux.github.io:6800/jsonrpc</code> 改为 <code>http://127.0.0.1:6800/jsonrpc</code></p>
@@ -237,7 +241,8 @@
 <p>看看 YAAW 的页面？有没有惊喜？</p>
 <hr>
 <p>再打个广告 -&gt; <a href="http://weibo.com/zwpaper" target="_blank" rel="external">我是微博</a></p>
-<h1 id="===">===</h1><h2 id="以下为旧文章">以下为旧文章</h2><p>date: 2015-07-19 12:20:28</p>
+<p>===</p>
+<h2 id="以下为旧文章">以下为旧文章</h2><p>date: 2015-07-19 12:20:28</p>
 <h1 id="说明">说明</h1><p>文章没有干货，只是自己碰巧找到两个好用的软件，效果惊人，所以总结一下自己的使用情况。</p>
 <p>因为要用到命令行，所以 Windows 没试过，Mac 和 Linux 用户应该是无压力的。</p>
 <h1 id="效果">效果</h1><p>扯别的都没用，先说一下我自己的速度情况。</p>
