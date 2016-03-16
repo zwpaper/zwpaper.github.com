@@ -25,7 +25,7 @@ tags:
 
 > 写代码，写代码，肯定要先把这命名约定写好了！
 
-![](http://7xivq7.com1.z0.glb.clouddn.com/bloggoogle_cpp_naming.tiff)
+![](http://7xivq7.com1.z0.glb.clouddn.com/bloggoogle_cpp_naming.png)
 
 ---
 
