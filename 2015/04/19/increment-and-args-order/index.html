@@ -8,7 +8,7 @@
   <meta name="description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自增运算与 printf 参数顺序">
-<meta property="og:url" content="http://zwpaper.github.com/2015/04/19/increment-and-args-order/index.html">
+<meta property="og:url" content="http://www.codespaper.com/2015/04/19/increment-and-args-order/index.html">
 <meta property="og:site_name" content="PapEr Write">
 <meta property="og:description" content="最近找实习，做了两次笔记题发现，有些东西就是你不做题平时很难碰到的，于是乎，就把一直被人喷的 程序员面试宝典 搬出来研究一下。发现这题挺好玩的。">
 <meta name="twitter:card" content="summary">
@@ -22,7 +22,23 @@
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
   <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  <% if (theme.google_analytics){ %>
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '<%= theme.google_analytics %>', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+<% } %>
+
 </head>
+
 <body>
   <div id="container">
     <div class="left-col">
@@ -291,7 +307,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="increment-and-args-order" data-title="自增运算与 printf 参数顺序" data-url="http://zwpaper.github.com/2015/04/19/increment-and-args-order/"></div>
+	<div class="ds-thread" data-thread-key="increment-and-args-order" data-title="自增运算与 printf 参数顺序" data-url="http://www.codespaper.com/2015/04/19/increment-and-args-order/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -331,8 +347,6 @@
 
 <script src="/js/mobile.js" type="text/javascript"></script>
 <script src="/js/main.js" type="text/javascript"></script>
-
-
 
 
 
