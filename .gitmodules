@@ -1,3 +1,6 @@
 [submodule "/Users/didi/Downloads/Codes/zwpaper.github.com/themes/fexo"]
 	path = /Users/didi/Downloads/Codes/zwpaper.github.com/themes/fexo
 	url = git@github.com:forsigner/fexo.git
+[submodule "themes/fexo"]
+	path = themes/fexo
+	url = git@github.com:forsigner/fexo.git
