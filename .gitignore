@@ -1,8 +1,13 @@
-public/
-.deploy/
-.DS_Store/
-.deploy_git/
-source/.DS_Store
-source/_posts/.DS_Store
+.DS_Store
+Thumbs.db
 
 themes/yilia/
+
+
+db.json
+*.log
+package.json
+node_modules/
+scaffolds/
+public/
+.deploy*/
