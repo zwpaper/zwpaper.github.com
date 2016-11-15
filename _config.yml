@@ -9,10 +9,11 @@ description:
 author: PapEr z
 email: zw.paper@gmail.com
 language: zh-CN
+baidu_analytics: true
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://zwpaper.github.com
+url: http://www.codespaper.com
 root: /
 permalink: :year/:month/:day/:title/
 tag_dir: tags
@@ -79,7 +80,7 @@ disqus_shortname:
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: yilia
+theme: fexo
 exclude_generator:
 
 # Deployment

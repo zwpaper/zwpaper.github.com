@@ -1,0 +1,222 @@
+# Blog info
+blog_name: PapEr Workz
+slogan: The people who are crazy enough to think they can change the world, are the ones who do
+url: http://www.codespaper.com
+
+# Set avatar (Absolute url and relative url)
+avatar: "https://avatars0.githubusercontent.com/u/3764335?v=3&s=140"
+
+# Set favicon
+favicon: /favicon.png
+
+# For seo
+keywords: Linux, C, Python, Go
+
+home_nav:
+  - name: Blog
+    url: /archives
+    target_blank: false #不在新页面打开
+#   - name: Project
+#     url: /project/
+#     target_blank: true #在新页面打开
+  - name: Github
+    url: https://github.com/zwpaper
+    target_blank: true
+  - name: Twitter
+    url: https://twitter.com/zwpaper
+    target_blank: true
+
+# config page nav
+page_nav:
+  - name: 博客
+    url: /archives/
+    target_blank: false # 不在新页面打开
+  - name: 分类
+    url: /category/
+    target_blank: false
+  - name: 标签
+    url: /tag/
+    target_blank: false
+  - name: 友链
+    url: /link/
+    target_blank: false
+  - name: 关于
+    url: /about/
+    target_blank: false
+  - name: RSS
+    url: /atom.xml
+    target_blank: true # 在新页面打开
+  - name: 搜索
+    url: /search/
+    target_blank: false # 在新页面打开
+
+page_nav_style: CIRCLE  # CIRCLE|ROUND_RECT
+
+# 面包屑
+breadcrumb:
+  isShow: false # true|fase
+
+# 盒子
+toolbox:
+  isShow: false # true|fase
+  text: 盒子
+
+search_slogan:
+  isShow: true # true|fase
+  text: Can you find the bug of world ~
+
+link_slogan:
+  isShow: true # true|fase
+  text: 交换友链可以邮件 blog@codespaper.com
+
+# set backtop show or hide
+backtop:
+  home: false
+  archive: false
+  category: true
+  tag: true
+  post: true
+  link: false
+  about: false
+
+post:
+  header_align: CENTER # LEFT|CENTER
+  showToc: true # true|false
+  showComments: true
+
+# =========================================================
+# 个性化设置
+# =========================================================
+
+# Custom CSS style
+personal_style: /css/personal-style.css
+
+home_background_scheme: light # dark、light
+
+# custom font-family 暂时只支持这3种英文字体，你可以完全自定义字体(看文档)
+blog_name_font_familiy: calligraffittiregular
+# blog_name_font_familiy: Lobster-Regular
+# blog_name_font_familiy: PoiretOne-Regular
+
+init_page_content: HOME_NAV  # HOME_NAV | POST
+
+
+# =========================================================
+# 第三方服务
+# =========================================================
+# Stats
+google_analytics:
+baidu_analytics: bc6cbe2230d121a4a4f4af23bbe65e2e
+
+# Comment service
+# disqus_shortname:
+duoshuo_shortname: pap3r
+
+
+# =========================================================
+# 页面内容设置
+# =========================================================
+about:
+  - type: me
+    icon: icon-user
+    text_value:
+    - "PapErz"
+    - "喜欢设计，擅长编程，喜欢睡懒觉."
+    - "前端开发工程师，常用 HTML / CSS / JavaScript."
+  - type: Github
+    icon: icon-github
+    text_key: Github
+    text_value: "@zwpaper"
+    text_value_url: https://github.com/zwpaper
+  - type: weibo
+    icon: icon-weibo
+    text_key: 微博
+    text_value: "@zwpaper"
+    text_value_url: http://weibo.com/u/1769440317
+  - type: mail
+    icon: icon-mail
+    text_key: Gmail
+    text_value: "blog@codespaper.com"
+#  - type: location
+#    icon: icon-location
+#    text_value: 珠海
+
+link:
+  - name: 织网
+    info: 身体和灵魂，总有一个在路上
+    url: http://zheng-ji.info/
+    avatar: https://avatars3.githubusercontent.com/u/1414745?v=3&s=100
+  - name: Dongyado
+    info: 生命不止，折腾不息
+    url: http://dongyado.com/
+    avatar: https://avatars0.githubusercontent.com/u/6274940?v=3&s=100
+  - name: OrangeCoder
+    info: android ffmpeg nodejs gradle
+    url: http://orangecoder.com/
+    avatar: https://avatars0.githubusercontent.com/u/2263785?v=3&s=100
+  - name: EverET
+    info: 好记性不如烂笔头
+    url: http://everet.org/about-me/
+    avatar: https://avatars1.githubusercontent.com/u/1559563?v=3&s=100
+  - name: 题叶
+    info: FP, GUI, Writing
+    url: http://tiye.me/
+    avatar: https://avatars2.githubusercontent.com/u/449224?v=3&s=100
+  - name: idisfkj
+    info: Android成长分享
+    url: http://idisfkj.github.io
+    avatar: https://avatars1.githubusercontent.com/u/8677862?v=3&s=100
+
+project:
+  - type: personal
+    name: fexo
+    url: https://github.com/forsigner/fexo
+    intro: A minimalist design theme for hexo
+  # - type: company
+  #   name: Fexo
+  #   url: https://github.com/forsigner/fexo
+  #   intro: A minimalist design theme for hexo
+  - type: personal
+    name: beside
+    url: https://github.com/forsigner/beside
+    intro: I need you beside me
+  - type: personal
+    name: web-fontmin
+    url: https://github.com/forsigner/web-fontmin
+    intro: 字体子集化，在线提取你需要的字体
+  - type: personal
+    name: magic-check
+    url: https://github.com/forsigner/magic-check
+    intro: Beautify Radio and Checkbox with pure CSS
+  - type: personal
+    name: nice-bar
+    url: https://github.com/forsigner/nice-bar
+    intro: A nice and lightweight scrollbar
+  - type: personal
+    name: angular-nice-bar
+    url: https://github.com/forsigner/angular-nice-bar
+    intro: A nice and lightweight scrollbar in Angular
+  - type: personal
+    name: fo-popover
+    url: https://github.com/forsigner/fo-popover
+    intro: A nice popover for Angular
+  - type: personal
+    name: fo-tooltip
+    url: A nice tooltip for Angular
+    intro: https://github.com/forsigner/fo-tooltip
+  - type: personal
+    name: fo-modal
+    url: https://github.com/forsigner/fo-modal
+    intro: A nice modal for Angular
+  - type: personal
+    name: mocer
+    url: https://github.com/forsigner/mocer
+    intro: Setup a mock server easily
+  - type: personal
+    name: node-pngdefry
+    url: https://github.com/forsigner/node-pngdefry
+    intro: Repairing iPhone fried PNGs using Node.js
+  - type: personal
+    name: ng-simditor
+    url: https://github.com/forsigner/ng-simditor
+    intro: Angular directive for simditor
