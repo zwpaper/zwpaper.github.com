@@ -4,3 +4,5 @@ public/
 .deploy_git/
 source/.DS_Store
 source/_posts/.DS_Store
+
+themes/yilia/
