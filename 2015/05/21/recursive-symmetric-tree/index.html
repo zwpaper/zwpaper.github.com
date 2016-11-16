@@ -1,21 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 
 
-  <html class="light page-post">
+
+  
 
 
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
-  
-  <title>symmetric tree in leetcode | PapEr Write</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
 
   
-    <meta name="keywords" content="leetcode,tech," />
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
   
 
-  <meta name="description" content="提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tech,leetcode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！
 写了一个迭代算法了，也只用了4ms, 为什么提交记录里 C++ 用时都挺多，但是这我刚的这两个都只用 4ms 呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="symmetric tree in leetcode">
@@ -23,27 +92,53 @@
 <meta property="og:site_name" content="PapEr Write">
 <meta property="og:description" content="提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！
 写了一个迭代算法了，也只用了4ms, 为什么提交记录里 C++ 用时都挺多，但是这我刚的这两个都只用 4ms 呢？">
+<meta property="og:updated_time" content="2016-03-16T13:24:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="symmetric tree in leetcode">
 <meta name="twitter:description" content="提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！
 写了一个迭代算法了，也只用了4ms, 为什么提交记录里 C++ 用时都挺多，但是这我刚的这两个都只用 4ms 呢？">
 
-  
-
-  
-    <link rel="icon" href="/favicon.png">
-  
-
-  <link href="/css/styles.css?v=eaf5ab1e" rel="stylesheet">
 
 
-  
-    <link rel="stylesheet" href="/css/personal-style.css" type="text/css">
-  
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.codespaper.com/2015/05/21/recursive-symmetric-tree/"/>
+
+
+
+
+
+  <title> symmetric tree in leetcode | PapEr Write </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
-  
+
+
   <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
@@ -55,60 +150,202 @@
   </script>
 
 
-</head>
 
-<body>
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=59502766";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
 
 
   
+  
+    
+  
 
-  <div class="post-header CENTER">
-   
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
 
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">PapEr Write</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
 </div>
 
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
 
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#递归"><span class="toc-text">递归</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#迭代"><span class="toc-text">迭代</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路-1"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码-1"><span class="toc-text">代码</span></a></li></ol></li></ol>
-  </div>
+<nav class="site-nav">
+  
 
-
-
-<div class="content content-post CENTER">
-   <article id="post-recursive-symmetric-tree" class="article article-type-post" itemprop="blogPost">
-  <header class="article-header">
-    <h1 class="post-title">symmetric tree in leetcode</h1>
-
-    <div class="article-meta">
-      <span>
-        <i class="icon-calendar"></i>
-        <span>2015.05.21</span>
-      </span>
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
 
       
-        <span class="article-author">
-          <i class="icon-user"></i>
-          <span>PapEr z</span>
-        </span>
-      
+    </ul>
+  
 
-      
+  
+</nav>
 
 
-      
 
-    </div>
-  </header>
+ </div>
+    </header>
 
-  <div class="article-content">
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
-      <blockquote>
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.codespaper.com/2015/05/21/recursive-symmetric-tree/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="PapEr z">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/3764335?v=3&s=140">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="PapEr Write">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="PapEr Write" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                symmetric tree in leetcode
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-21T17:23:58+08:00">
+                May 21 2015
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/05/21/recursive-symmetric-tree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/21/recursive-symmetric-tree/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
 <p>提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！</p>
 <p>写了一个迭代算法了，也只用了4ms, 为什么提交记录里 C++ 用时都挺多，但是这我刚的这两个都只用 4ms 呢？</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="递归">递归</h1><h2 id="思路">思路</h2><ul>
+<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>这是一棵树！<br>必须要有的想法，看到一棵树，递归！</li>
 <li><p>这棵树是左右对称的<br>从左向右看 和 从右向左看 应该是一结果应该是一样的  </p>
 <blockquote>
@@ -124,7 +361,7 @@
 <li>value 不等，假</li>
 <li>value 相等，递归进行两次比较</li>
 </ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">first</span>-&gt;left, <span class="keyword">second</span>-&gt;<span class="constant">right</span></span><br><span class="line"><span class="keyword">first</span>-&gt;<span class="constant">right</span>, <span class="keyword">second</span>-&gt;left</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">first-&gt;left, second-&gt;right</div><div class="line">first-&gt;right, second-&gt;left</div></pre></td></tr></table></figure>
 <p>返回两个递归比较和与。</p>
 </li>
 </ul>
@@ -134,8 +371,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="代码">代码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    bool isSymmetric(TreeNode* root) &#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> checkSymmetric(root-&gt;left, root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    bool checkSymmetric(TreeNode *first, TreeNode *second)&#123;</span><br><span class="line">        <span class="keyword">if</span>(first == <span class="keyword">NULL</span> &amp;&amp; second == <span class="keyword">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;        </span><br><span class="line">        <span class="keyword">if</span>(first == <span class="keyword">NULL</span> ^ second == <span class="keyword">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(first-&gt;val == second-&gt;val)&#123;</span><br><span class="line">            <span class="keyword">return</span> checkSymmetric(first-&gt;left, second-&gt;right) &amp;&amp; checkSymmetric(first-&gt;right, second-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="迭代">迭代</h1><h2 id="思路-1">思路</h2><ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    bool isSymmetric(TreeNode* root) &#123;</div><div class="line">        if(root == NULL)</div><div class="line">            return true;</div><div class="line">        return checkSymmetric(root-&gt;left, root-&gt;right);</div><div class="line">    &#125;</div><div class="line">private:</div><div class="line">    bool checkSymmetric(TreeNode *first, TreeNode *second)&#123;</div><div class="line">        if(first == NULL &amp;&amp; second == NULL)</div><div class="line">            return true;        </div><div class="line">        if(first == NULL ^ second == NULL)</div><div class="line">            return false;</div><div class="line">        if(first-&gt;val == second-&gt;val)&#123;</div><div class="line">            return checkSymmetric(first-&gt;left, second-&gt;right) &amp;&amp; checkSymmetric(first-&gt;right, second-&gt;left);</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h1><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>左右对称的，那就一层层比较，每层是不是对称的，广度优先，BFS</li>
 <li>非递归，用栈实现 BFS</li>
 <li>每层在比对的时候需要空间保存节点，如果用支持随机访问的容器可以省空间</li>
@@ -170,169 +407,358 @@
 </ul>
 </li>
 </ul>
-<h2 id="代码-1">代码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	bool isSymmetric(TreeNode *root)&#123;</span><br><span class="line">		<span class="keyword">if</span>(root == <span class="keyword">NULL</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		TreeNode *walker = <span class="keyword">NULL</span>;</span><br><span class="line">		int layer_size = <span class="number">0</span>;</span><br><span class="line">		deque&lt;TreeNode *&gt; tree_deque;</span><br><span class="line">		tree_deque.push_back(root-&gt;left);</span><br><span class="line">		tree_deque.push_back(root-&gt;right);</span><br><span class="line">		<span class="keyword">while</span>(!tree_deque.<span class="keyword">empty</span>())&#123;</span><br><span class="line">			layer_size = tree_deque.size();</span><br><span class="line">			<span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; layer_size / <span class="number">2</span>; i++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(tree_deque[i] == <span class="keyword">NULL</span> ^ tree_deque[layer_size - <span class="number">1</span> - i] == <span class="keyword">NULL</span>) </span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">if</span>(tree_deque[i] != <span class="keyword">NULL</span> &amp;&amp; tree_deque[layer_size - <span class="number">1</span> - i] != <span class="keyword">NULL</span> </span><br><span class="line">					&amp;&amp; tree_deque[i]-&gt;val != tree_deque[layer_size - <span class="number">1</span> - i]-&gt;val )</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; layer_size; i++)&#123;</span><br><span class="line">				walker = tree_deque.front();</span><br><span class="line">				tree_deque.pop_front();</span><br><span class="line">				<span class="keyword">if</span>(walker != <span class="keyword">NULL</span>)&#123;</span><br><span class="line">					tree_deque.push_back(walker-&gt;left);</span><br><span class="line">					tree_deque.push_back(walker-&gt;right);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">	bool isSymmetric(TreeNode *root)&#123;</div><div class="line">		if(root == NULL)</div><div class="line">			return true;</div><div class="line">		TreeNode *walker = NULL;</div><div class="line">		int layer_size = 0;</div><div class="line">		deque&lt;TreeNode *&gt; tree_deque;</div><div class="line">		tree_deque.push_back(root-&gt;left);</div><div class="line">		tree_deque.push_back(root-&gt;right);</div><div class="line">		while(!tree_deque.empty())&#123;</div><div class="line">			layer_size = tree_deque.size();</div><div class="line">			for(int i = 0; i &lt; layer_size / 2; i++)&#123;</div><div class="line">				if(tree_deque[i] == NULL ^ tree_deque[layer_size - 1 - i] == NULL) </div><div class="line">					return false;</div><div class="line">				if(tree_deque[i] != NULL &amp;&amp; tree_deque[layer_size - 1 - i] != NULL </div><div class="line">					&amp;&amp; tree_deque[i]-&gt;val != tree_deque[layer_size - 1 - i]-&gt;val )</div><div class="line">					return false;</div><div class="line">			&#125;</div><div class="line">			for(int i = 0; i &lt; layer_size; i++)&#123;</div><div class="line">				walker = tree_deque.front();</div><div class="line">				tree_deque.pop_front();</div><div class="line">				if(walker != NULL)&#123;</div><div class="line">					tree_deque.push_back(walker-&gt;left);</div><div class="line">					tree_deque.push_back(walker-&gt;right);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tech/" rel="tag"># tech</a>
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/09/subsets/" rel="next" title="subsets in leetcode">
+                <i class="fa fa-chevron-left"></i> subsets in leetcode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/21/google-cpp-style/" rel="prev" title="google C++ 代码风格">
+                google C++ 代码风格 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/05/21/recursive-symmetric-tree/"
+           data-title="symmetric tree in leetcode" data-url="http://www.codespaper.com/2015/05/21/recursive-symmetric-tree/">
+      </div>
     
   </div>
-</article>
 
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/3764335?v=3&s=140"
+               alt="PapEr z" />
+          <p class="site-author-name" itemprop="name">PapEr z</p>
+          <p class="site-description motion-element" itemprop="description">The people who are crazy enough to think they can change the world, are the ones who do</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zwpaper" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/zwpaper" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/zwpaper" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#递归"><span class="nav-number">1.</span> <span class="nav-text">递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#迭代"><span class="nav-number">2.</span> <span class="nav-text">迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PapEr z</span>
 </div>
 
 
-  <a id="backTop" class="back-top">
-    <i class="icon-angle-up"></i>
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
   </a>
-
-
-
-
-  <div class="modal" id="modal">
-  <span id="cover" class="cover hide"></span>
-  <div id="modal-dialog" class="modal-dialog hide-dialog">
-    <div class="modal-header">
-      <span id="close" class="btn-close">关闭</span>
-    </div>
-    <hr>
-    <div class="modal-body">
-      <ul class="list-toolbox">
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/archives/"
-              target="_self"
-              >
-              博客
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/category/"
-              target="_self"
-              >
-              分类
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/tag/"
-              target="_self"
-              >
-              标签
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/link/"
-              target="_self"
-              >
-              友链
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/about/"
-              target="_self"
-              >
-              关于
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/atom.xml"
-              target="_blank"
-              >
-              RSS
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/search/"
-              target="_self"
-              >
-              搜索
-            </a>
-          </li>
-        
-      </ul>
-
-    </div>
-  </div>
 </div>
 
 
+        
 
-  
-      <div class="fexo-comments comments-post">
-    
+        
+      </div>
+    </footer>
 
-    
-  <section class="duoshuo-comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="" data-title="symmetric tree in leetcode" data-url="http://www.codespaper.com/2015/05/21/recursive-symmetric-tree/index.html"></div>
-    <!-- 多说评论框 end -->
-  </section>
-
-
-
-
-  <script type="text/javascript">
-  var duoshuoQuery = {short_name:"pap3r"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0]
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-
-
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
 
-  <script type="text/javascript">
-  function loadScript(url, callback) {
-    var script = document.createElement('script')
-    script.type = 'text/javascript';
-
-    if (script.readyState) { //IE
-      script.onreadystatechange = function() {
-        if (script.readyState == 'loaded' ||
-          script.readyState == 'complete') {
-          script.onreadystatechange = null;
-          callback();
-        }
-      };
-    } else { //Others
-      script.onload = function() {
-        callback();
-      };
-    }
-
-    script.src = url;
-    document.getElementsByTagName('head')[0].appendChild(script);
-  }
-
-  window.onload = function() {
-    loadScript('/js/bundle.js?235683', function() {
-      // load success
-    });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
 </script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"pap3r"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
 
 </body>
 </html>
