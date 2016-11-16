@@ -4,3 +4,6 @@
 [submodule "themes/fexo"]
 	path = themes/fexo
 	url = git@github.com:forsigner/fexo.git
+[submodule "themes/next"]
+	path = themes/next
+	url = git@github.com:iissnan/hexo-theme-next.git
