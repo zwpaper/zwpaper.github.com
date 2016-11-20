@@ -5,11 +5,12 @@
 # Site
 title: PapEr Write
 subtitle:
-description:
+description: The people who are crazy enough to think they can change the world, are the ones who do
 author: PapEr z
 email: zw.paper@gmail.com
-language: zh-CN
+language: en
 baidu_analytics: true
+avatar: "https://avatars0.githubusercontent.com/u/3764335?v=3&s=140"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -77,15 +78,18 @@ pagination_dir: page
 # Disqus
 disqus_shortname:
 
+# Baidu Analytics ID
+# baidu_analytics: bc6cbe2230d121a4a4f4af23bbe65e2e
+
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: fexo
+theme: next
 exclude_generator:
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/zwpaper/zwpaper.github.com.git
+  repository: git@github.com:zwpaper/zwpaper.github.com.git
   branch: master
