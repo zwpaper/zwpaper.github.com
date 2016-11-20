@@ -1,8 +1,8 @@
 title: "subsets in leetcode"
 date: 2015-05-09 20:58:51
 tags:
-- tech
-- leetcode
+- Tech
+- Leetcode
 ---
 
 > 回朔法实践
@@ -108,3 +108,4 @@ public:
 ## 失
 
 * 自己对算法还是很不熟悉，复杂一点的算法就容易没有思路
+

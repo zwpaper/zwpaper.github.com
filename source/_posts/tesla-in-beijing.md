@@ -1,7 +1,7 @@
 title: "Tesla in Beijing"
 date: 2015-03-31 23:40:54
 tags: 
-- fun
+- Fun
 ---
 
 > 假期北京一日游~~流~~，看到突然看到好几辆 Model S，突然有种感觉，Elon Musk 真心有本事啊！尤其是那神一般的执行力，或者说对产品的实现的能力。

@@ -1,7 +1,7 @@
 title: "Sessions control for hammerspoon"
 date: 2015-07-11 23:48:27
 tags:
-- tech
+- Tech
 - Software
 ---
 
@@ -113,3 +113,4 @@ Sessions control 是基于 Hammerspoon 的脚本程序，使用 lua 编写，主
 * sessions_head.lua
 
 为了方便管理，把这两个文件放到了 `sessions-control-hammerspoon` 文件夹中。
+

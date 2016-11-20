@@ -1,8 +1,8 @@
 title: "Validate Binary Search Tree"
 date: 2015-04-04 14:44:58
 tags: 
-- tech
-- leetcode
+- Tech
+- Leetcode
 ---
 
 > 给定一棵二叉树，要判断是否二叉搜索树，一开始还觉得不麻烦，但是做起来突然发起也不顺手。。。
@@ -123,3 +123,4 @@ public:
     }
 };
 ```
+

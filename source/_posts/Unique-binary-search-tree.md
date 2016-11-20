@@ -1,8 +1,8 @@
 title: "Unique binary search tree in LeetCode"
 date: 2015-04-03 00:45:44
 tags: 
-- tech
-- leetcode
+- Tech
+- Leetcode
 ---
 
 > 最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~
@@ -64,3 +64,4 @@ int numTrees(int n) {
 }
 };
 ```
+

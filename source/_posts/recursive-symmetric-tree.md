@@ -1,8 +1,8 @@
 title: "symmetric tree in leetcode"
 date: 2015-05-21 17:23:58
 tags:
-- leetcode
-- tech
+- Leetcode
+- Tech
 ---
 
 > 提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！
@@ -124,3 +124,4 @@ public:
 	}
 };
 ```
+
