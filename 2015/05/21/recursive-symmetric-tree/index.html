@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tech,leetcode," />
+  <meta name="keywords" content="Tech,Leetcode," />
 
 
 
@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="PapEr Write">
 <meta property="og:description" content="提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！
 写了一个迭代算法了，也只用了4ms, 为什么提交记录里 C++ 用时都挺多，但是这我刚的这两个都只用 4ms 呢？">
-<meta property="og:updated_time" content="2016-03-16T13:24:51.000Z">
+<meta property="og:updated_time" content="2016-11-20T15:40:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="symmetric tree in leetcode">
 <meta name="twitter:description" content="提交递归 symmetric tree 代码的时候突然发现时间居然只要 4ms，比想像的还要好，所以又到了记录的时候了！
@@ -408,6 +408,7 @@
 </li>
 </ul>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">	bool isSymmetric(TreeNode *root)&#123;</div><div class="line">		if(root == NULL)</div><div class="line">			return true;</div><div class="line">		TreeNode *walker = NULL;</div><div class="line">		int layer_size = 0;</div><div class="line">		deque&lt;TreeNode *&gt; tree_deque;</div><div class="line">		tree_deque.push_back(root-&gt;left);</div><div class="line">		tree_deque.push_back(root-&gt;right);</div><div class="line">		while(!tree_deque.empty())&#123;</div><div class="line">			layer_size = tree_deque.size();</div><div class="line">			for(int i = 0; i &lt; layer_size / 2; i++)&#123;</div><div class="line">				if(tree_deque[i] == NULL ^ tree_deque[layer_size - 1 - i] == NULL) </div><div class="line">					return false;</div><div class="line">				if(tree_deque[i] != NULL &amp;&amp; tree_deque[layer_size - 1 - i] != NULL </div><div class="line">					&amp;&amp; tree_deque[i]-&gt;val != tree_deque[layer_size - 1 - i]-&gt;val )</div><div class="line">					return false;</div><div class="line">			&#125;</div><div class="line">			for(int i = 0; i &lt; layer_size; i++)&#123;</div><div class="line">				walker = tree_deque.front();</div><div class="line">				tree_deque.pop_front();</div><div class="line">				if(walker != NULL)&#123;</div><div class="line">					tree_deque.push_back(walker-&gt;left);</div><div class="line">					tree_deque.push_back(walker-&gt;right);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -430,9 +431,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tech/" rel="tag"># tech</a>
+            <a href="/tags/Tech/" rel="tag"># Tech</a>
           
-            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
           
         </div>
       
@@ -535,7 +536,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

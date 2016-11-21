@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tech,leetcode," />
+  <meta name="keywords" content="Tech,Leetcode," />
 
 
 
@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://www.codespaper.com/2015/04/03/Unique-binary-search-tree/index.html">
 <meta property="og:site_name" content="PapEr Write">
 <meta property="og:description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~">
-<meta property="og:updated_time" content="2016-03-16T13:24:51.000Z">
+<meta property="og:updated_time" content="2016-11-20T15:40:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unique binary search tree in LeetCode">
 <meta name="twitter:description" content="最近时不时地刷一下 LeetCode，突然做了这么一道 Unique binary search tree，一看时间，尼码哥也有自豪的时候啦！快拿出来晒一晒~">
@@ -358,6 +358,7 @@
 <h2 id="aha-Algrithm"><a href="#aha-Algrithm" class="headerlink" title="aha Algrithm"></a>aha Algrithm</h2><p>19 个测试，1ms 的时间，C++ 比很多用 C 还快了~</p>
 <p>Talk is cheap, show you the code!</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">int numTrees(int n) &#123;</div><div class="line">	if( n &lt;= 2 )</div><div class="line">		return n;</div><div class="line"></div><div class="line">	int numbers[n+1];</div><div class="line">	numbers[0] = 1;</div><div class="line">	numbers[1] = 1;</div><div class="line"></div><div class="line">	int i,j;</div><div class="line">	for( i = 2; i &lt;= n; i++)</div><div class="line">		numbers[i] = 0;</div><div class="line">	for( i = 2; i &lt;= n; i++ )</div><div class="line">	&#123;</div><div class="line"></div><div class="line">		for( j = i - 1 ; j &gt;=0; j-- )</div><div class="line">		&#123;</div><div class="line">			numbers[i] += numbers[j] * numbers[i - j - 1];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">    return numbers[n];</div><div class="line">&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -380,9 +381,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tech/" rel="tag"># tech</a>
+            <a href="/tags/Tech/" rel="tag"># Tech</a>
           
-            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
           
         </div>
       
@@ -485,7 +486,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

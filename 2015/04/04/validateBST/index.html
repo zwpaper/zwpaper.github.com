@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tech,leetcode," />
+  <meta name="keywords" content="Tech,Leetcode," />
 
 
 
@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://www.codespaper.com/2015/04/04/validateBST/index.html">
 <meta property="og:site_name" content="PapEr Write">
 <meta property="og:description" content="给定一棵二叉树，要判断是否二叉搜索树，一开始还觉得不麻烦，但是做起来突然发起也不顺手。。。">
-<meta property="og:updated_time" content="2016-03-16T13:24:51.000Z">
+<meta property="og:updated_time" content="2016-11-20T15:40:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Validate Binary Search Tree">
 <meta name="twitter:description" content="给定一棵二叉树，要判断是否二叉搜索树，一开始还觉得不麻烦，但是做起来突然发起也不顺手。。。">
@@ -367,6 +367,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Definition for binary tree</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    bool isValidBST(TreeNode *root) &#123;</div><div class="line">        if( root == NULL )</div><div class="line">        	return true;</div><div class="line">        midOrder( root );</div><div class="line">        return isOrdered( list );</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    std::vector&lt;int&gt; list;</div><div class="line">    void midOrder( TreeNode *node )</div><div class="line">    &#123;</div><div class="line">    	if( node == NULL )</div><div class="line">    		return ;</div><div class="line">    	midOrder( node-&gt;left );</div><div class="line">    	list.push_back(node-&gt;val);</div><div class="line">    	midOrder( node-&gt;right );</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    bool isOrdered(std::vector&lt;int&gt; &amp;v)</div><div class="line">    &#123;</div><div class="line">    	for(std::vector&lt;int&gt;::iterator i = v.begin(); ++i != v.end(); )</div><div class="line">    	&#123;</div><div class="line">    		if( *i &gt;= *(i + 1) )</div><div class="line">    			return false;</div><div class="line">    	&#125;</div><div class="line">    	return true;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>中根序合并</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Definition for binary tree</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    bool isValidBST(TreeNode *root) &#123;</div><div class="line">    	TreeNode *p = NULL;</div><div class="line">    	return inOrder( root, p );    </div><div class="line">    &#125;</div><div class="line"></div><div class="line">    bool inOrder(TreeNode *node, TreeNode *prev)</div><div class="line">    &#123;</div><div class="line">    	if( node == NULL )</div><div class="line">    		return true;</div><div class="line">    	if( !inOrder( node, node-&gt;left ) )</div><div class="line">    		return false;</div><div class="line">    	if(( prev != NULL )&amp;&amp;( node-&gt;val &lt;= prev-&gt;val ))</div><div class="line">    		return false;</div><div class="line">    	return inOrder( node-&gt;right, node );</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -389,9 +390,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tech/" rel="tag"># tech</a>
+            <a href="/tags/Tech/" rel="tag"># Tech</a>
           
-            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
           
         </div>
       
@@ -494,7 +495,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
