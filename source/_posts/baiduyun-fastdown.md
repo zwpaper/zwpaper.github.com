@@ -4,6 +4,15 @@ tags:
 - Software
 ---
 
+> 教程有点过时了！
+> 教程有点过时了！
+> 教程有点过时了！  
+> 本想更新一下教程，结果发现度娘封这个插件封的好狠，简直是斗智斗勇。
+> 2016.11.21 看到的情况是下不鸟，所以大家也不用向下看了。
+> 有兴趣的旁朋，可以关注一下我的微博，如果哪天能用了，我更新了，会在微博说的
+
+ [微博点我](http://weibo.com/zwpaper/)
+
 > 自从百度云成为视频下载神器，百度云下载就广为人知，又从百度云无耻限速，百度云又被骂得广为人知，如果你还在因限速而惆怅，刚好你又在用 Chrome/Safari，来这里，就对了。
 > 写了这个文章，结果还不少人问我怎么不能用，所以我又修改了一下，把教程做简单一点。
 
@@ -14,11 +23,11 @@ tags:
 ## 下载文件
 要用到的文件我都放在百度云了，直接下了就够了，强迫性也可以从下面主页下载
 
-[http://pan.baidu.com/s/1kTZPgEF]() 密码: 4966
+[http://pan.baidu.com/s/1kTZPgEF](http://pan.baidu.com/s/1kTZPgEF) 密码: 4966
 
 1. 脚本文件 aria2baiduyun，见百度云
-2. aria2 dmg文件，[https://github.com/tatsuhiro-t/aria2/releases]()
-3. 浏览器插件（二选一）：主页：[https://github.com/acgotaku/BaiduExporter/releases]()
+2. aria2 dmg文件，[https://github.com/tatsuhiro-t/aria2/releases](https://github.com/tatsuhiro-t/aria2/releases)
+3. 浏览器插件（二选一）：主页：[https://github.com/acgotaku/BaiduExporter/releases](https://github.com/acgotaku/BaiduExporter/releases)
     * Chrome 插件 crx，--> [百度网盘助手](https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno)
     * Safari 插件 BaiduExporter.safariextz，没有链接。
     
@@ -94,7 +103,7 @@ Error: Internal server error
 
 看到上面的图标了吗？
 
-![](http://7xivq7.com1.z0.glb.clouddn.com/blogdownload.png)
+![导出下载](https://i.imgur.com/y4WqUym.png)
 
 如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。
 
@@ -296,7 +305,7 @@ aria2rpc
 
 看到上面的图标了吗？
 
-![](http://7xivq7.com1.z0.glb.clouddn.com/blogdownload.png)
+![导出下载](https://i.imgur.com/y4WqUym.png)
 
 如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。
 
