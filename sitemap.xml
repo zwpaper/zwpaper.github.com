@@ -3,6 +3,20 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://page.codespaper.com/2019/gpg-encrypt-org/</loc>
+      
+      <lastmod>2019-03-09T18:56:25+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/</loc>
       
       <lastmod>2015-07-11T23:48:27+08:00</lastmod>
@@ -43,7 +57,21 @@
     </url>
   
     <url>
-      <loc>https://page.codespaper.com/categories/development/</loc>
+      <loc>https://page.codespaper.com/tags/emacs/</loc>
+      
+      <lastmod>2019-03-09T18:56:25+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/macos/</loc>
       
       <lastmod>2015-07-11T23:48:27+08:00</lastmod>
       
@@ -57,9 +85,9 @@
     </url>
   
     <url>
-      <loc>https://page.codespaper.com/tags/mac/</loc>
+      <loc>https://page.codespaper.com/tags/orgmode/</loc>
       
-      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
+      <lastmod>2019-03-09T18:56:25+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -73,7 +101,7 @@
     <url>
       <loc>https://page.codespaper.com/posts/</loc>
       
-      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
+      <lastmod>2019-03-09T18:56:25+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -99,9 +127,23 @@
     </url>
   
     <url>
+      <loc>https://page.codespaper.com/categories/tech/</loc>
+      
+      <lastmod>2019-03-09T18:56:25+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://page.codespaper.com/</loc>
       
-      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
+      <lastmod>2019-03-09T18:56:25+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>

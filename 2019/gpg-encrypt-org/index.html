@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  <link rel="prev" href="https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/" />
+  
+  <link rel="canonical" href="https://page.codespaper.com/2019/gpg-encrypt-org/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           使用 GPG 在 Emacs 中加密 Org Mode 笔记文件 | zwPapEr
+       
+  </title>
+  <meta name="title" content="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件 | zwPapEr">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件"/>
+<meta name="twitter:description" content="场景 Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好， 但是有一些敏感信息，还是认为谁都不值得信任。
+所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。
+GPG  https://zh.wikipedia.org/wiki/GnuPG
+ GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。 GnuPG用于加密、数字签名及产生非对称钥匙对的软件。
+ 如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html
+ 简单地说就是可以通过 GPG 使用两种方式加密文件：
+ 对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg
+brew install gpg  Emacs 通过 use-package 配置 Emacs
+ 如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
+ macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
+(setq epa-pinentry-mode &#39;loopback)  最后，配置文件如下："/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "使用 GPG 在 Emacs 中加密 Org Mode 笔记文件",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://page.codespaper.com/2019/gpg-encrypt-org/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://page.codespaper.com/cover.png",
+    "width": 800,
+    "height": 600
+  },
+  "genre": "posts",
+  "keywords": "Emacs, OrgMode",
+  "wordcount": 187,
+  "url": "https://page.codespaper.com/2019/gpg-encrypt-org/",
+  "datePublished": "2019-03-09T00:00:00+08:00",
+  "dateModified": "2019-03-09T18:56:25+08:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zwPapEr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://page.codespaper.com/ironman.png",
+      "width": 127,
+      "height": 40
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "[paper]"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://page.codespaper.com/">zwPapEr</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">使用 GPG 在 Emacs 中加密 Org Mode 笔记文件</h1>
+        <div class="post-meta">
+              <a href="https://page.codespaper.com/" rel="author">[paper]</a>  ♥ 
+                <span class="post-time">
+                     <time datetime=2019-03-09 >9 March 2019</time>
+                </span>
+                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
+                        
+                </span>
+                &nbsp;&nbsp;1 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="场景">场景</h2>
+
+<p>Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+但是有一些敏感信息，还是认为谁都不值得信任。</p>
+
+<p>所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， <code>EasyPG Assistant</code> 可以很方便地加解密。</p>
+
+<h2 id="gpg">GPG</h2>
+
+<blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/GnuPG" rel="nofollow noreferrer" target="_blank">https://zh.wikipedia.org/wiki/GnuPG</a></p>
+</blockquote>
+
+<p>GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。
+GnuPG用于加密、数字签名及产生非对称钥匙对的软件。</p>
+
+<blockquote>
+<p>如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门
+<a href="http://www.ruanyifeng.com/blog/2013/07/gpg.html" rel="nofollow noreferrer" target="_blank">http://www.ruanyifeng.com/blog/2013/07/gpg.html</a></p>
+</blockquote>
+
+<p>简单地说就是可以通过 GPG 使用两种方式加密文件：</p>
+
+<ul>
+<li>对称加密，只使用密码对文件进行加密</li>
+<li>非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥</li>
+</ul>
+
+<h2 id="配置">配置</h2>
+
+<h3 id="macos">macOS</h3>
+
+<p>通过 brew 安装 gpg</p>
+
+<pre><code class="language-bash">brew install gpg
+</code></pre>
+
+<h3 id="emacs">Emacs</h3>
+
+<p>通过 <code>use-package</code> 配置 Emacs</p>
+
+<blockquote>
+<p>如果没用过 <code>use-package</code> 可以看一下：
+<a href="https://github.com/jwiegley/use-package" rel="nofollow noreferrer" target="_blank">https://github.com/jwiegley/use-package</a></p>
+</blockquote>
+
+<p>macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决</p>
+
+<pre><code class="language-emacs-lisp">(setq epa-pinentry-mode 'loopback)
+</code></pre>
+
+<p>最后，配置文件如下：</p>
+
+<pre><code class="language-emacs-lisp">(use-package epa-file
+  :ensure nil
+  :config
+  (epa-file-enable)
+  (setq epa-pinentry-mode 'loopback))
+</code></pre>
+
+<h2 id="使用">使用</h2>
+
+<h3 id="对称加密">对称加密</h3>
+
+<p>默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密</p>
+
+<p>每次打开文件时，都要输入密码，保存时，甚至要输入两次，因为被当成新加密了。</p>
+
+<p>可以把密码缓存起来：</p>
+
+<pre><code class="language-emacs-lisp">(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+</code></pre>
+
+<p>再打开和保存这个文件时，就不用输入密码，</p>
+
+<p><strong>但是!!</strong></p>
+
+<p>这个缓存是在 <code>gpg agent</code> 进程里的，如果能确保电脑没别人会用，倒还好，
+否则别人也是可能通过 <code>gpg agent</code> 的缓存读到解密内容的！
+或者说使用完，关了 Emacs 之后，其它人再重新打开，尝试读取，也是能载入缓存的！</p>
+
+<p>可以通过加一个 Hook，在关 Emacs 的时候，把 <code>gpg agent</code> 也杀了，相对能安全点</p>
+
+<pre><code class="language-emacs-lisp">(add-hook 'kill-emacs-hook (defun personal--kill-gpg-agent ()
+                             (shell-command &quot;pkill gpg-agent&quot;)))
+</code></pre>
+
+<blockquote>
+<p>这里我们用 defun 而不是 lambda，有兴趣可以看一下这篇文章：
+<a href="http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html" rel="nofollow noreferrer" target="_blank">http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html</a></p>
+</blockquote>
+
+<h3 id="非对称加密">非对称加密</h3>
+
+<p>使用 gpg key 对文件进行加密，这个目前应该是无懈可击的加密方式了</p>
+
+<p>在 <code>Org Mode</code> 里使用非对称加密需要在文件开头加上：</p>
+
+<pre><code class="language-org"># -*- mode:org; epa-file-encrypt-to: (&quot;address@email.com&quot;) -*-
+</code></pre>
+
+<p>在保存的时候，Emacs 会提示让选择一个 GPG Key 进行加密，
+加密以后，再打开这个文件，需要提供 GPG Key 私钥密码进行解密，然后再保存就不需要输入密码了。</p>
+
+<blockquote>
+<p>我在用的时候有个问题，就是第一次新建文件加密保存后，每次都需要选择 Key 进行加密，
+把 Buffer Kill 了之后，再打开文件使用就没有问题了</p>
+</blockquote>
+
+<h3 id="gpg-相关">GPG 相关</h3>
+
+<h4 id="导出-key">导出 Key</h4>
+
+<p>用了 GPG 加密，那私钥就非常的重要了，所以最好把私钥导出一份：</p>
+
+<pre><code class="language-bash"># 找到自己的 Key ID，一长串字符
+gpg --list-keys
+# 导出，armor 表示使用可打印字符
+gpg --export-secret-keys --armor AAAABBBBBBBBBCCCCCCC0000000000 &gt;&gt; /tmp/private.key
+</code></pre>
+
+<p>最重要的就是把导出文件保存好了，推荐离线保存！</p>
+
+<p>这个文件比较大，内容比较多。
+可以把文件分割成几个小份，然后导出生成二维码，打印到纸上，离线保存。</p>
+
+<h4 id="导入-key">导入 Key</h4>
+
+<p>有导出，自然也有导入：</p>
+
+<pre><code class="language-bash">gpg --import private.key
+</code></pre>
+
+<p>导入之后 Key 没被信任，需要修改一下：</p>
+
+<pre><code class="language-bash">gpg --edit-key AAAABBBBBBBBBCCCCCCC0000000000
+# 看到提示符后输入 trust
+# 再选择信任等级，我自己的 Key，我选 5
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>:</span>
+                <span>zwPapEr </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>:</span>
+                   <span>187</span>
+            </p>
+
+             
+            <p class="copyright-item lincese">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>: 
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/emacs/">
+                    #Emacs</a></span>
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/orgmode/">
+                    #OrgMode</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();"></a></span> · 
+                <span><a href="https://page.codespaper.com/"></a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/" class="prev" rel="prev" title="Sessions control for hammerspoon"><i class="iconfont icon-dajiantou"></i>&nbsp;Sessions control for hammerspoon</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2012 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://fsb01.com" target="_blank" rel="external nofollow noopener noreffer">Fastbyte01</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

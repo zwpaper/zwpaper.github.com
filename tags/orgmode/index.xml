@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on zwPapEr</title>
-    <link>https://page.codespaper.com/posts/</link>
-    <description>Recent content in Posts on zwPapEr</description>
+    <title>Orgmode on zwPapEr</title>
+    <link>https://page.codespaper.com/tags/orgmode/</link>
+    <description>Recent content in Orgmode on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0800</lastBuildDate>
     
-	<atom:link href="https://page.codespaper.com/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://page.codespaper.com/tags/orgmode/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -28,17 +28,6 @@ brew install gpg  Emacs 通过 use-package 配置 Emacs
  如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
  macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
 (setq epa-pinentry-mode &#39;loopback)  最后，配置文件如下：</description>
-    </item>
-    
-    <item>
-      <title>Sessions control for hammerspoon</title>
-      <link>https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/</link>
-      <pubDate>Sat, 11 Jul 2015 23:48:27 +0800</pubDate>
-      
-      <guid>https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

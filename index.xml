@@ -6,8 +6,158 @@
     <description>Recent content in zwPapEr on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jul 2015 23:48:27 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>使用 GPG 在 Emacs 中加密 Org Mode 笔记文件</title>
+      <link>https://page.codespaper.com/2019/gpg-encrypt-org/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/gpg-encrypt-org/</guid>
+      <description>
+
+&lt;h2 id=&#34;场景&#34;&gt;场景&lt;/h2&gt;
+
+&lt;p&gt;Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+但是有一些敏感信息，还是认为谁都不值得信任。&lt;/p&gt;
+
+&lt;p&gt;所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， &lt;code&gt;EasyPG Assistant&lt;/code&gt; 可以很方便地加解密。&lt;/p&gt;
+
+&lt;h2 id=&#34;gpg&#34;&gt;GPG&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/GnuPG&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://zh.wikipedia.org/wiki/GnuPG&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。
+GnuPG用于加密、数字签名及产生非对称钥匙对的软件。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门
+&lt;a href=&#34;http://www.ruanyifeng.com/blog/2013/07/gpg.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.ruanyifeng.com/blog/2013/07/gpg.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;简单地说就是可以通过 GPG 使用两种方式加密文件：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对称加密，只使用密码对文件进行加密&lt;/li&gt;
+&lt;li&gt;非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+
+&lt;h3 id=&#34;macos&#34;&gt;macOS&lt;/h3&gt;
+
+&lt;p&gt;通过 brew 安装 gpg&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew install gpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;emacs&#34;&gt;Emacs&lt;/h3&gt;
+
+&lt;p&gt;通过 &lt;code&gt;use-package&lt;/code&gt; 配置 Emacs&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;如果没用过 &lt;code&gt;use-package&lt;/code&gt; 可以看一下：
+&lt;a href=&#34;https://github.com/jwiegley/use-package&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/jwiegley/use-package&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-emacs-lisp&#34;&gt;(setq epa-pinentry-mode &#39;loopback)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后，配置文件如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-emacs-lisp&#34;&gt;(use-package epa-file
+  :ensure nil
+  :config
+  (epa-file-enable)
+  (setq epa-pinentry-mode &#39;loopback))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+
+&lt;h3 id=&#34;对称加密&#34;&gt;对称加密&lt;/h3&gt;
+
+&lt;p&gt;默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密&lt;/p&gt;
+
+&lt;p&gt;每次打开文件时，都要输入密码，保存时，甚至要输入两次，因为被当成新加密了。&lt;/p&gt;
+
+&lt;p&gt;可以把密码缓存起来：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-emacs-lisp&#34;&gt;(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再打开和保存这个文件时，就不用输入密码，&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;但是!!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;这个缓存是在 &lt;code&gt;gpg agent&lt;/code&gt; 进程里的，如果能确保电脑没别人会用，倒还好，
+否则别人也是可能通过 &lt;code&gt;gpg agent&lt;/code&gt; 的缓存读到解密内容的！
+或者说使用完，关了 Emacs 之后，其它人再重新打开，尝试读取，也是能载入缓存的！&lt;/p&gt;
+
+&lt;p&gt;可以通过加一个 Hook，在关 Emacs 的时候，把 &lt;code&gt;gpg agent&lt;/code&gt; 也杀了，相对能安全点&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-emacs-lisp&#34;&gt;(add-hook &#39;kill-emacs-hook (defun personal--kill-gpg-agent ()
+                             (shell-command &amp;quot;pkill gpg-agent&amp;quot;)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这里我们用 defun 而不是 lambda，有兴趣可以看一下这篇文章：
+&lt;a href=&#34;http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;非对称加密&#34;&gt;非对称加密&lt;/h3&gt;
+
+&lt;p&gt;使用 gpg key 对文件进行加密，这个目前应该是无懈可击的加密方式了&lt;/p&gt;
+
+&lt;p&gt;在 &lt;code&gt;Org Mode&lt;/code&gt; 里使用非对称加密需要在文件开头加上：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-org&#34;&gt;# -*- mode:org; epa-file-encrypt-to: (&amp;quot;address@email.com&amp;quot;) -*-
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在保存的时候，Emacs 会提示让选择一个 GPG Key 进行加密，
+加密以后，再打开这个文件，需要提供 GPG Key 私钥密码进行解密，然后再保存就不需要输入密码了。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;我在用的时候有个问题，就是第一次新建文件加密保存后，每次都需要选择 Key 进行加密，
+把 Buffer Kill 了之后，再打开文件使用就没有问题了&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;gpg-相关&#34;&gt;GPG 相关&lt;/h3&gt;
+
+&lt;h4 id=&#34;导出-key&#34;&gt;导出 Key&lt;/h4&gt;
+
+&lt;p&gt;用了 GPG 加密，那私钥就非常的重要了，所以最好把私钥导出一份：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 找到自己的 Key ID，一长串字符
+gpg --list-keys
+# 导出，armor 表示使用可打印字符
+gpg --export-secret-keys --armor AAAABBBBBBBBBCCCCCCC0000000000 &amp;gt;&amp;gt; /tmp/private.key
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最重要的就是把导出文件保存好了，推荐离线保存！&lt;/p&gt;
+
+&lt;p&gt;这个文件比较大，内容比较多。
+可以把文件分割成几个小份，然后导出生成二维码，打印到纸上，离线保存。&lt;/p&gt;
+
+&lt;h4 id=&#34;导入-key&#34;&gt;导入 Key&lt;/h4&gt;
+
+&lt;p&gt;有导出，自然也有导入：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gpg --import private.key
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;导入之后 Key 没被信任，需要修改一下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gpg --edit-key AAAABBBBBBBBBCCCCCCC0000000000
+# 看到提示符后输入 trust
+# 再选择信任等级，我自己的 Key，我选 5
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Sessions control for hammerspoon</title>
