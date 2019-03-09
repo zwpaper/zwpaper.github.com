@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on zwPapEr</title>
+    <link>https://page.codespaper.com/tags/</link>
+    <description>Recent content in Tags on zwPapEr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Jul 2015 23:48:27 +0800</lastBuildDate>
+    
+	<atom:link href="https://page.codespaper.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dev</title>
+      <link>https://page.codespaper.com/tags/dev/</link>
+      <pubDate>Sat, 11 Jul 2015 23:48:27 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/dev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>https://page.codespaper.com/tags/mac/</link>
+      <pubDate>Sat, 11 Jul 2015 23:48:27 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
