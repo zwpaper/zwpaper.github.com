@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on zwPapEr</title>
+    <link>https://page.codespaper.com/tags/golang/</link>
+    <description>Recent content in Golang on zwPapEr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://page.codespaper.com/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>为什么我觉得 Golang 更好</title>
+      <link>https://page.codespaper.com/2019/why-golang/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/why-golang/</guid>
+      <description>Less is exponentially more 读后感 最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more
+ 如果你不知道 Rob Pike 是谁：Rob Pike
+或者用一句话介绍，Golang 作者之一
+ 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚
+从 C++ 到 Golang Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：Newsqueak， 在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)， 作为一名在 Google 的 C++ 工程师 Rob Pike 自然也十分关注，可是也在这时候， Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉得在 Newsqueak 里有一些特性， 如果能用在开发里，会对服务器端的很多开发都会有帮助。
+可是 C++ 庞大复杂的体系，要加一些比较不一样的特性已经不是一件易事，而且可能也不值得， 所以在 C++ 项目编译的时间里（编译一次要 45 分钟，还是在编译集群上！）Rob 就拉上了 Ken Thompson 和 Robert Griesemer 决定要做点事情，Golang 从此开始登上历史的舞台。</description>
+    </item>
+    
+  </channel>
+</rss>
