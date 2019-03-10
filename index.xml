@@ -6,8 +6,118 @@
     <description>Recent content in zwPapEr on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>为什么我觉得 Golang 更好</title>
+      <link>https://page.codespaper.com/2019/why-golang/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/why-golang/</guid>
+      <description>
+
+&lt;h2 id=&#34;less-is-exponentially-more-读后感&#34;&gt;Less is exponentially more 读后感&lt;/h2&gt;
+
+&lt;p&gt;最近看到 Rob Pike 在 2012 年写的一篇文章，&lt;a href=&#34;https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Less is exponentially more&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;如果你不知道 Rob Pike 是谁：&lt;a href=&#34;https://zh.wikipedia.org/wiki/%25E7%25BE%2585%25E5%258B%2583%25C2%25B7%25E6%25B4%25BE%25E5%2585%258B&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Rob Pike&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;或者用一句话介绍，Golang 作者之一&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚&lt;/p&gt;
+
+&lt;h2 id=&#34;从-c-到-golang&#34;&gt;从 C++ 到 Golang&lt;/h2&gt;
+
+&lt;p&gt;Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：&lt;a href=&#34;https://swtch.com/~rsc/thread/newsqueak.pdf&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Newsqueak&lt;/a&gt;，
+在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)，
+作为一名在 Google 的 C++ 工程师 Rob Pike 自然也十分关注，可是也在这时候，
+Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉得在 Newsqueak 里有一些特性，
+如果能用在开发里，会对服务器端的很多开发都会有帮助。&lt;/p&gt;
+
+&lt;p&gt;可是 C++ 庞大复杂的体系，要加一些比较不一样的特性已经不是一件易事，而且可能也不值得，
+所以在 C++ 项目编译的时间里（编译一次要 45 分钟，还是在编译集群上！）Rob 就拉上了
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Ken%5FThompson&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Ken Thompson&lt;/a&gt; 和 Robert Griesemer 决定要做点事情，Golang 从此开始登上历史的舞台。&lt;/p&gt;
+
+&lt;p&gt;要知道 Ken, Rob, 都是贝尔实验室的大佬，一直在 Google 做 C++, 决心要针对 C++ 做一个优化，
+这就是突破性的了，更别说 Ken 是 Unix，Plan 9，C 语言作为作者之一。&lt;/p&gt;
+
+&lt;h2 id=&#34;大道至简&#34;&gt;大道至简&lt;/h2&gt;
+
+&lt;p&gt;在文章中，就如文章标题，Rob 希望重新造轮子的原因主要就是觉得 C++ 太复杂了，觉得大道应该至简，
+所以才考虑重新从头设计一门语言。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;文章里多次提到了在 C++ 编译的时候，Rob 去找同事们聊天，这个编译时间，
+对 Rob 来说，应该还是感觉挺难受的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;本来 Robert 希望 Go 从 C 语言出发，但是最后还是决定，从零出发，至简就该如此。所以网上常说 Golang
+是 Better C，其实 Golang 是 Better language。&lt;/p&gt;
+
+&lt;p&gt;文章中提到了很多的简化，只要写代码过程中，可能需要考虑，而又没必要的东西，Golang 都直接不出现。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;没有头文件&lt;/li&gt;
+&lt;li&gt;常量只能是数字&lt;/li&gt;
+&lt;li&gt;没有子类型继承&lt;/li&gt;
+&lt;li&gt;文件被编译到一个包里&lt;/li&gt;
+&lt;li&gt;没有指针运算&lt;/li&gt;
+&lt;li&gt;内存一直以零值初始化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;等等。&lt;/p&gt;
+
+&lt;p&gt;甚至，连泛型都没有，而且 Golang 也借鉴了函数式编程的函数作为 &lt;code&gt;first class object&lt;/code&gt; ，
+但是其它一些函数式编程的优点就什么也都没有了，就像： &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt; 等，&lt;/p&gt;
+
+&lt;p&gt;因为 Rob 说，用 &lt;code&gt;for&lt;/code&gt; 吧&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/robpike/filter&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/robpike/filter&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;从语言层面，Golang 就对代码规范进行了限制，还提供了 fmt 格式化工具，doc 文档体系，
+这都像是在说，这些不关紧要的东西，就都不要去考虑了。&lt;/p&gt;
+
+&lt;p&gt;并发，也是一样的，从语言级别的支持，一个 &lt;code&gt;go&lt;/code&gt; 关键字，加上 &lt;code&gt;channel&lt;/code&gt; 的 CSP 并发模型，
+可以说是很大程度地简化了开发高并发软件的复杂度。&lt;/p&gt;
+
+&lt;h2 id=&#34;真正的-oop&#34;&gt;真正的 OOP&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If C++ and Java are about type hierarchies and the taxonomy of types, Go is about composition.&lt;/p&gt;
+
+&lt;p&gt;Go takes that idea and pushes it very far. It is a language of composition and coupling.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;之前看到一个讨论，就在说 Golang 的编程思想，提到为什么 Golang 不用传统的 OOP 思想，
+而是用了一套 &lt;code&gt;组合&lt;/code&gt; 代替，原因也在这，Rob 认为 Java 和 C++ 推崇的 OOP 思想更多的是历史包袱，
+程序员们更应该关注的是接口。&lt;/p&gt;
+
+&lt;p&gt;目前的 OOP 思想更多的都是 Java 和 C++ 的流行而发展出来的，与最初的 &lt;code&gt;对象范式&lt;/code&gt; 已经走上不同的道路了。
+Golang 也许是第一个明确使用了最初 &lt;code&gt;对象范式&lt;/code&gt; 设计的语言，这个可能还需要用一篇文章来研究。&lt;/p&gt;
+
+&lt;h2 id=&#34;高层抽象&#34;&gt;高层抽象&lt;/h2&gt;
+
+&lt;p&gt;最近也在看一些函数式编程的文章，有一个观点我还是挺认可的：&lt;/p&gt;
+
+&lt;p&gt;函数式编程把一些无关紧要的问题封装在了语言级别，写程序时，可以不需要考虑，如 &lt;code&gt;内存管理&lt;/code&gt; ， &lt;code&gt;for 循环&lt;/code&gt; 等。
+以前函数式编程不流行，更多的是因为当时的算力或者编译程序不足以让函数式语言的体验与过程式语言匹敌，
+但是现在时机已经来了，函数式编程马上要再次走上舞台了。&lt;/p&gt;
+
+&lt;p&gt;一个例子是 &lt;code&gt;内存管理&lt;/code&gt; ，虽然说这是很多高级语言都有的特性，可是这不也是一个证明，语言级别能解决好的事情，
+就让语言去解决吧。&lt;/p&gt;
+
+&lt;p&gt;另一个例子是 Clojure 一次对 Map 和 vector 扩展，内部进行了并行优化，开发者不需要改变就得到了性能提升。&lt;/p&gt;
+
+&lt;p&gt;Golang 对并发的封装，也是一个高层抽象的表现。&lt;/p&gt;
+
+&lt;p&gt;这个也可能需要一篇文章来研究。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>使用 GPG 在 Emacs 中加密 Org Mode 笔记文件</title>

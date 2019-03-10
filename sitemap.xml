@@ -3,6 +3,20 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://page.codespaper.com/2019/why-golang/</loc>
+      
+      <lastmod>2019-03-10T20:20:16+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://page.codespaper.com/2019/gpg-encrypt-org/</loc>
       
       <lastmod>2019-03-09T19:04:15+08:00</lastmod>
@@ -101,7 +115,7 @@
     <url>
       <loc>https://page.codespaper.com/posts/</loc>
       
-      <lastmod>2019-03-09T19:04:15+08:00</lastmod>
+      <lastmod>2019-03-10T20:20:16+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -143,7 +157,7 @@
     <url>
       <loc>https://page.codespaper.com/</loc>
       
-      <lastmod>2019-03-09T19:04:15+08:00</lastmod>
+      <lastmod>2019-03-10T20:20:16+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
