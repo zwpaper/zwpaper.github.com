@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javassript on zwPapEr</title>
+    <link>https://page.codespaper.com/tags/javassript/</link>
+    <description>Recent content in Javassript on zwPapEr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://page.codespaper.com/tags/javassript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>作为新手，为什么我选 Typescript</title>
+      <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/js-to-ts-for-newbie/</guid>
+      <description>简介 最近尝试着使用 Taro 写一个微信小程序，Taro 是京东凹凸实验室开发的一款使用 React 语法多端统一开发解决方案， 其实也就是使用 React 语法编写一次，使用不同的编译方式编译出 BATT 各家小程序，React Native 程序。
+Taro 在对各端支持上还有一些差异，在开发的时候有一些细节需要关注。 而目前小程序基本只有微信小程序比较热门，而且腾讯推出云开发，可以一定程度省去后端的工作量， 所以目前入门基本只关注微信小程序就足够了。
+背景 作为一名后端工程师，对前端（Web 端，App 端）经验还是比较缺失的， JavaScript 也是第一次真正认真地接触。
+由于使用 React 的语法，所以说到的 JavaScript 基本都含 JSX。
+JavaScript 从入门到放弃 由于 JavaScript 的资源相对多，所以入门的时候没有太多犹豫就选择了 JavaScript，而不是大热的 TypeScript， 也正是由于这个选择，才会让我感觉到为什么现在 TypeScript 会大热。
+JavaScript 最大的特点应该就是自由，动态语言的弱类型系统，类型之间可以随意转换，而且转换发生在运行时， 写代码的时候看起来都没有问题，可是运行起来之后，可能就会出现各种各样的报错。
+在网络调用时，由于对类型没有预先的考虑，基本就是把同一个函数复制到另一个位置， 修改一下使用的参数，就又堆叠了几行代码。
+TypeScript TypeScript 和 JavaScript 几乎可能无缝转化，我把一个 JavaScript 的文件后缀改成 TypeScript 之后， 把一些变量的类型补上，就可以编译通过了。 但是也就是这个补充类型的过程中，开始思考这些类似的地方，我应该把他们抽象出来。
+类型系统 强类型系统可以在编译时做出足够多的检查，减少运行时的错误，运行时错误只能依赖于对 App 的各种各样的测试， 而我们都知道，测试也是很难做到面面俱到的，所以让错误出现在编译期，显然是更好的选择。
+Interface TypeScript 的特点就是在 JavaScript 中加入了类型检查，而最核心的特性之一就是 Interface 所实现的 鸭子类型 。 interface 也是在 JavaScript 中没有的， interface 指定了成员们的类型，主要用途也正是做更多的类型检查。</description>
+    </item>
+    
+  </channel>
+</rss>

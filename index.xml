@@ -6,8 +6,97 @@
     <description>Recent content in zwPapEr on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>作为新手，为什么我选 Typescript</title>
+      <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/js-to-ts-for-newbie/</guid>
+      <description>
+
+&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;最近尝试着使用 Taro 写一个微信小程序，&lt;a href=&#34;https://taro.jd.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Taro&lt;/a&gt; 是&lt;a href=&#34;https://aotu.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;京东凹凸实验室&lt;/a&gt;开发的一款使用 &lt;a href=&#34;https://reactjs.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;React&lt;/a&gt; 语法多端统一开发解决方案，
+其实也就是使用 React 语法编写一次，使用不同的编译方式编译出 BATT 各家小程序，React Native 程序。&lt;/p&gt;
+
+&lt;p&gt;Taro 在对各端支持上还有一些差异，在开发的时候有一些细节需要关注。
+而目前小程序基本只有微信小程序比较热门，而且腾讯推出云开发，可以一定程度省去后端的工作量，
+所以目前入门基本只关注微信小程序就足够了。&lt;/p&gt;
+
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;作为一名后端工程师，对前端（Web 端，App 端）经验还是比较缺失的，
+JavaScript 也是第一次真正认真地接触。&lt;/p&gt;
+
+&lt;p&gt;由于使用 React 的语法，所以说到的 JavaScript 基本都含 &lt;a href=&#34;https://reactjs.org/docs/introducing-jsx.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JSX&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&#34;javascript-从入门到放弃&#34;&gt;JavaScript 从入门到放弃&lt;/h2&gt;
+
+&lt;p&gt;由于 JavaScript 的资源相对多，所以入门的时候没有太多犹豫就选择了 JavaScript，而不是大热的 TypeScript，
+也正是由于这个选择，才会让我感觉到为什么现在 TypeScript 会大热。&lt;/p&gt;
+
+&lt;p&gt;JavaScript 最大的特点应该就是自由，动态语言的弱类型系统，类型之间可以随意转换，而且转换发生在运行时，
+写代码的时候看起来都没有问题，可是运行起来之后，可能就会出现各种各样的报错。&lt;/p&gt;
+
+&lt;p&gt;在网络调用时，由于对类型没有预先的考虑，基本就是把同一个函数复制到另一个位置，
+修改一下使用的参数，就又堆叠了几行代码。&lt;/p&gt;
+
+&lt;h2 id=&#34;typescript&#34;&gt;TypeScript&lt;/h2&gt;
+
+&lt;p&gt;TypeScript 和 JavaScript 几乎可能无缝转化，我把一个 JavaScript 的文件后缀改成 TypeScript 之后，
+把一些变量的类型补上，就可以编译通过了。
+但是也就是这个补充类型的过程中，开始思考这些类似的地方，我应该把他们抽象出来。&lt;/p&gt;
+
+&lt;h3 id=&#34;类型系统&#34;&gt;类型系统&lt;/h3&gt;
+
+&lt;p&gt;强类型系统可以在编译时做出足够多的检查，减少运行时的错误，运行时错误只能依赖于对 App 的各种各样的测试，
+而我们都知道，测试也是很难做到面面俱到的，所以让错误出现在编译期，显然是更好的选择。&lt;/p&gt;
+
+&lt;h4 id=&#34;interface&#34;&gt;Interface&lt;/h4&gt;
+
+&lt;p&gt;TypeScript 的特点就是在 JavaScript 中加入了类型检查，而最核心的特性之一就是 &lt;code&gt;Interface&lt;/code&gt; 所实现的 &lt;code&gt;鸭子类型&lt;/code&gt; 。
+&lt;code&gt;interface&lt;/code&gt; 也是在 JavaScript 中没有的， &lt;code&gt;interface&lt;/code&gt; 指定了成员们的类型，主要用途也正是做更多的类型检查。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;interface&lt;/code&gt; 规定的是一系列约束，而不需要实例显示去实现，当实例满足 &lt;code&gt;interface&lt;/code&gt; 中的约束时，
+那实例就可以用到这个 &lt;code&gt;interface&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;当他走路像鸭子，叫起来像鸭子，游泳也像鸭子，那他就可以称为鸭子&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;由于在 JavaScript 中，函数是一等公民，和其它类型无异，所以在 &lt;code&gt;interface&lt;/code&gt; 中，
+我们可以列出来需要的变量和其类型，同样的，我们也可以列出来需要实现的函数。&lt;/p&gt;
+
+&lt;p&gt;最后，在 TypeScript 编译成 JavaScript 之后， &lt;code&gt;interface&lt;/code&gt; 的信息是会被删除掉的，
+也就是 &lt;code&gt;interface&lt;/code&gt; 的检查只发生在 TypeScript 中。&lt;/p&gt;
+
+&lt;h4 id=&#34;class&#34;&gt;Class&lt;/h4&gt;
+
+&lt;p&gt;ECMAScript 6(ES6) 正式给 JavaScript 世界引入了 &lt;code&gt;Class&lt;/code&gt; 。TypeScript 在这个基础上又衍生出了自己的特性。&lt;/p&gt;
+
+&lt;p&gt;首当其冲就是 static 属性，可以让你在没有实例时，直接使用类函数，最常见的用法就是用于新建一个类的实例。
+这样就可以把新建实例的函数也归到类的定义中。&lt;/p&gt;
+
+&lt;p&gt;通常，我们不需要把 &lt;code&gt;Class&lt;/code&gt; export 出去，只 export 对应的 “构造函数” 就可以了，交互可以通过 &lt;code&gt;interface&lt;/code&gt; 完成。&lt;/p&gt;
+
+&lt;h2 id=&#34;后话&#34;&gt;后话&lt;/h2&gt;
+
+&lt;p&gt;当然，我 JavaScript 只是使用了比较短暂的时间，很多地方没有深入理解，没有领会到正确的用法，
+但也正是这样，我反而觉得 JavaScript 自由性让人在上手的时候，只关注于能实现就行，
+而不关注软件工程中的程序设计。&lt;/p&gt;
+
+&lt;p&gt;反观 TypeScript，强制的类型检查，让人不自觉地考虑，这个地方是否应该有一个类？
+学习的时候，很快就会看到 Interface，Class，都是熟悉的味道，很自然地就会想，
+我这里是否能抽象，后面这里是否可以复用。&lt;/p&gt;
+
+&lt;p&gt;JavaScript 是一个很伟大的语言，在前端有着无与伦比的统治力，
+有着面向对象的特性，有函数式编程的特性，熟练之后可以写出各种花式的代码，
+但是我还是更喜欢死板一点的 TypeScript，简单上手就可以写出不错的代码，后续也可以在这个基础上不断迭代。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>为什么我觉得 Golang 更好</title>
@@ -22,14 +111,14 @@
 &lt;p&gt;最近看到 Rob Pike 在 2012 年写的一篇文章，&lt;a href=&#34;https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Less is exponentially more&lt;/a&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;如果你不知道 Rob Pike 是谁：&lt;a href=&#34;https://zh.wikipedia.org/wiki/%25E7%25BE%2585%25E5%258B%2583%25C2%25B7%25E6%25B4%25BE%25E5%2585%258B&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Rob Pike&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果你不知道 Rob Pike 是谁：&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E7%BE%85%E5%8B%83%C2%B7%E6%B4%BE%E5%85%8B&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Rob Pike&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;或者用一句话介绍，Golang 作者之一&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚&lt;/p&gt;
 
-&lt;h2 id=&#34;从-c-到-golang&#34;&gt;从 C++ 到 Golang&lt;/h2&gt;
+&lt;h2 id=&#34;从-c-plus-plus-到-golang&#34;&gt;从 C++ 到 Golang&lt;/h2&gt;
 
 &lt;p&gt;Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：&lt;a href=&#34;https://swtch.com/~rsc/thread/newsqueak.pdf&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Newsqueak&lt;/a&gt;，
 在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)，
