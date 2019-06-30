@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  <link rel="prev" href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" />
+  
+  <link rel="canonical" href="https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           dnsmasq &#43; Cloudflare DoH 自建 DNS | zwPapEr
+       
+  </title>
+  <meta name="title" content="dnsmasq &#43; Cloudflare DoH 自建 DNS | zwPapEr">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="dnsmasq &#43; Cloudflare DoH 自建 DNS"/>
+<meta name="twitter:description" content="简介 有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况， 而最近很流行的 DNS over HTTPS 更是十分的稳定安全，所以，通过自建 DNS，可以精确的得到解析结果。
+文章中的所有文件可以直接在我的仓库中找到：
+Archlinux dot file
+方案 dnsmasq dnsmasq 是一个十分老牌的软件了，可以提供 DNS 缓存和 DHCP 服务功能，还带了一个 PXE 服务器，但是这些都不是我们需要关注的点，我们只看 DNS 。
+作为域名解析服务器 DNS ， dnsmasq 可以通过缓存 DNS 请求来提高对访问过的网址的连接速度，所以有一些结果虽然第一次比较耗时，但是后续就可以直接用本地结果了。
+最重要的是 dnsmasq 轻量而且容易配置，几乎默认的配置就足够我们使用了。
+DNS over HTTPS DNS over HTTPS 也就是常见的 DoH
+ 没什么问题是加一层解决不了的，如果有，那个加两层。
+ DNS 经常出问题，那就把 UDP 换成 TCP ，还解决不了？那就再上一层 TLS 。
+由于 HTTP 协议需要多次数据交互，还有 TLS 的加解密，所以在时间上，耗时比传统的 DNS 高了不少。 上文也提到了 dnsmasq 有缓存作用，所以也一定程度缓解了这个问题。
+Cloudflare 1.1.1.1 Cloudflare 本来是一个主打 CDN 和 权威 DNS 的企业，在 2018 年的时候强势推出了 1."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "dnsmasq \x2b Cloudflare DoH 自建 DNS",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/page.codespaper.com\/2019\/dnsmasq-cloudflare-doh\/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/page.codespaper.com\/cover.png",
+    "width":  800 ,
+    "height":  600 
+  },
+  "genre": "posts",
+  "keywords": "dns, op",
+  "wordcount":  484 ,
+  "url": "https:\/\/page.codespaper.com\/2019\/dnsmasq-cloudflare-doh\/",
+  "datePublished": "2019-06-30T00:00:00\x2b08:00",
+  "dateModified": "2019-06-30T17:31:02\x2b08:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zwPapEr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/page.codespaper.com\/ironman.png",
+      "width":  127 ,
+      "height":  40 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "[Zhang Wei]"
+  },
+  "description": ""
+}
+</script>
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://page.codespaper.com/">zwPapEr</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">dnsmasq &#43; Cloudflare DoH 自建 DNS</h1>
+        <div class="post-meta">
+              <a href="https://page.codespaper.com/" rel="author">[Zhang Wei]</a>  ♥ 
+                <span class="post-time">
+                     <time datetime=2019-06-30 >30 June 2019</time>
+                </span>
+                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
+                        
+                </span>
+                &nbsp;&nbsp;3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="简介">简介</h2>
+
+<p>有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，
+而最近很流行的 DNS over HTTPS 更是十分的稳定安全，所以，通过自建 DNS，可以精确的得到解析结果。</p>
+
+<p>文章中的所有文件可以直接在我的仓库中找到：</p>
+
+<p><a href="https://github.com/zwpaper/dotfile/tree/master/archlinux" rel="nofollow noreferrer" target="_blank">Archlinux dot file</a></p>
+
+<h2 id="方案">方案</h2>
+
+<h3 id="dnsmasq">dnsmasq</h3>
+
+<p><code>dnsmasq</code> 是一个十分老牌的软件了，可以提供 <code>DNS</code> 缓存和 <code>DHCP</code> 服务功能，还带了一个 <code>PXE</code> 服务器，但是这些都不是我们需要关注的点，我们只看 <code>DNS</code> 。</p>
+
+<p>作为域名解析服务器 <code>DNS</code> ， <code>dnsmasq</code> 可以通过缓存 <code>DNS</code> 请求来提高对访问过的网址的连接速度，所以有一些结果虽然第一次比较耗时，但是后续就可以直接用本地结果了。</p>
+
+<p>最重要的是 <code>dnsmasq</code> 轻量而且容易配置，几乎默认的配置就足够我们使用了。</p>
+
+<h3 id="dns-over-https">DNS over HTTPS</h3>
+
+<p><code>DNS over HTTPS</code> 也就是常见的 <code>DoH</code></p>
+
+<blockquote>
+<p>没什么问题是加一层解决不了的，如果有，那个加两层。</p>
+</blockquote>
+
+<p><code>DNS</code> 经常出问题，那就把 <code>UDP</code> 换成 <code>TCP</code> ，还解决不了？那就再上一层 <code>TLS</code> 。</p>
+
+<p>由于 <code>HTTP</code> 协议需要多次数据交互，还有 <code>TLS</code> 的加解密，所以在时间上，耗时比传统的 <code>DNS</code> 高了不少。
+上文也提到了 <code>dnsmasq</code> 有缓存作用，所以也一定程度缓解了这个问题。</p>
+
+<h4 id="cloudflare-1-dot-1-dot-1-dot-1">Cloudflare 1.1.1.1</h4>
+
+<p><code>Cloudflare</code> 本来是一个主打 <code>CDN</code> 和 <code>权威 DNS</code> 的企业，在 2018 年的时候强势推出了 <code>1.1.1.1</code> 的 <code>local DNS</code> ， 还带着 <code>DNS over HTTPS</code> 支持。
+目前比较有名的 <code>DoH</code> 服务就只有 <code>Cloudflare</code> 和 <code>Google</code> ，而这是 <code>Cloudflare</code> 的主战场，自然也就是一个优选。</p>
+
+<ul>
+<li><p>Cloudflare DoH Client</p>
+
+<p><code>Cloudflare</code> 还提供了一个 <code>Golang</code> 开发的 <code>DoH</code> <a href="https://developers.cloudflare.com/1.1.1.1/dns-over-https/cloudflared-proxy/" rel="nofollow noreferrer" target="_blank">客户端</a>，可以直接在本地把 <code>DoH</code> 转为传统 <code>DNS</code> 。</p>
+
+<p>得益于 <code>Golang</code> 开发，所以所有需要下载的内容就是一个二进制文件： <code>cloudflared</code> 。当然如果对应 <code>Linux 发行版</code> ，想安装 <code>deb</code> 或者 <code>rpm</code> ，官网也是有的。</p>
+
+<p>运行方式也只需要如下命令即可：</p>
+
+<pre><code class="language-shell">cloudflared proxy-dns --address 0.0.0.0 --port 5353
+</code></pre>
+
+<h3 id="dnsmasq-china-list">dnsmasq china list</h3>
+
+<p>上文提到了， <code>DoH</code> 相对比较耗时，而 <code>DNS</code> 的问题更多地出现在国外的域名上，所以国内的域名，我们其实直接用传统方案就可以了，
+<a href="https://github.com/felixonmars/dnsmasq-china-list" rel="nofollow noreferrer" target="_blank">dnsmasq china list</a> 就是一个国内的域名列表，而最方便的地方在于可以直接生成 <code>dnsmasq</code> 的配置文件。</p>
+
+<h2 id="安装">安装</h2>
+
+<p>考虑到这是一个服务，需要长期运行，所以我们使用 <code>systemd</code> 来运行。</p>
+
+<p>配置文件如下，考虑到文章不一定能及时更新，可以看我的 <a href="https://github.com/zwpaper/dotfile/tree/master/archlinux" rel="nofollow noreferrer" target="_blank">dot file repo</a>：</p>
+
+<h3 id="cloudflare">Cloudflare</h3>
+
+<pre><code class="language-text">[Unit]
+Description=cloudflare DoH
+Documentation=cloudflare DNS over HTTPS
+
+[Service]
+Type=simple
+ExecStart=/home/username/.bin/cloudflared proxy-dns --address 0.0.0.0 --port 5353
+ExecStop=kill $MAINPID
+Restart=always
+
+[Install]
+WantedBy=default.target
+</code></pre></li>
+</ul>
+
+<h3 id="dnsmasq-1">dnsmasq</h3>
+
+<p><code>dnsmasq</code> 直接使用自已安装的时候带的 <code>systemd</code> 配置文件就足够了，主要是改一下 <code>dnsmasq</code> 的<a href="https://github.com/zwpaper/dotfile/blob/master/archlinux/config/dnsmasq/dnsmasq.conf" rel="nofollow noreferrer" target="_blank">配置文件</a>， <code>/etc/dnsmasq.conf</code> ：</p>
+
+<pre><code class="language-text">no-hosts
+no-resolv
+
+server=127.0.0.1#5353
+conf-dir=/etc/dnsmasq.d/
+
+log-queries
+log-facility=/var/log/dnsmasq/dnsmasq.log
+</code></pre>
+
+<p>然后安装 <code>dnsmasq-china-list</code> ，简单地来说，运行一个<a href="https://github.com/zwpaper/dotfile/blob/master/archlinux/config/dnsmasq/install.sh" rel="nofollow noreferrer" target="_blank">脚本</a>就可以：</p>
+
+<pre><code class="language-shell">wget https://raw.githubusercontent.com/zwpaper/dotfile/master/archlinux/config/dnsmasq/install.sh
+sudo bash install.sh
+</code></pre>
+
+<h2 id="效果">效果</h2>
+
+<p>到此，安装就完成了，目前的效果</p>
+
+<h3 id="国内域名">国内域名：</h3>
+
+<pre><code class="language-text"># dig @127.0.0.1 163.com
+
+; &lt;&lt;&gt;&gt; DiG 9.14.3 &lt;&lt;&gt;&gt; @127.0.0.1 163.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 3825
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;163.com.                       IN      A
+
+;; ANSWER SECTION:
+163.com.                98      IN      A       123.58.180.7
+163.com.                98      IN      A       123.58.180.8
+
+;; Query time: 44 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Sun Jun 30 17:19:54 HKT 2019
+;; MSG SIZE  rcvd: 68
+</code></pre>
+
+<p>查看日志：</p>
+
+<pre><code class="language-text">Jun 30 17:19:54 dnsmasq[20723]: query[A] 163.com from 127.0.0.1
+Jun 30 17:19:54 dnsmasq[20723]: forwarded 163.com to 180.76.76.76
+Jun 30 17:19:54 dnsmasq[20723]: forwarded 163.com to 114.114.115.115
+Jun 30 17:19:54 dnsmasq[20723]: forwarded 163.com to 114.114.114.114
+Jun 30 17:19:54 dnsmasq[20723]: reply 163.com is 123.58.180.7
+Jun 30 17:19:54 dnsmasq[20723]: reply 163.com is 123.58.180.8
+</code></pre>
+
+<p>可以看到 <code>dnsmasq</code> 转发了三个请求到国内的 <code>local dns</code> 了。</p>
+
+<h3 id="国外的请求">国外的请求</h3>
+
+<pre><code class="language-text"># dig @127.0.0.1 google.com
+
+; &lt;&lt;&gt;&gt; DiG 9.14.3 &lt;&lt;&gt;&gt; @127.0.0.1 google.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 36565
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1452
+; PAD (69 bytes)
+;; QUESTION SECTION:
+;google.com.                    IN      A
+
+;; ANSWER SECTION:
+google.com.             272     IN      A       216.58.217.206
+
+;; Query time: 251 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Sun Jun 30 17:30:37 HKT 2019
+;; MSG SIZE  rcvd: 138
+</code></pre>
+
+<p>看日志，转发到 <code>127.0.0.1</code> 了，因为我们的 <code>cloudflared</code> 是运行在本地的。</p>
+
+<pre><code class="language-text">Jun 30 17:30:36 dnsmasq[20723]: query[A] google.com from 127.0.0.1
+Jun 30 17:30:36 dnsmasq[20723]: forwarded google.com to 127.0.0.1
+Jun 30 17:30:37 dnsmasq[20723]: reply google.com is 216.58.217.206
+</code></pre>
+
+<h3 id="cache">Cache</h3>
+
+<p>再发起一次请求，看日志，直接从 cache 返回了：</p>
+
+<pre><code class="language-text">Jun 30 17:31:31 dnsmasq[20723]: query[A] google.com from 127.0.0.1
+Jun 30 17:31:31 dnsmasq[20723]: cached google.com is 216.58.217.206
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>:</span>
+                <span>zwPapEr </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>:</span>
+                   <span>484</span>
+            </p>
+
+             
+            <p class="copyright-item lincese">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>: 
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/dns/">
+                    #dns</a></span>
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/op/">
+                    #op</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();"></a></span> · 
+                <span><a href="https://page.codespaper.com/"></a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" class="prev" rel="prev" title="作为新手，为什么我选 Typescript"><i class="iconfont icon-dajiantou"></i>&nbsp;作为新手，为什么我选 Typescript</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2012 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://fsb01.com" target="_blank" rel="external nofollow noopener noreffer">Fastbyte01</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

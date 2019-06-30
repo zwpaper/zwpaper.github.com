@@ -1,6 +1,139 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    <url>
+      <loc>https://page.codespaper.com/categories/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/posts/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/categories/tech/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/dns/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/op/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/</loc>
+      
+      <lastmod>2019-06-30T17:31:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/javassript/</loc>
+      
+      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/miniapp/</loc>
+      
+      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/typescript/</loc>
+      
+      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
   
     <url>
       <loc>https://page.codespaper.com/2019/js-to-ts-for-newbie/</loc>
@@ -17,6 +150,18 @@
     </url>
   
     <url>
+      <loc>https://page.codespaper.com/tags/golang/</loc>
+      
+      <lastmod>2019-06-09T13:51:40+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://page.codespaper.com/2019/why-golang/</loc>
       
       <lastmod>2019-06-09T13:51:40+08:00</lastmod>
@@ -26,6 +171,30 @@
       
       
       <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/emacs/</loc>
+      
+      <lastmod>2019-03-09T19:04:15+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/orgmode/</loc>
+      
+      <lastmod>2019-03-09T19:04:15+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
       
       
     </url>
@@ -59,66 +228,10 @@
     </url>
   
     <url>
-      <loc>https://page.codespaper.com/categories/</loc>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
       <loc>https://page.codespaper.com/tags/dev/</loc>
       
       <lastmod>2015-07-11T23:48:27+08:00</lastmod>
       
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/emacs/</loc>
-      
-      <lastmod>2019-03-09T19:04:15+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/golang/</loc>
-      
-      <lastmod>2019-06-09T13:51:40+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/javassript/</loc>
-      
-      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
       
       
       <priority>0</priority>
@@ -131,106 +244,6 @@
       
       <lastmod>2015-07-11T23:48:27+08:00</lastmod>
       
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/miniapp/</loc>
-      
-      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/orgmode/</loc>
-      
-      <lastmod>2019-03-09T19:04:15+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/posts/</loc>
-      
-      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/</loc>
-      
-      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/categories/tech/</loc>
-      
-      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/typescript/</loc>
-      
-      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/</loc>
-      
-      <lastmod>2019-06-09T13:52:57+08:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
       
       
       <priority>0</priority>
