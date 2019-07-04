@@ -31,6 +31,21 @@ Cloudflare 1.1.1.1 Cloudflare 本来是一个主打 CDN 和 权威 DNS 的企业
     </item>
     
     <item>
+      <title>从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</title>
+      <link>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</link>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</guid>
+      <description>简介 传统的高性能计算集群一般都习惯性地使用 Slurm + Lustre 的方案作为任务调度和存储，然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，而 Kubernetes 也成为了容器编排的事实标准。
+而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力，也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。
+本系列文章主要记录了在 Kubernetes 内使用 Pytorch 运行 ImageNet 的淌坑经验，同时也使用 CephFS 作为网络存储，解决数据存放问题。
+计划：
+ 简介和容器内使用显卡（本文） Kuberentes 和 Device Plugin Kubeflow 和 Pytorch-Operator CSI(Cofntainer Storage Interface) 和 CephFS 网络存储 mnist Demo 和分布式训练（MPI) 分布式 ImageNet  Slurm Slurm(Simple Linux Utility for Resource Management) 是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具，被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。
+Slurm 的成熟度毋庸置疑，但是有两个问题：
+ 在互联网公司不一定能有专人维护 Slurm 集群 交付环境没有 Slurm  Lustre Lustre(得名于：Linux + Cluster) 一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。</description>
+    </item>
+    
+    <item>
       <title>作为新手，为什么我选 Typescript</title>
       <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>

@@ -199,6 +199,114 @@ Jun 30 17:31:31 dnsmasq[20723]: cached google.com is 216.58.217.206
     </item>
     
     <item>
+      <title>从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</title>
+      <link>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</link>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</guid>
+      <description>
+
+&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;传统的高性能计算集群一般都习惯性地使用 &lt;code&gt;Slurm&lt;/code&gt; + &lt;code&gt;Lustre&lt;/code&gt; 的方案作为任务调度和存储，然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，而 &lt;code&gt;Kubernetes&lt;/code&gt; 也成为了容器编排的事实标准。&lt;/p&gt;
+
+&lt;p&gt;而且，对比容器化的简洁， &lt;code&gt;Slurm&lt;/code&gt; 和 &lt;code&gt;Lustre&lt;/code&gt; 复杂的配置，让人头疼的运維压力，也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。&lt;/p&gt;
+
+&lt;p&gt;本系列文章主要记录了在 &lt;code&gt;Kubernetes&lt;/code&gt; 内使用 &lt;code&gt;Pytorch&lt;/code&gt; 运行 &lt;code&gt;ImageNet&lt;/code&gt; 的淌坑经验，同时也使用 CephFS 作为网络存储，解决数据存放问题。&lt;/p&gt;
+
+&lt;p&gt;计划：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;简介和容器内使用显卡（本文）&lt;/li&gt;
+&lt;li&gt;Kuberentes 和 Device Plugin&lt;/li&gt;
+&lt;li&gt;Kubeflow 和 Pytorch-Operator&lt;/li&gt;
+&lt;li&gt;CSI(Cofntainer Storage Interface) 和 CephFS 网络存储&lt;/li&gt;
+&lt;li&gt;mnist Demo 和分布式训练（MPI)&lt;/li&gt;
+&lt;li&gt;分布式 ImageNet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;slurm&#34;&gt;Slurm&lt;/h3&gt;
+
+&lt;p&gt;Slurm(Simple Linux Utility for Resource Management)
+是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具，被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。&lt;/p&gt;
+
+&lt;p&gt;Slurm 的成熟度毋庸置疑，但是有两个问题：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在互联网公司不一定能有专人维护 Slurm 集群&lt;/li&gt;
+&lt;li&gt;交付环境没有 Slurm&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;lustre&#34;&gt;Lustre&lt;/h3&gt;
+
+&lt;p&gt;Lustre(得名于：Linux + Cluster)
+一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。&lt;/p&gt;
+
+&lt;h3 id=&#34;kubernetes-plus-ceph&#34;&gt;Kubernetes + Ceph&lt;/h3&gt;
+
+&lt;p&gt;互联网时代，容器化并使用 Kubernetes 同时使用 Ceph 作为网络存储肯定是毫无疑问的方案和方向。如果 Kubernetes + Ceph 能够解决机器学习中高性能集群资源分配和利用的问题，那对于互联网公司，肯定会是更好的选择。&lt;/p&gt;
+
+&lt;h2 id=&#34;容器内使用显卡&#34;&gt;容器内使用显卡&lt;/h2&gt;
+
+&lt;h3 id=&#34;gpu&#34;&gt;GPU&lt;/h3&gt;
+
+&lt;p&gt;现在机器学习的主流是深度学习，自然 GPU 是少不了的。本文中使用了 Nvidia 的 GTX 1080Ti。&lt;/p&gt;
+
+&lt;h4 id=&#34;驱动&#34;&gt;驱动&lt;/h4&gt;
+
+&lt;p&gt;首先确认机器上是否有 GPU 卡：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;lspci -vnn | grep NVIDIA
+
+# Nvidia 显卡可以用自家工具看到详情
+nvidia-smi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认安装了 Nvidia 驱动 (cuda-driver)，一般直接从源里安装即可。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果官方源里没有，那就在 Nvidia 提供的&lt;a href=&#34;https://www.nvidia.com/object/unix.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;这里&lt;/a&gt;下载安装文件，安装也可。&lt;/p&gt;
+
+&lt;p&gt;这里需要注意的是高版本的 CUDA 同样需要高版本的驱动，对应关系如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://page.codespaper.com/images/cudadriver.jpg&#34; alt=&#34;CUDA Driver&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;nvidia-docker-2-dot-0&#34;&gt;Nvidia docker 2.0&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/NVIDIA/nvidia-docker&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/NVIDIA/nvidia-docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;默认的 Docker 是不支持 GPU 的，所以我们需要 &lt;code&gt;nvidia-docker&lt;/code&gt; ，这是 Nvidia 为了支持 Docker 生态出的一个包，而 &lt;code&gt;nvidia docker 2.0&lt;/code&gt; 是第二版，主要是为 &lt;code&gt;Docker&lt;/code&gt; 新增了一个 &lt;code&gt;nvidia&lt;/code&gt; 的运行时，&lt;/p&gt;
+
+&lt;p&gt;所以在安装完 &lt;code&gt;nvidia docker 2.0&lt;/code&gt; 后，需要把 Docker 的默认运行时个性为 &lt;code&gt;nvidia&lt;/code&gt; 。可以通过修改 docker 配置文件 &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt; 让 docker 能够使用 &lt;code&gt;Nvidia Container Runtime&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Nvidia Container Runtime&lt;/code&gt; 作为核心部分，在原有的容器运行时 &lt;code&gt;runc&lt;/code&gt; 的基础上增加一个 &lt;code&gt;prestart hook&lt;/code&gt; ，用于调用 &lt;code&gt;libnvidia-container&lt;/code&gt; 库。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;libnvidia-container&lt;/code&gt; 提供一个库和一个简单的 Cli 工具，这个库让容器能够使用 Nvidia 的 GPU。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;runc&lt;/code&gt; 是docker默认的容器运行时，根据 &lt;code&gt;Open Containers Initiative (OCI)&lt;/code&gt; 创建容器。&lt;/p&gt;
+
+&lt;p&gt;总而言之，就是当我们要在 Docker 里使用 Nvidia GPU 时，就必须要安装 &lt;code&gt;Nvidia Docker&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;安装完之后，基本的用法如下，可以测试一下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果出现 &lt;code&gt;brand = tesla: unknown&lt;/code&gt; 的错误，就是 cuda 的版本和我们使用的驱动不匹配，可以看一下宿主显卡驱动的版本和使用的 CUDA 版本，然后对照上文的图片看是否匹配。&lt;/p&gt;
+
+&lt;p&gt;可以使用对应版本的 CUDA 镜像，如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run --runtime=nvidia --rm nvidia/cuda:8.0-runtime nvidia-smi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以更新宿主机驱动。&lt;/p&gt;
+
+&lt;p&gt;至此，我们就可以在容器内使用 GPU 了，但是我们想在 Kubernetes 内使用，还需要使用 &lt;code&gt;Device Plugin&lt;/code&gt; ，这个会在后文说到。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>作为新手，为什么我选 Typescript</title>
       <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
