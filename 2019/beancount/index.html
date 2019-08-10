@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  <link rel="prev" href="https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/" />
+  
+  <link rel="canonical" href="https://page.codespaper.com/2019/beancount/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           开始用 Beancount 实践复式记账（一）：初始化 | zwPapEr
+       
+  </title>
+  <meta name="title" content="开始用 Beancount 实践复式记账（一）：初始化 | zwPapEr">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="开始用 Beancount 实践复式记账（一）：初始化"/>
+<meta name="twitter:description" content="复式记账 Beancount 第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。
+目前 beancount 的中文文章还不算多，主要看了这两篇：
+ https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava
+pip install beancount fava  ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
+UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&quot;Fast C decimal implementation appears to be missing; &quot;  这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
+pacman -S mpdecimal  Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "开始用 Beancount 实践复式记账（一）：初始化",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/page.codespaper.com\/2019\/beancount\/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/page.codespaper.com\/cover.png",
+    "width":  800 ,
+    "height":  600 
+  },
+  "genre": "posts",
+  "keywords": "Accounting, beancount",
+  "wordcount":  274 ,
+  "url": "https:\/\/page.codespaper.com\/2019\/beancount\/",
+  "datePublished": "2019-08-10T00:00:00\x2b08:00",
+  "dateModified": "2019-08-10T20:39:46\x2b08:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zwPapEr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/page.codespaper.com\/ironman.png",
+      "width":  127 ,
+      "height":  40 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "zwPapEr"
+  },
+  "description": ""
+}
+</script>
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://page.codespaper.com/">zwPapEr</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">开始用 Beancount 实践复式记账（一）：初始化</h1>
+        <div class="post-meta">
+              <a href="https://page.codespaper.com/" rel="author">zwPapEr</a>  ♥ 
+                <span class="post-time">
+                     <time datetime=2019-08-10 >10 August 2019</time>
+                </span>
+                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://page.codespaper.com/categories/lift/"> Lift </a>
+                        
+                </span>
+                &nbsp;&nbsp;2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="复式记账-beancount">复式记账 Beancount</h2>
+
+<p>第一次了解到复式记账是 Emacs 的 <code>Ledger mode</code> ，但是还挺复杂的，就放弃了。后来 Byvoid 的<a href="https://www.byvoid.com/zht/blog/beancount-bookkeeping-1" rel="nofollow noreferrer" target="_blank">Beancount 复式记账（一）：为什么</a>里提到了 <code>Beancount</code> ，感觉比较值得一试。</p>
+
+<p>目前 beancount 的中文文章还不算多，主要看了这两篇：</p>
+
+<ul>
+<li><a href="https://wzyboy.im/post/1063.html" rel="nofollow noreferrer" target="_blank">https://wzyboy.im/post/1063.html</a></li>
+<li><a href="https://yuchi.me/post/beancount-intro/" rel="nofollow noreferrer" target="_blank">https://yuchi.me/post/beancount-intro/</a></li>
+</ul>
+
+<h2 id="配置">配置</h2>
+
+<p>网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava</p>
+
+<pre><code class="language-shell">pip install beancount fava
+</code></pre>
+
+<h3 id="archlinux">ArchLinux</h3>
+
+<p>因为使用了 <code>ArchLinux</code> ，在用 beancount 命令的时候会报</p>
+
+<pre><code class="language-shell">UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal
+  warnings.warn(&quot;Fast C decimal implementation appears to be missing; &quot;
+</code></pre>
+
+<p>这个其实是因为在 ArchLinux 上少了 <code>mpdecimal</code> 这个库，所以要安装</p>
+
+<pre><code class="language-shell">pacman -S mpdecimal
+</code></pre>
+
+<h3 id="emacs">Emacs</h3>
+
+<p>Beancount 作者也是 Emacs 用户，所以在项目里有一个 <code>beancount.el</code> ，
+<a href="https://github.com/beancount/beancount/tree/master/editors/emacs" rel="nofollow noreferrer" target="_blank">https://github.com/beancount/beancount/tree/master/editors/emacs</a>
+我们下载并放到 <code>load-path</code> ，然后用 <code>use-package</code> 配置一下即可。</p>
+
+<pre><code class="language-emacs-lisp">(use-package beancount
+  :load-path &quot;~/.emacs.d/plugin&quot;
+  :ensure nil
+  :mode
+  (&quot;\\.bean$&quot; . beancount-mode))
+</code></pre>
+
+<p>Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：</p>
+
+<ul>
+<li>beancount-check</li>
+<li>beancount-insert-account</li>
+<li>beancount-insert-price</li>
+</ul>
+
+<p>这些命令基本看字面意思也都能看出来。
+<code>beancount-check</code> ，用于检查当前文件有没有语法错误，这个目前是个人觉得最有用的</p>
+
+<p>后续可能我会更新我的配置，可以参考：</p>
+
+<p><a href="https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el" rel="nofollow noreferrer" target="_blank">https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el</a></p>
+
+<h2 id="开始使用">开始使用</h2>
+
+<h3 id="初始化账户">初始化账户</h3>
+
+<p>按照上文提到的两篇文章，我们已经可以初步建立我们的账户</p>
+
+<pre><code class="language-nil">option &quot;title&quot; &quot;Personal Ledger&quot;
+option &quot;operating_currency&quot; &quot;CNY&quot;
+option &quot;operating_currency&quot; &quot;USD&quot;
+
+1990-05-28 open Equity:Opening-Balances
+
+1990-05-28 open Assets:Bank:CMB:xxxx:Deposit CNY
+1990-05-28 open Assets:Bank:CMB:xxxx:ZZY CNY
+
+1990-05-28 open Liabilities:Credit:CMB:xxxx CNY,USD
+1990-05-28 open Liabilities:Huabei CNY
+
+2018-10-30 open Income:CompanyName:Salary CNY
+1990-05-28 open Income:PnL CNY
+1990-05-28 note Income:PnL &quot;盈亏&quot;
+1990-05-28 open Income:PnL:Fund CNY
+
+2016-07-07 open Expenses:Gov:HousingFund CNY
+2016-07-07 open Expenses:Gov:Pension CNY
+2016-07-07 open Expenses:Gov:Unemployment CNY
+2016-07-07 open Expenses:Gov:MedicalCare CNY
+2016-07-07 open Expenses:Gov:IncomeTax CNY
+
+1990-05-28 open Expenses:Daily:Cloth CNY
+1990-05-28 open Expenses:Daily:Food CNY
+</code></pre>
+
+<p>主要是几类：</p>
+
+<dl>
+<dt>Asset:Bank</dt>
+<dd>银行卡</dd>
+<dt>Liabilities:Credit</dt>
+<dd>信用卡</dd>
+<dt>Incoume:CompanyName:Salary</dt>
+<dd>工资</dd>
+<dt>Incoume:PnL</dt>
+<dd>用于盈亏，对应加了一条 note，方便记忆</dd>
+<dt>Expenses:Gov</dt>
+<dd>五险一金</dd>
+<dt>Expenses:XXX</dt>
+<dd>其它支出</dd>
+<dt>Equity:Opening-Balances</dt>
+<dd>开户平衡</dd>
+</dl>
+
+<h3 id="当前余额">当前余额</h3>
+
+<p>现在有账户了，然后就是账户里的余额， <code>beancount</code> 已经考虑到了，所以有 <code>pad</code> ，而且上文开户有一个 <code>Equity:Opening-Balances</code> ，就是用来初始化账户，而且在你补充了中间的条目之后， <code>pad</code> 的值也会对应更新。</p>
+
+<p>用法是从 <code>时间1</code> 到 <code>时间2</code> 期间 <code>账户1</code> 的余额是 <code>banlance</code> 指明的值，差值算到 <code>账户2</code> 内。</p>
+
+<pre><code class="language-nil">  时间1 pad 账户1 账户2
+  时间2 balance 账户1 金额1 货币
+</code></pre>
+
+<p>我们初始化账户可以把 <code>时间1</code> 设置为生日， <code>时间2</code> 设置为当前，这样表示之前帐目的都用 <code>Opening-Balances</code> 先抹平，如果我们之前有记录的内容，直接补充进去就好了， <code>pad</code> 会自己更新。</p>
+
+<pre><code class="language-nil">1990-05-28 pad Assets:Bank:CMB:6838:Deposit Equity:Opening-Balances
+2019-08-10 balance Assets:Bank:CMB:6838:Deposit xxx CNY
+
+1990-05-28 pad Liabilities:Credit:CMB Equity:Opening-Balances
+2019-08-10 balance Liabilities:Credit:CMB -xxxxx CNY
+</code></pre>
+
+<p>到此，我们的账户初始化就完成了。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>我们可以打开 fava 看一下我们的资产：</p>
+
+<pre><code class="language-shell">fava xx.bean
+</code></pre>
+
+<p>可以看到在资产页，我们填的余额都已经更新了。</p>
+
+<p>其中还有一个点，就是 <code>Book Value</code> 和 <code>Market Value</code> 。复式记账多用于公司，所以这两个值主要也是公司财务比较熟悉的。</p>
+
+<dl>
+<dt>Book Value</dt>
+<dd>纸面上的价值，就是欠的钱都还了之后的资产</dd>
+<dt>Market Value</dt>
+<dd>股票价值，Beancount 里就是制定 price 之后计算出来的价格</dd>
+</dl>
+
+<p>考虑到自动化需要一个比较好用的工具，等下一片文章再具体写一下工具的情况。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>:</span>
+                <span>zwPapEr </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>:</span>
+                   <span>274</span>
+            </p>
+
+             
+            <p class="copyright-item lincese">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>: 
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/accounting/">
+                    #Accounting</a></span>
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/beancount/">
+                    #beancount</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();"></a></span> · 
+                <span><a href="https://page.codespaper.com/"></a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/" class="prev" rel="prev" title="dnsmasq &#43; Cloudflare DoH 自建 DNS"><i class="iconfont icon-dajiantou"></i>&nbsp;dnsmasq &#43; Cloudflare DoH 自建 DNS</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2012 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://fsb01.com" target="_blank" rel="external nofollow noopener noreffer">Fastbyte01</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

@@ -6,10 +6,28 @@
     <description>Recent content in Tags on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 10 Aug 2019 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://page.codespaper.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Accounting</title>
+      <link>https://page.codespaper.com/tags/accounting/</link>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/accounting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>beancount</title>
+      <link>https://page.codespaper.com/tags/beancount/</link>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/beancount/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>dns</title>
