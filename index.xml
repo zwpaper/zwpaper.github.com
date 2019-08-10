@@ -89,6 +89,10 @@ option &amp;quot;operating_currency&amp;quot; &amp;quot;USD&amp;quot;
 
 1990-05-28 open Assets:Bank:CMB:xxxx:Deposit CNY
 1990-05-28 open Assets:Bank:CMB:xxxx:ZZY CNY
+20xx-xx-xx open Assets:House:HouseName CNY
+
+20xx-xx-xx open Liabilities:Mortgage:House CNY
+20xx-xx-xx open Liabilities:Mortgage:Interest CNY
 
 1990-05-28 open Liabilities:Credit:CMB:xxxx CNY,USD
 1990-05-28 open Liabilities:Huabei CNY
@@ -126,6 +130,8 @@ option &amp;quot;operating_currency&amp;quot; &amp;quot;USD&amp;quot;
 &lt;dt&gt;Equity:Opening-Balances&lt;/dt&gt;
 &lt;dd&gt;开户平衡&lt;/dd&gt;
 &lt;/dl&gt;
+
+&lt;p&gt;有几点需要主要的是，工资的话，是算上应收，再算五险一金，最后是收入。还有房贷，房屋价值和利息是要分开算的。&lt;/p&gt;
 
 &lt;h3 id=&#34;当前余额&#34;&gt;当前余额&lt;/h3&gt;
 
