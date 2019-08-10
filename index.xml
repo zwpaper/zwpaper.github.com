@@ -62,18 +62,20 @@
 
 &lt;p&gt;Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;beancount-check&lt;/li&gt;
-&lt;li&gt;beancount-insert-account&lt;/li&gt;
-&lt;li&gt;beancount-insert-price&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这些命令基本看字面意思也都能看出来。
-&lt;code&gt;beancount-check&lt;/code&gt; ，用于检查当前文件有没有语法错误，这个目前是个人觉得最有用的&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;beancount-check&lt;/dt&gt;
+&lt;dd&gt;用于检查当前文件有没有语法错误&lt;/dd&gt;
+&lt;dt&gt;beancount-init-account&lt;/dt&gt;
+&lt;dd&gt;更新 Emacs 已知的账户名，用于下一个&lt;/dd&gt;
+&lt;dt&gt;beancount-insert-account&lt;/dt&gt;
+&lt;dd&gt;插入账户名，相当于补全&lt;/dd&gt;
+&lt;/dl&gt;
 
 &lt;p&gt;后续可能我会更新我的配置，可以参考：&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下一篇文章我会写工具，也会自介绍一下 Emacs 里怎么去用这些命令。&lt;/p&gt;
 
 &lt;h2 id=&#34;开始使用&#34;&gt;开始使用&lt;/h2&gt;
 

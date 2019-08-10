@@ -56,10 +56,10 @@ pacman -S mpdecimal  Emacs Beancount 作者也是 Emacs 用户，所以在项目
   },
   "genre": "posts",
   "keywords": "Accounting, beancount",
-  "wordcount":  287 ,
+  "wordcount":  292 ,
   "url": "https:\/\/page.codespaper.com\/2019\/beancount\/",
   "datePublished": "2019-08-10T00:00:00\x2b08:00",
-  "dateModified": "2019-08-10T21:00:08\x2b08:00",
+  "dateModified": "2019-08-10T21:17:59\x2b08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -216,18 +216,20 @@ if (!doNotTrack) {
 
 <p>Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：</p>
 
-<ul>
-<li>beancount-check</li>
-<li>beancount-insert-account</li>
-<li>beancount-insert-price</li>
-</ul>
-
-<p>这些命令基本看字面意思也都能看出来。
-<code>beancount-check</code> ，用于检查当前文件有没有语法错误，这个目前是个人觉得最有用的</p>
+<dl>
+<dt>beancount-check</dt>
+<dd>用于检查当前文件有没有语法错误</dd>
+<dt>beancount-init-account</dt>
+<dd>更新 Emacs 已知的账户名，用于下一个</dd>
+<dt>beancount-insert-account</dt>
+<dd>插入账户名，相当于补全</dd>
+</dl>
 
 <p>后续可能我会更新我的配置，可以参考：</p>
 
 <p><a href="https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el" rel="nofollow noreferrer" target="_blank">https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el</a></p>
+
+<p>下一篇文章我会写工具，也会自介绍一下 Emacs 里怎么去用这些命令。</p>
 
 <h2 id="开始使用">开始使用</h2>
 
@@ -340,7 +342,7 @@ option &quot;operating_currency&quot; &quot;USD&quot;
            
             <p class="copyright-item">
                     <span>:</span>
-                   <span>287</span>
+                   <span>292</span>
             </p>
 
              
