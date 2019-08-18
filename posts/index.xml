@@ -6,23 +6,19 @@
     <description>Recent content in Posts on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Aug 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://page.codespaper.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>开始用 Beancount 实践复式记账（一）：初始化</title>
-      <link>https://page.codespaper.com/2019/beancount/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      <title>用 Stack 管理多个 GHC 版本</title>
+      <link>https://page.codespaper.com/2019/stack-multi-ghc/</link>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0800</pubDate>
       
-      <guid>https://page.codespaper.com/2019/beancount/</guid>
-      <description>复式记账 Beancount 第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。
-目前 beancount 的中文文章还不算多，主要看了这两篇：
- https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava
-pip install beancount fava  ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
-UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&amp;quot;Fast C decimal implementation appears to be missing; &amp;quot;  这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
-pacman -S mpdecimal  Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.</description>
+      <guid>https://page.codespaper.com/2019/stack-multi-ghc/</guid>
+      <description>简介 在用 Cabal 安装 Haskell 的软件时有时有碰到如下报错：
+$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&amp;gt; base&amp;gt;=4.11 &amp;amp;&amp;amp; &amp;lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&#39;ve had most trouble fulfilling: base, orgstat  可以看到 base 库的版本要求是 &amp;gt;=4.</description>
     </item>
     
     <item>

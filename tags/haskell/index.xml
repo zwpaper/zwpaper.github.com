@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Haskell on zwPapEr</title>
+    <link>https://page.codespaper.com/tags/haskell/</link>
+    <description>Recent content in Haskell on zwPapEr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://page.codespaper.com/tags/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用 Stack 管理多个 GHC 版本</title>
+      <link>https://page.codespaper.com/2019/stack-multi-ghc/</link>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/stack-multi-ghc/</guid>
+      <description>简介 在用 Cabal 安装 Haskell 的软件时有时有碰到如下报错：
+$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&amp;gt; base&amp;gt;=4.11 &amp;amp;&amp;amp; &amp;lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&#39;ve had most trouble fulfilling: base, orgstat  可以看到 base 库的版本要求是 &amp;gt;=4.</description>
+    </item>
+    
+  </channel>
+</rss>
