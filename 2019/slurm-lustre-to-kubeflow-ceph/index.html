@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noodp"/>
   
+  
+  
+  
+  
   <link rel="prev" href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" />
   <link rel="next" href="https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/" />
   <link rel="canonical" href="https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/" />
@@ -96,6 +100,7 @@ if (!doNotTrack) {
   
 
 
+
   <body class="">
     <div class="wrapper">
         <nav class="navbar">
@@ -137,6 +142,7 @@ if (!doNotTrack) {
         </div>
     </div>
 </nav>
+
     	 <main class="main">
           <div class="container">
       		
@@ -144,17 +150,18 @@ if (!doNotTrack) {
     <header class="post-header">
         <h1 class="post-title">从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</h1>
         <div class="post-meta">
-              <a href="https://page.codespaper.com/" rel="author">zwPapEr</a>  ♥ 
+            Written by <a href="https://page.codespaper.com/" rel="author">zwPapEr</a> with ♥
                 <span class="post-time">
-                     <time datetime=2019-06-15 >15 June 2019</time>
+                    on <time datetime=2019-06-15 >15 June 2019</time>
                 </span>
-                
+                in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
                         <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
                         
                 </span>
-                &nbsp;&nbsp;2 min
+                <i class="iconfont icon-timer"></i>
+                2 min
         </div>
     </header>
     <div class="post-content">
@@ -166,7 +173,7 @@ if (!doNotTrack) {
 
         
         
-     
+
           
           
           
@@ -278,30 +285,76 @@ nvidia-smi
     </div>
 
     <div class="post-copyright">
-             
+            
             <p class="copyright-item">
-                <span>:</span>
+                <span>Author:</span>
                 <span>zwPapEr </span>
                 </p>
             
-           
+
             <p class="copyright-item">
-                    <span>:</span>
+                    <span>Words:</span>
                    <span>223</span>
             </p>
 
-             
-            <p class="copyright-item lincese">
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f&amp;text=%e4%bb%8e%20Slurm%20%2b%20Lustre%20%e5%88%b0%20Kubeflow%20%2b%20Ceph%20%280%29%ef%bc%8c%e7%ae%80%e4%bb%8b%e5%92%8c%e5%ae%b9%e5%99%a8%e4%b8%ad%e4%bd%bf%e7%94%a8%e6%98%be%e5%8d%a1&amp;via=zwpaper" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+        <a href="//reddit.com/submit?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f&amp;title=%e4%bb%8e%20Slurm%20%2b%20Lustre%20%e5%88%b0%20Kubeflow%20%2b%20Ceph%20%280%29%ef%bc%8c%e7%ae%80%e4%bb%8b%e5%92%8c%e5%ae%b9%e5%99%a8%e4%b8%ad%e4%bd%bf%e7%94%a8%e6%98%be%e5%8d%a1" target="_blank" title="Share on Reddit">
+          <i class="iconfont icon-reddit"></i>
+        </a>
+        
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f&amp;appkey=&amp;title=%e4%bb%8e%20Slurm%20%2b%20Lustre%20%e5%88%b0%20Kubeflow%20%2b%20Ceph%20%280%29%ef%bc%8c%e7%ae%80%e4%bb%8b%e5%92%8c%e5%ae%b9%e5%99%a8%e4%b8%ad%e4%bd%bf%e7%94%a8%e6%98%be%e5%8d%a1" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+                
+            </p>
+
+            
+            <p class="copyright-item">
                 Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
             </p>
             
     </div>
 
-  
+
     <div class="post-tags">
         
             <section>
-            <i class="iconfont icon-icon-tag"></i>: 
+            <i class="iconfont icon-icon-tag"></i>Tag:
             
             <span class="tag"><a href="https://page.codespaper.com/tags/machinelearing/">
                     #machineLearing</a></span>
@@ -312,15 +365,15 @@ nvidia-smi
             </section>
         
         <section>
-                <a href="javascript:window.history.back();"></a></span> · 
-                <span><a href="https://page.codespaper.com/"></a></span>
+                <a href="javascript:window.history.back();">Back</a></span> ·
+                <span><a href="https://page.codespaper.com/">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
         
         <a href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" class="prev" rel="prev" title="作为新手，为什么我选 Typescript"><i class="iconfont icon-dajiantou"></i>&nbsp;作为新手，为什么我选 Typescript</a>
-         
+        
         
         <a href="https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/" class="next" rel="next" title="dnsmasq &#43; Cloudflare DoH 自建 DNS">dnsmasq &#43; Cloudflare DoH 自建 DNS&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
@@ -328,7 +381,10 @@ nvidia-smi
 
     <div class="post-comment">
           
-                 
+          
+  
+
+
           
     </div>
 </article>
@@ -344,7 +400,7 @@ nvidia-smi
             <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
          
 
-		  <span>Crafted with ❤️ by <a href="https://fsb01.com" target="_blank" rel="external nofollow noopener noreffer">Fastbyte01</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
     </div>
 </footer>
 
@@ -360,12 +416,26 @@ nvidia-smi
 
 
     
-     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
       
      <script src="/js/vendor_gallery.min.js" async="" ></script>
     
   
 
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
 
