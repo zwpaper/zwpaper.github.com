@@ -120,6 +120,176 @@ ghc-pkg    ghci-8.4.2     hp2ps              runghc
     </item>
     
     <item>
+      <title>开始用 Beancount 实践复式记账（一）：初始化</title>
+      <link>https://page.codespaper.com/2019/beancount/</link>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/beancount/</guid>
+      <description>
+
+&lt;h2 id=&#34;复式记账-beancount&#34;&gt;复式记账 Beancount&lt;/h2&gt;
+
+&lt;p&gt;第一次了解到复式记账是 Emacs 的 &lt;code&gt;Ledger mode&lt;/code&gt; ，但是还挺复杂的，就放弃了。后来 Byvoid 的&lt;a href=&#34;https://www.byvoid.com/zht/blog/beancount-bookkeeping-1&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Beancount 复式记账（一）：为什么&lt;/a&gt;里提到了 &lt;code&gt;Beancount&lt;/code&gt; ，感觉比较值得一试。&lt;/p&gt;
+
+&lt;p&gt;目前 beancount 的中文文章还不算多，主要看了这两篇：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://wzyboy.im/post/1063.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://wzyboy.im/post/1063.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://yuchi.me/post/beancount-intro/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://yuchi.me/post/beancount-intro/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+
+&lt;p&gt;网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;pip install beancount fava
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;archlinux&#34;&gt;ArchLinux&lt;/h3&gt;
+
+&lt;p&gt;因为使用了 &lt;code&gt;ArchLinux&lt;/code&gt; ，在用 beancount 命令的时候会报&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal
+  warnings.warn(&amp;quot;Fast C decimal implementation appears to be missing; &amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个其实是因为在 ArchLinux 上少了 &lt;code&gt;mpdecimal&lt;/code&gt; 这个库，所以要安装&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;pacman -S mpdecimal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;emacs&#34;&gt;Emacs&lt;/h3&gt;
+
+&lt;p&gt;Beancount 作者也是 Emacs 用户，所以在项目里有一个 &lt;code&gt;beancount.el&lt;/code&gt; ，
+&lt;a href=&#34;https://github.com/beancount/beancount/tree/master/editors/emacs&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/beancount/beancount/tree/master/editors/emacs&lt;/a&gt;
+我们下载并放到 &lt;code&gt;load-path&lt;/code&gt; ，然后用 &lt;code&gt;use-package&lt;/code&gt; 配置一下即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-emacs-lisp&#34;&gt;(use-package beancount
+  :load-path &amp;quot;~/.emacs.d/plugin&amp;quot;
+  :ensure nil
+  :mode
+  (&amp;quot;\\.bean$&amp;quot; . beancount-mode))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;beancount-check&lt;/dt&gt;
+&lt;dd&gt;用于检查当前文件有没有语法错误&lt;/dd&gt;
+&lt;dt&gt;beancount-init-account&lt;/dt&gt;
+&lt;dd&gt;更新 Emacs 已知的账户名，用于下一个&lt;/dd&gt;
+&lt;dt&gt;beancount-insert-account&lt;/dt&gt;
+&lt;dd&gt;插入账户名，相当于补全&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;后续可能我会更新我的配置，可以参考：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下一篇文章我会写工具，也会自介绍一下 Emacs 里怎么去用这些命令。&lt;/p&gt;
+
+&lt;h2 id=&#34;开始使用&#34;&gt;开始使用&lt;/h2&gt;
+
+&lt;h3 id=&#34;初始化账户&#34;&gt;初始化账户&lt;/h3&gt;
+
+&lt;p&gt;按照上文提到的两篇文章，我们已经可以初步建立我们的账户&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nil&#34;&gt;option &amp;quot;title&amp;quot; &amp;quot;Personal Ledger&amp;quot;
+option &amp;quot;operating_currency&amp;quot; &amp;quot;CNY&amp;quot;
+option &amp;quot;operating_currency&amp;quot; &amp;quot;USD&amp;quot;
+
+1990-05-28 open Equity:Opening-Balances
+
+1990-05-28 open Assets:Bank:CMB:xxxx:Deposit CNY
+1990-05-28 open Assets:Bank:CMB:xxxx:ZZY CNY
+20xx-xx-xx open Assets:House:HouseName CNY
+
+20xx-xx-xx open Liabilities:Mortgage:House CNY
+20xx-xx-xx open Liabilities:Mortgage:Interest CNY
+
+1990-05-28 open Liabilities:Credit:CMB:xxxx CNY,USD
+1990-05-28 open Liabilities:Huabei CNY
+
+2018-10-30 open Income:CompanyName:Salary CNY
+1990-05-28 open Income:PnL CNY
+1990-05-28 note Income:PnL &amp;quot;盈亏&amp;quot;
+1990-05-28 open Income:PnL:Fund CNY
+
+2016-07-07 open Expenses:Gov:HousingFund CNY
+2016-07-07 open Expenses:Gov:Pension CNY
+2016-07-07 open Expenses:Gov:Unemployment CNY
+2016-07-07 open Expenses:Gov:MedicalCare CNY
+2016-07-07 open Expenses:Gov:IncomeTax CNY
+
+1990-05-28 open Expenses:Daily:Cloth CNY
+1990-05-28 open Expenses:Daily:Food CNY
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;主要是几类：&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;Asset:Bank&lt;/dt&gt;
+&lt;dd&gt;银行卡&lt;/dd&gt;
+&lt;dt&gt;Liabilities:Credit&lt;/dt&gt;
+&lt;dd&gt;信用卡&lt;/dd&gt;
+&lt;dt&gt;Incoume:CompanyName:Salary&lt;/dt&gt;
+&lt;dd&gt;工资&lt;/dd&gt;
+&lt;dt&gt;Incoume:PnL&lt;/dt&gt;
+&lt;dd&gt;用于盈亏，对应加了一条 note，方便记忆&lt;/dd&gt;
+&lt;dt&gt;Expenses:Gov&lt;/dt&gt;
+&lt;dd&gt;五险一金&lt;/dd&gt;
+&lt;dt&gt;Expenses:XXX&lt;/dt&gt;
+&lt;dd&gt;其它支出&lt;/dd&gt;
+&lt;dt&gt;Equity:Opening-Balances&lt;/dt&gt;
+&lt;dd&gt;开户平衡&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;有几点需要主要的是，工资的话，是算上应收，再算五险一金，最后是收入。还有房贷，房屋价值和利息是要分开算的。&lt;/p&gt;
+
+&lt;h3 id=&#34;当前余额&#34;&gt;当前余额&lt;/h3&gt;
+
+&lt;p&gt;现在有账户了，然后就是账户里的余额， &lt;code&gt;beancount&lt;/code&gt; 已经考虑到了，所以有 &lt;code&gt;pad&lt;/code&gt; ，而且上文开户有一个 &lt;code&gt;Equity:Opening-Balances&lt;/code&gt; ，就是用来初始化账户，而且在你补充了中间的条目之后， &lt;code&gt;pad&lt;/code&gt; 的值也会对应更新。&lt;/p&gt;
+
+&lt;p&gt;用法是从 &lt;code&gt;时间1&lt;/code&gt; 到 &lt;code&gt;时间2&lt;/code&gt; 期间 &lt;code&gt;账户1&lt;/code&gt; 的余额是 &lt;code&gt;banlance&lt;/code&gt; 指明的值，差值算到 &lt;code&gt;账户2&lt;/code&gt; 内。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nil&#34;&gt;  时间1 pad 账户1 账户2
+  时间2 balance 账户1 金额1 货币
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们初始化账户可以把 &lt;code&gt;时间1&lt;/code&gt; 设置为生日， &lt;code&gt;时间2&lt;/code&gt; 设置为当前，这样表示之前帐目的都用 &lt;code&gt;Opening-Balances&lt;/code&gt; 先抹平，如果我们之前有记录的内容，直接补充进去就好了， &lt;code&gt;pad&lt;/code&gt; 会自己更新。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nil&#34;&gt;1990-05-28 pad Assets:Bank:CMB:6838:Deposit Equity:Opening-Balances
+2019-08-10 balance Assets:Bank:CMB:6838:Deposit xxx CNY
+
+1990-05-28 pad Liabilities:Credit:CMB Equity:Opening-Balances
+2019-08-10 balance Liabilities:Credit:CMB -xxxxx CNY
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;到此，我们的账户初始化就完成了。&lt;/p&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;我们可以打开 fava 看一下我们的资产：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;fava xx.bean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到在资产页，我们填的余额都已经更新了。&lt;/p&gt;
+
+&lt;p&gt;其中还有一个点，就是 &lt;code&gt;Book Value&lt;/code&gt; 和 &lt;code&gt;Market Value&lt;/code&gt; 。复式记账多用于公司，所以这两个值主要也是公司财务比较熟悉的。&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;Book Value&lt;/dt&gt;
+&lt;dd&gt;纸面上的价值，就是欠的钱都还了之后的资产&lt;/dd&gt;
+&lt;dt&gt;Market Value&lt;/dt&gt;
+&lt;dd&gt;股票价值，Beancount 里就是制定 price 之后计算出来的价格&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;考虑到自动化需要一个比较好用的工具，等下一片文章再具体写一下工具的情况。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>dnsmasq &#43; Cloudflare DoH 自建 DNS</title>
       <link>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</link>
       <pubDate>Sun, 30 Jun 2019 00:00:00 +0800</pubDate>

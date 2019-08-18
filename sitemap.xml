@@ -4,7 +4,7 @@
     <url>
       <loc>https://page.codespaper.com/categories/</loc>
       
-      <lastmod>2019-08-18T14:20:58+08:00</lastmod>
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
       
       
       
@@ -28,7 +28,7 @@
     <url>
       <loc>https://page.codespaper.com/posts/</loc>
       
-      <lastmod>2019-08-18T14:20:58+08:00</lastmod>
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
       
       
       
@@ -40,7 +40,7 @@
     <url>
       <loc>https://page.codespaper.com/tags/</loc>
       
-      <lastmod>2019-08-18T14:20:58+08:00</lastmod>
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
       
       
       
@@ -64,7 +64,7 @@
     <url>
       <loc>https://page.codespaper.com/</loc>
       
-      <lastmod>2019-08-18T14:20:58+08:00</lastmod>
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
       
       
       
@@ -77,6 +77,56 @@
       <loc>https://page.codespaper.com/2019/stack-multi-ghc/</loc>
       
       <lastmod>2019-08-18T14:20:53+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/accounting/</loc>
+      
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/categories/lift/</loc>
+      
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/beancount/</loc>
+      
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/2019/beancount/</loc>
+      
+      <lastmod>2019-08-18T16:28:53+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
