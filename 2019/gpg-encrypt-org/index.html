@@ -43,10 +43,11 @@ GPG  https://zh.wikipedia.org/wiki/GnuPG
  如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html
  简单地说就是可以通过 GPG 使用两种方式加密文件：
  对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg
-brew install gpg  Emacs 通过 use-package 配置 Emacs
+brew install gpg Emacs 通过 use-package 配置 Emacs
  如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
  macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
-(setq epa-pinentry-mode &#39;loopback)  最后，配置文件如下："/>
+(setq epa-pinentry-mode &#39;loopback) 最后，配置文件如下：
+(use-package epa-file :ensure nil :config (epa-file-enable) (setq epa-pinentry-mode &#39;loopback)) 使用 对称加密 默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密"/>
 
   <script type="application/ld+json">
 {
@@ -183,148 +184,89 @@ if (!doNotTrack) {
           
           
 
-          
-
-<h2 id="场景">场景</h2>
-
+          <h2 id="场景">场景</h2>
 <p>Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
 但是有一些敏感信息，还是认为谁都不值得信任。</p>
-
 <p>所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， <code>EasyPG Assistant</code> 可以很方便地加解密。</p>
-
 <h2 id="gpg">GPG</h2>
-
 <blockquote>
-<p><a href="https://zh.wikipedia.org/wiki/GnuPG" rel="nofollow noreferrer" target="_blank">https://zh.wikipedia.org/wiki/GnuPG</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/GnuPG">https://zh.wikipedia.org/wiki/GnuPG</a></p>
 </blockquote>
-
 <p>GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。
 GnuPG用于加密、数字签名及产生非对称钥匙对的软件。</p>
-
 <blockquote>
 <p>如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门
-<a href="http://www.ruanyifeng.com/blog/2013/07/gpg.html" rel="nofollow noreferrer" target="_blank">http://www.ruanyifeng.com/blog/2013/07/gpg.html</a></p>
+<a href="http://www.ruanyifeng.com/blog/2013/07/gpg.html">http://www.ruanyifeng.com/blog/2013/07/gpg.html</a></p>
 </blockquote>
-
 <p>简单地说就是可以通过 GPG 使用两种方式加密文件：</p>
-
 <ul>
 <li>对称加密，只使用密码对文件进行加密</li>
 <li>非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥</li>
 </ul>
-
 <h2 id="配置">配置</h2>
-
 <h3 id="macos">macOS</h3>
-
 <p>通过 brew 安装 gpg</p>
-
-<pre><code class="language-bash">brew install gpg
-</code></pre>
-
-<h3 id="emacs">Emacs</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install gpg
+</code></pre></div><h3 id="emacs">Emacs</h3>
 <p>通过 <code>use-package</code> 配置 Emacs</p>
-
 <blockquote>
 <p>如果没用过 <code>use-package</code> 可以看一下：
-<a href="https://github.com/jwiegley/use-package" rel="nofollow noreferrer" target="_blank">https://github.com/jwiegley/use-package</a></p>
+<a href="https://github.com/jwiegley/use-package">https://github.com/jwiegley/use-package</a></p>
 </blockquote>
-
 <p>macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决</p>
-
-<pre><code class="language-emacs-lisp">(setq epa-pinentry-mode 'loopback)
-</code></pre>
-
-<p>最后，配置文件如下：</p>
-
-<pre><code class="language-emacs-lisp">(use-package epa-file
-  :ensure nil
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq epa-pinentry-mode <span style="color:#e6db74">&#39;loopback</span>)
+</code></pre></div><p>最后，配置文件如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(use-package epa-file
+  :ensure <span style="color:#66d9ef">nil</span>
   :config
   (epa-file-enable)
-  (setq epa-pinentry-mode 'loopback))
-</code></pre>
-
-<h2 id="使用">使用</h2>
-
+  (setq epa-pinentry-mode <span style="color:#e6db74">&#39;loopback</span>))
+</code></pre></div><h2 id="使用">使用</h2>
 <h3 id="对称加密">对称加密</h3>
-
 <p>默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密</p>
-
 <p>每次打开文件时，都要输入密码，保存时，甚至要输入两次，因为被当成新加密了。</p>
-
 <p>可以把密码缓存起来：</p>
-
-<pre><code class="language-emacs-lisp">(setq epa-file-cache-passphrase-for-symmetric-encryption t)
-</code></pre>
-
-<p>再打开和保存这个文件时，就不用输入密码，</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq epa-file-cache-passphrase-for-symmetric-encryption <span style="color:#66d9ef">t</span>)
+</code></pre></div><p>再打开和保存这个文件时，就不用输入密码，</p>
 <p><strong>但是!!</strong></p>
-
 <p>这个缓存是在 <code>gpg agent</code> 进程里的，如果能确保电脑没别人会用，倒还好，
 否则别人也是可能通过 <code>gpg agent</code> 的缓存读到解密内容的！
 或者说使用完，关了 Emacs 之后，其它人再重新打开，尝试读取，也是能载入缓存的！</p>
-
 <p>可以通过加一个 Hook，在关 Emacs 的时候，把 <code>gpg agent</code> 也杀了，相对能安全点</p>
-
-<pre><code class="language-emacs-lisp">(add-hook 'kill-emacs-hook (defun personal--kill-gpg-agent ()
-                             (shell-command &quot;pkill gpg-agent&quot;)))
-</code></pre>
-
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(add-hook <span style="color:#e6db74">&#39;kill-emacs-hook</span> (defun personal--kill-gpg-agent ()
+                             (shell-command <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pkill gpg-agent</span><span style="color:#e6db74">&#34;</span>)))
+</code></pre></div><blockquote>
 <p>这里我们用 defun 而不是 lambda，有兴趣可以看一下这篇文章：
-<a href="http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html" rel="nofollow noreferrer" target="_blank">http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html</a></p>
+<a href="http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html">http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html</a></p>
 </blockquote>
-
 <h3 id="非对称加密">非对称加密</h3>
-
 <p>使用 gpg key 对文件进行加密，这个目前应该是无懈可击的加密方式了</p>
-
 <p>在 <code>Org Mode</code> 里使用非对称加密需要在文件开头加上：</p>
-
-<pre><code class="language-org"># -*- mode:org; epa-file-encrypt-to: (&quot;address@email.com&quot;) -*-
-</code></pre>
-
-<p>在保存的时候，Emacs 会提示让选择一个 GPG Key 进行加密，
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org"><span style="color:#75715e"># -*- mode:org; epa-file-encrypt-to: (&#34;address@email.com&#34;) -*-</span>
+</code></pre></div><p>在保存的时候，Emacs 会提示让选择一个 GPG Key 进行加密，
 加密以后，再打开这个文件，需要提供 GPG Key 私钥密码进行解密，然后再保存就不需要输入密码了。</p>
-
 <blockquote>
 <p>我在用的时候有个问题，就是第一次新建文件加密保存后，每次都需要选择 Key 进行加密，
 把 Buffer Kill 了之后，再打开文件使用就没有问题了</p>
 </blockquote>
-
 <h3 id="gpg-相关">GPG 相关</h3>
-
 <h4 id="导出-key">导出 Key</h4>
-
 <p>用了 GPG 加密，那私钥就非常的重要了，所以最好把私钥导出一份：</p>
-
-<pre><code class="language-bash"># 找到自己的 Key ID，一长串字符
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 找到自己的 Key ID，一长串字符</span>
 gpg --list-keys
-# 导出，armor 表示使用可打印字符
+<span style="color:#75715e"># 导出，armor 表示使用可打印字符</span>
 gpg --export-secret-keys --armor AAAABBBBBBBBBCCCCCCC0000000000 &gt;&gt; /tmp/private.key
-</code></pre>
-
-<p>最重要的就是把导出文件保存好了，推荐离线保存！</p>
-
+</code></pre></div><p>最重要的就是把导出文件保存好了，推荐离线保存！</p>
 <p>这个文件比较大，内容比较多。
 可以把文件分割成几个小份，然后导出生成二维码，打印到纸上，离线保存。</p>
-
 <h4 id="导入-key">导入 Key</h4>
-
 <p>有导出，自然也有导入：</p>
-
-<pre><code class="language-bash">gpg --import private.key
-</code></pre>
-
-<p>导入之后 Key 没被信任，需要修改一下：</p>
-
-<pre><code class="language-bash">gpg --edit-key AAAABBBBBBBBBCCCCCCC0000000000
-# 看到提示符后输入 trust
-# 再选择信任等级，我自己的 Key，我选 5
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --import private.key
+</code></pre></div><p>导入之后 Key 没被信任，需要修改一下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --edit-key AAAABBBBBBBBBCCCCCCC0000000000
+<span style="color:#75715e"># 看到提示符后输入 trust</span>
+<span style="color:#75715e"># 再选择信任等级，我自己的 Key，我选 5</span>
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -437,7 +379,7 @@ gpg --export-secret-keys --armor AAAABBBBBBBBBCCCCCCC0000000000 &gt;&gt; /tmp/pr
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2012 - 2019</span>
+        <span itemprop="copyrightYear">2012 - 2020</span>
         
          
             <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>

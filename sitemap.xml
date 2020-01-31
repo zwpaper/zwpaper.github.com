@@ -2,25 +2,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>https://page.codespaper.com/categories/</loc>
+      <loc>https://page.codespaper.com/2020/2019-2020/</loc>
       
-      <lastmod>2019-08-18T16:46:20+08:00</lastmod>
+      <lastmod>2020-01-31T20:20:22+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
   
     <url>
-      <loc>https://page.codespaper.com/tags/haskell/</loc>
+      <loc>https://page.codespaper.com/categories/</loc>
       
-      <lastmod>2019-08-18T14:20:53+08:00</lastmod>
+      <lastmod>2020-01-31T20:20:22+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/categories/life/</loc>
+      
+      <lastmod>2020-01-31T20:20:22+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -28,11 +46,27 @@
     <url>
       <loc>https://page.codespaper.com/posts/</loc>
       
-      <lastmod>2019-08-18T16:46:20+08:00</lastmod>
+      <lastmod>2020-01-31T20:20:22+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/review/</loc>
+      
+      <lastmod>2020-01-31T20:20:22+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -40,11 +74,41 @@
     <url>
       <loc>https://page.codespaper.com/tags/</loc>
       
-      <lastmod>2019-08-18T16:46:20+08:00</lastmod>
+      <lastmod>2020-01-31T20:20:22+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/</loc>
+      
+      <lastmod>2020-01-31T20:20:22+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/haskell/</loc>
+      
+      <lastmod>2019-08-18T14:00:22+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -55,20 +119,10 @@
       <lastmod>2019-08-18T14:20:58+08:00</lastmod>
       
       
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/</loc>
-      
-      <lastmod>2019-08-18T16:46:20+08:00</lastmod>
+      <changefreq>monthly</changefreq>
       
       
-      
-      <priority>0</priority>
+      <priority>0.5</priority>
       
       
     </url>
@@ -76,7 +130,7 @@
     <url>
       <loc>https://page.codespaper.com/2019/stack-multi-ghc/</loc>
       
-      <lastmod>2019-08-18T14:20:53+08:00</lastmod>
+      <lastmod>2019-08-18T14:00:22+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -93,20 +147,10 @@
       <lastmod>2019-08-18T16:46:20+08:00</lastmod>
       
       
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/categories/life/</loc>
-      
-      <lastmod>2019-08-18T16:46:20+08:00</lastmod>
+      <changefreq>monthly</changefreq>
       
       
-      
-      <priority>0</priority>
+      <priority>0.5</priority>
       
       
     </url>
@@ -117,8 +161,10 @@
       <lastmod>2019-08-18T16:46:20+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -143,8 +189,10 @@
       <lastmod>2019-08-18T14:20:58+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -169,8 +217,10 @@
       <lastmod>2019-08-18T14:20:58+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -181,8 +231,10 @@
       <lastmod>2019-07-05T00:32:38+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -193,8 +245,10 @@
       <lastmod>2019-07-05T00:32:38+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -219,8 +273,10 @@
       <lastmod>2019-06-09T13:52:57+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -231,8 +287,10 @@
       <lastmod>2019-06-09T13:52:57+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -243,8 +301,10 @@
       <lastmod>2019-06-09T13:52:57+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -269,8 +329,10 @@
       <lastmod>2019-06-09T13:51:40+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -295,8 +357,10 @@
       <lastmod>2019-03-09T19:04:15+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -307,8 +371,10 @@
       <lastmod>2019-03-09T19:04:15+08:00</lastmod>
       
       
+      <changefreq>monthly</changefreq>
       
-      <priority>0</priority>
+      
+      <priority>0.5</priority>
       
       
     </url>
@@ -317,6 +383,34 @@
       <loc>https://page.codespaper.com/2019/gpg-encrypt-org/</loc>
       
       <lastmod>2019-03-09T19:04:15+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/dev/</loc>
+      
+      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://page.codespaper.com/tags/macos/</loc>
+      
+      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -337,30 +431,6 @@
       
       
       <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/dev/</loc>
-      
-      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://page.codespaper.com/tags/macos/</loc>
-      
-      <lastmod>2015-07-11T23:48:27+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>

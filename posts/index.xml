@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on zwPapEr</title>
@@ -6,10 +6,28 @@
     <description>Recent content in Posts on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jan 2020 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://page.codespaper.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2019 年终总结，2020 新年展望</title>
+      <link>https://page.codespaper.com/2020/2019-2020/</link>
+      <pubDate>Fri, 31 Jan 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2020/2019-2020/</guid>
+      <description>2019 年终总结，2020 新年展望 关键词：水流不腐
+2019 工作 2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年， 水流不腐 这个关键词也是从这而来。
+新公司是 AI 公司，都说现在 AI 处于风口，虽然我是做基础设施的，但是也想看看风口上的 AI 公司有何不同。 创业公司对于我来说，另一个好处就是大部分基础设施都处于起步阶段，这个时候，正好可以经历基础平台从零到一。
+从之前做公有云，私有云网络，接触到了容器平台，发现容器平台也是现在基础设施的风口， 所以也希望在新公司能够在容器平台能够学习到这方面的知识。
+今年公司换了，技术方向也换了，最主要的就是身边的同事也都换了一圈，接触到的技术，做的事和之前完全不一样， 确实感觉到不同环境能够学习到的内容完全不一样。
+今年的老板作为架构师，和他接触，也开始了解到了架构方面的知识：
+ 设计模式 在以前做网络相关时，确实能用到的比较少，但是在目前容器平台，更高层次的程序架构考虑，这是必不可少的， Kubernetes 源码中也能看到不少设计模式的影子。 Domain Driven Design(DDD) 真正从需求到设计再到实现，不再是之前随想实现，DDD 就是用于指导这个流程的。前端领域常见的 MVC 架构也是同源的。  另外，今年大量接触到了 Kubernetes, 容器解决了应用部署的问题，而 Kubernetes 解决了容器编排，调度的问题
+ Pod 方便多个容器之间协作，解决多活高可用 Service + KubeDNS 解决容器之间互相访问 Storage Class 解决存储 Operator 解决中间件服务的生命周期管理  Kubernetes 成为了现在容器编排的事实标准，虽说少不了背后 Google 的支持，但是 Kubernetes 自身的设计和实现也确实是出色， 感觉 Kubernetes 还得再火个很长的时间。
+2020 年的任务之一，就是能够站在架构的角度，回过头来看 Kubernetes ，尤其在 Operator 相关的地方，需要多下功夫。
+技术 今年努力多接触新技术，争取各个领域都能够有所涉猎。</description>
+    </item>
     
     <item>
       <title>用 Stack 管理多个 GHC 版本</title>
@@ -18,7 +36,7 @@
       
       <guid>https://page.codespaper.com/2019/stack-multi-ghc/</guid>
       <description>简介 在用 Cabal 安装 Haskell 的软件时有时有碰到如下报错：
-$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&amp;gt; base&amp;gt;=4.11 &amp;amp;&amp;amp; &amp;lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&#39;ve had most trouble fulfilling: base, orgstat  可以看到 base 库的版本要求是 &amp;gt;=4.</description>
+$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&amp;gt; base&amp;gt;=4.11 &amp;amp;&amp;amp; &amp;lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&amp;#39;ve had most trouble fulfilling: base, orgstat 可以看到 base 库的版本要求是 &amp;gt;=4.</description>
     </item>
     
     <item>
@@ -30,9 +48,9 @@ $ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve d
       <description>复式记账 Beancount 第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。
 目前 beancount 的中文文章还不算多，主要看了这两篇：
  https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava
-pip install beancount fava  ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
-UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&amp;quot;Fast C decimal implementation appears to be missing; &amp;quot;  这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
-pacman -S mpdecimal  Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.</description>
+pip install beancount fava ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
+UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&amp;#34;Fast C decimal implementation appears to be missing; &amp;#34; 这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
+pacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.el ， https://github.</description>
     </item>
     
     <item>
@@ -114,10 +132,11 @@ GPG  https://zh.wikipedia.org/wiki/GnuPG
  如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html
  简单地说就是可以通过 GPG 使用两种方式加密文件：
  对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg
-brew install gpg  Emacs 通过 use-package 配置 Emacs
+brew install gpg Emacs 通过 use-package 配置 Emacs
  如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
  macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
-(setq epa-pinentry-mode &#39;loopback)  最后，配置文件如下：</description>
+(setq epa-pinentry-mode &amp;#39;loopback) 最后，配置文件如下：
+(use-package epa-file :ensure nil :config (epa-file-enable) (setq epa-pinentry-mode &amp;#39;loopback)) 使用 对称加密 默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密</description>
     </item>
     
     <item>

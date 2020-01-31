@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Life on zwPapEr</title>
-    <link>https://page.codespaper.com/categories/life/</link>
-    <description>Recent content in Life on zwPapEr</description>
+    <title>Review on zwPapEr</title>
+    <link>https://page.codespaper.com/tags/review/</link>
+    <description>Recent content in Review on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 31 Jan 2020 00:00:00 +0800</lastBuildDate>
     
-	<atom:link href="https://page.codespaper.com/categories/life/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://page.codespaper.com/tags/review/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -27,20 +27,6 @@
  Pod 方便多个容器之间协作，解决多活高可用 Service + KubeDNS 解决容器之间互相访问 Storage Class 解决存储 Operator 解决中间件服务的生命周期管理  Kubernetes 成为了现在容器编排的事实标准，虽说少不了背后 Google 的支持，但是 Kubernetes 自身的设计和实现也确实是出色， 感觉 Kubernetes 还得再火个很长的时间。
 2020 年的任务之一，就是能够站在架构的角度，回过头来看 Kubernetes ，尤其在 Operator 相关的地方，需要多下功夫。
 技术 今年努力多接触新技术，争取各个领域都能够有所涉猎。</description>
-    </item>
-    
-    <item>
-      <title>开始用 Beancount 实践复式记账（一）：初始化</title>
-      <link>https://page.codespaper.com/2019/beancount/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
-      
-      <guid>https://page.codespaper.com/2019/beancount/</guid>
-      <description>复式记账 Beancount 第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。
-目前 beancount 的中文文章还不算多，主要看了这两篇：
- https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava
-pip install beancount fava ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
-UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&amp;#34;Fast C decimal implementation appears to be missing; &amp;#34; 这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
-pacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.el ， https://github.</description>
     </item>
     
   </channel>

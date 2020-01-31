@@ -178,125 +178,97 @@ if (!doNotTrack) {
           <blockquote>
 <p>Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。</p>
 </blockquote>
-
 <p>注意：本程序还处于开发状态，不会关闭或丢失窗口，但并不对稳定性提供保证，请勿用于正式工作中！</p>
-
 <h1 id="hammerspoon">Hammerspoon</h1>
-
 <h1 id="sessions-control">sessions control</h1>
-
 <h2 id="简介">简介</h2>
-
 <p>Sessions control 主要有以下三个功能：</p>
-
 <ul>
 <li>显示当前场景(sessions)</li>
 <li>为当前场景增删窗口(windows)</li>
 <li>在不同场景中切换</li>
 </ul>
-
 <p>当前实现主要通过把窗口最小化完成场景切换，后期版本会考虑把窗口隐藏，不占用任务栏空间。</p>
-
 <p>目前主要优势在于同时可以处理<strong>全屏窗口</strong>，当切换场景时，全屏的窗口也会同时最小化，前台场景也会恢复应有的全屏状态。</p>
-
 <pre><code>由于切换动画为系统动画，所以无法简单地关闭动画，在切换场景的时候会有部分动画。
 </code></pre>
-
 <p>各个场景都会定时保存到磁盘中，以保证各个场景不会因为 hammerspoon 或电脑的开关而丢失。</p>
-
 <p>对各个功能的快捷键提供定制，在脚本中可以很简单地修改快捷键。</p>
-
 <h2 id="安装">安装</h2>
-
 <ol>
 <li>从 GitHub 中下载压缩包，或 clone 仓库到本地</li>
 <li>把 <code>sessions-control-hammerspoon</code> 文件夹复制到 <code>~/.hammerspoon/</code> 文件夹下</li>
 <li>更新 <code>~/.hammerspoon/</code> 目录下 <code>init.lua</code>，加入 sessions control 功能</li>
 </ol>
-
 <p>下载地址：</p>
-
 <ul>
 <li>GitHub 地址：()[]</li>
 <li>GiuHub 压缩包地址：()[]</li>
 </ul>
-
 <blockquote>
 <p>注：<code>.hammerspoon</code> 是隐藏文件夹，如果找不到相应位置，可以运行下载的程序中的 <code>setup</code> 程序，会自动复制相应文件到目标位置，并自动更新 <code>init.lua</code>。</p>
-
+</blockquote>
+<blockquote>
 <p>注：<code>init.lua</code> 是 <code>hammerspoon</code> 本身自带的初始化文件。</p>
 </blockquote>
-
 <h2 id="功能说明">功能说明</h2>
-
 <p>在本说明中使用默认的快捷键进行说明，操作主要是先按住功能键，然后点击相应快捷键，默认键位如下：</p>
-
 <ul>
-<li><p>功能键：
-ctrl + alt + cmd</p></li>
-
-<li><p>显示当前场景：P</p></li>
-
-<li><p>前一场景：[</p></li>
-
-<li><p>下一场景：]</p></li>
-
-<li><p>加入当前场景：L</p></li>
-
-<li><p>从当前场景删除：；</p></li>
-
-<li><p>数字键快速切换：1 ~ 场景数</p></li>
+<li>
+<p>功能键：
+ctrl + alt + cmd</p>
+</li>
+<li>
+<p>显示当前场景：P</p>
+</li>
+<li>
+<p>前一场景：[</p>
+</li>
+<li>
+<p>下一场景：]</p>
+</li>
+<li>
+<p>加入当前场景：L</p>
+</li>
+<li>
+<p>从当前场景删除：；</p>
+</li>
+<li>
+<p>数字键快速切换：1 ~ 场景数</p>
+</li>
 </ul>
-
 <p>其中，<code>数字键快速切换</code> 会按照场景数自动生成，通过按住功能键，加上相应的数字可以快速在场景间切换。</p>
-
 <p>默认键位都位于键盘右侧，通过功能分区。</p>
-
 <h3 id="显示当前场景">显示当前场景</h3>
-
 <blockquote>
 <p>按住 <code>ctrl + alt + cmd</code> 后，点击 <code>P</code></p>
 </blockquote>
-
 <p>通过系统通知展示当前各个场景，并自动编号，便于后面的快速切换。</p>
-
 <p>当然，同时进行太多任务会很乱，所以不应该同时有太多场景，同时，系统通知中不可以放入过长的内容，所以刚刚好 (;¬_¬)</p>
-
 <h3 id="前后场景">前后场景</h3>
-
 <blockquote>
 <ul>
 <li>前一场景：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>[</code></li>
 <li>下一场景：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>]</code></li>
 </ul>
 </blockquote>
-
 <p>这两个功能主要用于切换上一个或下一个场景，完成按键后，会自动记录当前窗口的全屏状态，并把当前场景的窗口最小后，然后切换到新场景，恢复新场景中的窗口状态。</p>
-
 <h3 id="窗口操作">窗口操作</h3>
-
 <blockquote>
 <ul>
 <li>加入：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>L</code></li>
 <li>删除：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>;</code></li>
 </ul>
 </blockquote>
-
 <p>这两个功能主要用于对当前窗口的操作</p>
-
 <ul>
 <li>把正在使用的窗口加入到当前场景中</li>
 <li>从当前场景中删除正在使用的窗口</li>
 </ul>
-
 <p>增删窗口之后会弹出通知提示完成操作，并显示当前场景中共有几个窗口</p>
-
 <h3 id="快速切换">快速切换</h3>
-
 <p>在查看场景时，每个场景名之前会有一个序号，该序号可用于快速切换，主要用于跨越多个场景的切换时，避免多个最大化，最小化动画。</p>
-
 <p>使用方法就是按住功能键后，再按相应的序号键（注：未测试小键盘区）</p>
-
 <blockquote>
 <ul>
 <li>按住 <code>ctrl + alt + cmd</code> 后，点击 <code>1</code></li>
@@ -304,16 +276,12 @@ ctrl + alt + cmd</p></li>
 <li>&hellip;</li>
 </ul>
 </blockquote>
-
 <h1 id="程序实现">程序实现</h1>
-
 <p>Sessions control 是基于 Hammerspoon 的脚本程序，使用 lua 编写，主要是两个文件实现。</p>
-
 <ul>
 <li>sessions_control.lua</li>
 <li>sessions_head.lua</li>
 </ul>
-
 <p>为了方便管理，把这两个文件放到了 <code>sessions-control-hammerspoon</code> 文件夹中。</p>
     </div>
 
@@ -425,7 +393,7 @@ ctrl + alt + cmd</p></li>
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2012 - 2019</span>
+        <span itemprop="copyrightYear">2012 - 2020</span>
         
          
             <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>

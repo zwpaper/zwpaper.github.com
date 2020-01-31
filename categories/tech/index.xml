@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tech on zwPapEr</title>
@@ -18,7 +18,7 @@
       
       <guid>https://page.codespaper.com/2019/stack-multi-ghc/</guid>
       <description>简介 在用 Cabal 安装 Haskell 的软件时有时有碰到如下报错：
-$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&amp;gt; base&amp;gt;=4.11 &amp;amp;&amp;amp; &amp;lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&#39;ve had most trouble fulfilling: base, orgstat  可以看到 base 库的版本要求是 &amp;gt;=4.</description>
+$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&amp;gt; base&amp;gt;=4.11 &amp;amp;&amp;amp; &amp;lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&amp;#39;ve had most trouble fulfilling: base, orgstat 可以看到 base 库的版本要求是 &amp;gt;=4.</description>
     </item>
     
     <item>
@@ -100,10 +100,11 @@ GPG  https://zh.wikipedia.org/wiki/GnuPG
  如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html
  简单地说就是可以通过 GPG 使用两种方式加密文件：
  对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg
-brew install gpg  Emacs 通过 use-package 配置 Emacs
+brew install gpg Emacs 通过 use-package 配置 Emacs
  如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
  macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
-(setq epa-pinentry-mode &#39;loopback)  最后，配置文件如下：</description>
+(setq epa-pinentry-mode &amp;#39;loopback) 最后，配置文件如下：
+(use-package epa-file :ensure nil :config (epa-file-enable) (setq epa-pinentry-mode &amp;#39;loopback)) 使用 对称加密 默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密</description>
     </item>
     
     <item>

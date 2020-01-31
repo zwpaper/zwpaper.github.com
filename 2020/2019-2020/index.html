@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://page.codespaper.com/2019/stack-multi-ghc/" />
+  
+  <link rel="canonical" href="https://page.codespaper.com/2020/2019-2020/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           2019 年终总结，2020 新年展望 | zwPapEr
+       
+  </title>
+  <meta name="title" content="2019 年终总结，2020 新年展望 | zwPapEr">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2019 年终总结，2020 新年展望"/>
+<meta name="twitter:description" content="2019 年终总结，2020 新年展望 关键词：水流不腐
+2019 工作 2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年， 水流不腐 这个关键词也是从这而来。
+新公司是 AI 公司，都说现在 AI 处于风口，虽然我是做基础设施的，但是也想看看风口上的 AI 公司有何不同。 创业公司对于我来说，另一个好处就是大部分基础设施都处于起步阶段，这个时候，正好可以经历基础平台从零到一。
+从之前做公有云，私有云网络，接触到了容器平台，发现容器平台也是现在基础设施的风口， 所以也希望在新公司能够在容器平台能够学习到这方面的知识。
+今年公司换了，技术方向也换了，最主要的就是身边的同事也都换了一圈，接触到的技术，做的事和之前完全不一样， 确实感觉到不同环境能够学习到的内容完全不一样。
+今年的老板作为架构师，和他接触，也开始了解到了架构方面的知识：
+ 设计模式 在以前做网络相关时，确实能用到的比较少，但是在目前容器平台，更高层次的程序架构考虑，这是必不可少的， Kubernetes 源码中也能看到不少设计模式的影子。 Domain Driven Design(DDD) 真正从需求到设计再到实现，不再是之前随想实现，DDD 就是用于指导这个流程的。前端领域常见的 MVC 架构也是同源的。  另外，今年大量接触到了 Kubernetes, 容器解决了应用部署的问题，而 Kubernetes 解决了容器编排，调度的问题
+ Pod 方便多个容器之间协作，解决多活高可用 Service &#43; KubeDNS 解决容器之间互相访问 Storage Class 解决存储 Operator 解决中间件服务的生命周期管理  Kubernetes 成为了现在容器编排的事实标准，虽说少不了背后 Google 的支持，但是 Kubernetes 自身的设计和实现也确实是出色， 感觉 Kubernetes 还得再火个很长的时间。
+2020 年的任务之一，就是能够站在架构的角度，回过头来看 Kubernetes ，尤其在 Operator 相关的地方，需要多下功夫。
+技术 今年努力多接触新技术，争取各个领域都能够有所涉猎。"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2019 年终总结，2020 新年展望",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/page.codespaper.com\/2020\/2019-2020\/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/page.codespaper.com\/cover.png",
+    "width":  800 ,
+    "height":  600 
+  },
+  "genre": "posts",
+  "keywords": "Review",
+  "wordcount":  289 ,
+  "url": "https:\/\/page.codespaper.com\/2020\/2019-2020\/",
+  "datePublished": "2020-01-31T00:00:00\x2b08:00",
+  "dateModified": "2020-01-31T20:20:22\x2b08:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zwPapEr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/page.codespaper.com\/ironman.png",
+      "width":  127 ,
+      "height":  40 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "[zwPapEr]"
+  },
+  "description": ""
+}
+</script>
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://page.codespaper.com/">zwPapEr</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">2019 年终总结，2020 新年展望</h1>
+        <div class="post-meta">
+            Written by <a href="https://page.codespaper.com/" rel="author">[zwPapEr]</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2020-01-31 >31 January 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://page.codespaper.com/categories/life/"> Life </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h2 id="2019-年终总结-2020-新年展望">2019 年终总结，2020 新年展望</h2>
+<p>关键词：水流不腐</p>
+<h2 id="2019">2019</h2>
+<h3 id="工作">工作</h3>
+<p>2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年，
+<code>水流不腐</code> 这个关键词也是从这而来。</p>
+<p>新公司是 AI 公司，都说现在 AI 处于风口，虽然我是做基础设施的，但是也想看看风口上的 AI 公司有何不同。
+创业公司对于我来说，另一个好处就是大部分基础设施都处于起步阶段，这个时候，正好可以经历基础平台从零到一。</p>
+<p>从之前做公有云，私有云网络，接触到了容器平台，发现容器平台也是现在基础设施的风口，
+所以也希望在新公司能够在容器平台能够学习到这方面的知识。</p>
+<p>今年公司换了，技术方向也换了，最主要的就是身边的同事也都换了一圈，接触到的技术，做的事和之前完全不一样，
+确实感觉到不同环境能够学习到的内容完全不一样。</p>
+<p>今年的老板作为架构师，和他接触，也开始了解到了架构方面的知识：</p>
+<dl>
+<dt>设计模式</dt>
+<dd>在以前做网络相关时，确实能用到的比较少，但是在目前容器平台，更高层次的程序架构考虑，这是必不可少的， <code>Kubernetes</code> 源码中也能看到不少设计模式的影子。</dd>
+<dt>Domain Driven Design(DDD)</dt>
+<dd>真正从需求到设计再到实现，不再是之前随想实现，DDD 就是用于指导这个流程的。前端领域常见的 MVC 架构也是同源的。</dd>
+</dl>
+<p>另外，今年大量接触到了 <code>Kubernetes</code>, 容器解决了应用部署的问题，而 <code>Kubernetes</code> 解决了容器编排，调度的问题</p>
+<dl>
+<dt>Pod</dt>
+<dd>方便多个容器之间协作，解决多活高可用</dd>
+<dt>Service + KubeDNS</dt>
+<dd>解决容器之间互相访问</dd>
+<dt>Storage Class</dt>
+<dd>解决存储</dd>
+<dt>Operator</dt>
+<dd>解决中间件服务的生命周期管理</dd>
+</dl>
+<p><code>Kubernetes</code> 成为了现在容器编排的事实标准，虽说少不了背后 Google 的支持，但是 <code>Kubernetes</code> 自身的设计和实现也确实是出色，
+感觉 <code>Kubernetes</code> 还得再火个很长的时间。</p>
+<p>2020 年的任务之一，就是能够站在架构的角度，回过头来看 <code>Kubernetes</code> ，尤其在 <code>Operator</code> 相关的地方，需要多下功夫。</p>
+<h3 id="技术">技术</h3>
+<p>今年努力多接触新技术，争取各个领域都能够有所涉猎。</p>
+<dl>
+<dt>后端</dt>
+<dd>作为主业
+<ul>
+<li><strong>Golang:</strong> 从零实践 DDD 实现了一个类 Operator 的 API，从设计，到实现，到测试。</li>
+<li><strong>Rust:</strong> 终于入门了这门学习曲线陡峭的语言，开始尝试在开源社区中贡献，提交了一个 <a href="https://github.com/Peltoche/lsd/pull/296">lsd PR</a>，已经合并到主干， <del>能看到在 Contributor 里排前列了</del></li>
+</ul>
+</dd>
+<dt>前端</dt>
+<dd>接触一下潮流前线前端娱乐圈
+<ul>
+<li><strong>Javascript:</strong> 尝试了一下 <code>Javascript</code> + <code>CSS</code> ，后来发现原来需要多借用 <code>Chrome</code> 调试，果然前端和后端玩法还是不一样</li>
+<li><strong>微信小程序:</strong> 同样是赶潮流，但是微信圈的小技术圈太局限，所以还是转到了 <a href="https://github.com/NervJS/taro">Taro</a> 使用 <code>React</code> 的语法上线了一个玩具，感受了一下微信小程序的全流程</li>
+<li><strong>Flutter:</strong> 这个是目前最看好的的跨平台方案，通过实现自己的渲染引擎，只依赖系统的图形绘制相关接口，保证各平台的体验一致性和性能，2020 希望能够上线一个以上的程序。</li>
+</ul>
+</dd>
+<dt>其他</dt>
+<dd>生命在于折腾，多感受些总是好的
+<ul>
+<li><strong>Haskell:</strong> 最著名的函数式编程语言，不拜读一下，总是有所遗憾，初步学习了一下，函数式编程通过抽象出函数，通过类似数学解题的思路编程，难怪学术界对函数式编程有所偏爱。只可惜未来得及深入学习更多函数式编程的思路。</li>
+<li><strong>Emacs Lisp:</strong> 学习至今，最有价值技术必须属 <code>Emacs</code> 了，而 2019 年开始从抄别人的配置文件到自己实现部分的 Emacs Lisp 配置，作为最年迈的编程语言之一，也是想多学习一下 Lisp 的设计思想。</li>
+<li><strong><a href="http://furius.ca/beancount/">Beancount</a>:</strong> 准确来说， <code>beancount</code> 应该算到生活里，但是 2019 年尝试实现自己的 <code>Beancount</code> 解析器，导入器，所以也列到这里。</li>
+<li><strong><a href="https://github.com/microsoft/language-server-protocol">Language Server Protocol</a>:</strong> 微软开源的统一编辑器后端，让 <a href="https://github.com/microsoft/vscode">VS Code</a> 和 <a href="https://www.gnu.org/software/emacs/">Emacs</a> 这样的编辑器能够更容易的达到和 IDE 一样的开发体验，2019 年 Golang 的 LSP Server 替换了三次，终于出了官方的 <a href="https://github.com/golang/tools/tree/master/gopls">gopls</a>，但是目前完善度比较捉鸡，所以 2020 年希望能够参与完善。</li>
+</ul>
+</dd>
+</dl>
+<h3 id="生活">生活</h3>
+<p>今年生活变化可以说是翻天覆地。</p>
+<dl>
+<dt>房子</dt>
+<dd>2018 年底买了人生的第一套房子，正式升级未房奴，2019 年完整的感受到的房奴的压力，好在自己还算乐观，2020 转压力为动力。</dd>
+<dt>孩子</dt>
+<dd>2019 年不知不觉中升级成了父亲，压力值++，2020 重心难免需要转到孩子上了。</dd>
+<dt>记账</dt>
+<dd>以前试用过 <code>Money Pro</code>, <code>MoneyWiz</code>, <code>随手记</code> ，都没持续坚持下去，2019 年从 Byvoid 了解到了 <a href="http://furius.ca/beancount/">Beancount</a>，感觉这个应该是想要的那个了，今年分析了一下，可惜由于房子和孩子，主要支出如预期，成了吃饭。</dd>
+</dl>
+<h3 id="阅读">阅读</h3>
+<p>2018 立了 10 本书的 Flag</p>
+<dl>
+<dt>时间简史</dt>
+<dd>读了半本，从 <code>黑洞</code> 开始，感觉有点理解不了了，加上时间少了，没能查资料，看不下去了，2020 把这半本看完。</dd>
+<dt>Getting Thing Done</dt>
+<dd>重新看了一次，常读常新，结合 <code>Emacs Org Mode</code> ，感觉工作上找到了不错的实践，就是 Agent 使用上还需要研究一下</dd>
+<dt><a href="https://book.douban.com/subject/1148282/">SICP</a></dt>
+<dd>大致看了一遍，前面部分其实就是用 <code>Scheme</code> 重新入门了编程，回顾了编程到底在干啥，就是 <code>元编程</code> 部分感觉 2020 年可以拓展一下，在 Emacs Lisp 中也能用上。</dd>
+<dt><a href="https://book.douban.com/subject/26819666/">DDD</a> + <a href="https://book.douban.com/subject/25844633/">iDDD</a></dt>
+<dd>接触 DDD 之后，这两本经典都是老板推荐的，可惜真的有点硬核了，各自看了一半，不过有了之前的实践，2020 年可以再战一次。</dd>
+<dt>函数式编程思维</dt>
+<dd>函数式编程思维的入门书</dd>
+<dt><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a></dt>
+<dd>Rust 官方入门书</dd>
+<dt><a href="https://book.douban.com/subject/30418895/">Rust编程之道</a></dt>
+<dd>Rust 官方入门书只讲了语法入门，看一本中文大全，从另一个角度了解一下，不过开始的比较晚，还没看完。</dd>
+<dt><a href="https://book.douban.com/subject/3291111/">穷爸爸富爸爸</a></dt>
+<dd>理财入门书，从小缺少了理财教育</dd>
+<dt><a href="https://book.douban.com/subject/3576486/">小狗钱钱</a></dt>
+<dd>同上，都是补习了一下理财知识</dd>
+</dl>
+<h2 id="2020">2020</h2>
+<p>2019 是一个变化的开始，2020 年必须继续努力。</p>
+<h3 id="技术">技术</h3>
+<dl>
+<dt><a href="https://github.com/zwpaper/go-bean">Go Bean</a></dt>
+<dd>主要的 Golang 开源项目，主要就是解析 beancount 文件，导入帐目。2020 把功能完善，再把推广做起来。</dd>
+<dt>LSD</dt>
+<dd>参与的第一个 Rust 开源项目，一个 ls 替代。2020 多做贡献，争取一个 <code>Collaborator</code> 。</dd>
+<dt>Flutter</dt>
+<dd>有意思的扩平台语言，2020 希望能够上线一个 Flutter 实现的 iOS 或者 Android 应用。</dd>
+<dt>gopls</dt>
+<dd>目标：5 个以上的 Pull Request</dd>
+<dt>Kubernetes</dt>
+<dd>工作需要，自己也参与到开源社区里，目标：2 个以上的 Pull Request</dd>
+</dl>
+<h3 id="阅读">阅读</h3>
+<dl>
+<dt>时间简史</dt>
+<dd>把剩下的半本读完</dd>
+<dt>DDD</dt>
+<dd>把剩下的半本读完</dd>
+<dt>Rust 编程之道</dt>
+<dd>把剩下的内容读完</dd>
+<dt><a href="https://book.douban.com/subject/25985021/">人类简史</a></dt>
+<dd>声名在外的一本人类历史书，角度新奇，之前扫过一次，今年认真看一看</dd>
+<dt><a href="https://book.douban.com/subject/6097773/">Linux内核设计与实现</a></dt>
+<dd>经典 Linux 内核书，决定上限。</dd>
+<dt><a href="https://book.douban.com/subject/10802357/">程序设计语言，实践之路</a></dt>
+<dd>编程语言名著，2019 年了解了这么多语言，是时候从编译原理的角度看看编程语言了。</dd>
+<dt>黑客与画家</dt>
+<dd>之前扫过，没想公司又发了一本，那就复习一下这本经典</dd>
+</dl>
+<p>还有经济学方面的，需要再找两本书，再看看其他大佬们的书单，看看补充一下。</p>
+<h3 id="生活">生活</h3>
+<p>生活其实不需要过多计划，目前就是：</p>
+<dl>
+<dt>房子</dt>
+<dd>有新的收入帮助还贷款</dd>
+<dt>孩子</dt>
+<dd>顺利生产，起一个好听的名字</dd>
+</dl>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>zwPapEr </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>289</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=https%3a%2f%2fpage.codespaper.com%2f2020%2f2019-2020%2f&amp;text=2019%20%e5%b9%b4%e7%bb%88%e6%80%bb%e7%bb%93%ef%bc%8c2020%20%e6%96%b0%e5%b9%b4%e5%b1%95%e6%9c%9b&amp;via=zwpaper" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpage.codespaper.com%2f2020%2f2019-2020%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+        <a href="//reddit.com/submit?url=https%3a%2f%2fpage.codespaper.com%2f2020%2f2019-2020%2f&amp;title=2019%20%e5%b9%b4%e7%bb%88%e6%80%bb%e7%bb%93%ef%bc%8c2020%20%e6%96%b0%e5%b9%b4%e5%b1%95%e6%9c%9b" target="_blank" title="Share on Reddit">
+          <i class="iconfont icon-reddit"></i>
+        </a>
+        
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=https%3a%2f%2fpage.codespaper.com%2f2020%2f2019-2020%2f&amp;appkey=&amp;title=2019%20%e5%b9%b4%e7%bb%88%e6%80%bb%e7%bb%93%ef%bc%8c2020%20%e6%96%b0%e5%b9%b4%e5%b1%95%e6%9c%9b" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+                
+            </p>
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/review/">
+                    #Review</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://page.codespaper.com/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://page.codespaper.com/2019/stack-multi-ghc/" class="prev" rel="prev" title="用 Stack 管理多个 GHC 版本"><i class="iconfont icon-dajiantou"></i>&nbsp;用 Stack 管理多个 GHC 版本</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2012 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+     </div>
+  </body>
+</html>
