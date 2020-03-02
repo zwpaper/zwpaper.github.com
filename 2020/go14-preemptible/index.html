@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://page.codespaper.com/2020/2019-2020/" />
+  
+  <link rel="canonical" href="https://page.codespaper.com/2020/go14-preemptible/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Golang 1.14 发布，抢占式调度优化 | zwPapEr
+       
+  </title>
+  <meta name="title" content="Golang 1.14 发布，抢占式调度优化 | zwPapEr">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang 1.14 发布，抢占式调度优化"/>
+<meta name="twitter:description" content="Golang 1.14 发布 Golang 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：
+ 调度器抢占优化，不再需要函数调用作为抢占点 Timer 更高效  这篇文章主要是聊聊调度器这部分。
+调度器抢占优化 Golang 主打高并发，调度器自然也是关注的重点，以前一致有一个毛病， 如果一个 Goroutine 没有调用其他函数，就会一直占用当前的 Process，无法被调度走。
+Golang 1.14 解决了这个问题。
+实例程序 package main import ( &#34;fmt&#34; &#34;runtime&#34; ) func main() { fmt.Println(runtime.GOMAXPROCS(1)) go func() { for { } }() runtime.Gosched() fmt.Println(&#34;outside&#34;) } GOMAXPROCS, NumCPU, Gosched 实例程序里用到了 3 个函数，都是 rintime 包里的。
+GOMAXPROCS GOMAXPROCS 用于设置一个 Go 程序能够使用的操作系统线程数， 现在默认值等于 NumCPU ，默认尽可能地使用系统资源。
+在 1.5 以前，Go 会默认把 GOMAXPROCS 设置成 1，不过应该没有人在用 1."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Golang 1.14 发布，抢占式调度优化",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/page.codespaper.com\/2020\/go14-preemptible\/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/page.codespaper.com\/cover.png",
+    "width":  800 ,
+    "height":  600 
+  },
+  "genre": "posts",
+  "keywords": "Go",
+  "wordcount":  775 ,
+  "url": "https:\/\/page.codespaper.com\/2020\/go14-preemptible\/",
+  "datePublished": "2020-03-01T00:00:00\x2b08:00",
+  "dateModified": "2020-03-02T13:42:50\x2b08:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zwPapEr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/page.codespaper.com\/ironman.png",
+      "width":  127 ,
+      "height":  40 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "[zwPapEr]"
+  },
+  "description": ""
+}
+</script>
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://page.codespaper.com/">zwPapEr</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Golang 1.14 发布，抢占式调度优化</h1>
+        <div class="post-meta">
+            Written by <a href="https://page.codespaper.com/" rel="author">[zwPapEr]</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2020-03-01 >1 March 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                4 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h2 id="golang-1-dot-14-发布">Golang 1.14 发布</h2>
+<p><code>Golang</code> 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：</p>
+<ul>
+<li>调度器抢占优化，不再需要函数调用作为抢占点</li>
+<li>Timer 更高效</li>
+</ul>
+<p>这篇文章主要是聊聊调度器这部分。</p>
+<h2 id="调度器抢占优化">调度器抢占优化</h2>
+<p><code>Golang</code> 主打高并发，调度器自然也是关注的重点，以前一致有一个毛病，
+如果一个 Goroutine 没有调用其他函数，就会一直占用当前的 Process，无法被调度走。</p>
+<p>Golang 1.14 解决了这个问题。</p>
+<h3 id="实例程序">实例程序</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
+    <span style="color:#e6db74">&#34;runtime&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> {
+        }
+    }()
+
+    <span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">Gosched</span>()
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;outside&#34;</span>)
+}
+</code></pre></div><h4 id="gomaxprocs-numcpu-gosched">GOMAXPROCS, NumCPU, Gosched</h4>
+<p>实例程序里用到了 3 个函数，都是 <code>rintime</code> 包里的。</p>
+<h5 id="gomaxprocs">GOMAXPROCS</h5>
+<p><code>GOMAXPROCS</code> 用于设置一个 Go 程序能够使用的操作系统线程数，
+现在默认值等于 <code>NumCPU</code> ，默认尽可能地使用系统资源。</p>
+<p>在 <code>1.5</code> 以前，Go 会默认把 <code>GOMAXPROCS</code> 设置成 1，不过应该没有人在用 <code>1.5</code> 以前的版本了吧。</p>
+<p>另一个需要注意的地方是 <code>GOMAXPROCS</code> 的返回值是 <code>NumCPU</code> ，而不是设置的 <code>GOMAXPROCS</code> 值。</p>
+<h5 id="numcpu">NumCPU</h5>
+<p><code>NumCPU</code> 返回的是可用的 CPU 线程数，注意是线程数，不是核心数，
+举个栗子，我现在用的 <code>Mackbook Pro</code> 16 寸 CPU 是 <code>i7-9750H</code> 是 6 核，但是由于支持超线程，
+所以是 12 个线程，所以 <code>NumCPU</code> 的值是 <code>12</code> 。</p>
+<h5 id="gosched">Gosched</h5>
+<p><code>Gosched</code> 用于 Goroutine 主动让出 CPU 线程执行权。</p>
+<h3 id="现象和现状">现象和现状</h3>
+<h4 id="1-dot-13-以前的问题">1.13 以前的问题</h4>
+<p>我们运行实例程序看看效果：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run preemptible.go
+<span style="color:#ae81ff">12</span>
+^Csignal: interrupt
+</code></pre></div><p>可以看到，直到我们输入了 <code>^C</code> ，也就是 <code>Ctrl-C</code> 中止程序之后，程序才退出，而且没有打印 <code>outside</code> 。</p>
+<ul>
+<li>尝试修改</li>
+</ul>
+<p>为了验证是由于我们的 Goroutine 阻塞住了程序，我们给两个 Process 看看，也就是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#ae81ff">2</span>)
+</code></pre></div><p>运行结果：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run preemptible.go
+<span style="color:#ae81ff">12</span>
+outside
+</code></pre></div><p>直接输出结束了。</p>
+<p>另外，我们还提到了，1.13 之前，Go 是在调用函数时，进行抢占的，那我们再把线程数改到 <code>1</code> ，调用一个函数试试。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
+    <span style="color:#e6db74">&#34;runtime&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#66d9ef">for</span> {
+            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>()
+        }
+    }()
+
+    <span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">Gosched</span>()
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;outside&#34;</span>)
+}
+</code></pre></div><p>注意， <code>GOMAXPROCS</code> 又设置成 <code>1</code> 了，
+而且在 Goroutine 里加了一个 <code>fmt.Print()</code> ，这是为了调用一个函数，但是不影响输出效果，
+可以看到输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go run preemptible.go
+<span style="color:#ae81ff">12</span>
+outside
+</code></pre></div><p>没有阻塞，正常退出了，印证了调用函数的时候能够抢占调度。</p>
+<h4 id="1-dot-14-优化">1.14 优化</h4>
+<p>直接就用上面的实例程序，跑一下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ GOROOT<span style="color:#f92672">=</span>~/code/go114 PATH<span style="color:#f92672">=</span>$GOROOT/bin:$PATH go run preemptible.go
+<span style="color:#ae81ff">12</span>
+outside
+</code></pre></div><p>什么都没有修改，成功打印 <code>outside</code> 退出，说明 <code>main</code> 确实抢占了 Goroutine 并退出。</p>
+<h3 id="源码分析">源码分析</h3>
+<h4 id="调试方法">调试方法</h4>
+<p>我们要调试的是 Golang 调度器，能够打印一些信息总是会方便我们调试的，
+好在 Golang 有一个 builtin 的 <code>print</code> 函数，可以在 Golang 的源码里进行一些打印，
+但是官方对 <code>print</code> 函数是没有保证的，但是我们调试是够用了。</p>
+<p>我们可以在希望输出的地方加上 <code>print</code> ，例如下面我提到的调度的位置，都可以加上：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">print(<span style="color:#e6db74">&#34;paper: &#34;</span>, <span style="color:#e6db74">&#34;before &#34;</span>, <span style="color:#e6db74">&#34;gomaxprocs=&#34;</span>, <span style="color:#a6e22e">gomaxprocs</span>, <span style="color:#e6db74">&#34; idleprocs=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">npidle</span>, <span style="color:#e6db74">&#34; threads=&#34;</span>, <span style="color:#a6e22e">mcount</span>(), <span style="color:#e6db74">&#34; spinningthreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmspinning</span>, <span style="color:#e6db74">&#34; idlethreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmidle</span>, <span style="color:#e6db74">&#34; runqueue=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">runqsize</span>, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</code></pre></div><p>这样程序运行是，就可以看到类似输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ GODEBUG<span style="color:#f92672">=</span>schedtrace<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span> ./preempt                                                                        <span style="color:#f92672">[</span>12:22:17<span style="color:#f92672">]</span>
+SCHED 0ms: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">11</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">[</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> 0<span style="color:#f92672">]</span>
+paper: retake gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#ae81ff">12</span>
+paper: retake gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+paper: before gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+paper: after gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+outside
+</code></pre></div><h4 id="调度分析">调度分析</h4>
+<p>Go 在运行时，会有一个 <code>sysmon</code> ，函数，作为监控线程，不需要 P 就可以运行，
+其中一个作用就是抢占长时间阻塞的 P。</p>
+<p><code>sysmon</code> 定义在 <a href="https://github.com/golang/go/blob/329317472fd3fbc3179523bd70e03e452c829846/src/runtime/proc.go#L4455">runtime/proc.go</a> 其中 <a href="https://github.com/golang/go/blob/329317472fd3fbc3179523bd70e03e452c829846/src/runtime/proc.go#L4569">retake</a> 函数就是用于抢占 P。</p>
+<p>可以看到：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">pd</span>.<span style="color:#a6e22e">schedwhen</span><span style="color:#f92672">+</span><span style="color:#a6e22e">forcePreemptNS</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">now</span> {
+    <span style="color:#a6e22e">preemptone</span>(<span style="color:#a6e22e">_p_</span>)
+    <span style="color:#75715e">// In case of syscall, preemptone() doesn&#39;t
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// work, because there is no M wired to P.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">sysretake</span> = <span style="color:#66d9ef">true</span>
+}
+</code></pre></div><p>当超过 <code>forcePreemptNS</code> 时，就会抢占 P， <code>1.14</code> 的优化就在 <a href="https://github.com/golang/go/blob/329317472fd3fbc3179523bd70e03e452c829846/src/runtime/proc.go#L4666">preemptone</a>。</p>
+<h4 id="优化点">优化点</h4>
+<p>先展示一下两个版本的函数，注意，这里的几个 <code>print</code> 是我加的，用于调试：</p>
+<h5 id="113">1.13</h5>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">preemptone</span>(<span style="color:#a6e22e">_p_</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#a6e22e">mp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">ptr</span>()
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">getg</span>().<span style="color:#a6e22e">m</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+    }
+    <span style="color:#a6e22e">gp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">curg</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">g0</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+    }
+
+    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
+
+    <span style="color:#75715e">// Every call in a go routine checks for stack overflow by
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// comparing the current stack pointer to gp-&gt;stackguard0.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Setting gp-&gt;stackguard0 to StackPreempt folds
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// preemption into the normal stack overflow check.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">stackguard0</span> = <span style="color:#a6e22e">stackPreempt</span>
+    print(<span style="color:#e6db74">&#34;paper: &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;gomaxprocs=&#34;</span>, <span style="color:#a6e22e">gomaxprocs</span>, <span style="color:#e6db74">&#34; idleprocs=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">npidle</span>, <span style="color:#e6db74">&#34; threads=&#34;</span>, <span style="color:#a6e22e">mcount</span>(), <span style="color:#e6db74">&#34; spinningthreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmspinning</span>, <span style="color:#e6db74">&#34; idlethreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmidle</span>, <span style="color:#e6db74">&#34; runqueue=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">runqsize</span>, <span style="color:#e6db74">&#34;\n&#34;</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+}
+</code></pre></div><h5 id="114">1.14</h5>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">preemptone</span>(<span style="color:#a6e22e">_p_</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#a6e22e">mp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">ptr</span>()
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">getg</span>().<span style="color:#a6e22e">m</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+    }
+    <span style="color:#a6e22e">gp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">curg</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">g0</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+    }
+
+    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
+
+    <span style="color:#75715e">// Every call in a go routine checks for stack overflow by
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// comparing the current stack pointer to gp-&gt;stackguard0.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Setting gp-&gt;stackguard0 to StackPreempt folds
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// preemption into the normal stack overflow check.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">stackguard0</span> = <span style="color:#a6e22e">stackPreempt</span>
+
+    <span style="color:#75715e">// Request an async preemption of this P.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">preemptMSupported</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">debug</span>.<span style="color:#a6e22e">asyncpreemptoff</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+        <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
+        print(<span style="color:#e6db74">&#34;paper: &#34;</span>, <span style="color:#e6db74">&#34;before &#34;</span>, <span style="color:#e6db74">&#34;gomaxprocs=&#34;</span>, <span style="color:#a6e22e">gomaxprocs</span>, <span style="color:#e6db74">&#34; idleprocs=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">npidle</span>, <span style="color:#e6db74">&#34; threads=&#34;</span>, <span style="color:#a6e22e">mcount</span>(), <span style="color:#e6db74">&#34; spinningthreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmspinning</span>, <span style="color:#e6db74">&#34; idlethreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmidle</span>, <span style="color:#e6db74">&#34; runqueue=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">runqsize</span>, <span style="color:#e6db74">&#34;\n&#34;</span>)
+        <span style="color:#a6e22e">preemptM</span>(<span style="color:#a6e22e">mp</span>)
+        print(<span style="color:#e6db74">&#34;paper: &#34;</span>, <span style="color:#e6db74">&#34;after &#34;</span>, <span style="color:#e6db74">&#34;gomaxprocs=&#34;</span>, <span style="color:#a6e22e">gomaxprocs</span>, <span style="color:#e6db74">&#34; idleprocs=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">npidle</span>, <span style="color:#e6db74">&#34; threads=&#34;</span>, <span style="color:#a6e22e">mcount</span>(), <span style="color:#e6db74">&#34; spinningthreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmspinning</span>, <span style="color:#e6db74">&#34; idlethreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmidle</span>, <span style="color:#e6db74">&#34; runqueue=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">runqsize</span>, <span style="color:#e6db74">&#34;\n&#34;</span>)
+    }
+
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+}
+</code></pre></div><p>我们先看看效果：</p>
+<ul>
+<li>
+<p>可以看到 <code>1.13</code> 一直在尝试抢占 P，可是一直没有函数调度的机会：</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build -o preempt preemptible.go
+$ ./preempt
+<span style="color:#ae81ff">12</span>
+paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</code></pre></div></li>
+<li>
+<p>可以看到， <code>1.14</code> 调用 <code>preemptM</code> 之后， <code>main</code> 就抢占了 P，打印 <code>outside</code> 后退出。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ GOROOT<span style="color:#f92672">=</span>~/code/go114 PATH<span style="color:#f92672">=</span>$GOROOT/bin:$PATH go build -o preempt preemptible.go
+$ ./preempt
+<span style="color:#ae81ff">12</span>
+paper: before gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+paper: after gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+outside
+</code></pre></div></li>
+</ul>
+<p>对比一下，其实 <code>1.14</code> 就是在 <code>preemptone</code> 后加入了：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Request an async preemption of this P.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">preemptMSupported</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">debug</span>.<span style="color:#a6e22e">asyncpreemptoff</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+    <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
+    <span style="color:#a6e22e">preemptM</span>(<span style="color:#a6e22e">mp</span>)
+}
+</code></pre></div><p><code>preemptM</code> 的实现就和平台相关了，可以看到，unix 平台的实现位于：<a href="https://github.com/golang/go/blob/329317472fd3fbc3179523bd70e03e452c829846/src/runtime/signal%5Funix.go#L346">runtime/signal_unix.go</a>
+主要就是给 M 发送了一个 <code>SIGURG</code> 信号，表示有 <code>urgent</code> 紧急的事件需要处理。</p>
+<h4 id="不可抢占部分">不可抢占部分</h4>
+<p>另外，碰巧看到另一段代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">next</span> &lt; <span style="color:#a6e22e">now</span> {
+    <span style="color:#75715e">// There are timers that should have already run,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// perhaps because there is an unpreemptible P.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Try to start an M to run them.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">startm</span>(<span style="color:#66d9ef">nil</span>, <span style="color:#66d9ef">false</span>)
+}
+</code></pre></div><p>感觉 Go 在碰到不可抢占的地方，还会尝试再启动一个 M 用于处理？
+本文感觉到这里就差不多了，这个 <code>不可抢占部分</code> 有机会再进一步看看。</p>
+<h2 id="总结">总结</h2>
+<p>总结一下，其实就一句话，1.14 在以前的抢占调度基础上，利用平台的能力（UNIX 平台的信号），
+触发真正的抢占式调度，而不需要依赖以前在函数调用时，检查栈的方法。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>zwPapEr </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>775</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=https%3a%2f%2fpage.codespaper.com%2f2020%2fgo14-preemptible%2f&amp;text=Golang%201.14%20%e5%8f%91%e5%b8%83%ef%bc%8c%e6%8a%a2%e5%8d%a0%e5%bc%8f%e8%b0%83%e5%ba%a6%e4%bc%98%e5%8c%96&amp;via=zwpaper" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpage.codespaper.com%2f2020%2fgo14-preemptible%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+        <a href="//reddit.com/submit?url=https%3a%2f%2fpage.codespaper.com%2f2020%2fgo14-preemptible%2f&amp;title=Golang%201.14%20%e5%8f%91%e5%b8%83%ef%bc%8c%e6%8a%a2%e5%8d%a0%e5%bc%8f%e8%b0%83%e5%ba%a6%e4%bc%98%e5%8c%96" target="_blank" title="Share on Reddit">
+          <i class="iconfont icon-reddit"></i>
+        </a>
+        
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=https%3a%2f%2fpage.codespaper.com%2f2020%2fgo14-preemptible%2f&amp;appkey=&amp;title=Golang%201.14%20%e5%8f%91%e5%b8%83%ef%bc%8c%e6%8a%a2%e5%8d%a0%e5%bc%8f%e8%b0%83%e5%ba%a6%e4%bc%98%e5%8c%96" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+                
+            </p>
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://page.codespaper.com/tags/go/">
+                    #Go</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://page.codespaper.com/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://page.codespaper.com/2020/2019-2020/" class="prev" rel="prev" title="2019 年终总结，2020 新年展望"><i class="iconfont icon-dajiantou"></i>&nbsp;2019 年终总结，2020 新年展望</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+
+ 
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2012 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+     </div>
+  </body>
+</html>

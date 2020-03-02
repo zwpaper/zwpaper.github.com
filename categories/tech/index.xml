@@ -6,10 +6,25 @@
     <description>Recent content in Tech on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://page.codespaper.com/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang 1.14 发布，抢占式调度优化</title>
+      <link>https://page.codespaper.com/2020/go14-preemptible/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2020/go14-preemptible/</guid>
+      <description>Golang 1.14 发布 Golang 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：
+ 调度器抢占优化，不再需要函数调用作为抢占点 Timer 更高效  这篇文章主要是聊聊调度器这部分。
+调度器抢占优化 Golang 主打高并发，调度器自然也是关注的重点，以前一致有一个毛病， 如果一个 Goroutine 没有调用其他函数，就会一直占用当前的 Process，无法被调度走。
+Golang 1.14 解决了这个问题。
+实例程序 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;runtime&amp;#34; ) func main() { fmt.Println(runtime.GOMAXPROCS(1)) go func() { for { } }() runtime.Gosched() fmt.Println(&amp;#34;outside&amp;#34;) } GOMAXPROCS, NumCPU, Gosched 实例程序里用到了 3 个函数，都是 rintime 包里的。
+GOMAXPROCS GOMAXPROCS 用于设置一个 Go 程序能够使用的操作系统线程数， 现在默认值等于 NumCPU ，默认尽可能地使用系统资源。
+在 1.5 以前，Go 会默认把 GOMAXPROCS 设置成 1，不过应该没有人在用 1.</description>
+    </item>
     
     <item>
       <title>用 Stack 管理多个 GHC 版本</title>
