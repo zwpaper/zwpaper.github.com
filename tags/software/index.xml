@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software on zwPapEr</title>
+    <link>https://page.codespaper.com/tags/software/</link>
+    <description>Recent content in Software on zwPapEr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://page.codespaper.com/tags/software/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>从 NextCloud 替换为 Seafile</title>
+      <link>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</link>
+      <pubDate>Sun, 08 Mar 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</guid>
+      <description>之前自己组装了一台 NAS，用作私有云，解决大容量网盘，自己跑的一些小应用的问题，还计划作为软路由。 当时对网盘的选择是 NextCloud，最主要的原因就是这是有名气的 Self Hosted 网盘里，最开源的选项， 而这周末，我还是决定更换到 Seafile。
+NextCloud 与 Seafile 简单体会 换到 Seafile 之后，简单用了一下，有一下几点体会：
+ iOS 相册内有 10000+ 张照片，同步到网盘上  Seafile 每次尝试同步是，会认为全部已经同步完成，然后逐步检测到未同步照片后同步 NextCloud 每次打开，都会有大量的同步任务，然后这一万张就一直同步不完   iOS 端用户体验  Seafile 感觉是原生 iOS App NextCloud 感觉是网页版套壳   iOS 端上传 6G+ 大文件  Seafile 迟迟不开始，估计是在分块 NextCloud 一直在尝试上传，但是一直失败，最后任务找不到了   历史版本  这个是意外收获，以前都不知道 NextCloud 有历史版本，用了 Seafile 之后，发现两家都有   文件管理  Seafile 中有一个 资料库 的概念，目前还没体会到用处 NextCloud 直接就是一个网盘，用起来比较简单   元文件  Seafile 把文件分块后存储，但是提供 fuse 和 WebDAV 用于查看文件 NextCloud 直接存储文件，可以直接在 data 目录看到元文件和目录结构   部署  Seafile 总共 3 个容器，用 Docker-compose 一起拉起来 NextCloud 两个容器，一个 NextCloud，一个 Postgres 单独部署    最主要影响我的是第一点，同步照片，NextCloud 我尝试过一个晚上没关屏幕，NextCloud 在前台运行， 但是一晚上过去了，没传上去太多，Seafile 反而可以一次次检查，慢慢把所有照片同步上去。</description>
+    </item>
+    
+  </channel>
+</rss>
