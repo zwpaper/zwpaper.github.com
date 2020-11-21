@@ -36,13 +36,11 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡"/>
-<meta name="twitter:description" content="简介 传统的高性能计算集群一般都习惯性地使用 Slurm &#43; Lustre 的方案作为任务调度和存储，然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，而 Kubernetes 也成为了容器编排的事实标准。
-而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力，也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。
-本系列文章主要记录了在 Kubernetes 内使用 Pytorch 运行 ImageNet 的淌坑经验，同时也使用 CephFS 作为网络存储，解决数据存放问题。
-计划：
- 简介和容器内使用显卡（本文） Kuberentes 和 Device Plugin Kubeflow 和 Pytorch-Operator CSI(Cofntainer Storage Interface) 和 CephFS 网络存储 mnist Demo 和分布式训练（MPI) 分布式 ImageNet  Slurm Slurm(Simple Linux Utility for Resource Management) 是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具，被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。
-Slurm 的成熟度毋庸置疑，但是有两个问题：
- 在互联网公司不一定能有专人维护 Slurm 集群 交付环境没有 Slurm  Lustre Lustre(得名于：Linux &#43; Cluster) 一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。"/>
+<meta name="twitter:description" content="传统的高性能计算集群一般都习惯性地使用 Slurm &#43; Lustre 的方案作为任务调度和存储，
+然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，
+而 Kubernetes 也成为了容器编排的事实标准。
+而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力，
+也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。"/>
 
   <script type="application/ld+json">
 {
@@ -61,10 +59,10 @@ Slurm 的成熟度毋庸置疑，但是有两个问题：
   },
   "genre": "posts",
   "keywords": "machineLearing, kubernetes",
-  "wordcount":  225 ,
+  "wordcount":  237 ,
   "url": "https:\/\/page.codespaper.com\/2019\/slurm-lustre-to-kubeflow-ceph\/",
   "datePublished": "2019-06-15T00:00:00\x2b08:00",
-  "dateModified": "2019-07-05T00:32:38\x2b08:00",
+  "dateModified": "2020-03-22T21:13:07\x2b08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -78,7 +76,7 @@ Slurm 的成熟度毋庸置疑，但是有两个问题：
   },
   "author": {
     "@type": "Person",
-    "name": "zwPapEr"
+    "name": "[zhangwei]"
   },
   "description": ""
 }
@@ -149,7 +147,7 @@ if (!doNotTrack) {
     <header class="post-header">
         <h1 class="post-title">从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</h1>
         <div class="post-meta">
-            Written by <a href="https://page.codespaper.com/" rel="author">zwPapEr</a> with ♥ 
+            Written by <a href="https://page.codespaper.com/" rel="author">[zhangwei]</a> with ♥ 
                 <span class="post-time">
                     on <time datetime=2019-06-15 >15 June 2019</time>
                 </span>
@@ -179,10 +177,14 @@ if (!doNotTrack) {
           
           
 
-          <h2 id="简介">简介</h2>
-<p>传统的高性能计算集群一般都习惯性地使用 <code>Slurm</code> + <code>Lustre</code> 的方案作为任务调度和存储，然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，而 <code>Kubernetes</code> 也成为了容器编排的事实标准。</p>
-<p>而且，对比容器化的简洁， <code>Slurm</code> 和 <code>Lustre</code> 复杂的配置，让人头疼的运維压力，也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。</p>
-<p>本系列文章主要记录了在 <code>Kubernetes</code> 内使用 <code>Pytorch</code> 运行 <code>ImageNet</code> 的淌坑经验，同时也使用 CephFS 作为网络存储，解决数据存放问题。</p>
+          <p>传统的高性能计算集群一般都习惯性地使用 <code>Slurm</code> + <code>Lustre</code> 的方案作为任务调度和存储，
+然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，
+而 <code>Kubernetes</code> 也成为了容器编排的事实标准。</p>
+<p>而且，对比容器化的简洁， <code>Slurm</code> 和 <code>Lustre</code> 复杂的配置，让人头疼的运維压力，
+也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。</p>
+<h2 id="简介">简介</h2>
+<p>本系列文章主要记录了在 <code>Kubernetes</code> 内使用 <code>Pytorch</code> 运行 <code>ImageNet</code> 的淌坑经验，
+同时也使用 CephFS 作为网络存储，解决数据存放问题。</p>
 <p>计划：</p>
 <ul>
 <li>简介和容器内使用显卡（本文）</li>
@@ -194,7 +196,8 @@ if (!doNotTrack) {
 </ul>
 <h3 id="slurm">Slurm</h3>
 <p>Slurm(Simple Linux Utility for Resource Management)
-是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具，被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。</p>
+是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具，
+被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。</p>
 <p>Slurm 的成熟度毋庸置疑，但是有两个问题：</p>
 <ol>
 <li>在互联网公司不一定能有专人维护 Slurm 集群</li>
@@ -202,9 +205,12 @@ if (!doNotTrack) {
 </ol>
 <h3 id="lustre">Lustre</h3>
 <p>Lustre(得名于：Linux + Cluster)
-一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。</p>
+一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。
+很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。</p>
 <h3 id="kubernetes-plus-ceph">Kubernetes + Ceph</h3>
-<p>互联网时代，容器化并使用 Kubernetes 同时使用 Ceph 作为网络存储肯定是毫无疑问的方案和方向。如果 Kubernetes + Ceph 能够解决机器学习中高性能集群资源分配和利用的问题，那对于互联网公司，肯定会是更好的选择。</p>
+<p>互联网时代，容器化并使用 Kubernetes 同时使用 Ceph 作为网络存储肯定是毫无疑问的方案和方向。
+如果 Kubernetes + Ceph 能够解决机器学习中高性能集群资源分配和利用的问题，
+那对于互联网公司，肯定会是更好的选择。</p>
 <h2 id="容器内使用显卡">容器内使用显卡</h2>
 <h3 id="gpu">GPU</h3>
 <p>现在机器学习的主流是深度学习，自然 GPU 是少不了的。本文中使用了 Nvidia 的 GTX 1080Ti。</p>
@@ -221,20 +227,23 @@ nvidia-smi
 <p>!<a href="/images/cudadriver.jpg">CUDA Driver</a></p>
 <h4 id="nvidia-docker-2-dot-0">Nvidia docker 2.0</h4>
 <p><a href="https://github.com/NVIDIA/nvidia-docker">https://github.com/NVIDIA/nvidia-docker</a></p>
-<p>默认的 Docker 是不支持 GPU 的，所以我们需要 <code>nvidia-docker</code> ，这是 Nvidia 为了支持 Docker 生态出的一个包，而 <code>nvidia docker 2.0</code> 是第二版，主要是为 <code>Docker</code> 新增了一个 <code>nvidia</code> 的运行时，</p>
-<p>所以在安装完 <code>nvidia docker 2.0</code> 后，需要把 Docker 的默认运行时个性为 <code>nvidia</code> 。可以通过修改 docker 配置文件 <code>/etc/docker/daemon.json</code> 让 docker 能够使用 <code>Nvidia Container Runtime</code></p>
-<p><code>Nvidia Container Runtime</code> 作为核心部分，在原有的容器运行时 <code>runc</code> 的基础上增加一个 <code>prestart hook</code> ，用于调用 <code>libnvidia-container</code> 库。</p>
+<p>默认的 Docker 是不支持 GPU 的，所以我们需要 <code>nvidia-docker</code> ，这是 Nvidia 为了支持 Docker 生态出的一个包，
+而 <code>nvidia docker 2.0</code> 是第二版，主要是为 <code>Docker</code> 新增了一个 <code>nvidia</code> 的运行时，</p>
+<p>所以在安装完 <code>nvidia docker 2.0</code> 后，需要把 Docker 的默认运行时个性为 <code>nvidia</code> 。
+可以通过修改 docker 配置文件 <code>/etc/docker/daemon.json</code> 让 docker 能够使用 <code>Nvidia Container Runtime</code></p>
+<p><code>Nvidia Container Runtime</code> 作为核心部分，在原有的容器运行时 <code>runc</code> 的基础上增加一个 <code>prestart hook</code> ，
+用于调用 <code>libnvidia-container</code> 库。</p>
 <p><code>libnvidia-container</code> 提供一个库和一个简单的 Cli 工具，这个库让容器能够使用 Nvidia 的 GPU。</p>
 <p><code>runc</code> 是docker默认的容器运行时，根据 <code>Open Containers Initiative (OCI)</code> 创建容器。</p>
 <p>总而言之，就是当我们要在 Docker 里使用 Nvidia GPU 时，就必须要安装 <code>Nvidia Docker</code></p>
 <p>安装完之后，基本的用法如下，可以测试一下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --runtime<span style="color:#f92672">=</span>nvidia --rm nvidia/cuda nvidia-smi
-</code></pre></div><p>如果出现 <code>brand = tesla: unknown</code> 的错误，就是 cuda 的版本和我们使用的驱动不匹配，可以看一下宿主显卡驱动的版本和使用的 CUDA 版本，然后对照上文的图片看是否匹配。</p>
+</code></pre></div><p>如果出现 <code>brand = tesla: unknown</code> 的错误，就是 cuda 的版本和我们使用的驱动不匹配，
+可以看一下宿主显卡驱动的版本和使用的 CUDA 版本，然后对照上文的图片看是否匹配。</p>
 <p>可以使用对应版本的 CUDA 镜像，如：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --runtime<span style="color:#f92672">=</span>nvidia --rm nvidia/cuda:8.0-runtime nvidia-smi
 </code></pre></div><p>也可以更新宿主机驱动。</p>
 <p>至此，我们就可以在容器内使用 GPU 了，但是我们想在 Kubernetes 内使用，还需要使用 <code>Device Plugin</code> ，这个会在后文说到。</p>
-
     </div>
 
     <div class="post-copyright">
@@ -247,7 +256,7 @@ nvidia-smi
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>225</span>
+                   <span>237</span>
             </p>
             
             <p class="copyright-item">

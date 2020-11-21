@@ -36,18 +36,9 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件"/>
-<meta name="twitter:description" content="场景 Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好， 但是有一些敏感信息，还是认为谁都不值得信任。
-所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。
-GPG  https://zh.wikipedia.org/wiki/GnuPG
- GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。 GnuPG用于加密、数字签名及产生非对称钥匙对的软件。
- 如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html
- 简单地说就是可以通过 GPG 使用两种方式加密文件：
- 对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg
-brew install gpg Emacs 通过 use-package 配置 Emacs
- 如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
- macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
-(setq epa-pinentry-mode &#39;loopback) 最后，配置文件如下：
-(use-package epa-file :ensure nil :config (epa-file-enable) (setq epa-pinentry-mode &#39;loopback)) 使用 对称加密 默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密"/>
+<meta name="twitter:description" content="Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+但是有一些敏感信息，还是认为谁都不值得信任。
+所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。"/>
 
   <script type="application/ld+json">
 {
@@ -66,10 +57,10 @@ brew install gpg Emacs 通过 use-package 配置 Emacs
   },
   "genre": "posts",
   "keywords": "Emacs, OrgMode",
-  "wordcount":  187 ,
+  "wordcount":  186 ,
   "url": "https:\/\/page.codespaper.com\/2019\/gpg-encrypt-org\/",
   "datePublished": "2019-03-09T00:00:00\x2b08:00",
-  "dateModified": "2019-03-09T19:04:15\x2b08:00",
+  "dateModified": "2020-03-22T21:14:30\x2b08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -184,8 +175,7 @@ if (!doNotTrack) {
           
           
 
-          <h2 id="场景">场景</h2>
-<p>Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+          <p>Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
 但是有一些敏感信息，还是认为谁都不值得信任。</p>
 <p>所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， <code>EasyPG Assistant</code> 可以很方便地加解密。</p>
 <h2 id="gpg">GPG</h2>
@@ -234,7 +224,7 @@ GnuPG用于加密、数字签名及产生非对称钥匙对的软件。</p>
 或者说使用完，关了 Emacs 之后，其它人再重新打开，尝试读取，也是能载入缓存的！</p>
 <p>可以通过加一个 Hook，在关 Emacs 的时候，把 <code>gpg agent</code> 也杀了，相对能安全点</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(add-hook <span style="color:#e6db74">&#39;kill-emacs-hook</span> (defun personal--kill-gpg-agent ()
-                             (shell-command <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pkill gpg-agent</span><span style="color:#e6db74">&#34;</span>)))
+                             (shell-command <span style="color:#e6db74">&#34;pkill gpg-agent&#34;</span>)))
 </code></pre></div><blockquote>
 <p>这里我们用 defun 而不是 lambda，有兴趣可以看一下这篇文章：
 <a href="http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html">http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html</a></p>
@@ -279,7 +269,7 @@ gpg --export-secret-keys --armor AAAABBBBBBBBBCCCCCCC0000000000 &gt;&gt; /tmp/pr
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>187</span>
+                   <span>186</span>
             </p>
             
             <p class="copyright-item">

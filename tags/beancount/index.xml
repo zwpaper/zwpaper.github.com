@@ -17,12 +17,8 @@
       <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/beancount/</guid>
-      <description>复式记账 Beancount 第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。
-目前 beancount 的中文文章还不算多，主要看了这两篇：
- https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava
-pip install beancount fava ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
-UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&amp;#34;Fast C decimal implementation appears to be missing; &amp;#34; 这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
-pacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.el ， https://github.</description>
+      <description>&lt;p&gt;第一次了解到复式记账是 Emacs 的 &lt;code&gt;Ledger mode&lt;/code&gt; ，但是还挺复杂的，就放弃了。
+后来 Byvoid 的&lt;a href=&#34;https://www.byvoid.com/zht/blog/beancount-bookkeeping-1&#34;&gt;Beancount 复式记账（一）：为什么&lt;/a&gt;里提到了 &lt;code&gt;Beancount&lt;/code&gt; ，感觉比较值得一试。&lt;/p&gt;</description>
     </item>
     
   </channel>

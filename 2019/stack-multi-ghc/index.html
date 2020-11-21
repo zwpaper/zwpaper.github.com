@@ -36,8 +36,10 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="用 Stack 管理多个 GHC 版本"/>
-<meta name="twitter:description" content="简介 在用 Cabal 安装 Haskell 的软件时有时有碰到如下报错：
-$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&gt; base&gt;=4.11 &amp;&amp; &lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&#39;ve had most trouble fulfilling: base, orgstat 可以看到 base 库的版本要求是 &gt;=4."/>
+<meta name="twitter:description" content="使用 Haskell 碰到 GHC 版本的问题，但是搜了一下，感觉说的文章不多，
+可能是国内用 Haskell 的人比较少，或者用的人都比较厉害。
+Haskell 作为函数式编程的代表性语言，感觉还是很值得学习，也希望能有更多的中文文章，
+让像我这样希望入门的人，能够更容易的上手。"/>
 
   <script type="application/ld+json">
 {
@@ -56,10 +58,10 @@ $ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve d
   },
   "genre": "posts",
   "keywords": "Haskell",
-  "wordcount":  252 ,
+  "wordcount":  254 ,
   "url": "https:\/\/page.codespaper.com\/2019\/stack-multi-ghc\/",
   "datePublished": "2019-08-17T00:00:00\x2b08:00",
-  "dateModified": "2019-08-18T14:00:22\x2b08:00",
+  "dateModified": "2020-03-22T21:03:06\x2b08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -73,7 +75,7 @@ $ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve d
   },
   "author": {
     "@type": "Person",
-    "name": "[sensetime]"
+    "name": "[zwPapEr]"
   },
   "description": ""
 }
@@ -144,7 +146,7 @@ if (!doNotTrack) {
     <header class="post-header">
         <h1 class="post-title">用 Stack 管理多个 GHC 版本</h1>
         <div class="post-meta">
-            Written by <a href="https://page.codespaper.com/" rel="author">[sensetime]</a> with ♥ 
+            Written by <a href="https://page.codespaper.com/" rel="author">[zwPapEr]</a> with ♥ 
                 <span class="post-time">
                     on <time datetime=2019-08-17 >17 August 2019</time>
                 </span>
@@ -174,7 +176,11 @@ if (!doNotTrack) {
           
           
 
-          <h2 id="简介">简介</h2>
+          <p>使用 Haskell 碰到 GHC 版本的问题，但是搜了一下，感觉说的文章不多，
+可能是国内用 Haskell 的人比较少，或者用的人都比较厉害。</p>
+<p>Haskell 作为函数式编程的代表性语言，感觉还是很值得学习，也希望能有更多的中文文章，
+让像我这样希望入门的人，能够更容易的上手。</p>
+<h2 id="简介">简介</h2>
 <p>在用 Cabal 安装 Haskell 的软件时有时有碰到如下报错：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cabal new-install orgstat
 
@@ -194,7 +200,6 @@ non-upgradeable package requires installed instance<span style="color:#f92672">)
 <span style="color:#f92672">[</span>__1<span style="color:#f92672">]</span> fail <span style="color:#f92672">(</span>backjumping, conflict set: base, orgstat<span style="color:#f92672">)</span>
 After searching the rest of the dependency tree exhaustively, these were the
 goals I<span style="color:#960050;background-color:#1e0010">&#39;</span>ve had most trouble fulfilling: base, orgstat
-
 </code></pre></div><p>可以看到 base 库的版本要求是 <code>&gt;=4.11 &amp;&amp; &lt;4.12</code> ，从 <a href="https://wiki.haskell.org/Base%5Fpackage">https://wiki.haskell.org/Base%5Fpackage</a>
 就能看到， <code>8.6.1 (August 2018)</code> 开始的 <code>GHC</code> 就已经带的是 <code>4.12.0.0</code> 的 <code>base</code> 包了。</p>
 <p>所以我们需要用一个老版本的 <code>GHC</code> 。</p>
@@ -238,11 +243,6 @@ ghc-pkg    ghci-8.4.2     hp2ps              runghc
 主要是方便加到 <code>PATH</code> 环境变量里。</p>
 <p><code>symlink-bindir</code> 也可以放到 cabal 的配置文件中。</p>
 <h2 id="后记">后记</h2>
-<p>这个感觉是使用 Haskell 一个比较容易碰到的情况，但是搜了一下，感觉说的文章不多，
-可能是国内用 Haskell 的人比较少，或者用的人都比较厉害。</p>
-<p>Haskell 作为函数式编程的代表性语言，感觉还是很值得学习，也希望能有更多的中文文章，
-让像我这样希望入门的人，能够更容易的上手。</p>
-
     </div>
 
     <div class="post-copyright">
@@ -255,7 +255,7 @@ ghc-pkg    ghci-8.4.2     hp2ps              runghc
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>252</span>
+                   <span>254</span>
             </p>
             
             <p class="copyright-item">

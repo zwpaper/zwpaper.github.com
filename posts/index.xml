@@ -6,10 +6,35 @@
     <description>Recent content in Posts on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2020 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://page.codespaper.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>macOS GUI Emacs 使用 GPG 给 Git Commit 签名</title>
+      <link>https://page.codespaper.com/2020/mac-emacs-gui-gpg-sign-commit/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2020/mac-emacs-gui-gpg-sign-commit/</guid>
+      <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;使用 GPG 给 Commit 签名，网上已经有很多教程，但是在 Emacs 使用 &lt;a href=&#34;https://magit.vc/&#34;&gt;Magit&lt;/a&gt; 作为 Git 客户端时，
+还是碰到了几个问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>儿童疫苗攻略</title>
+      <link>https://page.codespaper.com/2020/kid-vaccine/</link>
+      <pubDate>Tue, 28 Jul 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2020/kid-vaccine/</guid>
+      <description>&lt;h2 id=&#34;选择原则&#34;&gt;选择原则&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;既有免费又有自费的 5 种疫苗，流脑疫苗选自费，其他选免费疫苗；&lt;/li&gt;
+&lt;li&gt;发病率高、发病后病情严重的先打；&lt;/li&gt;
+&lt;li&gt;自费疫苗尽早接种，可以和免费疫苗同时接种在不同部位。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>从 NextCloud 替换为 Seafile</title>
@@ -17,9 +42,9 @@
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</guid>
-      <description>之前自己组装了一台 NAS，用作私有云，解决大容量网盘，自己跑的一些小应用的问题，还计划作为软路由。 当时对网盘的选择是 NextCloud，最主要的原因就是这是有名气的 Self Hosted 网盘里，最开源的选项， 而这周末，我还是决定更换到 Seafile。
-NextCloud 与 Seafile 简单体会 换到 Seafile 之后，简单用了一下，有一下几点体会：
- iOS 相册内有 10000+ 张照片，同步到网盘上  Seafile 每次尝试同步是，会认为全部已经同步完成，然后逐步检测到未同步照片后同步 NextCloud 每次打开，都会有大量的同步任务，然后这一万张就一直同步不完   iOS 端用户体验  Seafile 感觉是原生 iOS App NextCloud 感觉是网页版套壳   iOS 端上传 6G+ 大文件  Seafile 迟迟不开始，估计是在分块 NextCloud 一直在尝试上传，但是一直失败，最后任务找不到了   历史版本  这个是意外收获，以前都不知道 NextCloud 有历史版本，用了 Seafile 之后，发现两家都有   文件管理  Seafile 中有一个 资料库 的概念，目前还没体会到用处 NextCloud 直接就是一个网盘，用起来比较简单   元文件  Seafile 把文件分块后存储，但是提供 fuse 和 WebDAV 用于查看文件 NextCloud 直接存储文件，可以直接在 data 目录看到元文件和目录结构   部署  Seafile 总共 3 个容器，用 Docker-compose 一起拉起来 NextCloud 两个容器，一个 NextCloud，一个 Postgres 单独部署    最主要影响我的是第一点，同步照片，NextCloud 我尝试过一个晚上没关屏幕，NextCloud 在前台运行， 但是一晚上过去了，没传上去太多，Seafile 反而可以一次次检查，慢慢把所有照片同步上去。</description>
+      <description>&lt;p&gt;之前自己组装了一台 NAS，用作私有云，解决大容量网盘，自己跑的一些小应用的问题，还计划作为软路由。
+当时对网盘的选择是 NextCloud，最主要的原因就是这是有名气的 Self Hosted 网盘里，最开源的选项，
+而这周末，我还是决定更换到 Seafile。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,13 +53,12 @@ NextCloud 与 Seafile 简单体会 换到 Seafile 之后，简单用了一下，
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2020/go14-preemptible/</guid>
-      <description>Golang 1.14 发布 Golang 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：
- 调度器抢占优化，不再需要函数调用作为抢占点 Timer 更高效  这篇文章主要是聊聊调度器这部分。
-调度器抢占优化 Golang 主打高并发，调度器自然也是关注的重点，以前一致有一个毛病， 如果一个 Goroutine 没有调用其他函数，就会一直占用当前的 Process，无法被调度走。
-Golang 1.14 解决了这个问题。
-实例程序 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;runtime&amp;#34; ) func main() { fmt.Println(runtime.GOMAXPROCS(1)) go func() { for { } }() runtime.Gosched() fmt.Println(&amp;#34;outside&amp;#34;) } GOMAXPROCS, NumCPU, Gosched 实例程序里用到了 3 个函数，都是 rintime 包里的。
-GOMAXPROCS GOMAXPROCS 用于设置一个 Go 程序能够使用的操作系统线程数， 现在默认值等于 NumCPU ，默认尽可能地使用系统资源。
-在 1.5 以前，Go 会默认把 GOMAXPROCS 设置成 1，不过应该没有人在用 1.</description>
+      <description>&lt;p&gt;&lt;code&gt;Golang&lt;/code&gt; 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;调度器抢占优化，不再需要函数调用作为抢占点&lt;/li&gt;
+&lt;li&gt;Timer 更高效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这篇文章主要是聊聊调度器这部分。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,16 +67,8 @@ GOMAXPROCS GOMAXPROCS 用于设置一个 Go 程序能够使用的操作系统线
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2020/2019-2020/</guid>
-      <description>2019 年终总结，2020 新年展望 关键词：水流不腐
-2019 工作 2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年， 水流不腐 这个关键词也是从这而来。
-新公司是 AI 公司，都说现在 AI 处于风口，虽然我是做基础设施的，但是也想看看风口上的 AI 公司有何不同。 创业公司对于我来说，另一个好处就是大部分基础设施都处于起步阶段，这个时候，正好可以经历基础平台从零到一。
-从之前做公有云，私有云网络，接触到了容器平台，发现容器平台也是现在基础设施的风口， 所以也希望在新公司能够在容器平台能够学习到这方面的知识。
-今年公司换了，技术方向也换了，最主要的就是身边的同事也都换了一圈，接触到的技术，做的事和之前完全不一样， 确实感觉到不同环境能够学习到的内容完全不一样。
-今年的老板作为架构师，和他接触，也开始了解到了架构方面的知识：
- 设计模式 在以前做网络相关时，确实能用到的比较少，但是在目前容器平台，更高层次的程序架构考虑，这是必不可少的， Kubernetes 源码中也能看到不少设计模式的影子。 Domain Driven Design(DDD) 真正从需求到设计再到实现，不再是之前随想实现，DDD 就是用于指导这个流程的。前端领域常见的 MVC 架构也是同源的。  另外，今年大量接触到了 Kubernetes, 容器解决了应用部署的问题，而 Kubernetes 解决了容器编排，调度的问题
- Pod 方便多个容器之间协作，解决多活高可用 Service + KubeDNS 解决容器之间互相访问 Storage Class 解决存储 Operator 解决中间件服务的生命周期管理  Kubernetes 成为了现在容器编排的事实标准，虽说少不了背后 Google 的支持，但是 Kubernetes 自身的设计和实现也确实是出色， 感觉 Kubernetes 还得再火个很长的时间。
-2020 年的任务之一，就是能够站在架构的角度，回过头来看 Kubernetes ，尤其在 Operator 相关的地方，需要多下功夫。
-技术 今年努力多接触新技术，争取各个领域都能够有所涉猎。</description>
+      <description>2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年。
+年度关键词： 水流不腐</description>
     </item>
     
     <item>
@@ -61,8 +77,10 @@ GOMAXPROCS GOMAXPROCS 用于设置一个 Go 程序能够使用的操作系统线
       <pubDate>Sat, 17 Aug 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/stack-multi-ghc/</guid>
-      <description>简介 在用 Cabal 安装 Haskell 的软件时有时有碰到如下报错：
-$ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve dependencies: [__0] trying: orgstat-0.1.6 (user goal) [__1] next goal: base (dependency of orgstat) [__1] rejecting: base-4.12.0.0/installed-4.1... (conflict: orgstat =&amp;gt; base&amp;gt;=4.11 &amp;amp;&amp;amp; &amp;lt;4.12) [__1] rejecting: base-4.12.0.0, base-4.11.1.0, base-4.11.0.0, base-4.10.1.0, base-4.10.0.0, base-4.9.1.0, base-4.9.0.0, base-4.8.2.0, base-4.8.1.0, base-4.8.0.0, base-4.7.0.2, base-4.7.0.1, base-4.7.0.0, base-4.6.0.1, base-4.6.0.0, base-4.5.1.0, base-4.5.0.0, base-4.4.1.0, base-4.4.0.0, base-4.3.1.0, base-4.3.0.0, base-4.2.0.2, base-4.2.0.1, base-4.2.0.0, base-4.1.0.0, base-4.0.0.0, base-3.0.3.2, base-3.0.3.1 (constraint from non-upgradeable package requires installed instance) [__1] fail (backjumping, conflict set: base, orgstat) After searching the rest of the dependency tree exhaustively, these were the goals I&amp;#39;ve had most trouble fulfilling: base, orgstat 可以看到 base 库的版本要求是 &amp;gt;=4.</description>
+      <description>&lt;p&gt;使用 Haskell 碰到 GHC 版本的问题，但是搜了一下，感觉说的文章不多，
+可能是国内用 Haskell 的人比较少，或者用的人都比较厉害。&lt;/p&gt;
+&lt;p&gt;Haskell 作为函数式编程的代表性语言，感觉还是很值得学习，也希望能有更多的中文文章，
+让像我这样希望入门的人，能够更容易的上手。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -71,12 +89,8 @@ $ cabal new-install orgstat Resolving dependencies... cabal: Could not resolve d
       <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/beancount/</guid>
-      <description>复式记账 Beancount 第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。
-目前 beancount 的中文文章还不算多，主要看了这两篇：
- https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava
-pip install beancount fava ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
-UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&amp;#34;Fast C decimal implementation appears to be missing; &amp;#34; 这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
-pacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.el ， https://github.</description>
+      <description>&lt;p&gt;第一次了解到复式记账是 Emacs 的 &lt;code&gt;Ledger mode&lt;/code&gt; ，但是还挺复杂的，就放弃了。
+后来 Byvoid 的&lt;a href=&#34;https://www.byvoid.com/zht/blog/beancount-bookkeeping-1&#34;&gt;Beancount 复式记账（一）：为什么&lt;/a&gt;里提到了 &lt;code&gt;Beancount&lt;/code&gt; ，感觉比较值得一试。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -85,17 +99,8 @@ pacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目�
       <pubDate>Sun, 30 Jun 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</guid>
-      <description>简介 有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况， 而最近很流行的 DNS over HTTPS 更是十分的稳定安全，所以，通过自建 DNS，可以精确的得到解析结果。
-文章中的所有文件可以直接在我的仓库中找到：
-Archlinux dot file
-方案 dnsmasq dnsmasq 是一个十分老牌的软件了，可以提供 DNS 缓存和 DHCP 服务功能，还带了一个 PXE 服务器，但是这些都不是我们需要关注的点，我们只看 DNS 。
-作为域名解析服务器 DNS ， dnsmasq 可以通过缓存 DNS 请求来提高对访问过的网址的连接速度，所以有一些结果虽然第一次比较耗时，但是后续就可以直接用本地结果了。
-最重要的是 dnsmasq 轻量而且容易配置，几乎默认的配置就足够我们使用了。
-DNS over HTTPS DNS over HTTPS 也就是常见的 DoH
- 没什么问题是加一层解决不了的，如果有，那个加两层。
- DNS 经常出问题，那就把 UDP 换成 TCP ，还解决不了？那就再上一层 TLS 。
-由于 HTTP 协议需要多次数据交互，还有 TLS 的加解密，所以在时间上，耗时比传统的 DNS 高了不少。 上文也提到了 dnsmasq 有缓存作用，所以也一定程度缓解了这个问题。
-Cloudflare 1.1.1.1 Cloudflare 本来是一个主打 CDN 和 权威 DNS 的企业，在 2018 年的时候强势推出了 1.</description>
+      <description>&lt;p&gt;有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，
+而最近很流行的 DNS over HTTPS 更是十分的稳定安全，所以，通过自建 DNS，可以精确的得到解析结果。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -104,13 +109,11 @@ Cloudflare 1.1.1.1 Cloudflare 本来是一个主打 CDN 和 权威 DNS 的企业
       <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</guid>
-      <description>简介 传统的高性能计算集群一般都习惯性地使用 Slurm + Lustre 的方案作为任务调度和存储，然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，而 Kubernetes 也成为了容器编排的事实标准。
-而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力，也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。
-本系列文章主要记录了在 Kubernetes 内使用 Pytorch 运行 ImageNet 的淌坑经验，同时也使用 CephFS 作为网络存储，解决数据存放问题。
-计划：
- 简介和容器内使用显卡（本文） Kuberentes 和 Device Plugin Kubeflow 和 Pytorch-Operator CSI(Cofntainer Storage Interface) 和 CephFS 网络存储 mnist Demo 和分布式训练（MPI) 分布式 ImageNet  Slurm Slurm(Simple Linux Utility for Resource Management) 是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具，被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。
-Slurm 的成熟度毋庸置疑，但是有两个问题：
- 在互联网公司不一定能有专人维护 Slurm 集群 交付环境没有 Slurm  Lustre Lustre(得名于：Linux + Cluster) 一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。</description>
+      <description>&lt;p&gt;传统的高性能计算集群一般都习惯性地使用 &lt;code&gt;Slurm&lt;/code&gt; + &lt;code&gt;Lustre&lt;/code&gt; 的方案作为任务调度和存储，
+然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，
+而 &lt;code&gt;Kubernetes&lt;/code&gt; 也成为了容器编排的事实标准。&lt;/p&gt;
+&lt;p&gt;而且，对比容器化的简洁， &lt;code&gt;Slurm&lt;/code&gt; 和 &lt;code&gt;Lustre&lt;/code&gt; 复杂的配置，让人头疼的运維压力，
+也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -119,16 +122,11 @@ Slurm 的成熟度毋庸置疑，但是有两个问题：
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/js-to-ts-for-newbie/</guid>
-      <description>简介 最近尝试着使用 Taro 写一个微信小程序，Taro 是京东凹凸实验室开发的一款使用 React 语法多端统一开发解决方案， 其实也就是使用 React 语法编写一次，使用不同的编译方式编译出 BATT 各家小程序，React Native 程序。
-Taro 在对各端支持上还有一些差异，在开发的时候有一些细节需要关注。 而目前小程序基本只有微信小程序比较热门，而且腾讯推出云开发，可以一定程度省去后端的工作量， 所以目前入门基本只关注微信小程序就足够了。
-背景 作为一名后端工程师，对前端（Web 端，App 端）经验还是比较缺失的， JavaScript 也是第一次真正认真地接触。
-由于使用 React 的语法，所以说到的 JavaScript 基本都含 JSX。
-JavaScript 从入门到放弃 由于 JavaScript 的资源相对多，所以入门的时候没有太多犹豫就选择了 JavaScript，而不是大热的 TypeScript， 也正是由于这个选择，才会让我感觉到为什么现在 TypeScript 会大热。
-JavaScript 最大的特点应该就是自由，动态语言的弱类型系统，类型之间可以随意转换，而且转换发生在运行时， 写代码的时候看起来都没有问题，可是运行起来之后，可能就会出现各种各样的报错。
-在网络调用时，由于对类型没有预先的考虑，基本就是把同一个函数复制到另一个位置， 修改一下使用的参数，就又堆叠了几行代码。
-TypeScript TypeScript 和 JavaScript 几乎可能无缝转化，我把一个 JavaScript 的文件后缀改成 TypeScript 之后， 把一些变量的类型补上，就可以编译通过了。 但是也就是这个补充类型的过程中，开始思考这些类似的地方，我应该把他们抽象出来。
-类型系统 强类型系统可以在编译时做出足够多的检查，减少运行时的错误，运行时错误只能依赖于对 App 的各种各样的测试， 而我们都知道，测试也是很难做到面面俱到的，所以让错误出现在编译期，显然是更好的选择。
-Interface TypeScript 的特点就是在 JavaScript 中加入了类型检查，而最核心的特性之一就是 Interface 所实现的 鸭子类型 。 interface 也是在 JavaScript 中没有的， interface 指定了成员们的类型，主要用途也正是做更多的类型检查。</description>
+      <description>&lt;p&gt;最近尝试着使用 Taro 写一个微信小程序，&lt;a href=&#34;https://taro.jd.com/&#34;&gt;Taro&lt;/a&gt; 是&lt;a href=&#34;https://aotu.io/&#34;&gt;京东凹凸实验室&lt;/a&gt;开发的一款使用 &lt;a href=&#34;https://reactjs.org/&#34;&gt;React&lt;/a&gt; 语法多端统一开发解决方案，
+其实也就是使用 React 语法编写一次，使用不同的编译方式编译出 BATT 各家小程序，React Native 程序。&lt;/p&gt;
+&lt;p&gt;Taro 在对各端支持上还有一些差异，在开发的时候有一些细节需要关注。
+而目前小程序基本只有微信小程序比较热门，而且腾讯推出云开发，可以一定程度省去后端的工作量，
+所以目前入门基本只关注微信小程序就足够了。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -137,12 +135,12 @@ Interface TypeScript 的特点就是在 JavaScript 中加入了类型检查，�
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/why-golang/</guid>
-      <description>Less is exponentially more 读后感 最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more
- 如果你不知道 Rob Pike 是谁：Rob Pike
-或者用一句话介绍，Golang 作者之一
- 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚
-从 C++ 到 Golang Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：Newsqueak， 在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)， 作为一名在 Google 的 C++ 工程师 Rob Pike 自然也十分关注，可是也在这时候， Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉得在 Newsqueak 里有一些特性， 如果能用在开发里，会对服务器端的很多开发都会有帮助。
-可是 C++ 庞大复杂的体系，要加一些比较不一样的特性已经不是一件易事，而且可能也不值得， 所以在 C++ 项目编译的时间里（编译一次要 45 分钟，还是在编译集群上！）Rob 就拉上了 Ken Thompson 和 Robert Griesemer 决定要做点事情，Golang 从此开始登上历史的舞台。</description>
+      <description>&lt;p&gt;最近看到 Rob Pike 在 2012 年写的一篇文章，&lt;a href=&#34;https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html&#34;&gt;Less is exponentially more&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果你不知道 Rob Pike 是谁：&lt;a href=&#34;https://zh.wikipedia.org/wiki/%25E7%25BE%2585%25E5%258B%2583%25C2%25B7%25E6%25B4%25BE%25E5%2585%258B&#34;&gt;Rob Pike&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;或者用一句话介绍，Golang 作者之一&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -151,18 +149,9 @@ Interface TypeScript 的特点就是在 JavaScript 中加入了类型检查，�
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/gpg-encrypt-org/</guid>
-      <description>场景 Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好， 但是有一些敏感信息，还是认为谁都不值得信任。
-所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。
-GPG  https://zh.wikipedia.org/wiki/GnuPG
- GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。 GnuPG用于加密、数字签名及产生非对称钥匙对的软件。
- 如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html
- 简单地说就是可以通过 GPG 使用两种方式加密文件：
- 对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg
-brew install gpg Emacs 通过 use-package 配置 Emacs
- 如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
- macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
-(setq epa-pinentry-mode &amp;#39;loopback) 最后，配置文件如下：
-(use-package epa-file :ensure nil :config (epa-file-enable) (setq epa-pinentry-mode &amp;#39;loopback)) 使用 对称加密 默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密</description>
+      <description>&lt;p&gt;Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+但是有一些敏感信息，还是认为谁都不值得信任。&lt;/p&gt;
+&lt;p&gt;所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， &lt;code&gt;EasyPG Assistant&lt;/code&gt; 可以很方便地加解密。&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -6,10 +6,28 @@
     <description>Recent content in Tags on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2020 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://page.codespaper.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Emacs</title>
+      <link>https://page.codespaper.com/tags/emacs/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kid</title>
+      <link>https://page.codespaper.com/tags/kid/</link>
+      <pubDate>Tue, 28 Jul 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/kid/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Gadgets</title>
@@ -134,15 +152,6 @@
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/tags/typescript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Emacs</title>
-      <link>https://page.codespaper.com/tags/emacs/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0800</pubDate>
-      
-      <guid>https://page.codespaper.com/tags/emacs/</guid>
       <description></description>
     </item>
     

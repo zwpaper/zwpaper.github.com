@@ -36,17 +36,8 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="dnsmasq &#43; Cloudflare DoH 自建 DNS"/>
-<meta name="twitter:description" content="简介 有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况， 而最近很流行的 DNS over HTTPS 更是十分的稳定安全，所以，通过自建 DNS，可以精确的得到解析结果。
-文章中的所有文件可以直接在我的仓库中找到：
-Archlinux dot file
-方案 dnsmasq dnsmasq 是一个十分老牌的软件了，可以提供 DNS 缓存和 DHCP 服务功能，还带了一个 PXE 服务器，但是这些都不是我们需要关注的点，我们只看 DNS 。
-作为域名解析服务器 DNS ， dnsmasq 可以通过缓存 DNS 请求来提高对访问过的网址的连接速度，所以有一些结果虽然第一次比较耗时，但是后续就可以直接用本地结果了。
-最重要的是 dnsmasq 轻量而且容易配置，几乎默认的配置就足够我们使用了。
-DNS over HTTPS DNS over HTTPS 也就是常见的 DoH
- 没什么问题是加一层解决不了的，如果有，那个加两层。
- DNS 经常出问题，那就把 UDP 换成 TCP ，还解决不了？那就再上一层 TLS 。
-由于 HTTP 协议需要多次数据交互，还有 TLS 的加解密，所以在时间上，耗时比传统的 DNS 高了不少。 上文也提到了 dnsmasq 有缓存作用，所以也一定程度缓解了这个问题。
-Cloudflare 1.1.1.1 Cloudflare 本来是一个主打 CDN 和 权威 DNS 的企业，在 2018 年的时候强势推出了 1."/>
+<meta name="twitter:description" content="有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，
+而最近很流行的 DNS over HTTPS 更是十分的稳定安全，所以，通过自建 DNS，可以精确的得到解析结果。"/>
 
   <script type="application/ld+json">
 {
@@ -65,10 +56,10 @@ Cloudflare 1.1.1.1 Cloudflare 本来是一个主打 CDN 和 权威 DNS 的企业
   },
   "genre": "posts",
   "keywords": "dns, op",
-  "wordcount":  486 ,
+  "wordcount":  485 ,
   "url": "https:\/\/page.codespaper.com\/2019\/dnsmasq-cloudflare-doh\/",
   "datePublished": "2019-06-30T00:00:00\x2b08:00",
-  "dateModified": "2019-08-18T14:20:58\x2b08:00",
+  "dateModified": "2020-03-22T21:12:30\x2b08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -183,8 +174,7 @@ if (!doNotTrack) {
           
           
 
-          <h2 id="简介">简介</h2>
-<p>有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，
+          <p>有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，
 而最近很流行的 DNS over HTTPS 更是十分的稳定安全，所以，通过自建 DNS，可以精确的得到解析结果。</p>
 <p>文章中的所有文件可以直接在我的仓库中找到：</p>
 <p><a href="https://github.com/zwpaper/dotfile/tree/master/archlinux">Archlinux dot file</a></p>
@@ -326,7 +316,7 @@ Jun 30 17:31:31 dnsmasq[20723]: cached google.com is 216.58.217.206
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>486</span>
+                   <span>485</span>
             </p>
             
             <p class="copyright-item">

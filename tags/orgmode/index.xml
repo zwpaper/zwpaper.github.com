@@ -17,18 +17,9 @@
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/gpg-encrypt-org/</guid>
-      <description>场景 Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好， 但是有一些敏感信息，还是认为谁都不值得信任。
-所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。
-GPG  https://zh.wikipedia.org/wiki/GnuPG
- GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。 GnuPG用于加密、数字签名及产生非对称钥匙对的软件。
- 如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html
- 简单地说就是可以通过 GPG 使用两种方式加密文件：
- 对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg
-brew install gpg Emacs 通过 use-package 配置 Emacs
- 如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package
- macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决
-(setq epa-pinentry-mode &amp;#39;loopback) 最后，配置文件如下：
-(use-package epa-file :ensure nil :config (epa-file-enable) (setq epa-pinentry-mode &amp;#39;loopback)) 使用 对称加密 默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密</description>
+      <description>&lt;p&gt;Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+但是有一些敏感信息，还是认为谁都不值得信任。&lt;/p&gt;
+&lt;p&gt;所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， &lt;code&gt;EasyPG Assistant&lt;/code&gt; 可以很方便地加解密。&lt;/p&gt;</description>
     </item>
     
   </channel>

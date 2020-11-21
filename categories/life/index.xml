@@ -6,10 +6,24 @@
     <description>Recent content in Life on zwPapEr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jul 2020 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://page.codespaper.com/categories/life/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>儿童疫苗攻略</title>
+      <link>https://page.codespaper.com/2020/kid-vaccine/</link>
+      <pubDate>Tue, 28 Jul 2020 00:00:00 +0800</pubDate>
+      
+      <guid>https://page.codespaper.com/2020/kid-vaccine/</guid>
+      <description>&lt;h2 id=&#34;选择原则&#34;&gt;选择原则&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;既有免费又有自费的 5 种疫苗，流脑疫苗选自费，其他选免费疫苗；&lt;/li&gt;
+&lt;li&gt;发病率高、发病后病情严重的先打；&lt;/li&gt;
+&lt;li&gt;自费疫苗尽早接种，可以和免费疫苗同时接种在不同部位。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>从 NextCloud 替换为 Seafile</title>
@@ -17,9 +31,9 @@
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</guid>
-      <description>之前自己组装了一台 NAS，用作私有云，解决大容量网盘，自己跑的一些小应用的问题，还计划作为软路由。 当时对网盘的选择是 NextCloud，最主要的原因就是这是有名气的 Self Hosted 网盘里，最开源的选项， 而这周末，我还是决定更换到 Seafile。
-NextCloud 与 Seafile 简单体会 换到 Seafile 之后，简单用了一下，有一下几点体会：
- iOS 相册内有 10000+ 张照片，同步到网盘上  Seafile 每次尝试同步是，会认为全部已经同步完成，然后逐步检测到未同步照片后同步 NextCloud 每次打开，都会有大量的同步任务，然后这一万张就一直同步不完   iOS 端用户体验  Seafile 感觉是原生 iOS App NextCloud 感觉是网页版套壳   iOS 端上传 6G+ 大文件  Seafile 迟迟不开始，估计是在分块 NextCloud 一直在尝试上传，但是一直失败，最后任务找不到了   历史版本  这个是意外收获，以前都不知道 NextCloud 有历史版本，用了 Seafile 之后，发现两家都有   文件管理  Seafile 中有一个 资料库 的概念，目前还没体会到用处 NextCloud 直接就是一个网盘，用起来比较简单   元文件  Seafile 把文件分块后存储，但是提供 fuse 和 WebDAV 用于查看文件 NextCloud 直接存储文件，可以直接在 data 目录看到元文件和目录结构   部署  Seafile 总共 3 个容器，用 Docker-compose 一起拉起来 NextCloud 两个容器，一个 NextCloud，一个 Postgres 单独部署    最主要影响我的是第一点，同步照片，NextCloud 我尝试过一个晚上没关屏幕，NextCloud 在前台运行， 但是一晚上过去了，没传上去太多，Seafile 反而可以一次次检查，慢慢把所有照片同步上去。</description>
+      <description>&lt;p&gt;之前自己组装了一台 NAS，用作私有云，解决大容量网盘，自己跑的一些小应用的问题，还计划作为软路由。
+当时对网盘的选择是 NextCloud，最主要的原因就是这是有名气的 Self Hosted 网盘里，最开源的选项，
+而这周末，我还是决定更换到 Seafile。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,16 +42,8 @@ NextCloud 与 Seafile 简单体会 换到 Seafile 之后，简单用了一下，
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2020/2019-2020/</guid>
-      <description>2019 年终总结，2020 新年展望 关键词：水流不腐
-2019 工作 2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年， 水流不腐 这个关键词也是从这而来。
-新公司是 AI 公司，都说现在 AI 处于风口，虽然我是做基础设施的，但是也想看看风口上的 AI 公司有何不同。 创业公司对于我来说，另一个好处就是大部分基础设施都处于起步阶段，这个时候，正好可以经历基础平台从零到一。
-从之前做公有云，私有云网络，接触到了容器平台，发现容器平台也是现在基础设施的风口， 所以也希望在新公司能够在容器平台能够学习到这方面的知识。
-今年公司换了，技术方向也换了，最主要的就是身边的同事也都换了一圈，接触到的技术，做的事和之前完全不一样， 确实感觉到不同环境能够学习到的内容完全不一样。
-今年的老板作为架构师，和他接触，也开始了解到了架构方面的知识：
- 设计模式 在以前做网络相关时，确实能用到的比较少，但是在目前容器平台，更高层次的程序架构考虑，这是必不可少的， Kubernetes 源码中也能看到不少设计模式的影子。 Domain Driven Design(DDD) 真正从需求到设计再到实现，不再是之前随想实现，DDD 就是用于指导这个流程的。前端领域常见的 MVC 架构也是同源的。  另外，今年大量接触到了 Kubernetes, 容器解决了应用部署的问题，而 Kubernetes 解决了容器编排，调度的问题
- Pod 方便多个容器之间协作，解决多活高可用 Service + KubeDNS 解决容器之间互相访问 Storage Class 解决存储 Operator 解决中间件服务的生命周期管理  Kubernetes 成为了现在容器编排的事实标准，虽说少不了背后 Google 的支持，但是 Kubernetes 自身的设计和实现也确实是出色， 感觉 Kubernetes 还得再火个很长的时间。
-2020 年的任务之一，就是能够站在架构的角度，回过头来看 Kubernetes ，尤其在 Operator 相关的地方，需要多下功夫。
-技术 今年努力多接触新技术，争取各个领域都能够有所涉猎。</description>
+      <description>2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年。
+年度关键词： 水流不腐</description>
     </item>
     
     <item>
@@ -46,12 +52,8 @@ NextCloud 与 Seafile 简单体会 换到 Seafile 之后，简单用了一下，
       <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
       
       <guid>https://page.codespaper.com/2019/beancount/</guid>
-      <description>复式记账 Beancount 第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。
-目前 beancount 的中文文章还不算多，主要看了这两篇：
- https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava
-pip install beancount fava ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报
-UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(&amp;#34;Fast C decimal implementation appears to be missing; &amp;#34; 这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装
-pacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.el ， https://github.</description>
+      <description>&lt;p&gt;第一次了解到复式记账是 Emacs 的 &lt;code&gt;Ledger mode&lt;/code&gt; ，但是还挺复杂的，就放弃了。
+后来 Byvoid 的&lt;a href=&#34;https://www.byvoid.com/zht/blog/beancount-bookkeeping-1&#34;&gt;Beancount 复式记账（一）：为什么&lt;/a&gt;里提到了 &lt;code&gt;Beancount&lt;/code&gt; ，感觉比较值得一试。&lt;/p&gt;</description>
     </item>
     
   </channel>

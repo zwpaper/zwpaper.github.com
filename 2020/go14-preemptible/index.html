@@ -36,13 +36,12 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang 1.14 发布，抢占式调度优化"/>
-<meta name="twitter:description" content="Golang 1.14 发布 Golang 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：
- 调度器抢占优化，不再需要函数调用作为抢占点 Timer 更高效  这篇文章主要是聊聊调度器这部分。
-调度器抢占优化 Golang 主打高并发，调度器自然也是关注的重点，以前一致有一个毛病， 如果一个 Goroutine 没有调用其他函数，就会一直占用当前的 Process，无法被调度走。
-Golang 1.14 解决了这个问题。
-实例程序 package main import ( &#34;fmt&#34; &#34;runtime&#34; ) func main() { fmt.Println(runtime.GOMAXPROCS(1)) go func() { for { } }() runtime.Gosched() fmt.Println(&#34;outside&#34;) } GOMAXPROCS, NumCPU, Gosched 实例程序里用到了 3 个函数，都是 rintime 包里的。
-GOMAXPROCS GOMAXPROCS 用于设置一个 Go 程序能够使用的操作系统线程数， 现在默认值等于 NumCPU ，默认尽可能地使用系统资源。
-在 1.5 以前，Go 会默认把 GOMAXPROCS 设置成 1，不过应该没有人在用 1."/>
+<meta name="twitter:description" content="Golang 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：
+
+调度器抢占优化，不再需要函数调用作为抢占点
+Timer 更高效
+
+这篇文章主要是聊聊调度器这部分。"/>
 
   <script type="application/ld+json">
 {
@@ -61,10 +60,10 @@ GOMAXPROCS GOMAXPROCS 用于设置一个 Go 程序能够使用的操作系统线
   },
   "genre": "posts",
   "keywords": "Go",
-  "wordcount":  775 ,
+  "wordcount":  800 ,
   "url": "https:\/\/page.codespaper.com\/2020\/go14-preemptible\/",
   "datePublished": "2020-03-01T00:00:00\x2b08:00",
-  "dateModified": "2020-03-02T13:42:50\x2b08:00",
+  "dateModified": "2020-03-22T21:05:38\x2b08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -179,8 +178,7 @@ if (!doNotTrack) {
           
           
 
-          <h2 id="golang-1-dot-14-发布">Golang 1.14 发布</h2>
-<p><code>Golang</code> 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：</p>
+          <p><code>Golang</code> 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：</p>
 <ul>
 <li>调度器抢占优化，不再需要函数调用作为抢占点</li>
 <li>Timer 更高效</li>
@@ -210,17 +208,28 @@ if (!doNotTrack) {
 }
 </code></pre></div><h4 id="gomaxprocs-numcpu-gosched">GOMAXPROCS, NumCPU, Gosched</h4>
 <p>实例程序里用到了 3 个函数，都是 <code>rintime</code> 包里的。</p>
-<h5 id="gomaxprocs">GOMAXPROCS</h5>
-<p><code>GOMAXPROCS</code> 用于设置一个 Go 程序能够使用的操作系统线程数，
-现在默认值等于 <code>NumCPU</code> ，默认尽可能地使用系统资源。</p>
-<p>在 <code>1.5</code> 以前，Go 会默认把 <code>GOMAXPROCS</code> 设置成 1，不过应该没有人在用 <code>1.5</code> 以前的版本了吧。</p>
-<p>另一个需要注意的地方是 <code>GOMAXPROCS</code> 的返回值是 <code>NumCPU</code> ，而不是设置的 <code>GOMAXPROCS</code> 值。</p>
-<h5 id="numcpu">NumCPU</h5>
-<p><code>NumCPU</code> 返回的是可用的 CPU 线程数，注意是线程数，不是核心数，
-举个栗子，我现在用的 <code>Mackbook Pro</code> 16 寸 CPU 是 <code>i7-9750H</code> 是 6 核，但是由于支持超线程，
-所以是 12 个线程，所以 <code>NumCPU</code> 的值是 <code>12</code> 。</p>
-<h5 id="gosched">Gosched</h5>
-<p><code>Gosched</code> 用于 Goroutine 主动让出 CPU 线程执行权。</p>
+<ul>
+<li>GOMAXPROCS</li>
+</ul>
+<pre><code>`GOMAXPROCS` 用于设置一个 Go 程序能够使用的操作系统线程数，
+现在默认值等于 `NumCPU` ，默认尽可能地使用系统资源。
+
+在 `1.5` 以前，Go 会默认把 `GOMAXPROCS` 设置成 1，不过应该没有人在用 `1.5` 以前的版本了吧。
+
+另一个需要注意的地方是 `GOMAXPROCS` 的返回值是 `NumCPU` ，而不是设置的 `GOMAXPROCS` 值。
+</code></pre>
+<ul>
+<li>NumCPU</li>
+</ul>
+<pre><code>`NumCPU` 返回的是可用的 CPU 线程数，注意是线程数，不是核心数，
+举个栗子，我现在用的 `Mackbook Pro` 16 寸 CPU 是 `i7-9750H` 是 6 核，但是由于支持超线程，
+所以是 12 个线程，所以 `NumCPU` 的值是 `12` 。
+</code></pre>
+<ul>
+<li>Gosched</li>
+</ul>
+<pre><code>`Gosched` 用于 Goroutine 主动让出 CPU 线程执行权。
+</code></pre>
 <h3 id="现象和现状">现象和现状</h3>
 <h4 id="1-dot-13-以前的问题">1.13 以前的问题</h4>
 <p>我们运行实例程序看看效果：</p>
@@ -231,39 +240,57 @@ if (!doNotTrack) {
 <ul>
 <li>尝试修改</li>
 </ul>
-<p>为了验证是由于我们的 Goroutine 阻塞住了程序，我们给两个 Process 看看，也就是</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#ae81ff">2</span>)
-</code></pre></div><p>运行结果：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run preemptible.go
-<span style="color:#ae81ff">12</span>
-outside
-</code></pre></div><p>直接输出结束了。</p>
-<p>另外，我们还提到了，1.13 之前，Go 是在调用函数时，进行抢占的，那我们再把线程数改到 <code>1</code> ，调用一个函数试试。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<pre><code>为了验证是由于我们的 Goroutine 阻塞住了程序，我们给两个 Process 看看，也就是
 
-<span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;fmt&#34;</span>
-    <span style="color:#e6db74">&#34;runtime&#34;</span>
+```go
+runtime.GOMAXPROCS(2)
+```
+
+运行结果：
+
+```shell
+$ go run preemptible.go
+12
+outside
+```
+
+直接输出结束了。
+
+另外，我们还提到了，1.13 之前，Go 是在调用函数时，进行抢占的，那我们再把线程数改到 `1` ，调用一个函数试试。
+
+```go
+package main
+
+import (
+    &quot;fmt&quot;
+    &quot;runtime&quot;
 )
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOMAXPROCS</span>(<span style="color:#ae81ff">1</span>))
-    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
-        <span style="color:#66d9ef">for</span> {
-            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>()
+func main() {
+    fmt.Println(runtime.GOMAXPROCS(1))
+    go func() {
+        for {
+            fmt.Print()
         }
     }()
 
-    <span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">Gosched</span>()
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;outside&#34;</span>)
+    runtime.Gosched()
+    fmt.Println(&quot;outside&quot;)
 }
-</code></pre></div><p>注意， <code>GOMAXPROCS</code> 又设置成 <code>1</code> 了，
-而且在 Goroutine 里加了一个 <code>fmt.Print()</code> ，这是为了调用一个函数，但是不影响输出效果，
-可以看到输出：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go run preemptible.go
-<span style="color:#ae81ff">12</span>
+```
+
+注意， `GOMAXPROCS` 又设置成 `1` 了，
+而且在 Goroutine 里加了一个 `fmt.Print()` ，这是为了调用一个函数，但是不影响输出效果，
+可以看到输出：
+
+```bash
+$ go run preemptible.go
+12
 outside
-</code></pre></div><p>没有阻塞，正常退出了，印证了调用函数的时候能够抢占调度。</p>
+```
+
+没有阻塞，正常退出了，印证了调用函数的时候能够抢占调度。
+</code></pre>
 <h4 id="1-dot-14-优化">1.14 优化</h4>
 <p>直接就用上面的实例程序，跑一下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ GOROOT<span style="color:#f92672">=</span>~/code/go114 PATH<span style="color:#f92672">=</span>$GOROOT/bin:$PATH go run preemptible.go
@@ -300,91 +327,109 @@ outside
 </code></pre></div><p>当超过 <code>forcePreemptNS</code> 时，就会抢占 P， <code>1.14</code> 的优化就在 <a href="https://github.com/golang/go/blob/329317472fd3fbc3179523bd70e03e452c829846/src/runtime/proc.go#L4666">preemptone</a>。</p>
 <h4 id="优化点">优化点</h4>
 <p>先展示一下两个版本的函数，注意，这里的几个 <code>print</code> 是我加的，用于调试：</p>
-<h5 id="113">1.13</h5>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">preemptone</span>(<span style="color:#a6e22e">_p_</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>) <span style="color:#66d9ef">bool</span> {
-    <span style="color:#a6e22e">mp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">ptr</span>()
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">getg</span>().<span style="color:#a6e22e">m</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-    }
-    <span style="color:#a6e22e">gp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">curg</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">g0</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-    }
-
-    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
-
-    <span style="color:#75715e">// Every call in a go routine checks for stack overflow by
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// comparing the current stack pointer to gp-&gt;stackguard0.
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Setting gp-&gt;stackguard0 to StackPreempt folds
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// preemption into the normal stack overflow check.
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">stackguard0</span> = <span style="color:#a6e22e">stackPreempt</span>
-    print(<span style="color:#e6db74">&#34;paper: &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;gomaxprocs=&#34;</span>, <span style="color:#a6e22e">gomaxprocs</span>, <span style="color:#e6db74">&#34; idleprocs=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">npidle</span>, <span style="color:#e6db74">&#34; threads=&#34;</span>, <span style="color:#a6e22e">mcount</span>(), <span style="color:#e6db74">&#34; spinningthreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmspinning</span>, <span style="color:#e6db74">&#34; idlethreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmidle</span>, <span style="color:#e6db74">&#34; runqueue=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">runqsize</span>, <span style="color:#e6db74">&#34;\n&#34;</span>)
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-}
-</code></pre></div><h5 id="114">1.14</h5>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">preemptone</span>(<span style="color:#a6e22e">_p_</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>) <span style="color:#66d9ef">bool</span> {
-    <span style="color:#a6e22e">mp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">ptr</span>()
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">mp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">getg</span>().<span style="color:#a6e22e">m</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-    }
-    <span style="color:#a6e22e">gp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">curg</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">gp</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">mp</span>.<span style="color:#a6e22e">g0</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-    }
-
-    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
-
-    <span style="color:#75715e">// Every call in a go routine checks for stack overflow by
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// comparing the current stack pointer to gp-&gt;stackguard0.
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Setting gp-&gt;stackguard0 to StackPreempt folds
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// preemption into the normal stack overflow check.
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gp</span>.<span style="color:#a6e22e">stackguard0</span> = <span style="color:#a6e22e">stackPreempt</span>
-
-    <span style="color:#75715e">// Request an async preemption of this P.
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">preemptMSupported</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">debug</span>.<span style="color:#a6e22e">asyncpreemptoff</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-        <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
-        print(<span style="color:#e6db74">&#34;paper: &#34;</span>, <span style="color:#e6db74">&#34;before &#34;</span>, <span style="color:#e6db74">&#34;gomaxprocs=&#34;</span>, <span style="color:#a6e22e">gomaxprocs</span>, <span style="color:#e6db74">&#34; idleprocs=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">npidle</span>, <span style="color:#e6db74">&#34; threads=&#34;</span>, <span style="color:#a6e22e">mcount</span>(), <span style="color:#e6db74">&#34; spinningthreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmspinning</span>, <span style="color:#e6db74">&#34; idlethreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmidle</span>, <span style="color:#e6db74">&#34; runqueue=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">runqsize</span>, <span style="color:#e6db74">&#34;\n&#34;</span>)
-        <span style="color:#a6e22e">preemptM</span>(<span style="color:#a6e22e">mp</span>)
-        print(<span style="color:#e6db74">&#34;paper: &#34;</span>, <span style="color:#e6db74">&#34;after &#34;</span>, <span style="color:#e6db74">&#34;gomaxprocs=&#34;</span>, <span style="color:#a6e22e">gomaxprocs</span>, <span style="color:#e6db74">&#34; idleprocs=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">npidle</span>, <span style="color:#e6db74">&#34; threads=&#34;</span>, <span style="color:#a6e22e">mcount</span>(), <span style="color:#e6db74">&#34; spinningthreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmspinning</span>, <span style="color:#e6db74">&#34; idlethreads=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">nmidle</span>, <span style="color:#e6db74">&#34; runqueue=&#34;</span>, <span style="color:#a6e22e">sched</span>.<span style="color:#a6e22e">runqsize</span>, <span style="color:#e6db74">&#34;\n&#34;</span>)
-    }
-
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-}
-</code></pre></div><p>我们先看看效果：</p>
 <ul>
-<li>
-<p>可以看到 <code>1.13</code> 一直在尝试抢占 P，可是一直没有函数调度的机会：</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build -o preempt preemptible.go
-$ ./preempt
-<span style="color:#ae81ff">12</span>
-paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-paper: gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-</code></pre></div></li>
-<li>
-<p>可以看到， <code>1.14</code> 调用 <code>preemptM</code> 之后， <code>main</code> 就抢占了 P，打印 <code>outside</code> 后退出。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ GOROOT<span style="color:#f92672">=</span>~/code/go114 PATH<span style="color:#f92672">=</span>$GOROOT/bin:$PATH go build -o preempt preemptible.go
-$ ./preempt
-<span style="color:#ae81ff">12</span>
-paper: before gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-paper: after gomaxprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> idleprocs<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> spinningthreads<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> idlethreads<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> runqueue<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-outside
-</code></pre></div></li>
+<li>1.13</li>
 </ul>
-<p>对比一下，其实 <code>1.14</code> 就是在 <code>preemptone</code> 后加入了：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Request an async preemption of this P.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">preemptMSupported</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">debug</span>.<span style="color:#a6e22e">asyncpreemptoff</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-    <span style="color:#a6e22e">_p_</span>.<span style="color:#a6e22e">preempt</span> = <span style="color:#66d9ef">true</span>
-    <span style="color:#a6e22e">preemptM</span>(<span style="color:#a6e22e">mp</span>)
+<pre><code>&lt;a id=&quot;code-snippet--1.13&quot;&gt;&lt;/a&gt;
+```go
+func preemptone(_p_ *p) bool {
+    mp := _p_.m.ptr()
+    if mp == nil || mp == getg().m {
+        return false
+    }
+    gp := mp.curg
+    if gp == nil || gp == mp.g0 {
+        return false
+    }
+
+    gp.preempt = true
+
+    // Every call in a go routine checks for stack overflow by
+    // comparing the current stack pointer to gp-&gt;stackguard0.
+    // Setting gp-&gt;stackguard0 to StackPreempt folds
+    // preemption into the normal stack overflow check.
+    gp.stackguard0 = stackPreempt
+    print(&quot;paper: &quot;, &quot;&quot;, &quot;gomaxprocs=&quot;, gomaxprocs, &quot; idleprocs=&quot;, sched.npidle, &quot; threads=&quot;, mcount(), &quot; spinningthreads=&quot;, sched.nmspinning, &quot; idlethreads=&quot;, sched.nmidle, &quot; runqueue=&quot;, sched.runqsize, &quot;\n&quot;)
+    return true
 }
-</code></pre></div><p><code>preemptM</code> 的实现就和平台相关了，可以看到，unix 平台的实现位于：<a href="https://github.com/golang/go/blob/329317472fd3fbc3179523bd70e03e452c829846/src/runtime/signal%5Funix.go#L346">runtime/signal_unix.go</a>
-主要就是给 M 发送了一个 <code>SIGURG</code> 信号，表示有 <code>urgent</code> 紧急的事件需要处理。</p>
+```
+</code></pre>
+<ul>
+<li>1.14</li>
+</ul>
+<pre><code>&lt;a id=&quot;code-snippet--1.14&quot;&gt;&lt;/a&gt;
+```go
+func preemptone(_p_ *p) bool {
+    mp := _p_.m.ptr()
+    if mp == nil || mp == getg().m {
+        return false
+    }
+    gp := mp.curg
+    if gp == nil || gp == mp.g0 {
+        return false
+    }
+
+    gp.preempt = true
+
+    // Every call in a go routine checks for stack overflow by
+    // comparing the current stack pointer to gp-&gt;stackguard0.
+    // Setting gp-&gt;stackguard0 to StackPreempt folds
+    // preemption into the normal stack overflow check.
+    gp.stackguard0 = stackPreempt
+
+    // Request an async preemption of this P.
+    if preemptMSupported &amp;&amp; debug.asyncpreemptoff == 0 {
+        _p_.preempt = true
+        print(&quot;paper: &quot;, &quot;before &quot;, &quot;gomaxprocs=&quot;, gomaxprocs, &quot; idleprocs=&quot;, sched.npidle, &quot; threads=&quot;, mcount(), &quot; spinningthreads=&quot;, sched.nmspinning, &quot; idlethreads=&quot;, sched.nmidle, &quot; runqueue=&quot;, sched.runqsize, &quot;\n&quot;)
+        preemptM(mp)
+        print(&quot;paper: &quot;, &quot;after &quot;, &quot;gomaxprocs=&quot;, gomaxprocs, &quot; idleprocs=&quot;, sched.npidle, &quot; threads=&quot;, mcount(), &quot; spinningthreads=&quot;, sched.nmspinning, &quot; idlethreads=&quot;, sched.nmidle, &quot; runqueue=&quot;, sched.runqsize, &quot;\n&quot;)
+    }
+
+    return true
+}
+```
+
+我们先看看效果：
+
+-   可以看到 `1.13` 一直在尝试抢占 P，可是一直没有函数调度的机会：
+
+    &lt;a id=&quot;code-snippet--1.13&quot;&gt;&lt;/a&gt;
+    ```shell
+    $ go build -o preempt preemptible.go
+    $ ./preempt
+    12
+    paper: gomaxprocs=1 idleprocs=0 threads=5 spinningthreads=0 idlethreads=3 runqueue=1
+    paper: gomaxprocs=1 idleprocs=0 threads=5 spinningthreads=0 idlethreads=3 runqueue=1
+    paper: gomaxprocs=1 idleprocs=0 threads=5 spinningthreads=0 idlethreads=3 runqueue=1
+    paper: gomaxprocs=1 idleprocs=0 threads=5 spinningthreads=0 idlethreads=3 runqueue=1
+    paper: gomaxprocs=1 idleprocs=0 threads=5 spinningthreads=0 idlethreads=3 runqueue=1
+    ```
+
+-   可以看到， `1.14` 调用 `preemptM` 之后， `main` 就抢占了 P，打印 `outside` 后退出。
+
+    &lt;a id=&quot;code-snippet--1.14&quot;&gt;&lt;/a&gt;
+    ```shell
+    $ GOROOT=~/code/go114 PATH=$GOROOT/bin:$PATH go build -o preempt preemptible.go
+    $ ./preempt
+    12
+    paper: before gomaxprocs=1 idleprocs=0 threads=5 spinningthreads=0 idlethreads=3 runqueue=1
+    paper: after gomaxprocs=1 idleprocs=0 threads=5 spinningthreads=0 idlethreads=3 runqueue=1
+    outside
+    ```
+
+对比一下，其实 `1.14` 就是在 `preemptone` 后加入了：
+
+```go
+// Request an async preemption of this P.
+if preemptMSupported &amp;&amp; debug.asyncpreemptoff == 0 {
+    _p_.preempt = true
+    preemptM(mp)
+}
+```
+
+`preemptM` 的实现就和平台相关了，可以看到，unix 平台的实现位于：[runtime/signal\_unix.go](https://github.com/golang/go/blob/329317472fd3fbc3179523bd70e03e452c829846/src/runtime/signal%5Funix.go#L346)
+主要就是给 M 发送了一个 `SIGURG` 信号，表示有 `urgent` 紧急的事件需要处理。
+</code></pre>
 <h4 id="不可抢占部分">不可抢占部分</h4>
 <p>另外，碰巧看到另一段代码：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">next</span> &lt; <span style="color:#a6e22e">now</span> {
@@ -398,7 +443,6 @@ outside
 <h2 id="总结">总结</h2>
 <p>总结一下，其实就一句话，1.14 在以前的抢占调度基础上，利用平台的能力（UNIX 平台的信号），
 触发真正的抢占式调度，而不需要依赖以前在函数调用时，检查栈的方法。</p>
-
     </div>
 
     <div class="post-copyright">
@@ -411,7 +455,7 @@ outside
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>775</span>
+                   <span>800</span>
             </p>
             
             <p class="copyright-item">
