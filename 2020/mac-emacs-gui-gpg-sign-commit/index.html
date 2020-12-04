@@ -57,10 +57,10 @@
   },
   "genre": "posts",
   "keywords": "Emacs",
-  "wordcount":  84 ,
+  "wordcount":  109 ,
   "url": "https:\/\/page.codespaper.com\/2020\/mac-emacs-gui-gpg-sign-commit\/",
   "datePublished": "2020-11-21T00:00:00\x2b08:00",
-  "dateModified": "2020-11-21T17:46:07\x2b08:00",
+  "dateModified": "2020-12-04T11:01:06\x2b08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -202,9 +202,17 @@ fatal: failed to write commit object</p>
 <p>解决方案，重启 gpg-agent：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">killall gpg-agent <span style="color:#f92672">&amp;&amp;</span> gpg-agent --daemon --pinentry-program /usr/local/bin/pinentry-mac
 </code></pre></div><h2 id="magit-默认签名">Magit 默认签名</h2>
+<p>Magit 现在使用 <code>Transient</code> 作为 UI，默认关闭了签名的配置项，需要手动打开：</p>
+<ol>
+<li><code>c</code> 打开 commit 界面</li>
+<li><code>C-x l</code> 打开 Transient Suffixes 配置界面</li>
+<li><code>-S</code> 选中 <code>gpg-sign</code></li>
+<li><code>1</code> 输入等级，小于 4 会展示</li>
+</ol>
 <p>Magit 配置页面可以通过 <code>C-x C-s</code> 保存当前配置，所以进入到 Commit 界面后</p>
 <ol>
-<li><code>-s</code> 使用签名</li>
+<li><code>-S</code> 使用签名</li>
+<li><code>-s</code> Commit 信息添加签名行</li>
 <li><code>C-x C-s</code> 保存配置</li>
 </ol>
     </div>
@@ -219,7 +227,7 @@ fatal: failed to write commit object</p>
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>84</span>
+                   <span>109</span>
             </p>
             
             <p class="copyright-item">
