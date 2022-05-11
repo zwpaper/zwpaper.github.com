@@ -1,40 +1,89 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  
-  
-  
-  
-  
-  <link rel="prev" href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" />
-  <link rel="next" href="https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/" />
-  <link rel="canonical" href="https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/" />
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡 | zwPapEr
-       
-  </title>
-  <meta name="title" content="从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡 | zwPapEr">
-    
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
+<html lang="en" dir="auto">
 
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡 | kWeiZh</title>
+<meta name="keywords" content="machineLearing, kubernetes">
+<meta name="description" content="传统的高性能计算集群一般都习惯性地使用 Slurm &#43; Lustre 的方案作为任务调度和存储，
+然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，
+而 Kubernetes 也成为了容器编排的事实标准。
+而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力，
+也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。">
+<meta name="author" content="zhangwei">
+<link rel="canonical" href="https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://page.codespaper.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://page.codespaper.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://page.codespaper.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://page.codespaper.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-  <meta name="twitter:card" content="summary"/>
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡" />
+<meta property="og:description" content="传统的高性能计算集群一般都习惯性地使用 Slurm &#43; Lustre 的方案作为任务调度和存储，
+然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，
+而 Kubernetes 也成为了容器编排的事实标准。
+而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力，
+也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-06-15T00:00:00&#43;08:00" />
+<meta property="article:modified_time" content="2020-03-22T21:13:07&#43;08:00" /><meta property="og:site_name" content="kWeiZh" />
+
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡"/>
 <meta name="twitter:description" content="传统的高性能计算集群一般都习惯性地使用 Slurm &#43; Lustre 的方案作为任务调度和存储，
 然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，
@@ -42,147 +91,138 @@
 而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力，
 也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。"/>
 
-  <script type="application/ld+json">
+
+<script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://page.codespaper.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "从 Slurm + Lustre 到 Kubeflow + Ceph (0)，简介和容器中使用显卡",
+      "item": "https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "从 Slurm \x2b Lustre 到 Kubeflow \x2b Ceph (0)，简介和容器中使用显卡",
+  "headline": "从 Slurm + Lustre 到 Kubeflow + Ceph (0)，简介和容器中使用显卡",
+  "name": "从 Slurm \u002b Lustre 到 Kubeflow \u002b Ceph (0)，简介和容器中使用显卡",
+  "description": "传统的高性能计算集群一般都习惯性地使用 Slurm + Lustre 的方案作为任务调度和存储， 然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化， 而 Kubernetes 也成为了容器编排的事实标准。\n而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力， 也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。\n",
+  "keywords": [
+    "machineLearing", "kubernetes"
+  ],
+  "articleBody": "传统的高性能计算集群一般都习惯性地使用 Slurm + Lustre 的方案作为任务调度和存储， 然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化， 而 Kubernetes 也成为了容器编排的事实标准。\n而且，对比容器化的简洁， Slurm 和 Lustre 复杂的配置，让人头疼的运維压力， 也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。\n简介 本系列文章主要记录了在 Kubernetes 内使用 Pytorch 运行 ImageNet 的淌坑经验， 同时也使用 CephFS 作为网络存储，解决数据存放问题。\n计划：\n 简介和容器内使用显卡（本文） Kuberentes 和 Device Plugin Kubeflow 和 Pytorch-Operator CSI(Cofntainer Storage Interface) 和 CephFS 网络存储 mnist Demo 和分布式训练（MPI) 分布式 ImageNet  Slurm Slurm(Simple Linux Utility for Resource Management) 是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具， 被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。\nSlurm 的成熟度毋庸置疑，但是有两个问题：\n 在互联网公司不一定能有专人维护 Slurm 集群 交付环境没有 Slurm  Lustre Lustre(得名于：Linux + Cluster) 一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。 很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。\nKubernetes + Ceph 互联网时代，容器化并使用 Kubernetes 同时使用 Ceph 作为网络存储肯定是毫无疑问的方案和方向。 如果 Kubernetes + Ceph 能够解决机器学习中高性能集群资源分配和利用的问题， 那对于互联网公司，肯定会是更好的选择。\n容器内使用显卡 GPU 现在机器学习的主流是深度学习，自然 GPU 是少不了的。本文中使用了 Nvidia 的 GTX 1080Ti。\n驱动 首先确认机器上是否有 GPU 卡：\nlspci -vnn | grep NVIDIA # Nvidia 显卡可以用自家工具看到详情 nvidia-smi 确认安装了 Nvidia 驱动 (cuda-driver)，一般直接从源里安装即可。\nhttps://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver\n如果官方源里没有，那就在 Nvidia 提供的这里下载安装文件，安装也可。\n这里需要注意的是高版本的 CUDA 同样需要高版本的驱动，对应关系如下：\n!CUDA Driver\nNvidia docker 2.0 https://github.com/NVIDIA/nvidia-docker\n默认的 Docker 是不支持 GPU 的，所以我们需要 nvidia-docker ，这是 Nvidia 为了支持 Docker 生态出的一个包， 而 nvidia docker 2.0 是第二版，主要是为 Docker 新增了一个 nvidia 的运行时，\n所以在安装完 nvidia docker 2.0 后，需要把 Docker 的默认运行时个性为 nvidia 。 可以通过修改 docker 配置文件 /etc/docker/daemon.json 让 docker 能够使用 Nvidia Container Runtime\nNvidia Container Runtime 作为核心部分，在原有的容器运行时 runc 的基础上增加一个 prestart hook ， 用于调用 libnvidia-container 库。\nlibnvidia-container 提供一个库和一个简单的 Cli 工具，这个库让容器能够使用 Nvidia 的 GPU。\nrunc 是docker默认的容器运行时，根据 Open Containers Initiative (OCI) 创建容器。\n总而言之，就是当我们要在 Docker 里使用 Nvidia GPU 时，就必须要安装 Nvidia Docker\n安装完之后，基本的用法如下，可以测试一下：\ndocker run --runtime=nvidia --rm nvidia/cuda nvidia-smi 如果出现 brand = tesla: unknown 的错误，就是 cuda 的版本和我们使用的驱动不匹配， 可以看一下宿主显卡驱动的版本和使用的 CUDA 版本，然后对照上文的图片看是否匹配。\n可以使用对应版本的 CUDA 镜像，如：\ndocker run --runtime=nvidia --rm nvidia/cuda:8.0-runtime nvidia-smi 也可以更新宿主机驱动。\n至此，我们就可以在容器内使用 GPU 了，但是我们想在 Kubernetes 内使用，还需要使用 Device Plugin ，这个会在后文说到。\n",
+  "wordCount" : "237",
+  "inLanguage": "en",
+  "datePublished": "2019-06-15T00:00:00+08:00",
+  "dateModified": "2020-03-22T21:13:07+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "zhangwei"
+  }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https:\/\/page.codespaper.com\/2019\/slurm-lustre-to-kubeflow-ceph\/"
+    "@id": "https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/"
   },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/page.codespaper.com\/cover.png",
-    "width":  800 ,
-    "height":  600 
-  },
-  "genre": "posts",
-  "keywords": "machineLearing, kubernetes",
-  "wordcount":  237 ,
-  "url": "https:\/\/page.codespaper.com\/2019\/slurm-lustre-to-kubeflow-ceph\/",
-  "datePublished": "2019-06-15T00:00:00\x2b08:00",
-  "dateModified": "2020-03-22T21:13:07\x2b08:00",
-  
   "publisher": {
     "@type": "Organization",
-    "name": "zwPapEr",
+    "name": "kWeiZh",
     "logo": {
       "@type": "ImageObject",
-      "url": "https:\/\/page.codespaper.com\/ironman.png",
-      "width":  127 ,
-      "height":  40 
+      "url": "https://page.codespaper.com/favicon.ico"
     }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "[zhangwei]"
-  },
-  "description": ""
+  }
 }
 </script>
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 </head>
 
-  
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
 
+</script>
 
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="https://page.codespaper.com/">zwPapEr</a>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
-        <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
-            <div class="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-        </div>
-    </div>
-</nav>
+        <ul id="menu">
+            <li>
+                <a href="https://page.codespaper.com/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp">
-    <header class="post-header">
-        <h1 class="post-title">从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</h1>
-        <div class="post-meta">
-            Written by <a href="https://page.codespaper.com/" rel="author">[zhangwei]</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2019-06-15 >15 June 2019</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                2 min
-        </div>
-    </header>
-    <div class="post-content">
-        
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡
+    </h1>
+    <div class="post-meta"><span title='2019-06-15 00:00:00 +0800 CST'>June 15, 2019</span>&nbsp;·&nbsp;zhangwei
 
-        
-
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          <p>传统的高性能计算集群一般都习惯性地使用 <code>Slurm</code> + <code>Lustre</code> 的方案作为任务调度和存储，
+</div>
+  </header> 
+  <div class="post-content"><p>传统的高性能计算集群一般都习惯性地使用 <code>Slurm</code> + <code>Lustre</code> 的方案作为任务调度和存储，
 然而，随着容器的发展，互联网业务的部署已经越来越多地开始了容器化，
 而 <code>Kubernetes</code> 也成为了容器编排的事实标准。</p>
 <p>而且，对比容器化的简洁， <code>Slurm</code> 和 <code>Lustre</code> 复杂的配置，让人头疼的运維压力，
 也让作为互联网的最前沿之一的机器学习，也开始了容器化探索。</p>
-<h2 id="简介">简介</h2>
+<h2 id="简介">简介<a hidden class="anchor" aria-hidden="true" href="#简介">#</a></h2>
 <p>本系列文章主要记录了在 <code>Kubernetes</code> 内使用 <code>Pytorch</code> 运行 <code>ImageNet</code> 的淌坑经验，
 同时也使用 CephFS 作为网络存储，解决数据存放问题。</p>
 <p>计划：</p>
@@ -194,7 +234,7 @@ if (!doNotTrack) {
 <li>mnist Demo 和分布式训练（MPI)</li>
 <li>分布式 ImageNet</li>
 </ul>
-<h3 id="slurm">Slurm</h3>
+<h3 id="slurm">Slurm<a hidden class="anchor" aria-hidden="true" href="#slurm">#</a></h3>
 <p>Slurm(Simple Linux Utility for Resource Management)
 是一个用于Linux 和 Unix 内核系统的免费、开源的任务调度工具，
 被世界范围内的（包括天河等）超级计算机和计算机群广泛采用。</p>
@@ -203,20 +243,20 @@ if (!doNotTrack) {
 <li>在互联网公司不一定能有专人维护 Slurm 集群</li>
 <li>交付环境没有 Slurm</li>
 </ol>
-<h3 id="lustre">Lustre</h3>
+<h3 id="lustre">Lustre<a hidden class="anchor" aria-hidden="true" href="#lustre">#</a></h3>
 <p>Lustre(得名于：Linux + Cluster)
 一种平行分布式文件系统，通常用于大型计算机集群和超级计算机。
 很多时候都是和 Slurm 配套使用的，所以也会有类似 Slurm 的两个问题。</p>
-<h3 id="kubernetes-plus-ceph">Kubernetes + Ceph</h3>
+<h3 id="kubernetes-plus-ceph">Kubernetes + Ceph<a hidden class="anchor" aria-hidden="true" href="#kubernetes-plus-ceph">#</a></h3>
 <p>互联网时代，容器化并使用 Kubernetes 同时使用 Ceph 作为网络存储肯定是毫无疑问的方案和方向。
 如果 Kubernetes + Ceph 能够解决机器学习中高性能集群资源分配和利用的问题，
 那对于互联网公司，肯定会是更好的选择。</p>
-<h2 id="容器内使用显卡">容器内使用显卡</h2>
-<h3 id="gpu">GPU</h3>
+<h2 id="容器内使用显卡">容器内使用显卡<a hidden class="anchor" aria-hidden="true" href="#容器内使用显卡">#</a></h2>
+<h3 id="gpu">GPU<a hidden class="anchor" aria-hidden="true" href="#gpu">#</a></h3>
 <p>现在机器学习的主流是深度学习，自然 GPU 是少不了的。本文中使用了 Nvidia 的 GTX 1080Ti。</p>
-<h4 id="驱动">驱动</h4>
+<h4 id="驱动">驱动<a hidden class="anchor" aria-hidden="true" href="#驱动">#</a></h4>
 <p>首先确认机器上是否有 GPU 卡：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lspci -vnn | grep NVIDIA
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lspci -vnn | grep NVIDIA
 
 <span style="color:#75715e"># Nvidia 显卡可以用自家工具看到详情</span>
 nvidia-smi
@@ -225,7 +265,7 @@ nvidia-smi
 <p>如果官方源里没有，那就在 Nvidia 提供的<a href="https://www.nvidia.com/object/unix.html">这里</a>下载安装文件，安装也可。</p>
 <p>这里需要注意的是高版本的 CUDA 同样需要高版本的驱动，对应关系如下：</p>
 <p>!<a href="/images/cudadriver.jpg">CUDA Driver</a></p>
-<h4 id="nvidia-docker-2-dot-0">Nvidia docker 2.0</h4>
+<h4 id="nvidia-docker-2-dot-0">Nvidia docker 2.0<a hidden class="anchor" aria-hidden="true" href="#nvidia-docker-2-dot-0">#</a></h4>
 <p><a href="https://github.com/NVIDIA/nvidia-docker">https://github.com/NVIDIA/nvidia-docker</a></p>
 <p>默认的 Docker 是不支持 GPU 的，所以我们需要 <code>nvidia-docker</code> ，这是 Nvidia 为了支持 Docker 生态出的一个包，
 而 <code>nvidia docker 2.0</code> 是第二版，主要是为 <code>Docker</code> 新增了一个 <code>nvidia</code> 的运行时，</p>
@@ -237,183 +277,93 @@ nvidia-smi
 <p><code>runc</code> 是docker默认的容器运行时，根据 <code>Open Containers Initiative (OCI)</code> 创建容器。</p>
 <p>总而言之，就是当我们要在 Docker 里使用 Nvidia GPU 时，就必须要安装 <code>Nvidia Docker</code></p>
 <p>安装完之后，基本的用法如下，可以测试一下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --runtime<span style="color:#f92672">=</span>nvidia --rm nvidia/cuda nvidia-smi
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --runtime<span style="color:#f92672">=</span>nvidia --rm nvidia/cuda nvidia-smi
 </code></pre></div><p>如果出现 <code>brand = tesla: unknown</code> 的错误，就是 cuda 的版本和我们使用的驱动不匹配，
 可以看一下宿主显卡驱动的版本和使用的 CUDA 版本，然后对照上文的图片看是否匹配。</p>
 <p>可以使用对应版本的 CUDA 镜像，如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --runtime<span style="color:#f92672">=</span>nvidia --rm nvidia/cuda:8.0-runtime nvidia-smi
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --runtime<span style="color:#f92672">=</span>nvidia --rm nvidia/cuda:8.0-runtime nvidia-smi
 </code></pre></div><p>也可以更新宿主机驱动。</p>
 <p>至此，我们就可以在容器内使用 GPU 了，但是我们想在 Kubernetes 内使用，还需要使用 <code>Device Plugin</code> ，这个会在后文说到。</p>
-    </div>
 
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>zwPapEr </span>
-                </p>
-            
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>237</span>
-            </p>
-            
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+  </div>
 
-      
-        <a href="//twitter.com/share?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f&amp;text=%e4%bb%8e%20Slurm%20%2b%20Lustre%20%e5%88%b0%20Kubeflow%20%2b%20Ceph%20%280%29%ef%bc%8c%e7%ae%80%e4%bb%8b%e5%92%8c%e5%ae%b9%e5%99%a8%e4%b8%ad%e4%bd%bf%e7%94%a8%e6%98%be%e5%8d%a1&amp;via=zwpaper" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
-        </a>
-        
-      
-      
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f" target="_blank" title="Share on Facebook">
-          <i class="iconfont icon-facebook"></i>
-        </a>
-        
-      
-      
-        <a href="//reddit.com/submit?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f&amp;title=%e4%bb%8e%20Slurm%20%2b%20Lustre%20%e5%88%b0%20Kubeflow%20%2b%20Ceph%20%280%29%ef%bc%8c%e7%ae%80%e4%bb%8b%e5%92%8c%e5%ae%b9%e5%99%a8%e4%b8%ad%e4%bd%bf%e7%94%a8%e6%98%be%e5%8d%a1" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
-        </a>
-        
-      
-      
-      
-      
-        
-      
-        
-      
-
-          
-
-          
-
-          
-
-          
-        <a href="//service.weibo.com/share/share.php?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fslurm-lustre-to-kubeflow-ceph%2f&amp;appkey=&amp;title=%e4%bb%8e%20Slurm%20%2b%20Lustre%20%e5%88%b0%20Kubeflow%20%2b%20Ceph%20%280%29%ef%bc%8c%e7%ae%80%e4%bb%8b%e5%92%8c%e5%ae%b9%e5%99%a8%e4%b8%ad%e4%bd%bf%e7%94%a8%e6%98%be%e5%8d%a1" target="_blank" title="Share on Douban ">
-            <i class="iconfont icon-weibo"></i>
-          </a>
-          
-</span>
-                
-            </p>
-
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
-    </div>
-
-  
-    <div class="post-tags">
-        
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
-            
-            <span class="tag"><a href="https://page.codespaper.com/tags/machinelearing/">
-                    #machineLearing</a></span>
-            
-            <span class="tag"><a href="https://page.codespaper.com/tags/kubernetes/">
-                    #kubernetes</a></span>
-            
-            </section>
-        
-        <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="https://page.codespaper.com/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-        
-        <a href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" class="prev" rel="prev" title="作为新手，为什么我选 Typescript"><i class="iconfont icon-dajiantou"></i>&nbsp;作为新手，为什么我选 Typescript</a>
-         
-        
-        <a href="https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/" class="next" rel="next" title="dnsmasq &#43; Cloudflare DoH 自建 DNS">dnsmasq &#43; Cloudflare DoH 自建 DNS&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
-        
-    </div>
-
-    <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
-  <script type="text/javascript">
-      (function() {
-          
-          
-          if (window.location.hostname == "localhost")
-              return;
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          var disqus_shortname = 'codespaper';
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
- 
-
-          
-    </div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://page.codespaper.com/tags/machinelearing/">machineLearing</a></li>
+      <li><a href="https://page.codespaper.com/tags/kubernetes/">kubernetes</a></li>
+    </ul>
+  </footer>
 </article>
-          </div>
-		   </main>
-      <footer class="footer">
-    <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2012 - 2021</span>
-        
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
-         
-
-		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
-    </div>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
 
-
-
-
-
-
-
-
-
-
-    
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
-    
-  
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
 
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
 
+</script>
+</body>
 
-     </div>
-  </body>
 </html>

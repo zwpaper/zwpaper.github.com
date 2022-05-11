@@ -1,40 +1,91 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  
-  
-  
-  
-  
-  <link rel="prev" href="https://page.codespaper.com/2019/gpg-encrypt-org/" />
-  <link rel="next" href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" />
-  <link rel="canonical" href="https://page.codespaper.com/2019/why-golang/" />
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           为什么我觉得 Golang 更好 | zwPapEr
-       
-  </title>
-  <meta name="title" content="为什么我觉得 Golang 更好 | zwPapEr">
-    
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
+<html lang="en" dir="auto">
 
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>为什么我觉得 Golang 更好 | kWeiZh</title>
+<meta name="keywords" content="Go">
+<meta name="description" content="最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more
 
-  <meta name="twitter:card" content="summary"/>
+如果你不知道 Rob Pike 是谁：Rob Pike
+或者用一句话介绍，Golang 作者之一
+
+结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚">
+<meta name="author" content="zwPapEr">
+<link rel="canonical" href="https://page.codespaper.com/2019/why-golang/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://page.codespaper.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://page.codespaper.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://page.codespaper.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://page.codespaper.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="为什么我觉得 Golang 更好" />
+<meta property="og:description" content="最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more
+
+如果你不知道 Rob Pike 是谁：Rob Pike
+或者用一句话介绍，Golang 作者之一
+
+结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://page.codespaper.com/2019/why-golang/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-03-10T00:00:00&#43;08:00" />
+<meta property="article:modified_time" content="2020-03-22T21:14:08&#43;08:00" /><meta property="og:site_name" content="kWeiZh" />
+
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="为什么我觉得 Golang 更好"/>
 <meta name="twitter:description" content="最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more
 
@@ -43,148 +94,139 @@
 
 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚"/>
 
-  <script type="application/ld+json">
+
+<script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://page.codespaper.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "为什么我觉得 Golang 更好",
+      "item": "https://page.codespaper.com/2019/why-golang/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "为什么我觉得 Golang 更好",
+  "name": "为什么我觉得 Golang 更好",
+  "description": "最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more\n 如果你不知道 Rob Pike 是谁：Rob Pike\n或者用一句话介绍，Golang 作者之一\n 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚\n",
+  "keywords": [
+    "Go"
+  ],
+  "articleBody": "最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more\n 如果你不知道 Rob Pike 是谁：Rob Pike\n或者用一句话介绍，Golang 作者之一\n 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚\n从 C++ 到 Golang Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：Newsqueak， 在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)， 作为一名在 Google 的 C++ 工程师 Rob Pike 自然也十分关注，可是也在这时候， Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉得在 Newsqueak 里有一些特性， 如果能用在开发里，会对服务器端的很多开发都会有帮助。\n可是 C++ 庞大复杂的体系，要加一些比较不一样的特性已经不是一件易事，而且可能也不值得， 所以在 C++ 项目编译的时间里（编译一次要 45 分钟，还是在编译集群上！）Rob 就拉上了 Ken Thompson 和 Robert Griesemer 决定要做点事情，Golang 从此开始登上历史的舞台。\n要知道 Ken, Rob, 都是贝尔实验室的大佬，一直在 Google 做 C++, 决心要针对 C++ 做一个优化， 这就是突破性的了，更别说 Ken 是 Unix，Plan 9，C 语言作为作者之一。\n大道至简 在文章中，就如文章标题，Rob 希望重新造轮子的原因主要就是觉得 C++ 太复杂了，觉得大道应该至简， 所以才考虑重新从头设计一门语言。\n 文章里多次提到了在 C++ 编译的时候，Rob 去找同事们聊天，这个编译时间， 对 Rob 来说，应该还是感觉挺难受的。\n 本来 Robert 希望 Go 从 C 语言出发，但是最后还是决定，从零出发，至简就该如此。所以网上常说 Golang 是 Better C，其实 Golang 是 Better language。\n文章中提到了很多的简化，只要写代码过程中，可能需要考虑，而又没必要的东西，Golang 都直接不出现。\n 没有头文件 常量只能是数字 没有子类型继承 文件被编译到一个包里 没有指针运算 内存一直以零值初始化  等等。\n甚至，连泛型都没有，而且 Golang 也借鉴了函数式编程的函数作为 first class object ， 但是其它一些函数式编程的优点就什么也都没有了，就像： map, filter, reduce 等，\n因为 Rob 说，用 for 吧\n https://github.com/robpike/filter\n 从语言层面，Golang 就对代码规范进行了限制，还提供了 fmt 格式化工具，doc 文档体系， 这都像是在说，这些不关紧要的东西，就都不要去考虑了。\n并发，也是一样的，从语言级别的支持，一个 go 关键字，加上 channel 的 CSP 并发模型， 可以说是很大程度地简化了开发高并发软件的复杂度。\n真正的 OOP  If C++ and Java are about type hierarchies and the taxonomy of types, Go is about composition.\nGo takes that idea and pushes it very far. It is a language of composition and coupling.\n 之前看到一个讨论，就在说 Golang 的编程思想，提到为什么 Golang 不用传统的 OOP 思想， 而是用了一套 组合 代替，原因也在这，Rob 认为 Java 和 C++ 推崇的 OOP 思想更多的是历史包袱， 程序员们更应该关注的是接口。\n目前的 OOP 思想更多的都是 Java 和 C++ 的流行而发展出来的，与最初的 对象范式 已经走上不同的道路了。 Golang 也许是第一个明确使用了最初 对象范式 设计的语言，这个可能还需要用一篇文章来研究。\n高层抽象 最近也在看一些函数式编程的文章，有一个观点我还是挺认可的：\n函数式编程把一些无关紧要的问题封装在了语言级别，写程序时，可以不需要考虑，如 内存管理 ， for 循环 等。 以前函数式编程不流行，更多的是因为当时的算力或者编译程序不足以让函数式语言的体验与过程式语言匹敌， 但是现在时机已经来了，函数式编程马上要再次走上舞台了。\n一个例子是 内存管理 ，虽然说这是很多高级语言都有的特性，可是这不也是一个证明，语言级别能解决好的事情， 就让语言去解决吧。\n另一个例子是 Clojure 一次对 Map 和 vector 扩展，内部进行了并行优化，开发者不需要改变就得到了性能提升。\nGolang 对并发的封装，也是一个高层抽象的表现。\n这个也可能需要一篇文章来研究。\n",
+  "wordCount" : "241",
+  "inLanguage": "en",
+  "datePublished": "2019-03-10T00:00:00+08:00",
+  "dateModified": "2020-03-22T21:14:08+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "zwPapEr"
+  }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https:\/\/page.codespaper.com\/2019\/why-golang\/"
+    "@id": "https://page.codespaper.com/2019/why-golang/"
   },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/page.codespaper.com\/cover.png",
-    "width":  800 ,
-    "height":  600 
-  },
-  "genre": "posts",
-  "keywords": "Go",
-  "wordcount":  241 ,
-  "url": "https:\/\/page.codespaper.com\/2019\/why-golang\/",
-  "datePublished": "2019-03-10T00:00:00\x2b08:00",
-  "dateModified": "2020-03-22T21:14:08\x2b08:00",
-  
   "publisher": {
     "@type": "Organization",
-    "name": "zwPapEr",
+    "name": "kWeiZh",
     "logo": {
       "@type": "ImageObject",
-      "url": "https:\/\/page.codespaper.com\/ironman.png",
-      "width":  127 ,
-      "height":  40 
+      "url": "https://page.codespaper.com/favicon.ico"
     }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "[zwPapEr]"
-  },
-  "description": ""
+  }
 }
 </script>
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 </head>
 
-  
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
 
+</script>
 
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="https://page.codespaper.com/">zwPapEr</a>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
-        <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
-            <div class="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-        </div>
-    </div>
-</nav>
+        <ul id="menu">
+            <li>
+                <a href="https://page.codespaper.com/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp">
-    <header class="post-header">
-        <h1 class="post-title">为什么我觉得 Golang 更好</h1>
-        <div class="post-meta">
-            Written by <a href="https://page.codespaper.com/" rel="author">[zwPapEr]</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2019-03-10 >10 March 2019</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                2 min
-        </div>
-    </header>
-    <div class="post-content">
-        
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      为什么我觉得 Golang 更好
+    </h1>
+    <div class="post-meta"><span title='2019-03-10 00:00:00 +0800 CST'>March 10, 2019</span>&nbsp;·&nbsp;zwPapEr
 
-        
-
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          <p>最近看到 Rob Pike 在 2012 年写的一篇文章，<a href="https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html">Less is exponentially more</a></p>
+</div>
+  </header> 
+  <div class="post-content"><p>最近看到 Rob Pike 在 2012 年写的一篇文章，<a href="https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html">Less is exponentially more</a></p>
 <blockquote>
 <p>如果你不知道 Rob Pike 是谁：<a href="https://zh.wikipedia.org/wiki/%25E7%25BE%2585%25E5%258B%2583%25C2%25B7%25E6%25B4%25BE%25E5%2585%258B">Rob Pike</a></p>
 <p>或者用一句话介绍，Golang 作者之一</p>
 </blockquote>
 <p>结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚</p>
-<h2 id="从-c-plus-plus-到-golang">从 C++ 到 Golang</h2>
+<h2 id="从-c-plus-plus-到-golang">从 C++ 到 Golang<a hidden class="anchor" aria-hidden="true" href="#从-c-plus-plus-到-golang">#</a></h2>
 <p>Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：<a href="https://swtch.com/~rsc/thread/newsqueak.pdf">Newsqueak</a>，
 在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)，
 作为一名在 Google 的 C++ 工程师 Rob Pike 自然也十分关注，可是也在这时候，
@@ -195,7 +237,7 @@ Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉�
 <a href="https://en.wikipedia.org/wiki/Ken%5FThompson">Ken Thompson</a> 和 Robert Griesemer 决定要做点事情，Golang 从此开始登上历史的舞台。</p>
 <p>要知道 Ken, Rob, 都是贝尔实验室的大佬，一直在 Google 做 C++, 决心要针对 C++ 做一个优化，
 这就是突破性的了，更别说 Ken 是 Unix，Plan 9，C 语言作为作者之一。</p>
-<h2 id="大道至简">大道至简</h2>
+<h2 id="大道至简">大道至简<a hidden class="anchor" aria-hidden="true" href="#大道至简">#</a></h2>
 <p>在文章中，就如文章标题，Rob 希望重新造轮子的原因主要就是觉得 C++ 太复杂了，觉得大道应该至简，
 所以才考虑重新从头设计一门语言。</p>
 <blockquote>
@@ -224,7 +266,7 @@ Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉�
 这都像是在说，这些不关紧要的东西，就都不要去考虑了。</p>
 <p>并发，也是一样的，从语言级别的支持，一个 <code>go</code> 关键字，加上 <code>channel</code> 的 CSP 并发模型，
 可以说是很大程度地简化了开发高并发软件的复杂度。</p>
-<h2 id="真正的-oop">真正的 OOP</h2>
+<h2 id="真正的-oop">真正的 OOP<a hidden class="anchor" aria-hidden="true" href="#真正的-oop">#</a></h2>
 <blockquote>
 <p>If C++ and Java are about type hierarchies and the taxonomy of types, Go is about composition.</p>
 <p>Go takes that idea and pushes it very far. It is a language of composition and coupling.</p>
@@ -234,7 +276,7 @@ Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉�
 程序员们更应该关注的是接口。</p>
 <p>目前的 OOP 思想更多的都是 Java 和 C++ 的流行而发展出来的，与最初的 <code>对象范式</code> 已经走上不同的道路了。
 Golang 也许是第一个明确使用了最初 <code>对象范式</code> 设计的语言，这个可能还需要用一篇文章来研究。</p>
-<h2 id="高层抽象">高层抽象</h2>
+<h2 id="高层抽象">高层抽象<a hidden class="anchor" aria-hidden="true" href="#高层抽象">#</a></h2>
 <p>最近也在看一些函数式编程的文章，有一个观点我还是挺认可的：</p>
 <p>函数式编程把一些无关紧要的问题封装在了语言级别，写程序时，可以不需要考虑，如 <code>内存管理</code> ， <code>for 循环</code> 等。
 以前函数式编程不流行，更多的是因为当时的算力或者编译程序不足以让函数式语言的体验与过程式语言匹敌，
@@ -244,173 +286,85 @@ Golang 也许是第一个明确使用了最初 <code>对象范式</code> 设计�
 <p>另一个例子是 Clojure 一次对 Map 和 vector 扩展，内部进行了并行优化，开发者不需要改变就得到了性能提升。</p>
 <p>Golang 对并发的封装，也是一个高层抽象的表现。</p>
 <p>这个也可能需要一篇文章来研究。</p>
-    </div>
 
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>zwPapEr </span>
-                </p>
-            
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>241</span>
-            </p>
-            
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+  </div>
 
-      
-        <a href="//twitter.com/share?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fwhy-golang%2f&amp;text=%e4%b8%ba%e4%bb%80%e4%b9%88%e6%88%91%e8%a7%89%e5%be%97%20Golang%20%e6%9b%b4%e5%a5%bd&amp;via=zwpaper" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
-        </a>
-        
-      
-      
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpage.codespaper.com%2f2019%2fwhy-golang%2f" target="_blank" title="Share on Facebook">
-          <i class="iconfont icon-facebook"></i>
-        </a>
-        
-      
-      
-        <a href="//reddit.com/submit?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fwhy-golang%2f&amp;title=%e4%b8%ba%e4%bb%80%e4%b9%88%e6%88%91%e8%a7%89%e5%be%97%20Golang%20%e6%9b%b4%e5%a5%bd" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
-        </a>
-        
-      
-      
-      
-      
-        
-      
-        
-      
-
-          
-
-          
-
-          
-
-          
-        <a href="//service.weibo.com/share/share.php?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fwhy-golang%2f&amp;appkey=&amp;title=%e4%b8%ba%e4%bb%80%e4%b9%88%e6%88%91%e8%a7%89%e5%be%97%20Golang%20%e6%9b%b4%e5%a5%bd" target="_blank" title="Share on Douban ">
-            <i class="iconfont icon-weibo"></i>
-          </a>
-          
-</span>
-                
-            </p>
-
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
-    </div>
-
-  
-    <div class="post-tags">
-        
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
-            
-            <span class="tag"><a href="https://page.codespaper.com/tags/go/">
-                    #Go</a></span>
-            
-            </section>
-        
-        <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="https://page.codespaper.com/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-        
-        <a href="https://page.codespaper.com/2019/gpg-encrypt-org/" class="prev" rel="prev" title="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件"><i class="iconfont icon-dajiantou"></i>&nbsp;使用 GPG 在 Emacs 中加密 Org Mode 笔记文件</a>
-         
-        
-        <a href="https://page.codespaper.com/2019/js-to-ts-for-newbie/" class="next" rel="next" title="作为新手，为什么我选 Typescript">作为新手，为什么我选 Typescript&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
-        
-    </div>
-
-    <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
-  <script type="text/javascript">
-      (function() {
-          
-          
-          if (window.location.hostname == "localhost")
-              return;
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          var disqus_shortname = 'codespaper';
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
- 
-
-          
-    </div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://page.codespaper.com/tags/go/">Go</a></li>
+    </ul>
+  </footer>
 </article>
-          </div>
-		   </main>
-      <footer class="footer">
-    <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2012 - 2021</span>
-        
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
-         
-
-		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
-    </div>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
 
-
-
-
-
-
-
-
-
-
-    
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
-    
-  
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
 
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
 
+</script>
+</body>
 
-     </div>
-  </body>
 </html>

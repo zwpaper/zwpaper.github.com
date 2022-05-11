@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>JavasSript on zwPapEr</title>
+    <title>JavasSript on kWeiZh</title>
     <link>https://page.codespaper.com/tags/javassript/</link>
-    <description>Recent content in JavasSript on zwPapEr</description>
+    <description>Recent content in JavasSript on kWeiZh</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://page.codespaper.com/tags/javassript/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/javassript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>作为新手，为什么我选 Typescript</title>
       <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>

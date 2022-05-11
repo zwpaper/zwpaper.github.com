@@ -1,184 +1,220 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  
-  
-  
-  
-  
-  <link rel="prev" href="https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/" />
-  <link rel="next" href="https://page.codespaper.com/2019/why-golang/" />
-  <link rel="canonical" href="https://page.codespaper.com/2019/gpg-encrypt-org/" />
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           使用 GPG 在 Emacs 中加密 Org Mode 笔记文件 | zwPapEr
-       
-  </title>
-  <meta name="title" content="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件 | zwPapEr">
-    
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
+<html lang="en" dir="auto">
 
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>使用 GPG 在 Emacs 中加密 Org Mode 笔记文件 | kWeiZh</title>
+<meta name="keywords" content="Emacs, OrgMode">
+<meta name="description" content="Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+但是有一些敏感信息，还是认为谁都不值得信任。
+所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。">
+<meta name="author" content="zwPapEr">
+<link rel="canonical" href="https://page.codespaper.com/2019/gpg-encrypt-org/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://page.codespaper.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://page.codespaper.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://page.codespaper.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://page.codespaper.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-  <meta name="twitter:card" content="summary"/>
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件" />
+<meta property="og:description" content="Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+但是有一些敏感信息，还是认为谁都不值得信任。
+所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://page.codespaper.com/2019/gpg-encrypt-org/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-03-09T00:00:00&#43;08:00" />
+<meta property="article:modified_time" content="2020-03-22T21:14:30&#43;08:00" /><meta property="og:site_name" content="kWeiZh" />
+
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件"/>
 <meta name="twitter:description" content="Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
 但是有一些敏感信息，还是认为谁都不值得信任。
 所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。"/>
 
-  <script type="application/ld+json">
+
+<script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://page.codespaper.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "使用 GPG 在 Emacs 中加密 Org Mode 笔记文件",
+      "item": "https://page.codespaper.com/2019/gpg-encrypt-org/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "使用 GPG 在 Emacs 中加密 Org Mode 笔记文件",
+  "name": "使用 GPG 在 Emacs 中加密 Org Mode 笔记文件",
+  "description": "Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好， 但是有一些敏感信息，还是认为谁都不值得信任。\n所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。\n",
+  "keywords": [
+    "Emacs", "OrgMode"
+  ],
+  "articleBody": "Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好， 但是有一些敏感信息，还是认为谁都不值得信任。\n所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， EasyPG Assistant 可以很方便地加解密。\nGPG  https://zh.wikipedia.org/wiki/GnuPG\n GNU Privacy Guard（GnuPG或GPG）是一种加密软件，它是PGP加密软件的满足GPL的替代物。GnuPG依照由IETF订定的OpenPGP技术标准设计。 GnuPG用于加密、数字签名及产生非对称钥匙对的软件。\n 如果不了解 GPG，推荐看一下阮一峰老师的文章，快速入门 http://www.ruanyifeng.com/blog/2013/07/gpg.html\n 简单地说就是可以通过 GPG 使用两种方式加密文件：\n 对称加密，只使用密码对文件进行加密 非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥  配置 macOS 通过 brew 安装 gpg\nbrew install gpg Emacs 通过 use-package 配置 Emacs\n 如果没用过 use-package 可以看一下： https://github.com/jwiegley/use-package\n macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决\n(setq epa-pinentry-mode 'loopback) 最后，配置文件如下：\n(use-package epa-file :ensure nil :config (epa-file-enable) (setq epa-pinentry-mode 'loopback)) 使用 对称加密 默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密\n每次打开文件时，都要输入密码，保存时，甚至要输入两次，因为被当成新加密了。\n可以把密码缓存起来：\n(setq epa-file-cache-passphrase-for-symmetric-encryption t) 再打开和保存这个文件时，就不用输入密码，\n但是!!\n这个缓存是在 gpg agent 进程里的，如果能确保电脑没别人会用，倒还好， 否则别人也是可能通过 gpg agent 的缓存读到解密内容的！ 或者说使用完，关了 Emacs 之后，其它人再重新打开，尝试读取，也是能载入缓存的！\n可以通过加一个 Hook，在关 Emacs 的时候，把 gpg agent 也杀了，相对能安全点\n(add-hook 'kill-emacs-hook (defun personal--kill-gpg-agent () (shell-command \"pkill gpg-agent\")))  这里我们用 defun 而不是 lambda，有兴趣可以看一下这篇文章： http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html\n 非对称加密 使用 gpg key 对文件进行加密，这个目前应该是无懈可击的加密方式了\n在 Org Mode 里使用非对称加密需要在文件开头加上：\n# -*- mode:org; epa-file-encrypt-to: (\"address@email.com\") -*- 在保存的时候，Emacs 会提示让选择一个 GPG Key 进行加密， 加密以后，再打开这个文件，需要提供 GPG Key 私钥密码进行解密，然后再保存就不需要输入密码了。\n 我在用的时候有个问题，就是第一次新建文件加密保存后，每次都需要选择 Key 进行加密， 把 Buffer Kill 了之后，再打开文件使用就没有问题了\n GPG 相关 导出 Key 用了 GPG 加密，那私钥就非常的重要了，所以最好把私钥导出一份：\n# 找到自己的 Key ID，一长串字符 gpg --list-keys # 导出，armor 表示使用可打印字符 gpg --export-secret-keys --armor AAAABBBBBBBBBCCCCCCC0000000000  /tmp/private.key 最重要的就是把导出文件保存好了，推荐离线保存！\n这个文件比较大，内容比较多。 可以把文件分割成几个小份，然后导出生成二维码，打印到纸上，离线保存。\n导入 Key 有导出，自然也有导入：\ngpg --import private.key 导入之后 Key 没被信任，需要修改一下：\ngpg --edit-key AAAABBBBBBBBBCCCCCCC0000000000 # 看到提示符后输入 trust # 再选择信任等级，我自己的 Key，我选 5 ",
+  "wordCount" : "186",
+  "inLanguage": "en",
+  "datePublished": "2019-03-09T00:00:00+08:00",
+  "dateModified": "2020-03-22T21:14:30+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "zwPapEr"
+  }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https:\/\/page.codespaper.com\/2019\/gpg-encrypt-org\/"
+    "@id": "https://page.codespaper.com/2019/gpg-encrypt-org/"
   },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/page.codespaper.com\/cover.png",
-    "width":  800 ,
-    "height":  600 
-  },
-  "genre": "posts",
-  "keywords": "Emacs, OrgMode",
-  "wordcount":  186 ,
-  "url": "https:\/\/page.codespaper.com\/2019\/gpg-encrypt-org\/",
-  "datePublished": "2019-03-09T00:00:00\x2b08:00",
-  "dateModified": "2020-03-22T21:14:30\x2b08:00",
-  
   "publisher": {
     "@type": "Organization",
-    "name": "zwPapEr",
+    "name": "kWeiZh",
     "logo": {
       "@type": "ImageObject",
-      "url": "https:\/\/page.codespaper.com\/ironman.png",
-      "width":  127 ,
-      "height":  40 
+      "url": "https://page.codespaper.com/favicon.ico"
     }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "[zwPapEr]"
-  },
-  "description": ""
+  }
 }
 </script>
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 </head>
 
-  
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
 
+</script>
 
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="https://page.codespaper.com/">zwPapEr</a>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
-        <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
-            <div class="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-        </div>
-    </div>
-</nav>
+        <ul id="menu">
+            <li>
+                <a href="https://page.codespaper.com/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp">
-    <header class="post-header">
-        <h1 class="post-title">使用 GPG 在 Emacs 中加密 Org Mode 笔记文件</h1>
-        <div class="post-meta">
-            Written by <a href="https://page.codespaper.com/" rel="author">[zwPapEr]</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2019-03-09 >9 March 2019</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                1 min
-        </div>
-    </header>
-    <div class="post-content">
-        
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      使用 GPG 在 Emacs 中加密 Org Mode 笔记文件
+    </h1>
+    <div class="post-meta"><span title='2019-03-09 00:00:00 +0800 CST'>March 9, 2019</span>&nbsp;·&nbsp;zwPapEr
 
-        
-
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          <p>Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
+</div>
+  </header> 
+  <div class="post-content"><p>Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，
 但是有一些敏感信息，还是认为谁都不值得信任。</p>
 <p>所以需要使用 GPG 加密后再传到 Dropbox，而 Emacs 中， <code>EasyPG Assistant</code> 可以很方便地加解密。</p>
-<h2 id="gpg">GPG</h2>
+<h2 id="gpg">GPG<a hidden class="anchor" aria-hidden="true" href="#gpg">#</a></h2>
 <blockquote>
 <p><a href="https://zh.wikipedia.org/wiki/GnuPG">https://zh.wikipedia.org/wiki/GnuPG</a></p>
 </blockquote>
@@ -193,240 +229,150 @@ GnuPG用于加密、数字签名及产生非对称钥匙对的软件。</p>
 <li>对称加密，只使用密码对文件进行加密</li>
 <li>非对称加密，使用 GPG 密钥对文件进行加密，只有使用私钥能进行解密，而且需要私钥密码才能使用私钥</li>
 </ul>
-<h2 id="配置">配置</h2>
-<h3 id="macos">macOS</h3>
+<h2 id="配置">配置<a hidden class="anchor" aria-hidden="true" href="#配置">#</a></h2>
+<h3 id="macos">macOS<a hidden class="anchor" aria-hidden="true" href="#macos">#</a></h3>
 <p>通过 brew 安装 gpg</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install gpg
-</code></pre></div><h3 id="emacs">Emacs</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install gpg
+</code></pre></div><h3 id="emacs">Emacs<a hidden class="anchor" aria-hidden="true" href="#emacs">#</a></h3>
 <p>通过 <code>use-package</code> 配置 Emacs</p>
 <blockquote>
 <p>如果没用过 <code>use-package</code> 可以看一下：
 <a href="https://github.com/jwiegley/use-package">https://github.com/jwiegley/use-package</a></p>
 </blockquote>
 <p>macOS 上的图形界面 Emacs 弹出密码窗口有问题，可以通过以下配置解决</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq epa-pinentry-mode <span style="color:#e6db74">&#39;loopback</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq epa-pinentry-mode <span style="color:#e6db74">&#39;loopback</span>)
 </code></pre></div><p>最后，配置文件如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(use-package epa-file
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(use-package epa-file
   :ensure <span style="color:#66d9ef">nil</span>
   :config
   (epa-file-enable)
   (setq epa-pinentry-mode <span style="color:#e6db74">&#39;loopback</span>))
-</code></pre></div><h2 id="使用">使用</h2>
-<h3 id="对称加密">对称加密</h3>
+</code></pre></div><h2 id="使用">使用<a hidden class="anchor" aria-hidden="true" href="#使用">#</a></h2>
+<h3 id="对称加密">对称加密<a hidden class="anchor" aria-hidden="true" href="#对称加密">#</a></h3>
 <p>默认情况下，Emacs会使用对称加密的方法进行文件加密，实际就是用一个密码，使用 AES 对文件进行加密</p>
 <p>每次打开文件时，都要输入密码，保存时，甚至要输入两次，因为被当成新加密了。</p>
 <p>可以把密码缓存起来：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq epa-file-cache-passphrase-for-symmetric-encryption <span style="color:#66d9ef">t</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq epa-file-cache-passphrase-for-symmetric-encryption <span style="color:#66d9ef">t</span>)
 </code></pre></div><p>再打开和保存这个文件时，就不用输入密码，</p>
 <p><strong>但是!!</strong></p>
 <p>这个缓存是在 <code>gpg agent</code> 进程里的，如果能确保电脑没别人会用，倒还好，
 否则别人也是可能通过 <code>gpg agent</code> 的缓存读到解密内容的！
 或者说使用完，关了 Emacs 之后，其它人再重新打开，尝试读取，也是能载入缓存的！</p>
 <p>可以通过加一个 Hook，在关 Emacs 的时候，把 <code>gpg agent</code> 也杀了，相对能安全点</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(add-hook <span style="color:#e6db74">&#39;kill-emacs-hook</span> (defun personal--kill-gpg-agent ()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(add-hook <span style="color:#e6db74">&#39;kill-emacs-hook</span> (defun personal--kill-gpg-agent ()
                              (shell-command <span style="color:#e6db74">&#34;pkill gpg-agent&#34;</span>)))
 </code></pre></div><blockquote>
 <p>这里我们用 defun 而不是 lambda，有兴趣可以看一下这篇文章：
 <a href="http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html">http://ergoemacs.org/emacs/emacs%5Favoid%5Flambda%5Fin%5Fhook.html</a></p>
 </blockquote>
-<h3 id="非对称加密">非对称加密</h3>
+<h3 id="非对称加密">非对称加密<a hidden class="anchor" aria-hidden="true" href="#非对称加密">#</a></h3>
 <p>使用 gpg key 对文件进行加密，这个目前应该是无懈可击的加密方式了</p>
 <p>在 <code>Org Mode</code> 里使用非对称加密需要在文件开头加上：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org"><span style="color:#75715e"># -*- mode:org; epa-file-encrypt-to: (&#34;address@email.com&#34;) -*-</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org"><span style="color:#75715e"># -*- mode:org; epa-file-encrypt-to: (&#34;address@email.com&#34;) -*-</span>
 </code></pre></div><p>在保存的时候，Emacs 会提示让选择一个 GPG Key 进行加密，
 加密以后，再打开这个文件，需要提供 GPG Key 私钥密码进行解密，然后再保存就不需要输入密码了。</p>
 <blockquote>
 <p>我在用的时候有个问题，就是第一次新建文件加密保存后，每次都需要选择 Key 进行加密，
 把 Buffer Kill 了之后，再打开文件使用就没有问题了</p>
 </blockquote>
-<h3 id="gpg-相关">GPG 相关</h3>
-<h4 id="导出-key">导出 Key</h4>
+<h3 id="gpg-相关">GPG 相关<a hidden class="anchor" aria-hidden="true" href="#gpg-相关">#</a></h3>
+<h4 id="导出-key">导出 Key<a hidden class="anchor" aria-hidden="true" href="#导出-key">#</a></h4>
 <p>用了 GPG 加密，那私钥就非常的重要了，所以最好把私钥导出一份：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 找到自己的 Key ID，一长串字符</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 找到自己的 Key ID，一长串字符</span>
 gpg --list-keys
 <span style="color:#75715e"># 导出，armor 表示使用可打印字符</span>
 gpg --export-secret-keys --armor AAAABBBBBBBBBCCCCCCC0000000000 &gt;&gt; /tmp/private.key
 </code></pre></div><p>最重要的就是把导出文件保存好了，推荐离线保存！</p>
 <p>这个文件比较大，内容比较多。
 可以把文件分割成几个小份，然后导出生成二维码，打印到纸上，离线保存。</p>
-<h4 id="导入-key">导入 Key</h4>
+<h4 id="导入-key">导入 Key<a hidden class="anchor" aria-hidden="true" href="#导入-key">#</a></h4>
 <p>有导出，自然也有导入：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --import private.key
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --import private.key
 </code></pre></div><p>导入之后 Key 没被信任，需要修改一下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --edit-key AAAABBBBBBBBBCCCCCCC0000000000
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --edit-key AAAABBBBBBBBBCCCCCCC0000000000
 <span style="color:#75715e"># 看到提示符后输入 trust</span>
 <span style="color:#75715e"># 再选择信任等级，我自己的 Key，我选 5</span>
 </code></pre></div>
-    </div>
 
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>zwPapEr </span>
-                </p>
-            
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>186</span>
-            </p>
-            
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+  </div>
 
-      
-        <a href="//twitter.com/share?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fgpg-encrypt-org%2f&amp;text=%e4%bd%bf%e7%94%a8%20GPG%20%e5%9c%a8%20Emacs%20%e4%b8%ad%e5%8a%a0%e5%af%86%20Org%20Mode%20%e7%ac%94%e8%ae%b0%e6%96%87%e4%bb%b6&amp;via=zwpaper" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
-        </a>
-        
-      
-      
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpage.codespaper.com%2f2019%2fgpg-encrypt-org%2f" target="_blank" title="Share on Facebook">
-          <i class="iconfont icon-facebook"></i>
-        </a>
-        
-      
-      
-        <a href="//reddit.com/submit?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fgpg-encrypt-org%2f&amp;title=%e4%bd%bf%e7%94%a8%20GPG%20%e5%9c%a8%20Emacs%20%e4%b8%ad%e5%8a%a0%e5%af%86%20Org%20Mode%20%e7%ac%94%e8%ae%b0%e6%96%87%e4%bb%b6" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
-        </a>
-        
-      
-      
-      
-      
-        
-      
-        
-      
-
-          
-
-          
-
-          
-
-          
-        <a href="//service.weibo.com/share/share.php?url=https%3a%2f%2fpage.codespaper.com%2f2019%2fgpg-encrypt-org%2f&amp;appkey=&amp;title=%e4%bd%bf%e7%94%a8%20GPG%20%e5%9c%a8%20Emacs%20%e4%b8%ad%e5%8a%a0%e5%af%86%20Org%20Mode%20%e7%ac%94%e8%ae%b0%e6%96%87%e4%bb%b6" target="_blank" title="Share on Douban ">
-            <i class="iconfont icon-weibo"></i>
-          </a>
-          
-</span>
-                
-            </p>
-
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
-    </div>
-
-  
-    <div class="post-tags">
-        
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
-            
-            <span class="tag"><a href="https://page.codespaper.com/tags/emacs/">
-                    #Emacs</a></span>
-            
-            <span class="tag"><a href="https://page.codespaper.com/tags/orgmode/">
-                    #OrgMode</a></span>
-            
-            </section>
-        
-        <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="https://page.codespaper.com/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-        
-        <a href="https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/" class="prev" rel="prev" title="Sessions control for hammerspoon"><i class="iconfont icon-dajiantou"></i>&nbsp;Sessions control for hammerspoon</a>
-         
-        
-        <a href="https://page.codespaper.com/2019/why-golang/" class="next" rel="next" title="为什么我觉得 Golang 更好">为什么我觉得 Golang 更好&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
-        
-    </div>
-
-    <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
-  <script type="text/javascript">
-      (function() {
-          
-          
-          if (window.location.hostname == "localhost")
-              return;
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          var disqus_shortname = 'codespaper';
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
- 
-
-          
-    </div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://page.codespaper.com/tags/emacs/">Emacs</a></li>
+      <li><a href="https://page.codespaper.com/tags/orgmode/">OrgMode</a></li>
+    </ul>
+  </footer>
 </article>
-          </div>
-		   </main>
-      <footer class="footer">
-    <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2012 - 2021</span>
-        
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
-         
-
-		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
-    </div>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
 
-
-
-
-
-
-
-
-
-
-    
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
-    
-  
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
 
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
 
+</script>
+</body>
 
-     </div>
-  </body>
 </html>

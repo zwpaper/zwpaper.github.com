@@ -1,187 +1,223 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  
-  
-  
-  
-  
-  
-  <link rel="next" href="https://page.codespaper.com/2019/gpg-encrypt-org/" />
-  <link rel="canonical" href="https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/" />
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           Sessions control for hammerspoon | zwPapEr
-       
-  </title>
-  <meta name="title" content="Sessions control for hammerspoon | zwPapEr">
-    
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
+<html lang="en" dir="auto">
 
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Sessions control for hammerspoon | kWeiZh</title>
+<meta name="keywords" content="dev, macOS">
+<meta name="description" content="
+Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。
+">
+<meta name="author" content="kWeiZh">
+<link rel="canonical" href="https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://page.codespaper.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://page.codespaper.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://page.codespaper.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://page.codespaper.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-  <meta name="twitter:card" content="summary"/>
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-135939181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Sessions control for hammerspoon" />
+<meta property="og:description" content="
+Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2015-07-11T23:48:27&#43;08:00" />
+<meta property="article:modified_time" content="2015-07-11T23:48:27&#43;08:00" /><meta property="og:site_name" content="kWeiZh" />
+
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Sessions control for hammerspoon"/>
 <meta name="twitter:description" content="
 Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。
 "/>
 
-  <script type="application/ld+json">
+
+<script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://page.codespaper.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Sessions control for hammerspoon",
+      "item": "https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Sessions control for hammerspoon",
+  "name": "Sessions control for hammerspoon",
+  "description": " Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。\n",
+  "keywords": [
+    "dev", "macOS"
+  ],
+  "articleBody": " Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。\n 注意：本程序还处于开发状态，不会关闭或丢失窗口，但并不对稳定性提供保证，请勿用于正式工作中！\nHammerspoon sessions control 简介 Sessions control 主要有以下三个功能：\n 显示当前场景(sessions) 为当前场景增删窗口(windows) 在不同场景中切换  当前实现主要通过把窗口最小化完成场景切换，后期版本会考虑把窗口隐藏，不占用任务栏空间。\n目前主要优势在于同时可以处理全屏窗口，当切换场景时，全屏的窗口也会同时最小化，前台场景也会恢复应有的全屏状态。\n由于切换动画为系统动画，所以无法简单地关闭动画，在切换场景的时候会有部分动画。  各个场景都会定时保存到磁盘中，以保证各个场景不会因为 hammerspoon 或电脑的开关而丢失。\n对各个功能的快捷键提供定制，在脚本中可以很简单地修改快捷键。\n安装  从 GitHub 中下载压缩包，或 clone 仓库到本地 把 sessions-control-hammerspoon 文件夹复制到 ~/.hammerspoon/ 文件夹下 更新 ~/.hammerspoon/ 目录下 init.lua，加入 sessions control 功能  下载地址：\n GitHub 地址：()[] GiuHub 压缩包地址：()[]   注：.hammerspoon 是隐藏文件夹，如果找不到相应位置，可以运行下载的程序中的 setup 程序，会自动复制相应文件到目标位置，并自动更新 init.lua。\n  注：init.lua 是 hammerspoon 本身自带的初始化文件。\n 功能说明 在本说明中使用默认的快捷键进行说明，操作主要是先按住功能键，然后点击相应快捷键，默认键位如下：\n  功能键： ctrl + alt + cmd\n  显示当前场景：P\n  前一场景：[\n  下一场景：]\n  加入当前场景：L\n  从当前场景删除：；\n  数字键快速切换：1 ~ 场景数\n  其中，数字键快速切换 会按照场景数自动生成，通过按住功能键，加上相应的数字可以快速在场景间切换。\n默认键位都位于键盘右侧，通过功能分区。\n显示当前场景  按住 ctrl + alt + cmd 后，点击 P\n 通过系统通知展示当前各个场景，并自动编号，便于后面的快速切换。\n当然，同时进行太多任务会很乱，所以不应该同时有太多场景，同时，系统通知中不可以放入过长的内容，所以刚刚好 (;¬_¬)\n前后场景   前一场景：按住 ctrl + alt + cmd 后，点击 [ 下一场景：按住 ctrl + alt + cmd 后，点击 ]   这两个功能主要用于切换上一个或下一个场景，完成按键后，会自动记录当前窗口的全屏状态，并把当前场景的窗口最小后，然后切换到新场景，恢复新场景中的窗口状态。\n窗口操作   加入：按住 ctrl + alt + cmd 后，点击 L 删除：按住 ctrl + alt + cmd 后，点击 ;   这两个功能主要用于对当前窗口的操作\n 把正在使用的窗口加入到当前场景中 从当前场景中删除正在使用的窗口  增删窗口之后会弹出通知提示完成操作，并显示当前场景中共有几个窗口\n快速切换 在查看场景时，每个场景名之前会有一个序号，该序号可用于快速切换，主要用于跨越多个场景的切换时，避免多个最大化，最小化动画。\n使用方法就是按住功能键后，再按相应的序号键（注：未测试小键盘区）\n  按住 ctrl + alt + cmd 后，点击 1 按住 ctrl + alt + cmd 后，点击 2 …   程序实现 Sessions control 是基于 Hammerspoon 的脚本程序，使用 lua 编写，主要是两个文件实现。\n sessions_control.lua sessions_head.lua  为了方便管理，把这两个文件放到了 sessions-control-hammerspoon 文件夹中。\n",
+  "wordCount" : "160",
+  "inLanguage": "en",
+  "datePublished": "2015-07-11T23:48:27+08:00",
+  "dateModified": "2015-07-11T23:48:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "kWeiZh"
+  },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https:\/\/page.codespaper.com\/2015\/sessions-control-hammerspoon-doc\/"
+    "@id": "https://page.codespaper.com/2015/sessions-control-hammerspoon-doc/"
   },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/page.codespaper.com\/cover.png",
-    "width":  800 ,
-    "height":  600 
-  },
-  "genre": "posts",
-  "keywords": "dev, macOS",
-  "wordcount":  160 ,
-  "url": "https:\/\/page.codespaper.com\/2015\/sessions-control-hammerspoon-doc\/",
-  "datePublished": "2015-07-11T23:48:27\x2b08:00",
-  "dateModified": "2015-07-11T23:48:27\x2b08:00",
-  
   "publisher": {
     "@type": "Organization",
-    "name": "zwPapEr",
+    "name": "kWeiZh",
     "logo": {
       "@type": "ImageObject",
-      "url": "https:\/\/page.codespaper.com\/ironman.png",
-      "width":  127 ,
-      "height":  40 
+      "url": "https://page.codespaper.com/favicon.ico"
     }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "zwPapEr"
-  },
-  "description": ""
+  }
 }
 </script>
-  
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 </head>
 
-  
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
 
+</script>
 
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="https://page.codespaper.com/">zwPapEr</a>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
-        <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://page.codespaper.com/">zwPapEr</a></div>
-            <div class="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-        </div>
-    </div>
-</nav>
+        <ul id="menu">
+            <li>
+                <a href="https://page.codespaper.com/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://page.codespaper.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp">
-    <header class="post-header">
-        <h1 class="post-title">Sessions control for hammerspoon</h1>
-        <div class="post-meta">
-            Written by <a href="https://page.codespaper.com/" rel="author">zwPapEr</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2015-07-11 >11 July 2015</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="https://page.codespaper.com/categories/tech/"> Tech </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                1 min
-        </div>
-    </header>
-    <div class="post-content">
-        
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Sessions control for hammerspoon
+    </h1>
+    <div class="post-meta"><span title='2015-07-11 23:48:27 +0800 CST'>July 11, 2015</span>&nbsp;·&nbsp;kWeiZh
 
-        
-
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          <blockquote>
+</div>
+  </header> 
+  <div class="post-content"><blockquote>
 <p>Sessions control 是一套基于 hammerspoon(Mac) 的脚本程序。可以通过快捷键把 Mac 中的各个窗口归类，并快速的在各个分类中切换，包括全屏的窗口也会自己切换。</p>
 </blockquote>
 <p>注意：本程序还处于开发状态，不会关闭或丢失窗口，但并不对稳定性提供保证，请勿用于正式工作中！</p>
-<h1 id="hammerspoon">Hammerspoon</h1>
-<h1 id="sessions-control">sessions control</h1>
-<h2 id="简介">简介</h2>
+<h1 id="hammerspoon">Hammerspoon<a hidden class="anchor" aria-hidden="true" href="#hammerspoon">#</a></h1>
+<h1 id="sessions-control">sessions control<a hidden class="anchor" aria-hidden="true" href="#sessions-control">#</a></h1>
+<h2 id="简介">简介<a hidden class="anchor" aria-hidden="true" href="#简介">#</a></h2>
 <p>Sessions control 主要有以下三个功能：</p>
 <ul>
 <li>显示当前场景(sessions)</li>
@@ -194,7 +230,7 @@ if (!doNotTrack) {
 </code></pre>
 <p>各个场景都会定时保存到磁盘中，以保证各个场景不会因为 hammerspoon 或电脑的开关而丢失。</p>
 <p>对各个功能的快捷键提供定制，在脚本中可以很简单地修改快捷键。</p>
-<h2 id="安装">安装</h2>
+<h2 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h2>
 <ol>
 <li>从 GitHub 中下载压缩包，或 clone 仓库到本地</li>
 <li>把 <code>sessions-control-hammerspoon</code> 文件夹复制到 <code>~/.hammerspoon/</code> 文件夹下</li>
@@ -211,7 +247,7 @@ if (!doNotTrack) {
 <blockquote>
 <p>注：<code>init.lua</code> 是 <code>hammerspoon</code> 本身自带的初始化文件。</p>
 </blockquote>
-<h2 id="功能说明">功能说明</h2>
+<h2 id="功能说明">功能说明<a hidden class="anchor" aria-hidden="true" href="#功能说明">#</a></h2>
 <p>在本说明中使用默认的快捷键进行说明，操作主要是先按住功能键，然后点击相应快捷键，默认键位如下：</p>
 <ul>
 <li>
@@ -239,13 +275,13 @@ ctrl + alt + cmd</p>
 </ul>
 <p>其中，<code>数字键快速切换</code> 会按照场景数自动生成，通过按住功能键，加上相应的数字可以快速在场景间切换。</p>
 <p>默认键位都位于键盘右侧，通过功能分区。</p>
-<h3 id="显示当前场景">显示当前场景</h3>
+<h3 id="显示当前场景">显示当前场景<a hidden class="anchor" aria-hidden="true" href="#显示当前场景">#</a></h3>
 <blockquote>
 <p>按住 <code>ctrl + alt + cmd</code> 后，点击 <code>P</code></p>
 </blockquote>
 <p>通过系统通知展示当前各个场景，并自动编号，便于后面的快速切换。</p>
 <p>当然，同时进行太多任务会很乱，所以不应该同时有太多场景，同时，系统通知中不可以放入过长的内容，所以刚刚好 (;¬_¬)</p>
-<h3 id="前后场景">前后场景</h3>
+<h3 id="前后场景">前后场景<a hidden class="anchor" aria-hidden="true" href="#前后场景">#</a></h3>
 <blockquote>
 <ul>
 <li>前一场景：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>[</code></li>
@@ -253,7 +289,7 @@ ctrl + alt + cmd</p>
 </ul>
 </blockquote>
 <p>这两个功能主要用于切换上一个或下一个场景，完成按键后，会自动记录当前窗口的全屏状态，并把当前场景的窗口最小后，然后切换到新场景，恢复新场景中的窗口状态。</p>
-<h3 id="窗口操作">窗口操作</h3>
+<h3 id="窗口操作">窗口操作<a hidden class="anchor" aria-hidden="true" href="#窗口操作">#</a></h3>
 <blockquote>
 <ul>
 <li>加入：按住 <code>ctrl + alt + cmd</code> 后，点击 <code>L</code></li>
@@ -266,7 +302,7 @@ ctrl + alt + cmd</p>
 <li>从当前场景中删除正在使用的窗口</li>
 </ul>
 <p>增删窗口之后会弹出通知提示完成操作，并显示当前场景中共有几个窗口</p>
-<h3 id="快速切换">快速切换</h3>
+<h3 id="快速切换">快速切换<a hidden class="anchor" aria-hidden="true" href="#快速切换">#</a></h3>
 <p>在查看场景时，每个场景名之前会有一个序号，该序号可用于快速切换，主要用于跨越多个场景的切换时，避免多个最大化，最小化动画。</p>
 <p>使用方法就是按住功能键后，再按相应的序号键（注：未测试小键盘区）</p>
 <blockquote>
@@ -276,181 +312,93 @@ ctrl + alt + cmd</p>
 <li>&hellip;</li>
 </ul>
 </blockquote>
-<h1 id="程序实现">程序实现</h1>
+<h1 id="程序实现">程序实现<a hidden class="anchor" aria-hidden="true" href="#程序实现">#</a></h1>
 <p>Sessions control 是基于 Hammerspoon 的脚本程序，使用 lua 编写，主要是两个文件实现。</p>
 <ul>
 <li>sessions_control.lua</li>
 <li>sessions_head.lua</li>
 </ul>
 <p>为了方便管理，把这两个文件放到了 <code>sessions-control-hammerspoon</code> 文件夹中。</p>
-    </div>
 
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>zwPapEr </span>
-                </p>
-            
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>160</span>
-            </p>
-            
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+  </div>
 
-      
-        <a href="//twitter.com/share?url=https%3a%2f%2fpage.codespaper.com%2f2015%2fsessions-control-hammerspoon-doc%2f&amp;text=Sessions%20control%20for%20hammerspoon&amp;via=zwpaper" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
-        </a>
-        
-      
-      
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpage.codespaper.com%2f2015%2fsessions-control-hammerspoon-doc%2f" target="_blank" title="Share on Facebook">
-          <i class="iconfont icon-facebook"></i>
-        </a>
-        
-      
-      
-        <a href="//reddit.com/submit?url=https%3a%2f%2fpage.codespaper.com%2f2015%2fsessions-control-hammerspoon-doc%2f&amp;title=Sessions%20control%20for%20hammerspoon" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
-        </a>
-        
-      
-      
-      
-      
-        
-      
-        
-      
-
-          
-
-          
-
-          
-
-          
-        <a href="//service.weibo.com/share/share.php?url=https%3a%2f%2fpage.codespaper.com%2f2015%2fsessions-control-hammerspoon-doc%2f&amp;appkey=&amp;title=Sessions%20control%20for%20hammerspoon" target="_blank" title="Share on Douban ">
-            <i class="iconfont icon-weibo"></i>
-          </a>
-          
-</span>
-                
-            </p>
-
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
-    </div>
-
-  
-    <div class="post-tags">
-        
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
-            
-            <span class="tag"><a href="https://page.codespaper.com/tags/dev/">
-                    #dev</a></span>
-            
-            <span class="tag"><a href="https://page.codespaper.com/tags/macos/">
-                    #macOS</a></span>
-            
-            </section>
-        
-        <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="https://page.codespaper.com/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-         
-        
-        <a href="https://page.codespaper.com/2019/gpg-encrypt-org/" class="next" rel="next" title="使用 GPG 在 Emacs 中加密 Org Mode 笔记文件">使用 GPG 在 Emacs 中加密 Org Mode 笔记文件&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
-        
-    </div>
-
-    <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
-  <script type="text/javascript">
-      (function() {
-          
-          
-          if (window.location.hostname == "localhost")
-              return;
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          var disqus_shortname = 'codespaper';
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
- 
-
-          
-    </div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://page.codespaper.com/tags/dev/">dev</a></li>
+      <li><a href="https://page.codespaper.com/tags/macos/">macOS</a></li>
+    </ul>
+  </footer>
 </article>
-          </div>
-		   </main>
-      <footer class="footer">
-    <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2012 - 2021</span>
-        
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://page.codespaper.com/">zwPapEr</a> | </span>
-         
-
-		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
-    </div>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
 
-
-
-
-
-
-
-
-
-
-    
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
-    
-  
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-135939181-1', 'auto');
-	
-	ga('send', 'pageview');
-}
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
 
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
 
+</script>
+</body>
 
-     </div>
-  </body>
 </html>

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>op on zwPapEr</title>
+    <title>op on kWeiZh</title>
     <link>https://page.codespaper.com/tags/op/</link>
-    <description>Recent content in op on zwPapEr</description>
+    <description>Recent content in op on kWeiZh</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://page.codespaper.com/tags/op/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/op/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>dnsmasq &#43; Cloudflare DoH 自建 DNS</title>
       <link>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</link>

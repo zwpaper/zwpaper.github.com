@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Gadgets on zwPapEr</title>
+    <title>Gadgets on kWeiZh</title>
     <link>https://page.codespaper.com/tags/gadgets/</link>
-    <description>Recent content in Gadgets on zwPapEr</description>
+    <description>Recent content in Gadgets on kWeiZh</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://page.codespaper.com/tags/gadgets/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/gadgets/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从 NextCloud 替换为 Seafile</title>
       <link>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</link>
