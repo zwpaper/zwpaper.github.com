@@ -60,10 +60,10 @@
     
     <item>
       <title>Kubernetes Scheduler 源码阅读</title>
-      <link>https://page.codespaper.com/2020/kube-scheduler-source-code/</link>
+      <link>https://page.codespaper.com/kube-scheduler-source-code/</link>
       <pubDate>Fri, 20 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://page.codespaper.com/2020/kube-scheduler-source-code/</guid>
+      <guid>https://page.codespaper.com/kube-scheduler-source-code/</guid>
       <description>Config https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/api/v1/types.go#L31
 { &amp;#34;kind&amp;#34; : &amp;#34;Policy&amp;#34;, &amp;#34;apiVersion&amp;#34; : &amp;#34;v1&amp;#34;, &amp;#34;extenders&amp;#34; : [ { &amp;#34;urlPrefix&amp;#34;: &amp;#34;http://127.0.0.1:3456/scheduler&amp;#34;, &amp;#34;filterVerb&amp;#34;: &amp;#34;predicates&amp;#34;, &amp;#34;enableHttps&amp;#34;: false, &amp;#34;nodeCacheCapable&amp;#34;: false, &amp;#34;managedResources&amp;#34;: [{ &amp;#34;name&amp;#34;: &amp;#34;tencent.com/vcuda-core&amp;#34;, &amp;#34;ignoredByScheduler&amp;#34;: false }, { &amp;#34;name&amp;#34;: &amp;#34;tencent.com/vcuda-memory&amp;#34;, &amp;#34;ignoredByScheduler&amp;#34;: false }] } ], &amp;#34;hardPodAffinitySymmetricWeight&amp;#34; : 10, &amp;#34;alwaysCheckAllPredicates&amp;#34; : false } Scheduling 谁调用 MakeNextPod, 然后调 schedulerOne? scheduling_queue.go:815] About to try and schedule pod default/engine-static-feature-db-worker-p4-3-0 https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/internal/queue/scheduling_queue.go#L811
 scheduler.go:456] Attempting to schedule pod: default/engine-static-feature-db-worker-p4-3-0 https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/scheduler.go#L442
@@ -146,20 +146,6 @@ nameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local c
     </item>
     
     <item>
-      <title>开始用 Beancount 实践复式记账（二）：工具</title>
-      <link>https://page.codespaper.com/2019/beancount-2/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://page.codespaper.com/2019/beancount-2/</guid>
-      <description>工具 Emacs ;; -- mode: org; mode: beancount; coding: utf-8; fill-column: 400; --
-beancount-check 用于检查当前文件有没有语法错误 beancount-init-account 更新 Emacs 已知的账户名，用于下一个 beancount-insert-account 插入账户名，相当于补全 beancount-align-number 对齐数字 Beancount 的一大特点就是自动化，所以自然是需要使用到各种各样的工具。 目前刚开始，先用点 Shell 脚本拼一下工具链， 后续用 Python 或者 Golang 写一个处理工具和 Emacs 拓展。
-Shell 微信账单 挺意外微信居然有账单导出，就在明细页， csv 格式的。 上半部分是统计信息，下半部分是明细，我们暂时只需要明细，统计部分可以在工具里做验证。 所以删除上半部分
-cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | tail -n +2 主要是用 sed 删除 微信支付账单明细列表 和以上的内容， 然后剩下的还有一个表格头，用 tail 打印第二行以后内容， 最后就剩明细了。
-— 三
-tag</description>
-    </item>
-    
-    <item>
       <title>dnsmasq &#43; Cloudflare DoH 自建 DNS</title>
       <link>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</link>
       <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
@@ -197,10 +183,10 @@ tag</description>
     
     <item>
       <title>用 Rust 从零开始写一个 Slack 机器人 (0)</title>
-      <link>https://page.codespaper.com/2019/slack-bot-in-rust/</link>
+      <link>https://page.codespaper.com/slack-bot-in-rust/</link>
       <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://page.codespaper.com/2019/slack-bot-in-rust/</guid>
+      <guid>https://page.codespaper.com/slack-bot-in-rust/</guid>
       <description>简介 Slack 机器人是一个服务端程序，可以通过 Slack 和他进行交互，完成期望的一些动作。
 如果你不知道什么是 Slack，可以先了解一下：
 About Slack
