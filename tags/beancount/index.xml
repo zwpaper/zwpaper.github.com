@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>beancount on kWeiZh</title>
+    <title>beancount on kWeizh</title>
     <link>https://page.codespaper.com/tags/beancount/</link>
-    <description>Recent content in beancount on kWeiZh</description>
+    <description>Recent content in beancount on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 10 Aug 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/beancount/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/beancount/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>开始用 Beancount 实践复式记账（一）：初始化</title>
       <link>https://page.codespaper.com/2019/beancount/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/beancount/</guid>
       <description>&lt;p&gt;第一次了解到复式记账是 Emacs 的 &lt;code&gt;Ledger mode&lt;/code&gt; ，但是还挺复杂的，就放弃了。

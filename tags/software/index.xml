@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Software on kWeiZh</title>
+    <title>Software on kWeizh</title>
     <link>https://page.codespaper.com/tags/software/</link>
-    <description>Recent content in Software on kWeiZh</description>
+    <description>Recent content in Software on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/software/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/software/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从 NextCloud 替换为 Seafile</title>
       <link>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</link>
-      <pubDate>Sun, 08 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 08 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</guid>
       <description>&lt;p&gt;之前自己组装了一台 NAS，用作私有云，解决大容量网盘，自己跑的一些小应用的问题，还计划作为软路由。

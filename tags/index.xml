@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tags on kWeiZh</title>
+    <title>Tags on kWeizh</title>
     <link>https://page.codespaper.com/tags/</link>
-    <description>Recent content in Tags on kWeiZh</description>
+    <description>Recent content in Tags on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 16 Feb 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>lsd</title>
+      <link>https://page.codespaper.com/tags/lsd/</link>
+      <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/lsd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenSource</title>
+      <link>https://page.codespaper.com/tags/opensource/</link>
+      <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/opensource/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sponsor</title>
+      <link>https://page.codespaper.com/tags/sponsor/</link>
+      <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://page.codespaper.com/tags/sponsor/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Review</title>
       <link>https://page.codespaper.com/tags/review/</link>
-      <pubDate>Tue, 16 Feb 2021 00:00:00 +0800</pubDate>
+      <pubDate>Tue, 16 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/review/</guid>
       <description></description>
@@ -19,7 +46,7 @@
     <item>
       <title>Emacs</title>
       <link>https://page.codespaper.com/tags/emacs/</link>
-      <pubDate>Sat, 21 Nov 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/emacs/</guid>
       <description></description>
@@ -28,7 +55,7 @@
     <item>
       <title>Kid</title>
       <link>https://page.codespaper.com/tags/kid/</link>
-      <pubDate>Tue, 28 Jul 2020 00:00:00 +0800</pubDate>
+      <pubDate>Tue, 28 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/kid/</guid>
       <description></description>
@@ -37,7 +64,7 @@
     <item>
       <title>Gadgets</title>
       <link>https://page.codespaper.com/tags/gadgets/</link>
-      <pubDate>Sun, 08 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 08 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/gadgets/</guid>
       <description></description>
@@ -46,7 +73,7 @@
     <item>
       <title>Software</title>
       <link>https://page.codespaper.com/tags/software/</link>
-      <pubDate>Sun, 08 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 08 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/software/</guid>
       <description></description>
@@ -55,7 +82,7 @@
     <item>
       <title>Go</title>
       <link>https://page.codespaper.com/tags/go/</link>
-      <pubDate>Sun, 01 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/go/</guid>
       <description></description>
@@ -64,7 +91,7 @@
     <item>
       <title>Haskell</title>
       <link>https://page.codespaper.com/tags/haskell/</link>
-      <pubDate>Sat, 17 Aug 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/haskell/</guid>
       <description></description>
@@ -73,7 +100,7 @@
     <item>
       <title>Accounting</title>
       <link>https://page.codespaper.com/tags/accounting/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/accounting/</guid>
       <description></description>
@@ -82,7 +109,7 @@
     <item>
       <title>beancount</title>
       <link>https://page.codespaper.com/tags/beancount/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/beancount/</guid>
       <description></description>
@@ -91,7 +118,7 @@
     <item>
       <title>dns</title>
       <link>https://page.codespaper.com/tags/dns/</link>
-      <pubDate>Sun, 30 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/dns/</guid>
       <description></description>
@@ -100,7 +127,7 @@
     <item>
       <title>op</title>
       <link>https://page.codespaper.com/tags/op/</link>
-      <pubDate>Sun, 30 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/op/</guid>
       <description></description>
@@ -109,7 +136,7 @@
     <item>
       <title>kubernetes</title>
       <link>https://page.codespaper.com/tags/kubernetes/</link>
-      <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/kubernetes/</guid>
       <description></description>
@@ -118,7 +145,7 @@
     <item>
       <title>machineLearing</title>
       <link>https://page.codespaper.com/tags/machinelearing/</link>
-      <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/machinelearing/</guid>
       <description></description>
@@ -127,7 +154,7 @@
     <item>
       <title>JavasSript</title>
       <link>https://page.codespaper.com/tags/javassript/</link>
-      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/javassript/</guid>
       <description></description>
@@ -136,7 +163,7 @@
     <item>
       <title>MiniApp</title>
       <link>https://page.codespaper.com/tags/miniapp/</link>
-      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/miniapp/</guid>
       <description></description>
@@ -145,7 +172,7 @@
     <item>
       <title>TypeScript</title>
       <link>https://page.codespaper.com/tags/typescript/</link>
-      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/typescript/</guid>
       <description></description>
@@ -154,7 +181,7 @@
     <item>
       <title>OrgMode</title>
       <link>https://page.codespaper.com/tags/orgmode/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/tags/orgmode/</guid>
       <description></description>

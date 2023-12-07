@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>MiniApp on kWeiZh</title>
+    <title>MiniApp on kWeizh</title>
     <link>https://page.codespaper.com/tags/miniapp/</link>
-    <description>Recent content in MiniApp on kWeiZh</description>
+    <description>Recent content in MiniApp on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/miniapp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/miniapp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>作为新手，为什么我选 Typescript</title>
       <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>
-      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/js-to-ts-for-newbie/</guid>
       <description>&lt;p&gt;最近尝试着使用 Taro 写一个微信小程序，&lt;a href=&#34;https://taro.jd.com/&#34;&gt;Taro&lt;/a&gt; 是&lt;a href=&#34;https://aotu.io/&#34;&gt;京东凹凸实验室&lt;/a&gt;开发的一款使用 &lt;a href=&#34;https://reactjs.org/&#34;&gt;React&lt;/a&gt; 语法多端统一开发解决方案，

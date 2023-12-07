@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Go on kWeiZh</title>
+    <title>Go on kWeizh</title>
     <link>https://page.codespaper.com/tags/go/</link>
-    <description>Recent content in Go on kWeiZh</description>
+    <description>Recent content in Go on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang 1.14 发布，抢占式调度优化</title>
       <link>https://page.codespaper.com/2020/go14-preemptible/</link>
-      <pubDate>Sun, 01 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/go14-preemptible/</guid>
       <description>&lt;p&gt;&lt;code&gt;Golang&lt;/code&gt; 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：&lt;/p&gt;
@@ -24,7 +24,7 @@
     <item>
       <title>为什么我觉得 Golang 更好</title>
       <link>https://page.codespaper.com/2019/why-golang/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/why-golang/</guid>
       <description>&lt;p&gt;最近看到 Rob Pike 在 2012 年写的一篇文章，&lt;a href=&#34;https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html&#34;&gt;Less is exponentially more&lt;/a&gt;&lt;/p&gt;

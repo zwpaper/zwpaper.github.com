@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tech on kWeiZh</title>
+    <title>Tech on kWeizh</title>
     <link>https://page.codespaper.com/categories/tech/</link>
-    <description>Recent content in Tech on kWeiZh</description>
+    <description>Recent content in Tech on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Nov 2020 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>收到第一次的周期开源赞助</title>
+      <link>https://page.codespaper.com/2023/2023-first-sponsor-lsd/</link>
+      <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://page.codespaper.com/2023/2023-first-sponsor-lsd/</guid>
+      <description>&lt;h1 id=&#34;收到第一次的周期开源赞助&#34;&gt;收到第一次的周期开源赞助&lt;/h1&gt;
+&lt;p&gt;最近收到了人生的第一个开源赞助，突然有一种被认可的感觉，激动的心情让我想写一点东西分享一下我的快乐。&lt;/p&gt;
+&lt;p&gt;首先肯定要大力感谢 &lt;a href=&#34;https://www.warp.dev/?utm_source=github&amp;amp;utm_medium=referral&amp;amp;utm_campaign=lsd_20231001&#34;&gt;Warp.dev 对我和 LSD 开源项目的支持&lt;/a&gt;！&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.warp.dev/?utm_source=github&amp;amp;utm_medium=referral&amp;amp;utm_campaign=lsd_20231001&#34;&gt;Warp.dev&lt;/a&gt; 是一个 Rust 实现的现代化 Terminal，目前我也在尝试用它替换 iTerm2，不得不说还是挺特别的，尤其每一个命令就是一个 Block，支持团队协作和 AI 建议等现代化功能，起码是在众多 Terminal 里，算是做出自己的特色了。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>macOS GUI Emacs 使用 GPG 给 Git Commit 签名</title>
       <link>https://page.codespaper.com/2020/mac-emacs-gui-gpg-sign-commit/</link>
-      <pubDate>Sat, 21 Nov 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/mac-emacs-gui-gpg-sign-commit/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
@@ -21,7 +33,7 @@
     <item>
       <title>Golang 1.14 发布，抢占式调度优化</title>
       <link>https://page.codespaper.com/2020/go14-preemptible/</link>
-      <pubDate>Sun, 01 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/go14-preemptible/</guid>
       <description>&lt;p&gt;&lt;code&gt;Golang&lt;/code&gt; 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：&lt;/p&gt;
@@ -35,7 +47,7 @@
     <item>
       <title>用 Stack 管理多个 GHC 版本</title>
       <link>https://page.codespaper.com/2019/stack-multi-ghc/</link>
-      <pubDate>Sat, 17 Aug 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/stack-multi-ghc/</guid>
       <description>&lt;p&gt;使用 Haskell 碰到 GHC 版本的问题，但是搜了一下，感觉说的文章不多，
@@ -47,7 +59,7 @@
     <item>
       <title>dnsmasq &#43; Cloudflare DoH 自建 DNS</title>
       <link>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</link>
-      <pubDate>Sun, 30 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</guid>
       <description>&lt;p&gt;有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，
@@ -57,7 +69,7 @@
     <item>
       <title>从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</title>
       <link>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</link>
-      <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</guid>
       <description>&lt;p&gt;传统的高性能计算集群一般都习惯性地使用 &lt;code&gt;Slurm&lt;/code&gt; + &lt;code&gt;Lustre&lt;/code&gt; 的方案作为任务调度和存储，
@@ -70,7 +82,7 @@
     <item>
       <title>作为新手，为什么我选 Typescript</title>
       <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>
-      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/js-to-ts-for-newbie/</guid>
       <description>&lt;p&gt;最近尝试着使用 Taro 写一个微信小程序，&lt;a href=&#34;https://taro.jd.com/&#34;&gt;Taro&lt;/a&gt; 是&lt;a href=&#34;https://aotu.io/&#34;&gt;京东凹凸实验室&lt;/a&gt;开发的一款使用 &lt;a href=&#34;https://reactjs.org/&#34;&gt;React&lt;/a&gt; 语法多端统一开发解决方案，
@@ -83,7 +95,7 @@
     <item>
       <title>为什么我觉得 Golang 更好</title>
       <link>https://page.codespaper.com/2019/why-golang/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/why-golang/</guid>
       <description>&lt;p&gt;最近看到 Rob Pike 在 2012 年写的一篇文章，&lt;a href=&#34;https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html&#34;&gt;Less is exponentially more&lt;/a&gt;&lt;/p&gt;
@@ -97,7 +109,7 @@
     <item>
       <title>使用 GPG 在 Emacs 中加密 Org Mode 笔记文件</title>
       <link>https://page.codespaper.com/2019/gpg-encrypt-org/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/gpg-encrypt-org/</guid>
       <description>&lt;p&gt;Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，

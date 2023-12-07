@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>为什么我觉得 Golang 更好 | kWeiZh</title>
+<title>为什么我觉得 Golang 更好 | kWeizh</title>
 <meta name="keywords" content="Go">
 <meta name="description" content="最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more
 
@@ -15,8 +15,8 @@
 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚">
 <meta name="author" content="zwPapEr">
 <link rel="canonical" href="https://page.codespaper.com/2019/why-golang/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://page.codespaper.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
@@ -82,8 +82,8 @@ if (!doNotTrack) {
 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://page.codespaper.com/2019/why-golang/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-03-10T00:00:00&#43;08:00" />
-<meta property="article:modified_time" content="2020-03-22T21:14:08&#43;08:00" /><meta property="og:site_name" content="kWeiZh" />
+<meta property="article:published_time" content="2019-03-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-22T21:14:08+08:00" /><meta property="og:site_name" content="kWeiZh" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="为什么我觉得 Golang 更好"/>
@@ -121,14 +121,14 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "为什么我觉得 Golang 更好",
   "name": "为什么我觉得 Golang 更好",
-  "description": "最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more\n 如果你不知道 Rob Pike 是谁：Rob Pike\n或者用一句话介绍，Golang 作者之一\n 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚\n",
+  "description": "最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more\n如果你不知道 Rob Pike 是谁：Rob Pike\n或者用一句话介绍，Golang 作者之一\n结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚\n",
   "keywords": [
     "Go"
   ],
-  "articleBody": "最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more\n 如果你不知道 Rob Pike 是谁：Rob Pike\n或者用一句话介绍，Golang 作者之一\n 结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚\n从 C++ 到 Golang Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：Newsqueak， 在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)， 作为一名在 Google 的 C++ 工程师 Rob Pike 自然也十分关注，可是也在这时候， Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉得在 Newsqueak 里有一些特性， 如果能用在开发里，会对服务器端的很多开发都会有帮助。\n可是 C++ 庞大复杂的体系，要加一些比较不一样的特性已经不是一件易事，而且可能也不值得， 所以在 C++ 项目编译的时间里（编译一次要 45 分钟，还是在编译集群上！）Rob 就拉上了 Ken Thompson 和 Robert Griesemer 决定要做点事情，Golang 从此开始登上历史的舞台。\n要知道 Ken, Rob, 都是贝尔实验室的大佬，一直在 Google 做 C++, 决心要针对 C++ 做一个优化， 这就是突破性的了，更别说 Ken 是 Unix，Plan 9，C 语言作为作者之一。\n大道至简 在文章中，就如文章标题，Rob 希望重新造轮子的原因主要就是觉得 C++ 太复杂了，觉得大道应该至简， 所以才考虑重新从头设计一门语言。\n 文章里多次提到了在 C++ 编译的时候，Rob 去找同事们聊天，这个编译时间， 对 Rob 来说，应该还是感觉挺难受的。\n 本来 Robert 希望 Go 从 C 语言出发，但是最后还是决定，从零出发，至简就该如此。所以网上常说 Golang 是 Better C，其实 Golang 是 Better language。\n文章中提到了很多的简化，只要写代码过程中，可能需要考虑，而又没必要的东西，Golang 都直接不出现。\n 没有头文件 常量只能是数字 没有子类型继承 文件被编译到一个包里 没有指针运算 内存一直以零值初始化  等等。\n甚至，连泛型都没有，而且 Golang 也借鉴了函数式编程的函数作为 first class object ， 但是其它一些函数式编程的优点就什么也都没有了，就像： map, filter, reduce 等，\n因为 Rob 说，用 for 吧\n https://github.com/robpike/filter\n 从语言层面，Golang 就对代码规范进行了限制，还提供了 fmt 格式化工具，doc 文档体系， 这都像是在说，这些不关紧要的东西，就都不要去考虑了。\n并发，也是一样的，从语言级别的支持，一个 go 关键字，加上 channel 的 CSP 并发模型， 可以说是很大程度地简化了开发高并发软件的复杂度。\n真正的 OOP  If C++ and Java are about type hierarchies and the taxonomy of types, Go is about composition.\nGo takes that idea and pushes it very far. It is a language of composition and coupling.\n 之前看到一个讨论，就在说 Golang 的编程思想，提到为什么 Golang 不用传统的 OOP 思想， 而是用了一套 组合 代替，原因也在这，Rob 认为 Java 和 C++ 推崇的 OOP 思想更多的是历史包袱， 程序员们更应该关注的是接口。\n目前的 OOP 思想更多的都是 Java 和 C++ 的流行而发展出来的，与最初的 对象范式 已经走上不同的道路了。 Golang 也许是第一个明确使用了最初 对象范式 设计的语言，这个可能还需要用一篇文章来研究。\n高层抽象 最近也在看一些函数式编程的文章，有一个观点我还是挺认可的：\n函数式编程把一些无关紧要的问题封装在了语言级别，写程序时，可以不需要考虑，如 内存管理 ， for 循环 等。 以前函数式编程不流行，更多的是因为当时的算力或者编译程序不足以让函数式语言的体验与过程式语言匹敌， 但是现在时机已经来了，函数式编程马上要再次走上舞台了。\n一个例子是 内存管理 ，虽然说这是很多高级语言都有的特性，可是这不也是一个证明，语言级别能解决好的事情， 就让语言去解决吧。\n另一个例子是 Clojure 一次对 Map 和 vector 扩展，内部进行了并行优化，开发者不需要改变就得到了性能提升。\nGolang 对并发的封装，也是一个高层抽象的表现。\n这个也可能需要一篇文章来研究。\n",
+  "articleBody": "最近看到 Rob Pike 在 2012 年写的一篇文章，Less is exponentially more\n如果你不知道 Rob Pike 是谁：Rob Pike\n或者用一句话介绍，Golang 作者之一\n结合之前看到对于 Golang 编程思想的讨论，对这篇文章真是相见恨晚\n从 C++ 到 Golang Golang 的前身是 Rob Pike 在 1980+ 年在贝尔实验室写的一门编程语言：Newsqueak， 在 2007 年的时候，C++标准委员会正在紧锣密鼓地准备 C++0x (现在的 C++11)， 作为一名在 Google 的 C++ 工程师 Rob Pike 自然也十分关注，可是也在这时候， Rob 觉得不应该把这么多的特性都放到一门语言里，同时也觉得在 Newsqueak 里有一些特性， 如果能用在开发里，会对服务器端的很多开发都会有帮助。\n可是 C++ 庞大复杂的体系，要加一些比较不一样的特性已经不是一件易事，而且可能也不值得， 所以在 C++ 项目编译的时间里（编译一次要 45 分钟，还是在编译集群上！）Rob 就拉上了 Ken Thompson 和 Robert Griesemer 决定要做点事情，Golang 从此开始登上历史的舞台。\n要知道 Ken, Rob, 都是贝尔实验室的大佬，一直在 Google 做 C++, 决心要针对 C++ 做一个优化， 这就是突破性的了，更别说 Ken 是 Unix，Plan 9，C 语言作为作者之一。\n大道至简 在文章中，就如文章标题，Rob 希望重新造轮子的原因主要就是觉得 C++ 太复杂了，觉得大道应该至简， 所以才考虑重新从头设计一门语言。\n文章里多次提到了在 C++ 编译的时候，Rob 去找同事们聊天，这个编译时间， 对 Rob 来说，应该还是感觉挺难受的。\n本来 Robert 希望 Go 从 C 语言出发，但是最后还是决定，从零出发，至简就该如此。所以网上常说 Golang 是 Better C，其实 Golang 是 Better language。\n文章中提到了很多的简化，只要写代码过程中，可能需要考虑，而又没必要的东西，Golang 都直接不出现。\n没有头文件 常量只能是数字 没有子类型继承 文件被编译到一个包里 没有指针运算 内存一直以零值初始化 等等。\n甚至，连泛型都没有，而且 Golang 也借鉴了函数式编程的函数作为 first class object ， 但是其它一些函数式编程的优点就什么也都没有了，就像： map, filter, reduce 等，\n因为 Rob 说，用 for 吧\nhttps://github.com/robpike/filter\n从语言层面，Golang 就对代码规范进行了限制，还提供了 fmt 格式化工具，doc 文档体系， 这都像是在说，这些不关紧要的东西，就都不要去考虑了。\n并发，也是一样的，从语言级别的支持，一个 go 关键字，加上 channel 的 CSP 并发模型， 可以说是很大程度地简化了开发高并发软件的复杂度。\n真正的 OOP If C++ and Java are about type hierarchies and the taxonomy of types, Go is about composition.\nGo takes that idea and pushes it very far. It is a language of composition and coupling.\n之前看到一个讨论，就在说 Golang 的编程思想，提到为什么 Golang 不用传统的 OOP 思想， 而是用了一套 组合 代替，原因也在这，Rob 认为 Java 和 C++ 推崇的 OOP 思想更多的是历史包袱， 程序员们更应该关注的是接口。\n目前的 OOP 思想更多的都是 Java 和 C++ 的流行而发展出来的，与最初的 对象范式 已经走上不同的道路了。 Golang 也许是第一个明确使用了最初 对象范式 设计的语言，这个可能还需要用一篇文章来研究。\n高层抽象 最近也在看一些函数式编程的文章，有一个观点我还是挺认可的：\n函数式编程把一些无关紧要的问题封装在了语言级别，写程序时，可以不需要考虑，如 内存管理 ， for 循环 等。 以前函数式编程不流行，更多的是因为当时的算力或者编译程序不足以让函数式语言的体验与过程式语言匹敌， 但是现在时机已经来了，函数式编程马上要再次走上舞台了。\n一个例子是 内存管理 ，虽然说这是很多高级语言都有的特性，可是这不也是一个证明，语言级别能解决好的事情， 就让语言去解决吧。\n另一个例子是 Clojure 一次对 Map 和 vector 扩展，内部进行了并行优化，开发者不需要改变就得到了性能提升。\nGolang 对并发的封装，也是一个高层抽象的表现。\n这个也可能需要一篇文章来研究。\n",
   "wordCount" : "241",
   "inLanguage": "en",
-  "datePublished": "2019-03-10T00:00:00+08:00",
+  "datePublished": "2019-03-10T00:00:00Z",
   "dateModified": "2020-03-22T21:14:08+08:00",
   "author":[{
     "@type": "Person",
@@ -140,7 +140,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "kWeiZh",
+    "name": "kWeizh",
     "logo": {
       "@type": "ImageObject",
       "url": "https://page.codespaper.com/favicon.ico"
@@ -165,15 +165,15 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
-            <span class="logo-switches">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeizh (Alt + H)">kWeizh</a>
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +187,7 @@ if (!doNotTrack) {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +216,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       为什么我觉得 Golang 更好
     </h1>
-    <div class="post-meta"><span title='2019-03-10 00:00:00 +0800 CST'>March 10, 2019</span>&nbsp;·&nbsp;zwPapEr
+    <div class="post-meta"><span title='2019-03-10 00:00:00 +0000 UTC'>March 10, 2019</span>&nbsp;·&nbsp;zwPapEr
 
 </div>
   </header> 
@@ -298,11 +298,11 @@ Golang 也许是第一个明确使用了最初 <code>对象范式</code> 设计�
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>&copy; 2023 <a href="https://page.codespaper.com/">kWeizh</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

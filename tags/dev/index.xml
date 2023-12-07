@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>dev on kWeiZh</title>
+    <title>dev on kWeizh</title>
     <link>https://page.codespaper.com/tags/dev/</link>
-    <description>Recent content in dev on kWeiZh</description>
+    <description>Recent content in dev on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 11 Jul 2015 23:48:27 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/dev/index.xml" rel="self" type="application/rss+xml" />

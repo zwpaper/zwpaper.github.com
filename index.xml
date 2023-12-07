@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>kWeiZh</title>
+    <title>kWeizh</title>
     <link>https://page.codespaper.com/</link>
-    <description>Recent content on kWeiZh</description>
+    <description>Recent content on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 16 Feb 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>收到第一次的周期开源赞助</title>
+      <link>https://page.codespaper.com/2023/2023-first-sponsor-lsd/</link>
+      <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://page.codespaper.com/2023/2023-first-sponsor-lsd/</guid>
+      <description>&lt;h1 id=&#34;收到第一次的周期开源赞助&#34;&gt;收到第一次的周期开源赞助&lt;/h1&gt;
+&lt;p&gt;最近收到了人生的第一个开源赞助，突然有一种被认可的感觉，激动的心情让我想写一点东西分享一下我的快乐。&lt;/p&gt;
+&lt;p&gt;首先肯定要大力感谢 &lt;a href=&#34;https://www.warp.dev/?utm_source=github&amp;amp;utm_medium=referral&amp;amp;utm_campaign=lsd_20231001&#34;&gt;Warp.dev 对我和 LSD 开源项目的支持&lt;/a&gt;！&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.warp.dev/?utm_source=github&amp;amp;utm_medium=referral&amp;amp;utm_campaign=lsd_20231001&#34;&gt;Warp.dev&lt;/a&gt; 是一个 Rust 实现的现代化 Terminal，目前我也在尝试用它替换 iTerm2，不得不说还是挺特别的，尤其每一个命令就是一个 Block，支持团队协作和 AI 建议等现代化功能，起码是在众多 Terminal 里，算是做出自己的特色了。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>2020 年终总结，2021 新年展望</title>
       <link>https://page.codespaper.com/2021/2020-2021/</link>
-      <pubDate>Tue, 16 Feb 2021 00:00:00 +0800</pubDate>
+      <pubDate>Tue, 16 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2021/2020-2021/</guid>
       <description>&lt;p&gt;2020 年碰到了新冠疫情，是大环境最差的一年，但是宅在家里，却看到了更多，做到了更多，
@@ -24,7 +36,7 @@
     <item>
       <title>macOS GUI Emacs 使用 GPG 给 Git Commit 签名</title>
       <link>https://page.codespaper.com/2020/mac-emacs-gui-gpg-sign-commit/</link>
-      <pubDate>Sat, 21 Nov 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/mac-emacs-gui-gpg-sign-commit/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
@@ -35,7 +47,7 @@
     <item>
       <title>儿童疫苗攻略</title>
       <link>https://page.codespaper.com/2020/kid-vaccine/</link>
-      <pubDate>Tue, 28 Jul 2020 00:00:00 +0800</pubDate>
+      <pubDate>Tue, 28 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/kid-vaccine/</guid>
       <description>&lt;h2 id=&#34;选择原则&#34;&gt;选择原则&lt;/h2&gt;
@@ -52,15 +64,18 @@
       <pubDate>Fri, 20 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/kube-scheduler-source-code/</guid>
-      <description>Config   https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/api/v1/types.go#L31
-{ &amp;#34;kind&amp;#34; : &amp;#34;Policy&amp;#34;, &amp;#34;apiVersion&amp;#34; : &amp;#34;v1&amp;#34;, &amp;#34;extenders&amp;#34; : [ { &amp;#34;urlPrefix&amp;#34;: &amp;#34;http://127.0.0.1:3456/scheduler&amp;#34;, &amp;#34;filterVerb&amp;#34;: &amp;#34;predicates&amp;#34;, &amp;#34;enableHttps&amp;#34;: false, &amp;#34;nodeCacheCapable&amp;#34;: false, &amp;#34;managedResources&amp;#34;: [{ &amp;#34;name&amp;#34;: &amp;#34;tencent.com/vcuda-core&amp;#34;, &amp;#34;ignoredByScheduler&amp;#34;: false }, { &amp;#34;name&amp;#34;: &amp;#34;tencent.com/vcuda-memory&amp;#34;, &amp;#34;ignoredByScheduler&amp;#34;: false }] } ], &amp;#34;hardPodAffinitySymmetricWeight&amp;#34; : 10, &amp;#34;alwaysCheckAllPredicates&amp;#34; : false }    Scheduling   谁调用 MakeNextPod, 然后调 schedulerOne? scheduling_queue.go:815] About to try and schedule pod default/engine-static-feature-db-worker-p4-3-0 https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/internal/queue/scheduling_queue.go#L811
- scheduler.go:456] Attempting to schedule pod: default/engine-static-feature-db-worker-p4-3-0 https://sourcegraph.</description>
+      <description>Config https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/api/v1/types.go#L31
+{ &amp;#34;kind&amp;#34; : &amp;#34;Policy&amp;#34;, &amp;#34;apiVersion&amp;#34; : &amp;#34;v1&amp;#34;, &amp;#34;extenders&amp;#34; : [ { &amp;#34;urlPrefix&amp;#34;: &amp;#34;http://127.0.0.1:3456/scheduler&amp;#34;, &amp;#34;filterVerb&amp;#34;: &amp;#34;predicates&amp;#34;, &amp;#34;enableHttps&amp;#34;: false, &amp;#34;nodeCacheCapable&amp;#34;: false, &amp;#34;managedResources&amp;#34;: [{ &amp;#34;name&amp;#34;: &amp;#34;tencent.com/vcuda-core&amp;#34;, &amp;#34;ignoredByScheduler&amp;#34;: false }, { &amp;#34;name&amp;#34;: &amp;#34;tencent.com/vcuda-memory&amp;#34;, &amp;#34;ignoredByScheduler&amp;#34;: false }] } ], &amp;#34;hardPodAffinitySymmetricWeight&amp;#34; : 10, &amp;#34;alwaysCheckAllPredicates&amp;#34; : false } Scheduling 谁调用 MakeNextPod, 然后调 schedulerOne? scheduling_queue.go:815] About to try and schedule pod default/engine-static-feature-db-worker-p4-3-0 https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/internal/queue/scheduling_queue.go#L811
+scheduler.go:456] Attempting to schedule pod: default/engine-static-feature-db-worker-p4-3-0 https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/scheduler.go#L442
+sched.schedule https://sourcegraph.com/github.com/kubernetes/kubernetes@v1.15.9/-/blob/pkg/scheduler/scheduler.go#L283
+sched.config.Algorithm.Schedule(pod, sched.config.NodeLister)
+scheduler.algorithm = NewGenericScheduler -&amp;gt; genericScheduler sched.</description>
     </item>
     
     <item>
       <title>从 NextCloud 替换为 Seafile</title>
       <link>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</link>
-      <pubDate>Sun, 08 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 08 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/from-nextcloud-to-seafile/</guid>
       <description>&lt;p&gt;之前自己组装了一台 NAS，用作私有云，解决大容量网盘，自己跑的一些小应用的问题，还计划作为软路由。
@@ -71,7 +86,7 @@
     <item>
       <title>Golang 1.14 发布，抢占式调度优化</title>
       <link>https://page.codespaper.com/2020/go14-preemptible/</link>
-      <pubDate>Sun, 01 Mar 2020 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/go14-preemptible/</guid>
       <description>&lt;p&gt;&lt;code&gt;Golang&lt;/code&gt; 1.14 在 2020-02-25 正式发布，看了一下 Release Notes，发现有两个点比较有意思：&lt;/p&gt;
@@ -85,7 +100,7 @@
     <item>
       <title>2019 年终总结，2020 新年展望</title>
       <link>https://page.codespaper.com/2020/2019-2020/</link>
-      <pubDate>Fri, 31 Jan 2020 00:00:00 +0800</pubDate>
+      <pubDate>Fri, 31 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2020/2019-2020/</guid>
       <description>&lt;p&gt;2018 年底从一个创业公司，换到了另一个创业公司，今年算是全新的一年。&lt;/p&gt;
@@ -98,21 +113,20 @@
       <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/k8s-dns-resolve/</guid>
-      <description>场景   在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
- 举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
-  10.0.171.239:80
-  demo-svc:80
-  demo-svc.namespace-name.svc.cluster.local:80
-   注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
-  通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
- 但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
-  原理解析  DNS   查看 Pod 内的 /etc/resolve.</description>
+      <description>场景 在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
+举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
+10.0.171.239:80 demo-svc:80 demo-svc.namespace-name.svc.cluster.local:80 注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
+通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
+但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
+原理解析 DNS 查看 Pod 内的 /etc/resolve.conf ，能看到一下内容：
+nameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local cluster.local options ndots:5 其中：
+10.0.0.10 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。 search 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 查找 后面对应的这几个后缀。 options ndots:5 这个有意思，当请求的域名里，显式出现少于 5 个 点 时，才补上 search 的后缀。 值得注意的时 options ndots:5 ，显式出现少于 5 个 点 是什么意思呢？</description>
     </item>
     
     <item>
       <title>用 Stack 管理多个 GHC 版本</title>
       <link>https://page.codespaper.com/2019/stack-multi-ghc/</link>
-      <pubDate>Sat, 17 Aug 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/stack-multi-ghc/</guid>
       <description>&lt;p&gt;使用 Haskell 碰到 GHC 版本的问题，但是搜了一下，感觉说的文章不多，
@@ -122,25 +136,9 @@
     </item>
     
     <item>
-      <title>开始用 Beancount 实践复式记账（二）：工具</title>
-      <link>https://page.codespaper.com/2019/beancount-2/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://page.codespaper.com/2019/beancount-2/</guid>
-      <description>工具  Emacs   ;; -- mode: org; mode: beancount; coding: utf-8; fill-column: 400; --
-  beancount-check   用于检查当前文件有没有语法错误
-  beancount-init-account   更新 Emacs 已知的账户名，用于下一个
-  beancount-insert-account   插入账户名，相当于补全
-  beancount-align-number   对齐数字
-  Beancount 的一大特点就是自动化，所以自然是需要使用到各种各样的工具。 目前刚开始，先用点 Shell 脚本拼一下工具链， 后续用 Python 或者 Golang 写一个处理工具和 Emacs 拓展。
-  Shell  微信账单  挺意外微信居然有账单导出，就在明细页， csv 格式的。 上半部分是统计信息，下半部分是明细，我们暂时只需要明细，统计部分可以在工具里做验证。 所以删除上半部分
-cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | tail -n +2   主要是用 sed 删除 微信支付账单明细列表 和以上的内容， 然后剩下的还有一个表格头，用 tail 打印第二行以后内容， 最后就剩明细了。</description>
-    </item>
-    
-    <item>
       <title>开始用 Beancount 实践复式记账（一）：初始化</title>
       <link>https://page.codespaper.com/2019/beancount/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/beancount/</guid>
       <description>&lt;p&gt;第一次了解到复式记账是 Emacs 的 &lt;code&gt;Ledger mode&lt;/code&gt; ，但是还挺复杂的，就放弃了。
@@ -148,9 +146,23 @@ cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | t
     </item>
     
     <item>
+      <title>开始用 Beancount 实践复式记账（二）：工具</title>
+      <link>https://page.codespaper.com/2019/beancount-2/</link>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://page.codespaper.com/2019/beancount-2/</guid>
+      <description>工具 Emacs ;; -- mode: org; mode: beancount; coding: utf-8; fill-column: 400; --
+beancount-check 用于检查当前文件有没有语法错误 beancount-init-account 更新 Emacs 已知的账户名，用于下一个 beancount-insert-account 插入账户名，相当于补全 beancount-align-number 对齐数字 Beancount 的一大特点就是自动化，所以自然是需要使用到各种各样的工具。 目前刚开始，先用点 Shell 脚本拼一下工具链， 后续用 Python 或者 Golang 写一个处理工具和 Emacs 拓展。
+Shell 微信账单 挺意外微信居然有账单导出，就在明细页， csv 格式的。 上半部分是统计信息，下半部分是明细，我们暂时只需要明细，统计部分可以在工具里做验证。 所以删除上半部分
+cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | tail -n +2 主要是用 sed 删除 微信支付账单明细列表 和以上的内容， 然后剩下的还有一个表格头，用 tail 打印第二行以后内容， 最后就剩明细了。
+— 三
+tag</description>
+    </item>
+    
+    <item>
       <title>dnsmasq &#43; Cloudflare DoH 自建 DNS</title>
       <link>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</link>
-      <pubDate>Sun, 30 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</guid>
       <description>&lt;p&gt;有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，
@@ -160,7 +172,7 @@ cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | t
     <item>
       <title>从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</title>
       <link>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</link>
-      <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</guid>
       <description>&lt;p&gt;传统的高性能计算集群一般都习惯性地使用 &lt;code&gt;Slurm&lt;/code&gt; + &lt;code&gt;Lustre&lt;/code&gt; 的方案作为任务调度和存储，
@@ -173,7 +185,7 @@ cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | t
     <item>
       <title>作为新手，为什么我选 Typescript</title>
       <link>https://page.codespaper.com/2019/js-to-ts-for-newbie/</link>
-      <pubDate>Sun, 09 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/js-to-ts-for-newbie/</guid>
       <description>&lt;p&gt;最近尝试着使用 Taro 写一个微信小程序，&lt;a href=&#34;https://taro.jd.com/&#34;&gt;Taro&lt;/a&gt; 是&lt;a href=&#34;https://aotu.io/&#34;&gt;京东凹凸实验室&lt;/a&gt;开发的一款使用 &lt;a href=&#34;https://reactjs.org/&#34;&gt;React&lt;/a&gt; 语法多端统一开发解决方案，
@@ -189,23 +201,22 @@ cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | t
       <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/slack-bot-in-rust/</guid>
-      <description>简介   Slack 机器人是一个服务端程序，可以通过 Slack 和他进行交互，完成期望的一些动作。
- 如果你不知道什么是 Slack，可以先了解一下：
- About Slack
- 因为我最近正在学习 Rust，所以本文会使用 Rust 从零开发一个 Slack 机器人，并记录下我碰到的问题， 最终希望能够做出一个真正能够解决一些实用问题的机器人。
- 本篇为初章，包含一些简介和 Slack API 的认证的开发。
-准备   开发 Slack 机器人需要有准备：
-  Slack 帐号，并申请开通 Bot user
-  带有公网帐号的服务器
-  如果使用实时信息 API 可以没有公网 IP。
-  Slack API   Slack 提供了三种 API：
-  Web hook   向 Slack 服务器发送 web 请求，从而发送信息到 Slack 上</description>
+      <description>简介 Slack 机器人是一个服务端程序，可以通过 Slack 和他进行交互，完成期望的一些动作。
+如果你不知道什么是 Slack，可以先了解一下：
+About Slack
+因为我最近正在学习 Rust，所以本文会使用 Rust 从零开发一个 Slack 机器人，并记录下我碰到的问题， 最终希望能够做出一个真正能够解决一些实用问题的机器人。
+本篇为初章，包含一些简介和 Slack API 的认证的开发。
+准备 开发 Slack 机器人需要有准备：
+Slack 帐号，并申请开通 Bot user 带有公网帐号的服务器 如果使用实时信息 API 可以没有公网 IP。
+Slack API Slack 提供了三种 API：
+Web hook 向 Slack 服务器发送 web 请求，从而发送信息到 Slack 上 Event API 订阅具体事件（Event）并由 Slack 发送到指定服务器，由服务器商决定做出什么反应 RTM API 实时信息 API，通过 WebSocket 连接到 Slack，连接后，会收到所有 Slack 的信息 考虑到 HTTP 服务端程序更常用，也足够满足机器人的要求，所以我们使用 Event API。
+关于几种 API 的区别，可以看一下 这篇文章</description>
     </item>
     
     <item>
       <title>为什么我觉得 Golang 更好</title>
       <link>https://page.codespaper.com/2019/why-golang/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/why-golang/</guid>
       <description>&lt;p&gt;最近看到 Rob Pike 在 2012 年写的一篇文章，&lt;a href=&#34;https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html&#34;&gt;Less is exponentially more&lt;/a&gt;&lt;/p&gt;
@@ -219,7 +230,7 @@ cat 文件名.csv| sed &amp;#39;0,/微信支付账单明细列表/d&amp;#39; | t
     <item>
       <title>使用 GPG 在 Emacs 中加密 Org Mode 笔记文件</title>
       <link>https://page.codespaper.com/2019/gpg-encrypt-org/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/gpg-encrypt-org/</guid>
       <description>&lt;p&gt;Org Mode 作为主要 GTD 和笔记软件，需要使用网盘来同步信息，虽然 Dropbox 名声十分良好，

@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>开始用 Beancount 实践复式记账（一）：初始化 | kWeiZh</title>
+<title>开始用 Beancount 实践复式记账（一）：初始化 | kWeizh</title>
 <meta name="keywords" content="Accounting, beancount">
 <meta name="description" content="第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。
 后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。">
 <meta name="author" content="zhangwei">
 <link rel="canonical" href="https://page.codespaper.com/2019/beancount/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://page.codespaper.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
@@ -74,8 +74,8 @@ if (!doNotTrack) {
 后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://page.codespaper.com/2019/beancount/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-08-10T00:00:00&#43;08:00" />
-<meta property="article:modified_time" content="2020-03-22T21:12:12&#43;08:00" /><meta property="og:site_name" content="kWeiZh" />
+<meta property="article:published_time" content="2019-08-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-22T21:12:12+08:00" /><meta property="og:site_name" content="kWeiZh" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="开始用 Beancount 实践复式记账（一）：初始化"/>
@@ -113,10 +113,10 @@ if (!doNotTrack) {
   "keywords": [
     "Accounting", "beancount"
   ],
-  "articleBody": "第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。 后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。\n复式记账 Beancount 目前 beancount 的中文文章还不算多，主要看了这两篇：\n https://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/  配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava\npip install beancount fava ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报\nUserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(\"Fast C decimal implementation appears to be missing; \" 这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装\npacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.el ， https://github.com/beancount/beancount/tree/master/editors/emacs 我们下载并放到 load-path ，然后用 use-package 配置一下即可。\n(use-package beancount :load-path \"~/.emacs.d/plugin\" :ensure nil :mode (\"\\\\.bean$\" . beancount-mode)) Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：\n beancount-check 用于检查当前文件有没有语法错误 beancount-init-account 更新 Emacs 已知的账户名，用于下一个 beancount-insert-account 插入账户名，相当于补全  后续可能我会更新我的配置，可以参考：\nhttps://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el\n下一篇文章我会写工具，也会自介绍一下 Emacs 里怎么去用这些命令。\n开始使用 初始化账户 按照上文提到的两篇文章，我们已经可以初步建立我们的账户\noption \"title\" \"Personal Ledger\" option \"operating_currency\" \"CNY\" option \"operating_currency\" \"USD\" 1990-05-28 open Equity:Opening-Balances 1990-05-28 open Assets:Bank:CMB:xxxx:Deposit CNY 1990-05-28 open Assets:Bank:CMB:xxxx:ZZY CNY 20xx-xx-xx open Assets:House:HouseName CNY 20xx-xx-xx open Liabilities:Mortgage:House CNY 20xx-xx-xx open Liabilities:Mortgage:Interest CNY 1990-05-28 open Liabilities:Credit:CMB:xxxx CNY,USD 1990-05-28 open Liabilities:Huabei CNY 2018-10-30 open Income:CompanyName:Salary CNY 1990-05-28 open Income:PnL CNY 1990-05-28 note Income:PnL \"盈亏\" 1990-05-28 open Income:PnL:Fund CNY 2016-07-07 open Expenses:Gov:HousingFund CNY 2016-07-07 open Expenses:Gov:Pension CNY 2016-07-07 open Expenses:Gov:Unemployment CNY 2016-07-07 open Expenses:Gov:MedicalCare CNY 2016-07-07 open Expenses:Gov:IncomeTax CNY 1990-05-28 open Expenses:Daily:Cloth CNY 1990-05-28 open Expenses:Daily:Food CNY 主要是几类：\n Asset:Bank 银行卡 Liabilities:Credit 信用卡 Incoume:CompanyName:Salary 工资 Incoume:PnL 用于盈亏，对应加了一条 note，方便记忆 Expenses:Gov 五险一金 Expenses:XXX 其它支出 Equity:Opening-Balances 开户平衡  有几点需要主要的是，工资的话，是算上应收，再算五险一金，最后是收入。 还有房贷，房屋价值和利息是要分开算的。\n当前余额 现在有账户了，然后就是账户里的余额， beancount 已经考虑到了，所以有 pad ， 而且上文开户有一个 Equity:Opening-Balances ，就是用来初始化账户， 而且在你补充了中间的条目之后， pad 的值也会对应更新。\n用法是从 时间1 到 时间2 期间 账户1 的余额是 banlance 指明的值， 差值算到 账户2 内。\n时间1 pad 账户1 账户2 时间2 balance 账户1 金额1 货币 我们初始化账户可以把 时间1 设置为生日， 时间2 设置为当前， 这样表示之前帐目的都用 Opening-Balances 先抹平，如果我们之前有记录的内容， 直接补充进去就好了， pad 会自己更新。\n1990-05-28 pad Assets:Bank:CMB:6838:Deposit Equity:Opening-Balances 2019-08-10 balance Assets:Bank:CMB:6838:Deposit xxx CNY 1990-05-28 pad Liabilities:Credit:CMB Equity:Opening-Balances 2019-08-10 balance Liabilities:Credit:CMB -xxxxx CNY 到此，我们的账户初始化就完成了。\n总结 我们可以打开 fava 看一下我们的资产：\nfava xx.bean 可以看到在资产页，我们填的余额都已经更新了。\n其中还有一个点，就是 Book Value 和 Market Value 。 复式记账多用于公司，所以这两个值主要也是公司财务比较熟悉的。\n Book Value 纸面上的价值，就是欠的钱都还了之后的资产 Market Value 股票价值，Beancount 里就是制定 price 之后计算出来的价格  考虑到自动化需要一个比较好用的工具，等下一片文章再具体写一下工具的情况。\n",
+  "articleBody": "第一次了解到复式记账是 Emacs 的 Ledger mode ，但是还挺复杂的，就放弃了。 后来 Byvoid 的Beancount 复式记账（一）：为什么里提到了 Beancount ，感觉比较值得一试。\n复式记账 Beancount 目前 beancount 的中文文章还不算多，主要看了这两篇：\nhttps://wzyboy.im/post/1063.html https://yuchi.me/post/beancount-intro/ 配置 网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava\npip install beancount fava ArchLinux 因为使用了 ArchLinux ，在用 beancount 命令的时候会报\nUserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal warnings.warn(\"Fast C decimal implementation appears to be missing; \" 这个其实是因为在 ArchLinux 上少了 mpdecimal 这个库，所以要安装\npacman -S mpdecimal Emacs Beancount 作者也是 Emacs 用户，所以在项目里有一个 beancount.el ， https://github.com/beancount/beancount/tree/master/editors/emacs 我们下载并放到 load-path ，然后用 use-package 配置一下即可。\n(use-package beancount :load-path \"~/.emacs.d/plugin\" :ensure nil :mode (\"\\\\.bean$\" . beancount-mode)) Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：\nbeancount-check 用于检查当前文件有没有语法错误 beancount-init-account 更新 Emacs 已知的账户名，用于下一个 beancount-insert-account 插入账户名，相当于补全 后续可能我会更新我的配置，可以参考：\nhttps://github.com/zwpaper/paper-emacs/blob/master/config/init-beancount.el\n下一篇文章我会写工具，也会自介绍一下 Emacs 里怎么去用这些命令。\n开始使用 初始化账户 按照上文提到的两篇文章，我们已经可以初步建立我们的账户\noption \"title\" \"Personal Ledger\" option \"operating_currency\" \"CNY\" option \"operating_currency\" \"USD\" 1990-05-28 open Equity:Opening-Balances 1990-05-28 open Assets:Bank:CMB:xxxx:Deposit CNY 1990-05-28 open Assets:Bank:CMB:xxxx:ZZY CNY 20xx-xx-xx open Assets:House:HouseName CNY 20xx-xx-xx open Liabilities:Mortgage:House CNY 20xx-xx-xx open Liabilities:Mortgage:Interest CNY 1990-05-28 open Liabilities:Credit:CMB:xxxx CNY,USD 1990-05-28 open Liabilities:Huabei CNY 2018-10-30 open Income:CompanyName:Salary CNY 1990-05-28 open Income:PnL CNY 1990-05-28 note Income:PnL \"盈亏\" 1990-05-28 open Income:PnL:Fund CNY 2016-07-07 open Expenses:Gov:HousingFund CNY 2016-07-07 open Expenses:Gov:Pension CNY 2016-07-07 open Expenses:Gov:Unemployment CNY 2016-07-07 open Expenses:Gov:MedicalCare CNY 2016-07-07 open Expenses:Gov:IncomeTax CNY 1990-05-28 open Expenses:Daily:Cloth CNY 1990-05-28 open Expenses:Daily:Food CNY 主要是几类：\nAsset:Bank 银行卡 Liabilities:Credit 信用卡 Incoume:CompanyName:Salary 工资 Incoume:PnL 用于盈亏，对应加了一条 note，方便记忆 Expenses:Gov 五险一金 Expenses:XXX 其它支出 Equity:Opening-Balances 开户平衡 有几点需要主要的是，工资的话，是算上应收，再算五险一金，最后是收入。 还有房贷，房屋价值和利息是要分开算的。\n当前余额 现在有账户了，然后就是账户里的余额， beancount 已经考虑到了，所以有 pad ， 而且上文开户有一个 Equity:Opening-Balances ，就是用来初始化账户， 而且在你补充了中间的条目之后， pad 的值也会对应更新。\n用法是从 时间1 到 时间2 期间 账户1 的余额是 banlance 指明的值， 差值算到 账户2 内。\n时间1 pad 账户1 账户2 时间2 balance 账户1 金额1 货币 我们初始化账户可以把 时间1 设置为生日， 时间2 设置为当前， 这样表示之前帐目的都用 Opening-Balances 先抹平，如果我们之前有记录的内容， 直接补充进去就好了， pad 会自己更新。\n1990-05-28 pad Assets:Bank:CMB:6838:Deposit Equity:Opening-Balances 2019-08-10 balance Assets:Bank:CMB:6838:Deposit xxx CNY 1990-05-28 pad Liabilities:Credit:CMB Equity:Opening-Balances 2019-08-10 balance Liabilities:Credit:CMB -xxxxx CNY 到此，我们的账户初始化就完成了。\n总结 我们可以打开 fava 看一下我们的资产：\nfava xx.bean 可以看到在资产页，我们填的余额都已经更新了。\n其中还有一个点，就是 Book Value 和 Market Value 。 复式记账多用于公司，所以这两个值主要也是公司财务比较熟悉的。\nBook Value 纸面上的价值，就是欠的钱都还了之后的资产 Market Value 股票价值，Beancount 里就是制定 price 之后计算出来的价格 考虑到自动化需要一个比较好用的工具，等下一片文章再具体写一下工具的情况。\n",
   "wordCount" : "300",
   "inLanguage": "en",
-  "datePublished": "2019-08-10T00:00:00+08:00",
+  "datePublished": "2019-08-10T00:00:00Z",
   "dateModified": "2020-03-22T21:12:12+08:00",
   "author":[{
     "@type": "Person",
@@ -128,7 +128,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "kWeiZh",
+    "name": "kWeizh",
     "logo": {
       "@type": "ImageObject",
       "url": "https://page.codespaper.com/favicon.ico"
@@ -153,15 +153,15 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
-            <span class="logo-switches">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeizh (Alt + H)">kWeizh</a>
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -175,7 +175,7 @@ if (!doNotTrack) {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -204,7 +204,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       开始用 Beancount 实践复式记账（一）：初始化
     </h1>
-    <div class="post-meta"><span title='2019-08-10 00:00:00 +0800 CST'>August 10, 2019</span>&nbsp;·&nbsp;zhangwei
+    <div class="post-meta"><span title='2019-08-10 00:00:00 +0000 UTC'>August 10, 2019</span>&nbsp;·&nbsp;zhangwei
 
 </div>
   </header> 
@@ -218,23 +218,23 @@ if (!doNotTrack) {
 </ul>
 <h2 id="配置">配置<a hidden class="anchor" aria-hidden="true" href="#配置">#</a></h2>
 <p>网上有很多安装教程，就不复述，主要就是安装 beancount 和 fava</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install beancount fava
-</code></pre></div><h3 id="archlinux">ArchLinux<a hidden class="anchor" aria-hidden="true" href="#archlinux">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install beancount fava
+</span></span></code></pre></div><h3 id="archlinux">ArchLinux<a hidden class="anchor" aria-hidden="true" href="#archlinux">#</a></h3>
 <p>因为使用了 <code>ArchLinux</code> ，在用 beancount 命令的时候会报</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal
-  warnings.warn<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fast C decimal implementation appears to be missing; &#34;</span>
-</code></pre></div><p>这个其实是因为在 ArchLinux 上少了 <code>mpdecimal</code> 这个库，所以要安装</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pacman -S mpdecimal
-</code></pre></div><h3 id="emacs">Emacs<a hidden class="anchor" aria-hidden="true" href="#emacs">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>UserWarning: Fast C decimal implementation appears to be missing; Consider installing cdecimal
+</span></span><span style="display:flex;"><span>  warnings.warn<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fast C decimal implementation appears to be missing; &#34;</span>
+</span></span></code></pre></div><p>这个其实是因为在 ArchLinux 上少了 <code>mpdecimal</code> 这个库，所以要安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pacman -S mpdecimal
+</span></span></code></pre></div><h3 id="emacs">Emacs<a hidden class="anchor" aria-hidden="true" href="#emacs">#</a></h3>
 <p>Beancount 作者也是 Emacs 用户，所以在项目里有一个 <code>beancount.el</code> ，
 <a href="https://github.com/beancount/beancount/tree/master/editors/emacs">https://github.com/beancount/beancount/tree/master/editors/emacs</a>
 我们下载并放到 <code>load-path</code> ，然后用 <code>use-package</code> 配置一下即可。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(use-package beancount
-  :load-path <span style="color:#e6db74">&#34;~/.emacs.d/plugin&#34;</span>
-  :ensure <span style="color:#66d9ef">nil</span>
-  :mode
-  (<span style="color:#e6db74">&#34;\\.bean$&#34;</span> <span style="color:#f92672">.</span> beancount-mode))
-</code></pre></div><p>Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>(use-package beancount
+</span></span><span style="display:flex;"><span>  :load-path <span style="color:#e6db74">&#34;~/.emacs.d/plugin&#34;</span>
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>  :mode
+</span></span><span style="display:flex;"><span>  (<span style="color:#e6db74">&#34;\\.bean$&#34;</span> <span style="color:#f92672">.</span> beancount-mode))
+</span></span></code></pre></div><p>Emacs 里 Beancount mode 主要是语法高亮和加入了 Beancount 命令的调用，像：</p>
 <dl>
 <dt>beancount-check</dt>
 <dd>用于检查当前文件有没有语法错误</dd>
@@ -249,9 +249,9 @@ if (!doNotTrack) {
 <h2 id="开始使用">开始使用<a hidden class="anchor" aria-hidden="true" href="#开始使用">#</a></h2>
 <h3 id="初始化账户">初始化账户<a hidden class="anchor" aria-hidden="true" href="#初始化账户">#</a></h3>
 <p>按照上文提到的两篇文章，我们已经可以初步建立我们的账户</p>
-<pre><code class="language-nil" data-lang="nil">option &quot;title&quot; &quot;Personal Ledger&quot;
-option &quot;operating_currency&quot; &quot;CNY&quot;
-option &quot;operating_currency&quot; &quot;USD&quot;
+<pre tabindex="0"><code class="language-nil" data-lang="nil">option &#34;title&#34; &#34;Personal Ledger&#34;
+option &#34;operating_currency&#34; &#34;CNY&#34;
+option &#34;operating_currency&#34; &#34;USD&#34;
 
 1990-05-28 open Equity:Opening-Balances
 
@@ -267,7 +267,7 @@ option &quot;operating_currency&quot; &quot;USD&quot;
 
 2018-10-30 open Income:CompanyName:Salary CNY
 1990-05-28 open Income:PnL CNY
-1990-05-28 note Income:PnL &quot;盈亏&quot;
+1990-05-28 note Income:PnL &#34;盈亏&#34;
 1990-05-28 open Income:PnL:Fund CNY
 
 2016-07-07 open Expenses:Gov:HousingFund CNY
@@ -303,12 +303,12 @@ option &quot;operating_currency&quot; &quot;USD&quot;
 而且在你补充了中间的条目之后， <code>pad</code> 的值也会对应更新。</p>
 <p>用法是从 <code>时间1</code> 到 <code>时间2</code> 期间 <code>账户1</code> 的余额是 <code>banlance</code> 指明的值，
 差值算到 <code>账户2</code> 内。</p>
-<pre><code class="language-nil" data-lang="nil">时间1 pad 账户1 账户2
+<pre tabindex="0"><code class="language-nil" data-lang="nil">时间1 pad 账户1 账户2
 时间2 balance 账户1 金额1 货币
 </code></pre><p>我们初始化账户可以把 <code>时间1</code> 设置为生日， <code>时间2</code> 设置为当前，
 这样表示之前帐目的都用 <code>Opening-Balances</code> 先抹平，如果我们之前有记录的内容，
 直接补充进去就好了， <code>pad</code> 会自己更新。</p>
-<pre><code class="language-nil" data-lang="nil">1990-05-28 pad Assets:Bank:CMB:6838:Deposit Equity:Opening-Balances
+<pre tabindex="0"><code class="language-nil" data-lang="nil">1990-05-28 pad Assets:Bank:CMB:6838:Deposit Equity:Opening-Balances
 2019-08-10 balance Assets:Bank:CMB:6838:Deposit xxx CNY
 
 1990-05-28 pad Liabilities:Credit:CMB Equity:Opening-Balances
@@ -316,8 +316,8 @@ option &quot;operating_currency&quot; &quot;USD&quot;
 </code></pre><p>到此，我们的账户初始化就完成了。</p>
 <h2 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h2>
 <p>我们可以打开 fava 看一下我们的资产：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fava xx.bean
-</code></pre></div><p>可以看到在资产页，我们填的余额都已经更新了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fava xx.bean
+</span></span></code></pre></div><p>可以看到在资产页，我们填的余额都已经更新了。</p>
 <p>其中还有一个点，就是 <code>Book Value</code> 和 <code>Market Value</code> 。
 复式记账多用于公司，所以这两个值主要也是公司财务比较熟悉的。</p>
 <dl>
@@ -340,11 +340,11 @@ option &quot;operating_currency&quot; &quot;USD&quot;
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>&copy; 2023 <a href="https://page.codespaper.com/">kWeizh</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

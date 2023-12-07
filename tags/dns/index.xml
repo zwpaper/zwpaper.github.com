@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>dns on kWeiZh</title>
+    <title>dns on kWeizh</title>
     <link>https://page.codespaper.com/tags/dns/</link>
-    <description>Recent content in dns on kWeiZh</description>
+    <description>Recent content in dns on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/dns/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>dnsmasq &#43; Cloudflare DoH 自建 DNS</title>
       <link>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</link>
-      <pubDate>Sun, 30 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/</guid>
       <description>&lt;p&gt;有时候方案一些网站的时候，会由于 DNS 解析出问题，即使网络情况很好，也会出现无法访问的情况，

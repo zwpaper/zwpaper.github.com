@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>2020 年终总结，2021 新年展望 | kWeiZh</title>
+<title>2020 年终总结，2021 新年展望 | kWeizh</title>
 <meta name="keywords" content="Review">
 <meta name="description" content="2020 年碰到了新冠疫情，是大环境最差的一年，但是宅在家里，却看到了更多，做到了更多，
 放眼看，今年科技圈又把眼光看向了太空，
@@ -15,8 +15,8 @@
 在拖延症 2020 年总结时， Golang 泛型还在农历新年迎来了好消息。">
 <meta name="author" content="zwPapEr">
 <link rel="canonical" href="https://page.codespaper.com/2021/2020-2021/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://page.codespaper.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
@@ -82,8 +82,8 @@ if (!doNotTrack) {
 在拖延症 2020 年总结时， Golang 泛型还在农历新年迎来了好消息。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://page.codespaper.com/2021/2020-2021/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-02-16T00:00:00&#43;08:00" />
-<meta property="article:modified_time" content="2021-02-20T18:31:46&#43;08:00" /><meta property="og:site_name" content="kWeiZh" />
+<meta property="article:published_time" content="2021-02-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-20T18:31:46+08:00" /><meta property="og:site_name" content="kWeiZh" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2020 年终总结，2021 新年展望"/>
@@ -125,10 +125,10 @@ if (!doNotTrack) {
   "keywords": [
     "Review"
   ],
-  "articleBody": "2020 年碰到了新冠疫情，是大环境最差的一年，但是宅在家里，却看到了更多，做到了更多， 放眼看，今年科技圈又把眼光看向了太空， 嫦娥五号登月带回样本，猎鹰九号载人升空，SN8 虽然落地爆炸，但是跳跃测试基本完美完成， 小时候成为科学家的梦想又开始在内心涌动起来（Doge）， 回看身边科技圈， Apple Silicon 闪亮登场， 苹果 市值 2 万亿， Tesla, 美团, 小米 市值猛涨， 在拖延症 2020 年总结时， Golang 泛型还在农历新年迎来了好消息。\n工作 工作上 2020 年没有太大的变化，还是继续扎根在云原生圈，希望能够做些有意义的事情。 前半年还是和之前一样，各个领域都有了解，但是归根到底，主要还是围绕的 Kubernetes 在做一些打杂的事情， 也更多的接触了 Rancher ，在思路上，Rancher 给我的感觉是一个不错的方向，把所有配置信息 CRD 化， 通过 Kubernetes 管理 Kubernetes，这个应该也是 Rancher 能够比较火原因吧， 但是看代码时，始终感觉实现得太过于重了，导致我对 Rancher 的感冒程度下降一个等级。\n倒是闲暇时候了解到了一个 IaaS 工具挺有意思的，2021 希望能够完善并推到起来。\n今年下半年独立负责了虚拟 GPU 的项目，基于腾讯的 TEKStack，解决了其中的一些问题，也开发了一些新功能， 有些功能本来计划能够回馈到上游，但是时间关系导致一直没有回馈，这个是今年一大遗憾，新的一年必须推动一下。 在维护 vGPU 的过程中，我们还发现了 TKEStack 的一个设计问题，如果有兴趣的可以看一下我的分析。 这个限制可以说是受限于 Kubernetes Device Plugin 的设计，不过好在，我们也找到了新的方案，解决了这个问题， 这个修复可以说是非常关键的了。\n另外在开发过程中，我们还就新开发的功能，申请了一个专利，不过在写专利的过程中，和专利代理人打交道的过程中， 我深刻感受到，写专利真正的困难明显不在专利本身，而是提交专利的过程，希望 2021 年能够成功把申请流程走完。\n在年末的时候，有幸参与到公司一个比较大的保密项目，2021 年也会负责其中的一部分，比较值得期待。\n最后在去年的展望里，我希望 2020 年能够更深入的理解 Operator 的模型架构，随着对 Kubernetes 了解的深入， 其实也就明白了 Operator 的架构，其实就是将 Kubernetes Controller 的思路抽离出来供第三方使用， Kubernetes 在第三方资源接入这方面确实提供了不少创意，第三方资源总能够很方便的融入到 Kubernetes 生态中。\n个人发展 今年个人发展上，和去年计划的差别还是比较大的。\nGolang 和 Kubernetes 上，由于工作上的使用，在熟悉程度上还是稳步上升， 但是一直感觉缺少了一个更深入的实践，所以新的一年希望能够在 Golang 和 Kubernetes 上在官方发起我的第一个 PR，挂上 Contributor 的名号。\nRust 今年算是成功入门了，给 LSD 贡献了几个 PR，目前在 Contributor 上看是排第三， 机缘巧合下也成为了 Collaborator，在开源和 Rust 上都算是达成了一个小目标。 新的一年希望继续维护 LSD，解决一些性能上的问题，并尝试进行推广，希望目前 5K+ Star 还能再有突破。\n今年在基础知识上的提升明显不多，所以新的一年希望分别能够通过 SICP 的公开课再次温习 SICP 这部经典作品， 以前 SICP 看书时，前面看得相对认真，后半部分的理解就不多了。 操作系统上看到了清华大学开源的一个 rCore，使用 Rust 实现的操作系统，新的一年希望能够参与的 rCore 项目中。 一方面继续学习 Rust，一方面也可以再深入学习操作系统的相关知识。\n去年定了一个前端圈的目标，可以说是完全没有进行，考虑到必须时刻学习新知识，今年给自己再定一个新目标， 进入 Apple 生态圈，学习 Swift 并开发一个应用。\n最后是个人财务方面，当然说的是知识方面，而不是具体财务，2019 年了解到了 Beancount，可惜和 Org Mode 一样，由于移动端的缺失，当然还有时间的不足，Beancount 记账只断断续续进行了很小的一部分， 工具开发上更是几乎没有进展，新的一年先回归最初的目标，希望能够继续使用 Beancount 进行记账和分析。\n和学习技术一样，除了实践，基础知识当然同样重要，所以今年已经开始学习 经济学原理 ， 2021 年希望能够完整地看完，有一些个人的思考。\n2021 展望 工作  IaaS 工具完善推动 vGPU 专利申请成功  个人发展  技术  Golang Contributor SICP 视频课程 参与 rCore Kubernetes Contributor Swift 应用   财务  Beancount 记账 经济学原理   书单  经济学原理 DDIA   ",
+  "articleBody": "2020 年碰到了新冠疫情，是大环境最差的一年，但是宅在家里，却看到了更多，做到了更多， 放眼看，今年科技圈又把眼光看向了太空， 嫦娥五号登月带回样本，猎鹰九号载人升空，SN8 虽然落地爆炸，但是跳跃测试基本完美完成， 小时候成为科学家的梦想又开始在内心涌动起来（Doge）， 回看身边科技圈， Apple Silicon 闪亮登场， 苹果 市值 2 万亿， Tesla, 美团, 小米 市值猛涨， 在拖延症 2020 年总结时， Golang 泛型还在农历新年迎来了好消息。\n工作 工作上 2020 年没有太大的变化，还是继续扎根在云原生圈，希望能够做些有意义的事情。 前半年还是和之前一样，各个领域都有了解，但是归根到底，主要还是围绕的 Kubernetes 在做一些打杂的事情， 也更多的接触了 Rancher ，在思路上，Rancher 给我的感觉是一个不错的方向，把所有配置信息 CRD 化， 通过 Kubernetes 管理 Kubernetes，这个应该也是 Rancher 能够比较火原因吧， 但是看代码时，始终感觉实现得太过于重了，导致我对 Rancher 的感冒程度下降一个等级。\n倒是闲暇时候了解到了一个 IaaS 工具挺有意思的，2021 希望能够完善并推到起来。\n今年下半年独立负责了虚拟 GPU 的项目，基于腾讯的 TEKStack，解决了其中的一些问题，也开发了一些新功能， 有些功能本来计划能够回馈到上游，但是时间关系导致一直没有回馈，这个是今年一大遗憾，新的一年必须推动一下。 在维护 vGPU 的过程中，我们还发现了 TKEStack 的一个设计问题，如果有兴趣的可以看一下我的分析。 这个限制可以说是受限于 Kubernetes Device Plugin 的设计，不过好在，我们也找到了新的方案，解决了这个问题， 这个修复可以说是非常关键的了。\n另外在开发过程中，我们还就新开发的功能，申请了一个专利，不过在写专利的过程中，和专利代理人打交道的过程中， 我深刻感受到，写专利真正的困难明显不在专利本身，而是提交专利的过程，希望 2021 年能够成功把申请流程走完。\n在年末的时候，有幸参与到公司一个比较大的保密项目，2021 年也会负责其中的一部分，比较值得期待。\n最后在去年的展望里，我希望 2020 年能够更深入的理解 Operator 的模型架构，随着对 Kubernetes 了解的深入， 其实也就明白了 Operator 的架构，其实就是将 Kubernetes Controller 的思路抽离出来供第三方使用， Kubernetes 在第三方资源接入这方面确实提供了不少创意，第三方资源总能够很方便的融入到 Kubernetes 生态中。\n个人发展 今年个人发展上，和去年计划的差别还是比较大的。\nGolang 和 Kubernetes 上，由于工作上的使用，在熟悉程度上还是稳步上升， 但是一直感觉缺少了一个更深入的实践，所以新的一年希望能够在 Golang 和 Kubernetes 上在官方发起我的第一个 PR，挂上 Contributor 的名号。\nRust 今年算是成功入门了，给 LSD 贡献了几个 PR，目前在 Contributor 上看是排第三， 机缘巧合下也成为了 Collaborator，在开源和 Rust 上都算是达成了一个小目标。 新的一年希望继续维护 LSD，解决一些性能上的问题，并尝试进行推广，希望目前 5K+ Star 还能再有突破。\n今年在基础知识上的提升明显不多，所以新的一年希望分别能够通过 SICP 的公开课再次温习 SICP 这部经典作品， 以前 SICP 看书时，前面看得相对认真，后半部分的理解就不多了。 操作系统上看到了清华大学开源的一个 rCore，使用 Rust 实现的操作系统，新的一年希望能够参与的 rCore 项目中。 一方面继续学习 Rust，一方面也可以再深入学习操作系统的相关知识。\n去年定了一个前端圈的目标，可以说是完全没有进行，考虑到必须时刻学习新知识，今年给自己再定一个新目标， 进入 Apple 生态圈，学习 Swift 并开发一个应用。\n最后是个人财务方面，当然说的是知识方面，而不是具体财务，2019 年了解到了 Beancount，可惜和 Org Mode 一样，由于移动端的缺失，当然还有时间的不足，Beancount 记账只断断续续进行了很小的一部分， 工具开发上更是几乎没有进展，新的一年先回归最初的目标，希望能够继续使用 Beancount 进行记账和分析。\n和学习技术一样，除了实践，基础知识当然同样重要，所以今年已经开始学习 经济学原理 ， 2021 年希望能够完整地看完，有一些个人的思考。\n2021 展望 工作 IaaS 工具完善推动 vGPU 专利申请成功 个人发展 技术 Golang Contributor SICP 视频课程 参与 rCore Kubernetes Contributor Swift 应用 财务 Beancount 记账 经济学原理 书单 经济学原理 DDIA ",
   "wordCount" : "181",
   "inLanguage": "en",
-  "datePublished": "2021-02-16T00:00:00+08:00",
+  "datePublished": "2021-02-16T00:00:00Z",
   "dateModified": "2021-02-20T18:31:46+08:00",
   "author":[{
     "@type": "Person",
@@ -140,7 +140,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "kWeiZh",
+    "name": "kWeizh",
     "logo": {
       "@type": "ImageObject",
       "url": "https://page.codespaper.com/favicon.ico"
@@ -165,15 +165,15 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
-            <span class="logo-switches">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeizh (Alt + H)">kWeizh</a>
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -187,7 +187,7 @@ if (!doNotTrack) {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -216,7 +216,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       2020 年终总结，2021 新年展望
     </h1>
-    <div class="post-meta"><span title='2021-02-16 00:00:00 +0800 CST'>February 16, 2021</span>&nbsp;·&nbsp;zwPapEr
+    <div class="post-meta"><span title='2021-02-16 00:00:00 +0000 UTC'>February 16, 2021</span>&nbsp;·&nbsp;zwPapEr
 
 </div>
   </header> 
@@ -306,11 +306,11 @@ PR，挂上 Contributor 的名号。</p>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>&copy; 2023 <a href="https://page.codespaper.com/">kWeizh</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

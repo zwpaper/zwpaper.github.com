@@ -5,21 +5,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Kubernetes 服务名解析原理 | kWeiZh</title>
+<title>Kubernetes 服务名解析原理 | kWeizh</title>
 <meta name="keywords" content="">
-<meta name="description" content="场景   在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
- 举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
-  10.0.171.239:80
-  demo-svc:80
-  demo-svc.namespace-name.svc.cluster.local:80
-   注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
-  通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
- 但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
-  原理解析  DNS   查看 Pod 内的 /etc/resolve.">
+<meta name="description" content="场景 在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
+举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
+10.0.171.239:80 demo-svc:80 demo-svc.namespace-name.svc.cluster.local:80 注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
+通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
+但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
+原理解析 DNS 查看 Pod 内的 /etc/resolve.conf ，能看到一下内容：
+nameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local cluster.local options ndots:5 其中：
+10.0.0.10 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。 search 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 查找 后面对应的这几个后缀。 options ndots:5 这个有意思，当请求的域名里，显式出现少于 5 个 点 时，才补上 search 的后缀。 值得注意的时 options ndots:5 ，显式出现少于 5 个 点 是什么意思呢？">
 <meta name="author" content="zwPapEr">
 <link rel="canonical" href="https://page.codespaper.com/2019/k8s-dns-resolve/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://page.codespaper.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://page.codespaper.com/favicon-16x16.png">
@@ -77,31 +76,29 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="Kubernetes 服务名解析原理" />
-<meta property="og:description" content="场景   在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
- 举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
-  10.0.171.239:80
-  demo-svc:80
-  demo-svc.namespace-name.svc.cluster.local:80
-   注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
-  通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
- 但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
-  原理解析  DNS   查看 Pod 内的 /etc/resolve." />
+<meta property="og:description" content="场景 在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
+举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
+10.0.171.239:80 demo-svc:80 demo-svc.namespace-name.svc.cluster.local:80 注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
+通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
+但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
+原理解析 DNS 查看 Pod 内的 /etc/resolve.conf ，能看到一下内容：
+nameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local cluster.local options ndots:5 其中：
+10.0.0.10 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。 search 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 查找 后面对应的这几个后缀。 options ndots:5 这个有意思，当请求的域名里，显式出现少于 5 个 点 时，才补上 search 的后缀。 值得注意的时 options ndots:5 ，显式出现少于 5 个 点 是什么意思呢？" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://page.codespaper.com/2019/k8s-dns-resolve/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-08-30T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2019-08-30T00:00:00&#43;00:00" /><meta property="og:site_name" content="kWeiZh" />
+<meta property="article:published_time" content="2019-08-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-30T00:00:00+00:00" /><meta property="og:site_name" content="kWeiZh" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Kubernetes 服务名解析原理"/>
-<meta name="twitter:description" content="场景   在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
- 举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
-  10.0.171.239:80
-  demo-svc:80
-  demo-svc.namespace-name.svc.cluster.local:80
-   注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
-  通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
- 但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
-  原理解析  DNS   查看 Pod 内的 /etc/resolve."/>
+<meta name="twitter:description" content="场景 在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。
+举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：
+10.0.171.239:80 demo-svc:80 demo-svc.namespace-name.svc.cluster.local:80 注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。
+通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。
+但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？
+原理解析 DNS 查看 Pod 内的 /etc/resolve.conf ，能看到一下内容：
+nameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local cluster.local options ndots:5 其中：
+10.0.0.10 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。 search 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 查找 后面对应的这几个后缀。 options ndots:5 这个有意思，当请求的域名里，显式出现少于 5 个 点 时，才补上 search 的后缀。 值得注意的时 options ndots:5 ，显式出现少于 5 个 点 是什么意思呢？"/>
 
 
 <script type="application/ld+json">
@@ -130,11 +127,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "Kubernetes 服务名解析原理",
   "name": "Kubernetes 服务名解析原理",
-  "description": "场景   在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。\n 举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：\n  10.0.171.239:80\n  demo-svc:80\n  demo-svc.namespace-name.svc.cluster.local:80\n   注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。\n  通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。\n 但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？\n  原理解析  DNS   查看 Pod 内的 /etc/resolve.",
+  "description": "场景 在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。\n举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：\n10.0.171.239:80 demo-svc:80 demo-svc.namespace-name.svc.cluster.local:80 注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。\n通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。\n但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？\n原理解析 DNS 查看 Pod 内的 /etc/resolve.conf ，能看到一下内容：\nnameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local cluster.local options ndots:5 其中：\n10.0.0.10 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。 search 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 查找 后面对应的这几个后缀。 options ndots:5 这个有意思，当请求的域名里，显式出现少于 5 个 点 时，才补上 search 的后缀。 值得注意的时 options ndots:5 ，显式出现少于 5 个 点 是什么意思呢？",
   "keywords": [
     
   ],
-  "articleBody": " 场景   在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。\n 举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：\n  10.0.171.239:80\n  demo-svc:80\n  demo-svc.namespace-name.svc.cluster.local:80\n   注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。\n  通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。\n 但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？\n  原理解析  DNS   查看 Pod 内的 /etc/resolve.conf ，能看到一下内容：\nnameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local cluster.local options ndots:5   其中：\n  10.0.0.10 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。\n  search 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 查找 后面对应的这几个后缀。\n  options ndots:5 这个有意思，当请求的域名里，显式出现少于 5 个 点 时，才补上 search 的后缀。\n  值得注意的时 options ndots:5 ，显式出现少于 5 个 点 是什么意思呢？\n  demo-svc.namespace-name.svc.cluster.local: 有 4 个点，会补全 search 中后缀解析\n  demo-svc.namespace-name.svc.cluster.local.: 有 5 个点，只会使用原域名解析\n  所以，我们在使用 demo-svc 访问 Service 的时候，DNS 解析时会自动加上 namespace-name.svc.cluster.local 进行解析，得到 demo-svc.namespace-name.svc.cluster.local. 的 IP 地址， 所以，我们在访问 Service 时，最终都是以 demo-svc.namespace-name.svc.cluster.local. 的地址访问的。\n  补全顺序  上文提到当少于 5 个 点 时，会补全域名再解析，那会按 search 配置中的顺序， 从前往后，依次尝试，还是刚刚的栗子：\n demo-svc 在解析时，会尝试：\n  demo-svc.namespace-name.svc.cluster.local\n  demo-svc.svc.cluster.local\n  demo-svc.cluster.local\n  当然，在尝试 demo-svc.namespace-name.svc.cluster.local 时就已经匹配了，就不会继续尝试后续的了。\n    验证   怎么来验证上文内容呢，有两个方式：\n  客户端\n  服务端\n  客户端   上文内容也不外乎是 DNS 解析，既然时 DNS，那少不了的工具就是dig。\n dig 是 BIND9 套件中的域名解析工具，至于 BIND9 又是什么，那就可以再花一篇文章来讲了。\n 本文中，我们可以进到某一个容器中，用 dig 来验证我们的结果。\n 使用 dig 时， +showsearch 参数会打印出尝试结果：\n4 个点，补全：   可以看到，我们访问 demo-svc.namespace-name.svc.cluster.local 时，由于上文提到的， 只有 4 个点，所以自动补全搜索了：\n 如果我们访问 demo-svc 也是一样的结果，只是第一次补全就会看到成功。\n# 进入容器 kubectl exec -it pod-name bash # root@pod-name:/# # 使用 4 个点的域名，用于验证 4 个点的补全 dig demo-svc.namespace-name.svc.cluster.local +showsearch # ;  DiG 9.11.3-1ubuntu1.7-Ubuntu  demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -HEADER# ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local.namespace-name.svc.cluster.local. IN A # # ;; AUTHORITY SECTION: # cluster.local.\t5\tIN\tSOA\tns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 200 # # # ;  DiG 9.11.3-1ubuntu1.7-Ubuntu  demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -HEADER# ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local.svc.cluster.local.\tIN A # # ;; AUTHORITY SECTION: # cluster.local.\t5\tIN\tSOA\tns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 188 # # # ;  DiG 9.11.3-1ubuntu1.7-Ubuntu  demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -HEADER# ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local.cluster.local. IN A # # ;; AUTHORITY SECTION: # cluster.local.\t5\tIN\tSOA\tns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 184 # # # ;  DiG 9.11.3-1ubuntu1.7-Ubuntu  demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -HEADER# ;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local. IN A # # ;; ANSWER SECTION: # demo-svc.namespace-name.svc.cluster.local. 5\tIN A\t10.102.159.83 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 129    5 个点，不补全  当访问域名有 5 个点时，就不会尝试补全，如完整的 demo-svc.namespace-name.svc.cluster.local.:\n# 进入容器 kubectl exec -it pod-name bash # root@pod-name:/# # 使用 5 个点的域名，用于验证 5 个点的不补全        ",
+  "articleBody": " 场景 在 Kubernetes 中，我们经常会有直接使用 Service 的名字访问对应 Service 地址的场景。\n举个栗子，我们建一个 Service，名字叫 demo-svc ，对应的 ClusterIP 为 10.0.171.239 ，端口为 80 。 那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：\n10.0.171.239:80 demo-svc:80 demo-svc.namespace-name.svc.cluster.local:80 注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 ExternalName 类型的 Service 实现， 但是这是另一个话题，就不展开了。\n通过 IP 地址访问的情况自然是不需要解释，通过 Service 名字访问的方式也很自然能想到时通过 DNS 解析实现。\n但是， demo-svc 和 demo-svc.namespace-name.svc.cluster.local 之间的区别和关系是什么呢？\n原理解析 DNS 查看 Pod 内的 /etc/resolve.conf ，能看到一下内容：\nnameserver 10.0.0.10 search namespace-name.svc.cluster.local svc.cluster.local cluster.local options ndots:5 其中：\n10.0.0.10 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。 search 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 查找 后面对应的这几个后缀。 options ndots:5 这个有意思，当请求的域名里，显式出现少于 5 个 点 时，才补上 search 的后缀。 值得注意的时 options ndots:5 ，显式出现少于 5 个 点 是什么意思呢？\ndemo-svc.namespace-name.svc.cluster.local: 有 4 个点，会补全 search 中后缀解析 demo-svc.namespace-name.svc.cluster.local.: 有 5 个点，只会使用原域名解析 所以，我们在使用 demo-svc 访问 Service 的时候，DNS 解析时会自动加上 namespace-name.svc.cluster.local 进行解析，得到 demo-svc.namespace-name.svc.cluster.local. 的 IP 地址， 所以，我们在访问 Service 时，最终都是以 demo-svc.namespace-name.svc.cluster.local. 的地址访问的。\n补全顺序 上文提到当少于 5 个 点 时，会补全域名再解析，那会按 search 配置中的顺序， 从前往后，依次尝试，还是刚刚的栗子：\ndemo-svc 在解析时，会尝试：\ndemo-svc.namespace-name.svc.cluster.local demo-svc.svc.cluster.local demo-svc.cluster.local 当然，在尝试 demo-svc.namespace-name.svc.cluster.local 时就已经匹配了，就不会继续尝试后续的了。\n验证 怎么来验证上文内容呢，有两个方式：\n客户端 服务端 客户端 上文内容也不外乎是 DNS 解析，既然时 DNS，那少不了的工具就是dig。\ndig 是 BIND9 套件中的域名解析工具，至于 BIND9 又是什么，那就可以再花一篇文章来讲了。\n本文中，我们可以进到某一个容器中，用 dig 来验证我们的结果。\n使用 dig 时， +showsearch 参数会打印出尝试结果：\n4 个点，补全： 可以看到，我们访问 demo-svc.namespace-name.svc.cluster.local 时，由于上文提到的， 只有 4 个点，所以自动补全搜索了：\n如果我们访问 demo-svc 也是一样的结果，只是第一次补全就会看到成功。\n# 进入容器 kubectl exec -it pod-name bash # root@pod-name:/# # 使用 4 个点的域名，用于验证 4 个点的补全 dig demo-svc.namespace-name.svc.cluster.local +showsearch # ; \u003c\u003c\u003e\u003e DiG 9.11.3-1ubuntu1.7-Ubuntu \u003c\u003c\u003e\u003e demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -\u003e\u003eHEADER\u003c\u003c- opcode: QUERY, status: NXDOMAIN, id: 44747 # ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local.namespace-name.svc.cluster.local. IN A # # ;; AUTHORITY SECTION: # cluster.local.\t5\tIN\tSOA\tns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 200 # # # ; \u003c\u003c\u003e\u003e DiG 9.11.3-1ubuntu1.7-Ubuntu \u003c\u003c\u003e\u003e demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -\u003e\u003eHEADER\u003c\u003c- opcode: QUERY, status: NXDOMAIN, id: 53786 # ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local.svc.cluster.local.\tIN A # # ;; AUTHORITY SECTION: # cluster.local.\t5\tIN\tSOA\tns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 188 # # # ; \u003c\u003c\u003e\u003e DiG 9.11.3-1ubuntu1.7-Ubuntu \u003c\u003c\u003e\u003e demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -\u003e\u003eHEADER\u003c\u003c- opcode: QUERY, status: NXDOMAIN, id: 1277 # ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local.cluster.local. IN A # # ;; AUTHORITY SECTION: # cluster.local.\t5\tIN\tSOA\tns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 184 # # # ; \u003c\u003c\u003e\u003e DiG 9.11.3-1ubuntu1.7-Ubuntu \u003c\u003c\u003e\u003e demo-svc.namespace-name.svc.cluster.local +showsearch # ;; global options: +cmd # ;; Got answer: # ;; WARNING: .local is reserved for Multicast DNS # ;; You are currently testing what happens when an mDNS query is leaked to DNS # ;; -\u003e\u003eHEADER\u003c\u003c- opcode: QUERY, status: NOERROR, id: 8827 # ;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1 # ;; WARNING: recursion requested but not available # # ;; OPT PSEUDOSECTION: # ; EDNS: version: 0, flags:; udp: 4096 # ; COOKIE: 0e9627a231a03702 (echoed) # ;; QUESTION SECTION: # ;demo-svc.namespace-name.svc.cluster.local. IN A # # ;; ANSWER SECTION: # demo-svc.namespace-name.svc.cluster.local. 5\tIN A\t10.102.159.83 # # ;; Query time: 0 msec # ;; SERVER: 10.0.0.10#53(10.0.0.10) # ;; WHEN: Fri Aug 30 11:06:19 UTC 2019 # ;; MSG SIZE rcvd: 129 5 个点，不补全 当访问域名有 5 个点时，就不会尝试补全，如完整的 demo-svc.namespace-name.svc.cluster.local.:\n# 进入容器 kubectl exec -it pod-name bash # root@pod-name:/# # 使用 5 个点的域名，用于验证 5 个点的不补全 ",
   "wordCount" : "783",
   "inLanguage": "en",
   "datePublished": "2019-08-30T00:00:00Z",
@@ -149,7 +146,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "kWeiZh",
+    "name": "kWeizh",
     "logo": {
       "@type": "ImageObject",
       "url": "https://page.codespaper.com/favicon.ico"
@@ -174,15 +171,15 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://page.codespaper.com/" accesskey="h" title="kWeiZh (Alt + H)">kWeiZh</a>
-            <span class="logo-switches">
+            <a href="https://page.codespaper.com/" accesskey="h" title="kWeizh (Alt + H)">kWeizh</a>
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -196,7 +193,7 @@ if (!doNotTrack) {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -241,15 +238,9 @@ if (!doNotTrack) {
   举个栗子，我们建一个 Service，名字叫 <code class="verbatim">demo-svc</code> ，对应的 <code class="verbatim">ClusterIP</code> 为 <code class="verbatim">10.0.171.239</code> ，端口为 <code class="verbatim">80</code> 。
   那么，我们在访问同一个 Namespace 下的这个 Service 时，我们一般会通过一下几种方式之一访问：</p>
 <ul>
-<li>
-<p>10.0.171.239:80</p>
-</li>
-<li>
-<p>demo-svc:80</p>
-</li>
-<li>
-<p>demo-svc.namespace-name.svc.cluster.local:80</p>
-</li>
+<li>10.0.171.239:80</li>
+<li>demo-svc:80</li>
+<li>demo-svc.namespace-name.svc.cluster.local:80</li>
 </ul>
 <blockquote>
 <p>注意：如果时要访问不同 Namespace 下，或者集群外部 Service，可以通过 <code class="verbatim">ExternalName</code> 类型的 Service 实现，
@@ -274,31 +265,21 @@ DNS
 <p>
    查看 Pod 内的 <code class="verbatim">/etc/resolve.conf</code> ，能看到一下内容：</p>
 <div class="src src-text">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">  nameserver 10.0.0.10
-  search namespace-name.svc.cluster.local svc.cluster.local cluster.local
-  options ndots:5</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>  nameserver 10.0.0.10
+</span></span><span style="display:flex;"><span>  search namespace-name.svc.cluster.local svc.cluster.local cluster.local
+</span></span><span style="display:flex;"><span>  options ndots:5</span></span></code></pre></div>
 </div>
 <p>
   其中：</p>
 <ul>
-<li>
-<p><code class="verbatim">10.0.0.10</code> 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。</p>
-</li>
-<li>
-<p><code class="verbatim">search</code> 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 <code class="verbatim">查找</code> 后面对应的这几个后缀。</p>
-</li>
-<li>
-<p><code class="verbatim">options ndots:5</code> 这个有意思，当请求的域名里，显式出现少于 5 个 <code class="verbatim">点</code> 时，才补上 <code class="verbatim">search</code> 的后缀。</p>
-</li>
+<li><code class="verbatim">10.0.0.10</code> 时 CoreDNS 的 Service 的 IP 地址，我们的请求都会发送到 CoreDNS 解析。</li>
+<li><code class="verbatim">search</code> 时 Kubernetes 加上的，顾名思义，解析 DNS 的时候会 <code class="verbatim">查找</code> 后面对应的这几个后缀。</li>
+<li><code class="verbatim">options ndots:5</code> 这个有意思，当请求的域名里，显式出现少于 5 个 <code class="verbatim">点</code> 时，才补上 <code class="verbatim">search</code> 的后缀。</li>
 </ul>
 <p>值得注意的时 <code class="verbatim">options ndots:5</code> ，显式出现少于 5 个 <code class="verbatim">点</code> 是什么意思呢？</p>
 <ul>
-<li>
-<p><code class="verbatim">demo-svc.namespace-name.svc.cluster.local</code>: 有 4 个点，会补全 <code class="verbatim">search</code> 中后缀解析</p>
-</li>
-<li>
-<p><code class="verbatim">demo-svc.namespace-name.svc.cluster.local.</code>: 有 5 个点，只会使用原域名解析</p>
-</li>
+<li><code class="verbatim">demo-svc.namespace-name.svc.cluster.local</code>: 有 4 个点，会补全 <code class="verbatim">search</code> 中后缀解析</li>
+<li><code class="verbatim">demo-svc.namespace-name.svc.cluster.local.</code>: 有 5 个点，只会使用原域名解析</li>
 </ul>
 <p>所以，我们在使用 <code class="verbatim">demo-svc</code> 访问 Service 的时候，DNS 解析时会自动加上 <code class="verbatim">namespace-name.svc.cluster.local</code>
   进行解析，得到 <code class="verbatim">demo-svc.namespace-name.svc.cluster.local.</code> 的 IP 地址，
@@ -315,15 +296,9 @@ DNS
 <p>
    <code class="verbatim">demo-svc</code> 在解析时，会尝试：</p>
 <ul>
-<li>
-<p>demo-svc.namespace-name.svc.cluster.local</p>
-</li>
-<li>
-<p>demo-svc.svc.cluster.local</p>
-</li>
-<li>
-<p>demo-svc.cluster.local</p>
-</li>
+<li>demo-svc.namespace-name.svc.cluster.local</li>
+<li>demo-svc.svc.cluster.local</li>
+<li>demo-svc.cluster.local</li>
 </ul>
 <p>当然，在尝试 <code class="verbatim">demo-svc.namespace-name.svc.cluster.local</code> 时就已经匹配了，就不会继续尝试后续的了。</p>
 </div>
@@ -338,12 +313,8 @@ DNS
 <p>
   怎么来验证上文内容呢，有两个方式：</p>
 <ul>
-<li>
-<p>客户端</p>
-</li>
-<li>
-<p>服务端</p>
-</li>
+<li>客户端</li>
+<li>服务端</li>
 </ul>
 <div id="outline-container-headline-6" class="outline-3">
 <h3 id="headline-6">
@@ -369,107 +340,107 @@ DNS
 <p>
     如果我们访问 <code class="verbatim">demo-svc</code> 也是一样的结果，只是第一次补全就会看到成功。</p>
 <div class="src src-shell">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  <span style="color:#75715e"># 进入容器</span>
-  kubectl exec -it pod-name bash
-  <span style="color:#75715e"># root@pod-name:/#</span>
-
-  <span style="color:#75715e"># 使用 4 个点的域名，用于验证 4 个点的补全</span>
-  dig demo-svc.namespace-name.svc.cluster.local +showsearch
-
-  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
-  <span style="color:#75715e"># ;; global options: +cmd</span>
-  <span style="color:#75715e"># ;; Got answer:</span>
-  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
-  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
-  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 44747</span>
-  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</span>
-  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
-  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
-  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
-  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
-  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local.namespace-name.svc.cluster.local. IN A</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; AUTHORITY SECTION:</span>
-  <span style="color:#75715e"># cluster.local.		5	IN	SOA	ns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; Query time: 0 msec</span>
-  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
-  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
-  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 200</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
-  <span style="color:#75715e"># ;; global options: +cmd</span>
-  <span style="color:#75715e"># ;; Got answer:</span>
-  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
-  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
-  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 53786</span>
-  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</span>
-  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
-  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
-  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
-  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
-  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local.svc.cluster.local.	IN A</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; AUTHORITY SECTION:</span>
-  <span style="color:#75715e"># cluster.local.		5	IN	SOA	ns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; Query time: 0 msec</span>
-  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
-  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
-  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 188</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
-  <span style="color:#75715e"># ;; global options: +cmd</span>
-  <span style="color:#75715e"># ;; Got answer:</span>
-  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
-  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
-  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 1277</span>
-  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</span>
-  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
-  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
-  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
-  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
-  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local.cluster.local. IN A</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; AUTHORITY SECTION:</span>
-  <span style="color:#75715e"># cluster.local.		5	IN	SOA	ns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; Query time: 0 msec</span>
-  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
-  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
-  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 184</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
-  <span style="color:#75715e"># ;; global options: +cmd</span>
-  <span style="color:#75715e"># ;; Got answer:</span>
-  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
-  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
-  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 8827</span>
-  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</span>
-  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
-  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
-  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
-  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
-  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local. IN A</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; ANSWER SECTION:</span>
-  <span style="color:#75715e"># demo-svc.namespace-name.svc.cluster.local. 5	IN A	10.102.159.83</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># ;; Query time: 0 msec</span>
-  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
-  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
-  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 129</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  <span style="color:#75715e"># 进入容器</span>
+</span></span><span style="display:flex;"><span>  kubectl exec -it pod-name bash
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># root@pod-name:/#</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 使用 4 个点的域名，用于验证 4 个点的补全</span>
+</span></span><span style="display:flex;"><span>  dig demo-svc.namespace-name.svc.cluster.local +showsearch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; global options: +cmd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Got answer:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 44747</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local.namespace-name.svc.cluster.local. IN A</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; AUTHORITY SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># cluster.local.		5	IN	SOA	ns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Query time: 0 msec</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 200</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; global options: +cmd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Got answer:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 53786</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local.svc.cluster.local.	IN A</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; AUTHORITY SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># cluster.local.		5	IN	SOA	ns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Query time: 0 msec</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 188</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; global options: +cmd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Got answer:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 1277</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local.cluster.local. IN A</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; AUTHORITY SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># cluster.local.		5	IN	SOA	ns.dns.cluster.local. hostmaster.cluster.local. 1567162775 7200 1800 86400 5</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Query time: 0 msec</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 184</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; &lt;&lt;&gt;&gt; DiG 9.11.3-1ubuntu1.7-Ubuntu &lt;&lt;&gt;&gt; demo-svc.namespace-name.svc.cluster.local +showsearch</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; global options: +cmd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Got answer:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: .local is reserved for Multicast DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; You are currently testing what happens when an mDNS query is leaked to DNS</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 8827</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WARNING: recursion requested but not available</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; OPT PSEUDOSECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; EDNS: version: 0, flags:; udp: 4096</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ; COOKIE: 0e9627a231a03702 (echoed)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; QUESTION SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;demo-svc.namespace-name.svc.cluster.local. IN A</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; ANSWER SECTION:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># demo-svc.namespace-name.svc.cluster.local. 5	IN A	10.102.159.83</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; Query time: 0 msec</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; SERVER: 10.0.0.10#53(10.0.0.10)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; WHEN: Fri Aug 30 11:06:19 UTC 2019</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ;; MSG SIZE  rcvd: 129</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -480,11 +451,11 @@ DNS
 <div id="outline-text-headline-8" class="outline-text-4">
 <p>当访问域名有 5 个点时，就不会尝试补全，如完整的 <code class="verbatim">demo-svc.namespace-name.svc.cluster.local.</code>:</p>
 <div class="src src-shell">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  <span style="color:#75715e"># 进入容器</span>
-  kubectl exec -it pod-name bash
-  <span style="color:#75715e"># root@pod-name:/#</span>
-
-  <span style="color:#75715e"># 使用 5 个点的域名，用于验证 5 个点的不补全</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  <span style="color:#75715e"># 进入容器</span>
+</span></span><span style="display:flex;"><span>  kubectl exec -it pod-name bash
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># root@pod-name:/#</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 使用 5 个点的域名，用于验证 5 个点的不补全</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -504,11 +475,11 @@ DNS
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://page.codespaper.com/">kWeiZh</a></span>
+    <span>&copy; 2023 <a href="https://page.codespaper.com/">kWeizh</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

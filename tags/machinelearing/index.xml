@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>machineLearing on kWeiZh</title>
+    <title>machineLearing on kWeizh</title>
     <link>https://page.codespaper.com/tags/machinelearing/</link>
-    <description>Recent content in machineLearing on kWeiZh</description>
+    <description>Recent content in machineLearing on kWeizh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://page.codespaper.com/tags/machinelearing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/machinelearing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从 Slurm &#43; Lustre 到 Kubeflow &#43; Ceph (0)，简介和容器中使用显卡</title>
       <link>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</link>
-      <pubDate>Sat, 15 Jun 2019 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://page.codespaper.com/2019/slurm-lustre-to-kubeflow-ceph/</guid>
       <description>&lt;p&gt;传统的高性能计算集群一般都习惯性地使用 &lt;code&gt;Slurm&lt;/code&gt; + &lt;code&gt;Lustre&lt;/code&gt; 的方案作为任务调度和存储，

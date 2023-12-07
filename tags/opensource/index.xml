@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>OpenSource on kWeizh</title>
+    <link>https://page.codespaper.com/tags/opensource/</link>
+    <description>Recent content in OpenSource on kWeizh</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://page.codespaper.com/tags/opensource/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>收到第一次的周期开源赞助</title>
+      <link>https://page.codespaper.com/2023/2023-first-sponsor-lsd/</link>
+      <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://page.codespaper.com/2023/2023-first-sponsor-lsd/</guid>
+      <description>&lt;h1 id=&#34;收到第一次的周期开源赞助&#34;&gt;收到第一次的周期开源赞助&lt;/h1&gt;
+&lt;p&gt;最近收到了人生的第一个开源赞助，突然有一种被认可的感觉，激动的心情让我想写一点东西分享一下我的快乐。&lt;/p&gt;
+&lt;p&gt;首先肯定要大力感谢 &lt;a href=&#34;https://www.warp.dev/?utm_source=github&amp;amp;utm_medium=referral&amp;amp;utm_campaign=lsd_20231001&#34;&gt;Warp.dev 对我和 LSD 开源项目的支持&lt;/a&gt;！&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.warp.dev/?utm_source=github&amp;amp;utm_medium=referral&amp;amp;utm_campaign=lsd_20231001&#34;&gt;Warp.dev&lt;/a&gt; 是一个 Rust 实现的现代化 Terminal，目前我也在尝试用它替换 iTerm2，不得不说还是挺特别的，尤其每一个命令就是一个 Block，支持团队协作和 AI 建议等现代化功能，起码是在众多 Terminal 里，算是做出自己的特色了。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
